@@ -363,7 +363,7 @@ class PasskeyChallengeRepository {
 
   /// Upserts all [PasskeyChallenge]s in the list and returns the resulting rows.
   ///
-  /// If a row conflicts on the given [uniqueColumns], the existing row is
+  /// If a row conflicts on the given [conflictColumns], the existing row is
   /// updated with the new values. Otherwise, a new row is inserted.
   ///
   /// The returned [PasskeyChallenge]s will have their `id` fields set.
@@ -373,31 +373,31 @@ class PasskeyChallengeRepository {
   Future<List<PasskeyChallenge>> upsert(
     _i1.DatabaseSession session,
     List<PasskeyChallenge> rows, {
-    required _i1.ColumnSelections<PasskeyChallengeTable> uniqueColumns,
+    required _i1.ColumnSelections<PasskeyChallengeTable> conflictColumns,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsert<PasskeyChallenge>(
       rows,
-      uniqueColumns: uniqueColumns(PasskeyChallenge.t),
+      conflictColumns: conflictColumns(PasskeyChallenge.t),
       transaction: transaction,
     );
   }
 
   /// Upserts a single [PasskeyChallenge] and returns the resulting row.
   ///
-  /// If the row conflicts on the given [uniqueColumns], the existing row is
+  /// If the row conflicts on the given [conflictColumns], the existing row is
   /// updated. Otherwise, a new row is inserted.
   ///
   /// The returned [PasskeyChallenge] will have its `id` field set.
   Future<PasskeyChallenge> upsertRow(
     _i1.DatabaseSession session,
     PasskeyChallenge row, {
-    required _i1.ColumnSelections<PasskeyChallengeTable> uniqueColumns,
+    required _i1.ColumnSelections<PasskeyChallengeTable> conflictColumns,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsertRow<PasskeyChallenge>(
       row,
-      uniqueColumns: uniqueColumns(PasskeyChallenge.t),
+      conflictColumns: conflictColumns(PasskeyChallenge.t),
       transaction: transaction,
     );
   }

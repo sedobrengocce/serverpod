@@ -650,7 +650,7 @@ class ServerSideSessionRepository {
 
   /// Upserts all [ServerSideSession]s in the list and returns the resulting rows.
   ///
-  /// If a row conflicts on the given [uniqueColumns], the existing row is
+  /// If a row conflicts on the given [conflictColumns], the existing row is
   /// updated with the new values. Otherwise, a new row is inserted.
   ///
   /// The returned [ServerSideSession]s will have their `id` fields set.
@@ -660,31 +660,31 @@ class ServerSideSessionRepository {
   Future<List<ServerSideSession>> upsert(
     _i1.DatabaseSession session,
     List<ServerSideSession> rows, {
-    required _i1.ColumnSelections<ServerSideSessionTable> uniqueColumns,
+    required _i1.ColumnSelections<ServerSideSessionTable> conflictColumns,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsert<ServerSideSession>(
       rows,
-      uniqueColumns: uniqueColumns(ServerSideSession.t),
+      conflictColumns: conflictColumns(ServerSideSession.t),
       transaction: transaction,
     );
   }
 
   /// Upserts a single [ServerSideSession] and returns the resulting row.
   ///
-  /// If the row conflicts on the given [uniqueColumns], the existing row is
+  /// If the row conflicts on the given [conflictColumns], the existing row is
   /// updated. Otherwise, a new row is inserted.
   ///
   /// The returned [ServerSideSession] will have its `id` field set.
   Future<ServerSideSession> upsertRow(
     _i1.DatabaseSession session,
     ServerSideSession row, {
-    required _i1.ColumnSelections<ServerSideSessionTable> uniqueColumns,
+    required _i1.ColumnSelections<ServerSideSessionTable> conflictColumns,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsertRow<ServerSideSession>(
       row,
-      uniqueColumns: uniqueColumns(ServerSideSession.t),
+      conflictColumns: conflictColumns(ServerSideSession.t),
       transaction: transaction,
     );
   }

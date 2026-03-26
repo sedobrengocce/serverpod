@@ -557,7 +557,7 @@ class PasskeyAccountRepository {
 
   /// Upserts all [PasskeyAccount]s in the list and returns the resulting rows.
   ///
-  /// If a row conflicts on the given [uniqueColumns], the existing row is
+  /// If a row conflicts on the given [conflictColumns], the existing row is
   /// updated with the new values. Otherwise, a new row is inserted.
   ///
   /// The returned [PasskeyAccount]s will have their `id` fields set.
@@ -567,31 +567,31 @@ class PasskeyAccountRepository {
   Future<List<PasskeyAccount>> upsert(
     _i1.DatabaseSession session,
     List<PasskeyAccount> rows, {
-    required _i1.ColumnSelections<PasskeyAccountTable> uniqueColumns,
+    required _i1.ColumnSelections<PasskeyAccountTable> conflictColumns,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsert<PasskeyAccount>(
       rows,
-      uniqueColumns: uniqueColumns(PasskeyAccount.t),
+      conflictColumns: conflictColumns(PasskeyAccount.t),
       transaction: transaction,
     );
   }
 
   /// Upserts a single [PasskeyAccount] and returns the resulting row.
   ///
-  /// If the row conflicts on the given [uniqueColumns], the existing row is
+  /// If the row conflicts on the given [conflictColumns], the existing row is
   /// updated. Otherwise, a new row is inserted.
   ///
   /// The returned [PasskeyAccount] will have its `id` field set.
   Future<PasskeyAccount> upsertRow(
     _i1.DatabaseSession session,
     PasskeyAccount row, {
-    required _i1.ColumnSelections<PasskeyAccountTable> uniqueColumns,
+    required _i1.ColumnSelections<PasskeyAccountTable> conflictColumns,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsertRow<PasskeyAccount>(
       row,
-      uniqueColumns: uniqueColumns(PasskeyAccount.t),
+      conflictColumns: conflictColumns(PasskeyAccount.t),
       transaction: transaction,
     );
   }

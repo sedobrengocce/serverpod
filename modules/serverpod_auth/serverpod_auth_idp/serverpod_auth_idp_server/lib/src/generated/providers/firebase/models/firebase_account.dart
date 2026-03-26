@@ -508,7 +508,7 @@ class FirebaseAccountRepository {
 
   /// Upserts all [FirebaseAccount]s in the list and returns the resulting rows.
   ///
-  /// If a row conflicts on the given [uniqueColumns], the existing row is
+  /// If a row conflicts on the given [conflictColumns], the existing row is
   /// updated with the new values. Otherwise, a new row is inserted.
   ///
   /// The returned [FirebaseAccount]s will have their `id` fields set.
@@ -518,31 +518,31 @@ class FirebaseAccountRepository {
   Future<List<FirebaseAccount>> upsert(
     _i1.DatabaseSession session,
     List<FirebaseAccount> rows, {
-    required _i1.ColumnSelections<FirebaseAccountTable> uniqueColumns,
+    required _i1.ColumnSelections<FirebaseAccountTable> conflictColumns,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsert<FirebaseAccount>(
       rows,
-      uniqueColumns: uniqueColumns(FirebaseAccount.t),
+      conflictColumns: conflictColumns(FirebaseAccount.t),
       transaction: transaction,
     );
   }
 
   /// Upserts a single [FirebaseAccount] and returns the resulting row.
   ///
-  /// If the row conflicts on the given [uniqueColumns], the existing row is
+  /// If the row conflicts on the given [conflictColumns], the existing row is
   /// updated. Otherwise, a new row is inserted.
   ///
   /// The returned [FirebaseAccount] will have its `id` field set.
   Future<FirebaseAccount> upsertRow(
     _i1.DatabaseSession session,
     FirebaseAccount row, {
-    required _i1.ColumnSelections<FirebaseAccountTable> uniqueColumns,
+    required _i1.ColumnSelections<FirebaseAccountTable> conflictColumns,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsertRow<FirebaseAccount>(
       row,
-      uniqueColumns: uniqueColumns(FirebaseAccount.t),
+      conflictColumns: conflictColumns(FirebaseAccount.t),
       transaction: transaction,
     );
   }

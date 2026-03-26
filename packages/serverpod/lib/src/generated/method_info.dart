@@ -358,7 +358,7 @@ class MethodInfoRepository {
 
   /// Upserts all [MethodInfo]s in the list and returns the resulting rows.
   ///
-  /// If a row conflicts on the given [uniqueColumns], the existing row is
+  /// If a row conflicts on the given [conflictColumns], the existing row is
   /// updated with the new values. Otherwise, a new row is inserted.
   ///
   /// The returned [MethodInfo]s will have their `id` fields set.
@@ -368,31 +368,31 @@ class MethodInfoRepository {
   Future<List<MethodInfo>> upsert(
     _i1.DatabaseSession session,
     List<MethodInfo> rows, {
-    required _i1.ColumnSelections<MethodInfoTable> uniqueColumns,
+    required _i1.ColumnSelections<MethodInfoTable> conflictColumns,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsert<MethodInfo>(
       rows,
-      uniqueColumns: uniqueColumns(MethodInfo.t),
+      conflictColumns: conflictColumns(MethodInfo.t),
       transaction: transaction,
     );
   }
 
   /// Upserts a single [MethodInfo] and returns the resulting row.
   ///
-  /// If the row conflicts on the given [uniqueColumns], the existing row is
+  /// If the row conflicts on the given [conflictColumns], the existing row is
   /// updated. Otherwise, a new row is inserted.
   ///
   /// The returned [MethodInfo] will have its `id` field set.
   Future<MethodInfo> upsertRow(
     _i1.DatabaseSession session,
     MethodInfo row, {
-    required _i1.ColumnSelections<MethodInfoTable> uniqueColumns,
+    required _i1.ColumnSelections<MethodInfoTable> conflictColumns,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsertRow<MethodInfo>(
       row,
-      uniqueColumns: uniqueColumns(MethodInfo.t),
+      conflictColumns: conflictColumns(MethodInfo.t),
       transaction: transaction,
     );
   }

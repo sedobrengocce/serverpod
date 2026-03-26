@@ -453,7 +453,7 @@ class PostRepository {
 
   /// Upserts all [Post]s in the list and returns the resulting rows.
   ///
-  /// If a row conflicts on the given [uniqueColumns], the existing row is
+  /// If a row conflicts on the given [conflictColumns], the existing row is
   /// updated with the new values. Otherwise, a new row is inserted.
   ///
   /// The returned [Post]s will have their `id` fields set.
@@ -463,31 +463,31 @@ class PostRepository {
   Future<List<Post>> upsert(
     _i1.DatabaseSession session,
     List<Post> rows, {
-    required _i1.ColumnSelections<PostTable> uniqueColumns,
+    required _i1.ColumnSelections<PostTable> conflictColumns,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsert<Post>(
       rows,
-      uniqueColumns: uniqueColumns(Post.t),
+      conflictColumns: conflictColumns(Post.t),
       transaction: transaction,
     );
   }
 
   /// Upserts a single [Post] and returns the resulting row.
   ///
-  /// If the row conflicts on the given [uniqueColumns], the existing row is
+  /// If the row conflicts on the given [conflictColumns], the existing row is
   /// updated. Otherwise, a new row is inserted.
   ///
   /// The returned [Post] will have its `id` field set.
   Future<Post> upsertRow(
     _i1.DatabaseSession session,
     Post row, {
-    required _i1.ColumnSelections<PostTable> uniqueColumns,
+    required _i1.ColumnSelections<PostTable> conflictColumns,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsertRow<Post>(
       row,
-      uniqueColumns: uniqueColumns(Post.t),
+      conflictColumns: conflictColumns(Post.t),
       transaction: transaction,
     );
   }

@@ -412,7 +412,7 @@ class DepartmentRepository {
 
   /// Upserts all [Department]s in the list and returns the resulting rows.
   ///
-  /// If a row conflicts on the given [uniqueColumns], the existing row is
+  /// If a row conflicts on the given [conflictColumns], the existing row is
   /// updated with the new values. Otherwise, a new row is inserted.
   ///
   /// The returned [Department]s will have their `id` fields set.
@@ -422,31 +422,31 @@ class DepartmentRepository {
   Future<List<Department>> upsert(
     _i1.DatabaseSession session,
     List<Department> rows, {
-    required _i1.ColumnSelections<DepartmentTable> uniqueColumns,
+    required _i1.ColumnSelections<DepartmentTable> conflictColumns,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsert<Department>(
       rows,
-      uniqueColumns: uniqueColumns(Department.t),
+      conflictColumns: conflictColumns(Department.t),
       transaction: transaction,
     );
   }
 
   /// Upserts a single [Department] and returns the resulting row.
   ///
-  /// If the row conflicts on the given [uniqueColumns], the existing row is
+  /// If the row conflicts on the given [conflictColumns], the existing row is
   /// updated. Otherwise, a new row is inserted.
   ///
   /// The returned [Department] will have its `id` field set.
   Future<Department> upsertRow(
     _i1.DatabaseSession session,
     Department row, {
-    required _i1.ColumnSelections<DepartmentTable> uniqueColumns,
+    required _i1.ColumnSelections<DepartmentTable> conflictColumns,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsertRow<Department>(
       row,
-      uniqueColumns: uniqueColumns(Department.t),
+      conflictColumns: conflictColumns(Department.t),
       transaction: transaction,
     );
   }

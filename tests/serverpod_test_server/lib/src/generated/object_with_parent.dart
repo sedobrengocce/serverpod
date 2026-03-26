@@ -330,7 +330,7 @@ class ObjectWithParentRepository {
 
   /// Upserts all [ObjectWithParent]s in the list and returns the resulting rows.
   ///
-  /// If a row conflicts on the given [uniqueColumns], the existing row is
+  /// If a row conflicts on the given [conflictColumns], the existing row is
   /// updated with the new values. Otherwise, a new row is inserted.
   ///
   /// The returned [ObjectWithParent]s will have their `id` fields set.
@@ -340,31 +340,31 @@ class ObjectWithParentRepository {
   Future<List<ObjectWithParent>> upsert(
     _i1.DatabaseSession session,
     List<ObjectWithParent> rows, {
-    required _i1.ColumnSelections<ObjectWithParentTable> uniqueColumns,
+    required _i1.ColumnSelections<ObjectWithParentTable> conflictColumns,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsert<ObjectWithParent>(
       rows,
-      uniqueColumns: uniqueColumns(ObjectWithParent.t),
+      conflictColumns: conflictColumns(ObjectWithParent.t),
       transaction: transaction,
     );
   }
 
   /// Upserts a single [ObjectWithParent] and returns the resulting row.
   ///
-  /// If the row conflicts on the given [uniqueColumns], the existing row is
+  /// If the row conflicts on the given [conflictColumns], the existing row is
   /// updated. Otherwise, a new row is inserted.
   ///
   /// The returned [ObjectWithParent] will have its `id` field set.
   Future<ObjectWithParent> upsertRow(
     _i1.DatabaseSession session,
     ObjectWithParent row, {
-    required _i1.ColumnSelections<ObjectWithParentTable> uniqueColumns,
+    required _i1.ColumnSelections<ObjectWithParentTable> conflictColumns,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsertRow<ObjectWithParent>(
       row,
-      uniqueColumns: uniqueColumns(ObjectWithParent.t),
+      conflictColumns: conflictColumns(ObjectWithParent.t),
       transaction: transaction,
     );
   }

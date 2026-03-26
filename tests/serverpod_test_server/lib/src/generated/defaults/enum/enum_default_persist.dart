@@ -382,7 +382,7 @@ class EnumDefaultPersistRepository {
 
   /// Upserts all [EnumDefaultPersist]s in the list and returns the resulting rows.
   ///
-  /// If a row conflicts on the given [uniqueColumns], the existing row is
+  /// If a row conflicts on the given [conflictColumns], the existing row is
   /// updated with the new values. Otherwise, a new row is inserted.
   ///
   /// The returned [EnumDefaultPersist]s will have their `id` fields set.
@@ -392,31 +392,31 @@ class EnumDefaultPersistRepository {
   Future<List<EnumDefaultPersist>> upsert(
     _i1.DatabaseSession session,
     List<EnumDefaultPersist> rows, {
-    required _i1.ColumnSelections<EnumDefaultPersistTable> uniqueColumns,
+    required _i1.ColumnSelections<EnumDefaultPersistTable> conflictColumns,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsert<EnumDefaultPersist>(
       rows,
-      uniqueColumns: uniqueColumns(EnumDefaultPersist.t),
+      conflictColumns: conflictColumns(EnumDefaultPersist.t),
       transaction: transaction,
     );
   }
 
   /// Upserts a single [EnumDefaultPersist] and returns the resulting row.
   ///
-  /// If the row conflicts on the given [uniqueColumns], the existing row is
+  /// If the row conflicts on the given [conflictColumns], the existing row is
   /// updated. Otherwise, a new row is inserted.
   ///
   /// The returned [EnumDefaultPersist] will have its `id` field set.
   Future<EnumDefaultPersist> upsertRow(
     _i1.DatabaseSession session,
     EnumDefaultPersist row, {
-    required _i1.ColumnSelections<EnumDefaultPersistTable> uniqueColumns,
+    required _i1.ColumnSelections<EnumDefaultPersistTable> conflictColumns,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsertRow<EnumDefaultPersist>(
       row,
-      uniqueColumns: uniqueColumns(EnumDefaultPersist.t),
+      conflictColumns: conflictColumns(EnumDefaultPersist.t),
       transaction: transaction,
     );
   }

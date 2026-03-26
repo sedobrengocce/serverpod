@@ -879,7 +879,7 @@ class TypesRepository {
 
   /// Upserts all [Types]s in the list and returns the resulting rows.
   ///
-  /// If a row conflicts on the given [uniqueColumns], the existing row is
+  /// If a row conflicts on the given [conflictColumns], the existing row is
   /// updated with the new values. Otherwise, a new row is inserted.
   ///
   /// The returned [Types]s will have their `id` fields set.
@@ -889,31 +889,31 @@ class TypesRepository {
   Future<List<Types>> upsert(
     _i1.DatabaseSession session,
     List<Types> rows, {
-    required _i1.ColumnSelections<TypesTable> uniqueColumns,
+    required _i1.ColumnSelections<TypesTable> conflictColumns,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsert<Types>(
       rows,
-      uniqueColumns: uniqueColumns(Types.t),
+      conflictColumns: conflictColumns(Types.t),
       transaction: transaction,
     );
   }
 
   /// Upserts a single [Types] and returns the resulting row.
   ///
-  /// If the row conflicts on the given [uniqueColumns], the existing row is
+  /// If the row conflicts on the given [conflictColumns], the existing row is
   /// updated. Otherwise, a new row is inserted.
   ///
   /// The returned [Types] will have its `id` field set.
   Future<Types> upsertRow(
     _i1.DatabaseSession session,
     Types row, {
-    required _i1.ColumnSelections<TypesTable> uniqueColumns,
+    required _i1.ColumnSelections<TypesTable> conflictColumns,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsertRow<Types>(
       row,
-      uniqueColumns: uniqueColumns(Types.t),
+      conflictColumns: conflictColumns(Types.t),
       transaction: transaction,
     );
   }

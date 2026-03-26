@@ -359,7 +359,7 @@ class ChildClassExplicitColumnRepository {
 
   /// Upserts all [ChildClassExplicitColumn]s in the list and returns the resulting rows.
   ///
-  /// If a row conflicts on the given [uniqueColumns], the existing row is
+  /// If a row conflicts on the given [conflictColumns], the existing row is
   /// updated with the new values. Otherwise, a new row is inserted.
   ///
   /// The returned [ChildClassExplicitColumn]s will have their `id` fields set.
@@ -369,31 +369,33 @@ class ChildClassExplicitColumnRepository {
   Future<List<ChildClassExplicitColumn>> upsert(
     _i2.DatabaseSession session,
     List<ChildClassExplicitColumn> rows, {
-    required _i2.ColumnSelections<ChildClassExplicitColumnTable> uniqueColumns,
+    required _i2.ColumnSelections<ChildClassExplicitColumnTable>
+    conflictColumns,
     _i2.Transaction? transaction,
   }) async {
     return session.db.upsert<ChildClassExplicitColumn>(
       rows,
-      uniqueColumns: uniqueColumns(ChildClassExplicitColumn.t),
+      conflictColumns: conflictColumns(ChildClassExplicitColumn.t),
       transaction: transaction,
     );
   }
 
   /// Upserts a single [ChildClassExplicitColumn] and returns the resulting row.
   ///
-  /// If the row conflicts on the given [uniqueColumns], the existing row is
+  /// If the row conflicts on the given [conflictColumns], the existing row is
   /// updated. Otherwise, a new row is inserted.
   ///
   /// The returned [ChildClassExplicitColumn] will have its `id` field set.
   Future<ChildClassExplicitColumn> upsertRow(
     _i2.DatabaseSession session,
     ChildClassExplicitColumn row, {
-    required _i2.ColumnSelections<ChildClassExplicitColumnTable> uniqueColumns,
+    required _i2.ColumnSelections<ChildClassExplicitColumnTable>
+    conflictColumns,
     _i2.Transaction? transaction,
   }) async {
     return session.db.upsertRow<ChildClassExplicitColumn>(
       row,
-      uniqueColumns: uniqueColumns(ChildClassExplicitColumn.t),
+      conflictColumns: conflictColumns(ChildClassExplicitColumn.t),
       transaction: transaction,
     );
   }

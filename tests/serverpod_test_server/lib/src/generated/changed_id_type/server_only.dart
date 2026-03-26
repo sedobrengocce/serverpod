@@ -294,7 +294,7 @@ class ServerOnlyChangedIdFieldClassRepository {
 
   /// Upserts all [ServerOnlyChangedIdFieldClass]s in the list and returns the resulting rows.
   ///
-  /// If a row conflicts on the given [uniqueColumns], the existing row is
+  /// If a row conflicts on the given [conflictColumns], the existing row is
   /// updated with the new values. Otherwise, a new row is inserted.
   ///
   /// The returned [ServerOnlyChangedIdFieldClass]s will have their `id` fields set.
@@ -305,19 +305,19 @@ class ServerOnlyChangedIdFieldClassRepository {
     _i1.DatabaseSession session,
     List<ServerOnlyChangedIdFieldClass> rows, {
     required _i1.ColumnSelections<ServerOnlyChangedIdFieldClassTable>
-    uniqueColumns,
+    conflictColumns,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsert<ServerOnlyChangedIdFieldClass>(
       rows,
-      uniqueColumns: uniqueColumns(ServerOnlyChangedIdFieldClass.t),
+      conflictColumns: conflictColumns(ServerOnlyChangedIdFieldClass.t),
       transaction: transaction,
     );
   }
 
   /// Upserts a single [ServerOnlyChangedIdFieldClass] and returns the resulting row.
   ///
-  /// If the row conflicts on the given [uniqueColumns], the existing row is
+  /// If the row conflicts on the given [conflictColumns], the existing row is
   /// updated. Otherwise, a new row is inserted.
   ///
   /// The returned [ServerOnlyChangedIdFieldClass] will have its `id` field set.
@@ -325,12 +325,12 @@ class ServerOnlyChangedIdFieldClassRepository {
     _i1.DatabaseSession session,
     ServerOnlyChangedIdFieldClass row, {
     required _i1.ColumnSelections<ServerOnlyChangedIdFieldClassTable>
-    uniqueColumns,
+    conflictColumns,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsertRow<ServerOnlyChangedIdFieldClass>(
       row,
-      uniqueColumns: uniqueColumns(ServerOnlyChangedIdFieldClass.t),
+      conflictColumns: conflictColumns(ServerOnlyChangedIdFieldClass.t),
       transaction: transaction,
     );
   }

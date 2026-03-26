@@ -378,7 +378,7 @@ class ChapterRepository {
 
   /// Upserts all [Chapter]s in the list and returns the resulting rows.
   ///
-  /// If a row conflicts on the given [uniqueColumns], the existing row is
+  /// If a row conflicts on the given [conflictColumns], the existing row is
   /// updated with the new values. Otherwise, a new row is inserted.
   ///
   /// The returned [Chapter]s will have their `id` fields set.
@@ -388,31 +388,31 @@ class ChapterRepository {
   Future<List<Chapter>> upsert(
     _i1.DatabaseSession session,
     List<Chapter> rows, {
-    required _i1.ColumnSelections<ChapterTable> uniqueColumns,
+    required _i1.ColumnSelections<ChapterTable> conflictColumns,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsert<Chapter>(
       rows,
-      uniqueColumns: uniqueColumns(Chapter.t),
+      conflictColumns: conflictColumns(Chapter.t),
       transaction: transaction,
     );
   }
 
   /// Upserts a single [Chapter] and returns the resulting row.
   ///
-  /// If the row conflicts on the given [uniqueColumns], the existing row is
+  /// If the row conflicts on the given [conflictColumns], the existing row is
   /// updated. Otherwise, a new row is inserted.
   ///
   /// The returned [Chapter] will have its `id` field set.
   Future<Chapter> upsertRow(
     _i1.DatabaseSession session,
     Chapter row, {
-    required _i1.ColumnSelections<ChapterTable> uniqueColumns,
+    required _i1.ColumnSelections<ChapterTable> conflictColumns,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsertRow<Chapter>(
       row,
-      uniqueColumns: uniqueColumns(Chapter.t),
+      conflictColumns: conflictColumns(Chapter.t),
       transaction: transaction,
     );
   }

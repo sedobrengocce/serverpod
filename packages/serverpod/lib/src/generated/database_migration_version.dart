@@ -384,7 +384,7 @@ class DatabaseMigrationVersionRepository {
 
   /// Upserts all [DatabaseMigrationVersion]s in the list and returns the resulting rows.
   ///
-  /// If a row conflicts on the given [uniqueColumns], the existing row is
+  /// If a row conflicts on the given [conflictColumns], the existing row is
   /// updated with the new values. Otherwise, a new row is inserted.
   ///
   /// The returned [DatabaseMigrationVersion]s will have their `id` fields set.
@@ -394,31 +394,33 @@ class DatabaseMigrationVersionRepository {
   Future<List<DatabaseMigrationVersion>> upsert(
     _i2.DatabaseSession session,
     List<DatabaseMigrationVersion> rows, {
-    required _i2.ColumnSelections<DatabaseMigrationVersionTable> uniqueColumns,
+    required _i2.ColumnSelections<DatabaseMigrationVersionTable>
+    conflictColumns,
     _i2.Transaction? transaction,
   }) async {
     return session.db.upsert<DatabaseMigrationVersion>(
       rows,
-      uniqueColumns: uniqueColumns(DatabaseMigrationVersion.t),
+      conflictColumns: conflictColumns(DatabaseMigrationVersion.t),
       transaction: transaction,
     );
   }
 
   /// Upserts a single [DatabaseMigrationVersion] and returns the resulting row.
   ///
-  /// If the row conflicts on the given [uniqueColumns], the existing row is
+  /// If the row conflicts on the given [conflictColumns], the existing row is
   /// updated. Otherwise, a new row is inserted.
   ///
   /// The returned [DatabaseMigrationVersion] will have its `id` field set.
   Future<DatabaseMigrationVersion> upsertRow(
     _i2.DatabaseSession session,
     DatabaseMigrationVersion row, {
-    required _i2.ColumnSelections<DatabaseMigrationVersionTable> uniqueColumns,
+    required _i2.ColumnSelections<DatabaseMigrationVersionTable>
+    conflictColumns,
     _i2.Transaction? transaction,
   }) async {
     return session.db.upsertRow<DatabaseMigrationVersion>(
       row,
-      uniqueColumns: uniqueColumns(DatabaseMigrationVersion.t),
+      conflictColumns: conflictColumns(DatabaseMigrationVersion.t),
       transaction: transaction,
     );
   }

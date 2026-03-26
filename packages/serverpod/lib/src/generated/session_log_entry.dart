@@ -685,7 +685,7 @@ class SessionLogEntryRepository {
 
   /// Upserts all [SessionLogEntry]s in the list and returns the resulting rows.
   ///
-  /// If a row conflicts on the given [uniqueColumns], the existing row is
+  /// If a row conflicts on the given [conflictColumns], the existing row is
   /// updated with the new values. Otherwise, a new row is inserted.
   ///
   /// The returned [SessionLogEntry]s will have their `id` fields set.
@@ -695,31 +695,31 @@ class SessionLogEntryRepository {
   Future<List<SessionLogEntry>> upsert(
     _i1.DatabaseSession session,
     List<SessionLogEntry> rows, {
-    required _i1.ColumnSelections<SessionLogEntryTable> uniqueColumns,
+    required _i1.ColumnSelections<SessionLogEntryTable> conflictColumns,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsert<SessionLogEntry>(
       rows,
-      uniqueColumns: uniqueColumns(SessionLogEntry.t),
+      conflictColumns: conflictColumns(SessionLogEntry.t),
       transaction: transaction,
     );
   }
 
   /// Upserts a single [SessionLogEntry] and returns the resulting row.
   ///
-  /// If the row conflicts on the given [uniqueColumns], the existing row is
+  /// If the row conflicts on the given [conflictColumns], the existing row is
   /// updated. Otherwise, a new row is inserted.
   ///
   /// The returned [SessionLogEntry] will have its `id` field set.
   Future<SessionLogEntry> upsertRow(
     _i1.DatabaseSession session,
     SessionLogEntry row, {
-    required _i1.ColumnSelections<SessionLogEntryTable> uniqueColumns,
+    required _i1.ColumnSelections<SessionLogEntryTable> conflictColumns,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsertRow<SessionLogEntry>(
       row,
-      uniqueColumns: uniqueColumns(SessionLogEntry.t),
+      conflictColumns: conflictColumns(SessionLogEntry.t),
       transaction: transaction,
     );
   }

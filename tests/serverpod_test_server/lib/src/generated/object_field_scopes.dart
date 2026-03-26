@@ -365,7 +365,7 @@ class ObjectFieldScopesRepository {
 
   /// Upserts all [ObjectFieldScopes]s in the list and returns the resulting rows.
   ///
-  /// If a row conflicts on the given [uniqueColumns], the existing row is
+  /// If a row conflicts on the given [conflictColumns], the existing row is
   /// updated with the new values. Otherwise, a new row is inserted.
   ///
   /// The returned [ObjectFieldScopes]s will have their `id` fields set.
@@ -375,31 +375,31 @@ class ObjectFieldScopesRepository {
   Future<List<ObjectFieldScopes>> upsert(
     _i1.DatabaseSession session,
     List<ObjectFieldScopes> rows, {
-    required _i1.ColumnSelections<ObjectFieldScopesTable> uniqueColumns,
+    required _i1.ColumnSelections<ObjectFieldScopesTable> conflictColumns,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsert<ObjectFieldScopes>(
       rows,
-      uniqueColumns: uniqueColumns(ObjectFieldScopes.t),
+      conflictColumns: conflictColumns(ObjectFieldScopes.t),
       transaction: transaction,
     );
   }
 
   /// Upserts a single [ObjectFieldScopes] and returns the resulting row.
   ///
-  /// If the row conflicts on the given [uniqueColumns], the existing row is
+  /// If the row conflicts on the given [conflictColumns], the existing row is
   /// updated. Otherwise, a new row is inserted.
   ///
   /// The returned [ObjectFieldScopes] will have its `id` field set.
   Future<ObjectFieldScopes> upsertRow(
     _i1.DatabaseSession session,
     ObjectFieldScopes row, {
-    required _i1.ColumnSelections<ObjectFieldScopesTable> uniqueColumns,
+    required _i1.ColumnSelections<ObjectFieldScopesTable> conflictColumns,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsertRow<ObjectFieldScopes>(
       row,
-      uniqueColumns: uniqueColumns(ObjectFieldScopes.t),
+      conflictColumns: conflictColumns(ObjectFieldScopes.t),
       transaction: transaction,
     );
   }

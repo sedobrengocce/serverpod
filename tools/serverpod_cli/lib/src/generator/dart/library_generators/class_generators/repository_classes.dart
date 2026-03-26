@@ -809,7 +809,7 @@ class BuildRepositoryClass {
         ..docs.add('''
 /// Upserts all [$className]s in the list and returns the resulting rows.
 ///
-/// If a row conflicts on the given [uniqueColumns], the existing row is
+/// If a row conflicts on the given [conflictColumns], the existing row is
 /// updated with the new values. Otherwise, a new row is inserted.
 ///
 /// The returned [$className]s will have their `id` fields set.
@@ -842,7 +842,7 @@ class BuildRepositoryClass {
                   ..symbol = 'ColumnSelections<${className}Table>'
                   ..url = 'package:serverpod/serverpod.dart',
               )
-              ..name = 'uniqueColumns'
+              ..name = 'conflictColumns'
               ..named = true
               ..required = true,
           ),
@@ -865,7 +865,7 @@ class BuildRepositoryClass {
             .call(
               [refer('rows')],
               {
-                'uniqueColumns': refer('uniqueColumns').call([
+                'conflictColumns': refer('conflictColumns').call([
                   refer(className).property('t'),
                 ]),
                 'transaction': refer('transaction'),
@@ -883,7 +883,7 @@ class BuildRepositoryClass {
         ..docs.add('''
 /// Upserts a single [$className] and returns the resulting row.
 ///
-/// If the row conflicts on the given [uniqueColumns], the existing row is
+/// If the row conflicts on the given [conflictColumns], the existing row is
 /// updated. Otherwise, a new row is inserted.
 ///
 /// The returned [$className] will have its `id` field set.''')
@@ -913,7 +913,7 @@ class BuildRepositoryClass {
                   ..symbol = 'ColumnSelections<${className}Table>'
                   ..url = 'package:serverpod/serverpod.dart',
               )
-              ..name = 'uniqueColumns'
+              ..name = 'conflictColumns'
               ..named = true
               ..required = true,
           ),
@@ -936,7 +936,7 @@ class BuildRepositoryClass {
             .call(
               [refer('row')],
               {
-                'uniqueColumns': refer('uniqueColumns').call([
+                'conflictColumns': refer('conflictColumns').call([
                   refer(className).property('t'),
                 ]),
                 'transaction': refer('transaction'),

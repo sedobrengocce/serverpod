@@ -421,7 +421,7 @@ class AnonymousAccountRepository {
 
   /// Upserts all [AnonymousAccount]s in the list and returns the resulting rows.
   ///
-  /// If a row conflicts on the given [uniqueColumns], the existing row is
+  /// If a row conflicts on the given [conflictColumns], the existing row is
   /// updated with the new values. Otherwise, a new row is inserted.
   ///
   /// The returned [AnonymousAccount]s will have their `id` fields set.
@@ -431,31 +431,31 @@ class AnonymousAccountRepository {
   Future<List<AnonymousAccount>> upsert(
     _i1.DatabaseSession session,
     List<AnonymousAccount> rows, {
-    required _i1.ColumnSelections<AnonymousAccountTable> uniqueColumns,
+    required _i1.ColumnSelections<AnonymousAccountTable> conflictColumns,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsert<AnonymousAccount>(
       rows,
-      uniqueColumns: uniqueColumns(AnonymousAccount.t),
+      conflictColumns: conflictColumns(AnonymousAccount.t),
       transaction: transaction,
     );
   }
 
   /// Upserts a single [AnonymousAccount] and returns the resulting row.
   ///
-  /// If the row conflicts on the given [uniqueColumns], the existing row is
+  /// If the row conflicts on the given [conflictColumns], the existing row is
   /// updated. Otherwise, a new row is inserted.
   ///
   /// The returned [AnonymousAccount] will have its `id` field set.
   Future<AnonymousAccount> upsertRow(
     _i1.DatabaseSession session,
     AnonymousAccount row, {
-    required _i1.ColumnSelections<AnonymousAccountTable> uniqueColumns,
+    required _i1.ColumnSelections<AnonymousAccountTable> conflictColumns,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsertRow<AnonymousAccount>(
       row,
-      uniqueColumns: uniqueColumns(AnonymousAccount.t),
+      conflictColumns: conflictColumns(AnonymousAccount.t),
       transaction: transaction,
     );
   }

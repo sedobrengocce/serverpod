@@ -525,7 +525,7 @@ class CitizenRepository {
 
   /// Upserts all [Citizen]s in the list and returns the resulting rows.
   ///
-  /// If a row conflicts on the given [uniqueColumns], the existing row is
+  /// If a row conflicts on the given [conflictColumns], the existing row is
   /// updated with the new values. Otherwise, a new row is inserted.
   ///
   /// The returned [Citizen]s will have their `id` fields set.
@@ -535,31 +535,31 @@ class CitizenRepository {
   Future<List<Citizen>> upsert(
     _i1.DatabaseSession session,
     List<Citizen> rows, {
-    required _i1.ColumnSelections<CitizenTable> uniqueColumns,
+    required _i1.ColumnSelections<CitizenTable> conflictColumns,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsert<Citizen>(
       rows,
-      uniqueColumns: uniqueColumns(Citizen.t),
+      conflictColumns: conflictColumns(Citizen.t),
       transaction: transaction,
     );
   }
 
   /// Upserts a single [Citizen] and returns the resulting row.
   ///
-  /// If the row conflicts on the given [uniqueColumns], the existing row is
+  /// If the row conflicts on the given [conflictColumns], the existing row is
   /// updated. Otherwise, a new row is inserted.
   ///
   /// The returned [Citizen] will have its `id` field set.
   Future<Citizen> upsertRow(
     _i1.DatabaseSession session,
     Citizen row, {
-    required _i1.ColumnSelections<CitizenTable> uniqueColumns,
+    required _i1.ColumnSelections<CitizenTable> conflictColumns,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsertRow<Citizen>(
       row,
-      uniqueColumns: uniqueColumns(Citizen.t),
+      conflictColumns: conflictColumns(Citizen.t),
       transaction: transaction,
     );
   }

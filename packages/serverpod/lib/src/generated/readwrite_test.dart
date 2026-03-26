@@ -334,7 +334,7 @@ class ReadWriteTestEntryRepository {
 
   /// Upserts all [ReadWriteTestEntry]s in the list and returns the resulting rows.
   ///
-  /// If a row conflicts on the given [uniqueColumns], the existing row is
+  /// If a row conflicts on the given [conflictColumns], the existing row is
   /// updated with the new values. Otherwise, a new row is inserted.
   ///
   /// The returned [ReadWriteTestEntry]s will have their `id` fields set.
@@ -344,31 +344,31 @@ class ReadWriteTestEntryRepository {
   Future<List<ReadWriteTestEntry>> upsert(
     _i1.DatabaseSession session,
     List<ReadWriteTestEntry> rows, {
-    required _i1.ColumnSelections<ReadWriteTestEntryTable> uniqueColumns,
+    required _i1.ColumnSelections<ReadWriteTestEntryTable> conflictColumns,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsert<ReadWriteTestEntry>(
       rows,
-      uniqueColumns: uniqueColumns(ReadWriteTestEntry.t),
+      conflictColumns: conflictColumns(ReadWriteTestEntry.t),
       transaction: transaction,
     );
   }
 
   /// Upserts a single [ReadWriteTestEntry] and returns the resulting row.
   ///
-  /// If the row conflicts on the given [uniqueColumns], the existing row is
+  /// If the row conflicts on the given [conflictColumns], the existing row is
   /// updated. Otherwise, a new row is inserted.
   ///
   /// The returned [ReadWriteTestEntry] will have its `id` field set.
   Future<ReadWriteTestEntry> upsertRow(
     _i1.DatabaseSession session,
     ReadWriteTestEntry row, {
-    required _i1.ColumnSelections<ReadWriteTestEntryTable> uniqueColumns,
+    required _i1.ColumnSelections<ReadWriteTestEntryTable> conflictColumns,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsertRow<ReadWriteTestEntry>(
       row,
-      uniqueColumns: uniqueColumns(ReadWriteTestEntry.t),
+      conflictColumns: conflictColumns(ReadWriteTestEntry.t),
       transaction: transaction,
     );
   }

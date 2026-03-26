@@ -102,7 +102,7 @@ void main() {
         var query = UpsertQueryBuilder(
           table: table,
           rows: [PersonClass(name: 'Alex', age: 33)],
-          uniqueColumns: [table.name],
+          conflictColumns: [table.name],
         ).build();
 
         expect(
@@ -121,7 +121,7 @@ void main() {
         var query = UpsertQueryBuilder(
           table: table,
           rows: [PersonClass(id: 5, name: 'Alex', age: 33)],
-          uniqueColumns: [table.name],
+          conflictColumns: [table.name],
         ).build();
 
         expect(
@@ -140,7 +140,7 @@ void main() {
         var query = UpsertQueryBuilder(
           table: table,
           rows: [PersonClass(name: 'Alex', age: 33)],
-          uniqueColumns: [table.name, table.age],
+          conflictColumns: [table.name, table.age],
         ).build();
 
         expect(
@@ -162,7 +162,7 @@ void main() {
             PersonClass(name: 'Alex', age: 33),
             PersonClass(name: 'Isak', age: 25),
           ],
-          uniqueColumns: [table.name],
+          conflictColumns: [table.name],
         ).build();
 
         expect(
@@ -184,7 +184,7 @@ void main() {
             PersonClass(id: 5, name: 'Alex', age: 33),
             PersonClass(name: 'Isak', age: 25),
           ],
-          uniqueColumns: [table.name],
+          conflictColumns: [table.name],
         ).build();
 
         expect(
@@ -211,7 +211,7 @@ SELECT * FROM upsertWithIdNotNull
         var query = UpsertQueryBuilder(
           table: table,
           rows: [UserClass(id: 33, userName: 'Alex', age: 33)],
-          uniqueColumns: [table.userName],
+          conflictColumns: [table.userName],
         ).build();
 
         expect(
@@ -233,7 +233,7 @@ SELECT * FROM upsertWithIdNotNull
           () => UpsertQueryBuilder(
             table: table,
             rows: [],
-            uniqueColumns: [table.name],
+            conflictColumns: [table.name],
           ),
           throwsArgumentError,
         );
@@ -241,14 +241,14 @@ SELECT * FROM upsertWithIdNotNull
     );
 
     test(
-      'when instantiating upsert query with empty uniqueColumns then argument error is thrown.',
+      'when instantiating upsert query with empty conflictColumns then argument error is thrown.',
       () {
         var table = PersonTable();
         expect(
           () => UpsertQueryBuilder(
             table: table,
             rows: [PersonClass(name: 'Alex', age: 33)],
-            uniqueColumns: [],
+            conflictColumns: [],
           ),
           throwsArgumentError,
         );
@@ -256,14 +256,14 @@ SELECT * FROM upsertWithIdNotNull
     );
 
     test(
-      'when instantiating upsert query with id as unique column then argument error is thrown.',
+      'when instantiating upsert query with id as conflict column then argument error is thrown.',
       () {
         var table = PersonTable();
         expect(
           () => UpsertQueryBuilder(
             table: table,
             rows: [PersonClass(name: 'Alex', age: 33)],
-            uniqueColumns: [table.id],
+            conflictColumns: [table.id],
           ),
           throwsArgumentError,
         );
@@ -279,9 +279,135 @@ SELECT * FROM upsertWithIdNotNull
           () => UpsertQueryBuilder(
             table: personTable,
             rows: [PersonClass(name: 'Alex', age: 33)],
-            uniqueColumns: [userTable.userName],
+            conflictColumns: [userTable.userName],
           ),
           throwsArgumentError,
+        );
+      },
+    );
+
+    test(
+      'when instantiating upsert query with empty updateColumns then argument error is thrown.',
+      () {
+        var table = PersonTable();
+        expect(
+          () => UpsertQueryBuilder(
+            table: table,
+            rows: [PersonClass(name: 'Alex', age: 33)],
+            conflictColumns: [table.name],
+            updateColumns: [],
+          ),
+          throwsArgumentError,
+        );
+      },
+    );
+
+    test(
+      'when instantiating upsert query with id in updateColumns then argument error is thrown.',
+      () {
+        var table = PersonTable();
+        expect(
+          () => UpsertQueryBuilder(
+            table: table,
+            rows: [PersonClass(name: 'Alex', age: 33)],
+            conflictColumns: [table.name],
+            updateColumns: [table.id],
+          ),
+          throwsArgumentError,
+        );
+      },
+    );
+
+    test(
+      'when instantiating upsert query with updateColumns containing column not in table then argument error is thrown.',
+      () {
+        var personTable = PersonTable();
+        var userTable = UserTable();
+        expect(
+          () => UpsertQueryBuilder(
+            table: personTable,
+            rows: [PersonClass(name: 'Alex', age: 33)],
+            conflictColumns: [personTable.name],
+            updateColumns: [userTable.userName],
+          ),
+          throwsArgumentError,
+        );
+      },
+    );
+
+    test(
+      'when instantiating upsert query with updateColumns overlapping conflictColumns then argument error is thrown.',
+      () {
+        var table = PersonTable();
+        expect(
+          () => UpsertQueryBuilder(
+            table: table,
+            rows: [PersonClass(name: 'Alex', age: 33)],
+            conflictColumns: [table.name],
+            updateColumns: [table.name],
+          ),
+          throwsArgumentError,
+        );
+      },
+    );
+  });
+
+  group('Given updateColumns parameter', () {
+    test(
+      'when building upsert query with explicit updateColumns then SET clause only includes those columns.',
+      () {
+        var table = PersonTable();
+        var query = UpsertQueryBuilder(
+          table: table,
+          rows: [PersonClass(name: 'Alex', age: 33)],
+          conflictColumns: [table.name],
+          updateColumns: [table.age],
+        ).build();
+
+        expect(
+          query,
+          'INSERT INTO "person" ("name", "age") VALUES (\'Alex\', 33) '
+          'ON CONFLICT ("name") DO UPDATE SET "age" = EXCLUDED."age" '
+          'RETURNING *',
+        );
+      },
+    );
+  });
+
+  group('Given conflictWhere parameter', () {
+    test(
+      'when building upsert query with conflictWhere then WHERE appears after SET clause.',
+      () {
+        var table = PersonTable();
+        var query = UpsertQueryBuilder(
+          table: table,
+          rows: [PersonClass(name: 'Alex', age: 33)],
+          conflictColumns: [table.name],
+          conflictWhere: table.age.notEquals(99),
+        ).build();
+
+        expect(
+          query,
+          contains('DO UPDATE SET "age" = EXCLUDED."age" WHERE'),
+        );
+      },
+    );
+
+    test(
+      'when building upsert query with both updateColumns and conflictWhere then both are applied.',
+      () {
+        var table = PersonTable();
+        var query = UpsertQueryBuilder(
+          table: table,
+          rows: [PersonClass(name: 'Alex', age: 33)],
+          conflictColumns: [table.name],
+          updateColumns: [table.age],
+          conflictWhere: table.age.notEquals(99),
+        ).build();
+
+        expect(
+          query,
+          contains('DO UPDATE SET "age" = EXCLUDED."age" WHERE'),
         );
       },
     );

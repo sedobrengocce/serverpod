@@ -384,7 +384,7 @@ class EmailAuthRepository {
 
   /// Upserts all [EmailAuth]s in the list and returns the resulting rows.
   ///
-  /// If a row conflicts on the given [uniqueColumns], the existing row is
+  /// If a row conflicts on the given [conflictColumns], the existing row is
   /// updated with the new values. Otherwise, a new row is inserted.
   ///
   /// The returned [EmailAuth]s will have their `id` fields set.
@@ -394,31 +394,31 @@ class EmailAuthRepository {
   Future<List<EmailAuth>> upsert(
     _i1.DatabaseSession session,
     List<EmailAuth> rows, {
-    required _i1.ColumnSelections<EmailAuthTable> uniqueColumns,
+    required _i1.ColumnSelections<EmailAuthTable> conflictColumns,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsert<EmailAuth>(
       rows,
-      uniqueColumns: uniqueColumns(EmailAuth.t),
+      conflictColumns: conflictColumns(EmailAuth.t),
       transaction: transaction,
     );
   }
 
   /// Upserts a single [EmailAuth] and returns the resulting row.
   ///
-  /// If the row conflicts on the given [uniqueColumns], the existing row is
+  /// If the row conflicts on the given [conflictColumns], the existing row is
   /// updated. Otherwise, a new row is inserted.
   ///
   /// The returned [EmailAuth] will have its `id` field set.
   Future<EmailAuth> upsertRow(
     _i1.DatabaseSession session,
     EmailAuth row, {
-    required _i1.ColumnSelections<EmailAuthTable> uniqueColumns,
+    required _i1.ColumnSelections<EmailAuthTable> conflictColumns,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsertRow<EmailAuth>(
       row,
-      uniqueColumns: uniqueColumns(EmailAuth.t),
+      conflictColumns: conflictColumns(EmailAuth.t),
       transaction: transaction,
     );
   }

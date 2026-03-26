@@ -335,35 +335,55 @@ class Database {
   }
 
   /// Upserts all [TableRow]s in the list and returns the resulting rows.
-  /// If a row conflicts on the given [uniqueColumns], the existing row is
+  /// If a row conflicts on the given [conflictColumns], the existing row is
   /// updated with the new values. Otherwise, a new row is inserted.
   /// This is an atomic operation.
+  ///
+  /// If [updateColumns] is provided, only those columns will be updated on
+  /// conflict. If null, all non-conflict, non-id columns are updated.
+  ///
+  /// If [conflictWhere] is provided, the update will only apply to rows
+  /// matching the given expression.
   Future<List<T>> upsert<T extends TableRow>(
     List<T> rows, {
-    required List<Column> uniqueColumns,
+    required List<Column> conflictColumns,
+    List<Column>? updateColumns,
+    Expression? conflictWhere,
     Transaction? transaction,
   }) async {
     return _databaseConnection.upsert<T>(
       _session,
       rows,
-      uniqueColumns: uniqueColumns,
+      conflictColumns: conflictColumns,
+      updateColumns: updateColumns,
+      conflictWhere: conflictWhere,
       // ignore: invalid_use_of_visible_for_testing_member
       transaction: transaction ?? _session.transaction,
     );
   }
 
   /// Upserts a single [TableRow] and returns the resulting row.
-  /// If the row conflicts on the given [uniqueColumns], the existing row is
+  /// If the row conflicts on the given [conflictColumns], the existing row is
   /// updated. Otherwise, a new row is inserted.
+  ///
+  /// If [updateColumns] is provided, only those columns will be updated on
+  /// conflict. If null, all non-conflict, non-id columns are updated.
+  ///
+  /// If [conflictWhere] is provided, the update will only apply to rows
+  /// matching the given expression.
   Future<T> upsertRow<T extends TableRow>(
     T row, {
-    required List<Column> uniqueColumns,
+    required List<Column> conflictColumns,
+    List<Column>? updateColumns,
+    Expression? conflictWhere,
     Transaction? transaction,
   }) async {
     return _databaseConnection.upsertRow<T>(
       _session,
       row,
-      uniqueColumns: uniqueColumns,
+      conflictColumns: conflictColumns,
+      updateColumns: updateColumns,
+      conflictWhere: conflictWhere,
       // ignore: invalid_use_of_visible_for_testing_member
       transaction: transaction ?? _session.transaction,
     );

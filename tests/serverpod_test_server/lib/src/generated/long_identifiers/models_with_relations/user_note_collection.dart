@@ -433,7 +433,7 @@ class UserNoteCollectionRepository {
 
   /// Upserts all [UserNoteCollection]s in the list and returns the resulting rows.
   ///
-  /// If a row conflicts on the given [uniqueColumns], the existing row is
+  /// If a row conflicts on the given [conflictColumns], the existing row is
   /// updated with the new values. Otherwise, a new row is inserted.
   ///
   /// The returned [UserNoteCollection]s will have their `id` fields set.
@@ -443,31 +443,31 @@ class UserNoteCollectionRepository {
   Future<List<UserNoteCollection>> upsert(
     _i1.DatabaseSession session,
     List<UserNoteCollection> rows, {
-    required _i1.ColumnSelections<UserNoteCollectionTable> uniqueColumns,
+    required _i1.ColumnSelections<UserNoteCollectionTable> conflictColumns,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsert<UserNoteCollection>(
       rows,
-      uniqueColumns: uniqueColumns(UserNoteCollection.t),
+      conflictColumns: conflictColumns(UserNoteCollection.t),
       transaction: transaction,
     );
   }
 
   /// Upserts a single [UserNoteCollection] and returns the resulting row.
   ///
-  /// If the row conflicts on the given [uniqueColumns], the existing row is
+  /// If the row conflicts on the given [conflictColumns], the existing row is
   /// updated. Otherwise, a new row is inserted.
   ///
   /// The returned [UserNoteCollection] will have its `id` field set.
   Future<UserNoteCollection> upsertRow(
     _i1.DatabaseSession session,
     UserNoteCollection row, {
-    required _i1.ColumnSelections<UserNoteCollectionTable> uniqueColumns,
+    required _i1.ColumnSelections<UserNoteCollectionTable> conflictColumns,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsertRow<UserNoteCollection>(
       row,
-      uniqueColumns: uniqueColumns(UserNoteCollection.t),
+      conflictColumns: conflictColumns(UserNoteCollection.t),
       transaction: transaction,
     );
   }

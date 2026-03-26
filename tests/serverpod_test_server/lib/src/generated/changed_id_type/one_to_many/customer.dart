@@ -413,7 +413,7 @@ class CustomerIntRepository {
 
   /// Upserts all [CustomerInt]s in the list and returns the resulting rows.
   ///
-  /// If a row conflicts on the given [uniqueColumns], the existing row is
+  /// If a row conflicts on the given [conflictColumns], the existing row is
   /// updated with the new values. Otherwise, a new row is inserted.
   ///
   /// The returned [CustomerInt]s will have their `id` fields set.
@@ -423,31 +423,31 @@ class CustomerIntRepository {
   Future<List<CustomerInt>> upsert(
     _i1.DatabaseSession session,
     List<CustomerInt> rows, {
-    required _i1.ColumnSelections<CustomerIntTable> uniqueColumns,
+    required _i1.ColumnSelections<CustomerIntTable> conflictColumns,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsert<CustomerInt>(
       rows,
-      uniqueColumns: uniqueColumns(CustomerInt.t),
+      conflictColumns: conflictColumns(CustomerInt.t),
       transaction: transaction,
     );
   }
 
   /// Upserts a single [CustomerInt] and returns the resulting row.
   ///
-  /// If the row conflicts on the given [uniqueColumns], the existing row is
+  /// If the row conflicts on the given [conflictColumns], the existing row is
   /// updated. Otherwise, a new row is inserted.
   ///
   /// The returned [CustomerInt] will have its `id` field set.
   Future<CustomerInt> upsertRow(
     _i1.DatabaseSession session,
     CustomerInt row, {
-    required _i1.ColumnSelections<CustomerIntTable> uniqueColumns,
+    required _i1.ColumnSelections<CustomerIntTable> conflictColumns,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsertRow<CustomerInt>(
       row,
-      uniqueColumns: uniqueColumns(CustomerInt.t),
+      conflictColumns: conflictColumns(CustomerInt.t),
       transaction: transaction,
     );
   }

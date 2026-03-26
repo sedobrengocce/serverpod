@@ -408,7 +408,7 @@ class ObjectUserRepository {
 
   /// Upserts all [ObjectUser]s in the list and returns the resulting rows.
   ///
-  /// If a row conflicts on the given [uniqueColumns], the existing row is
+  /// If a row conflicts on the given [conflictColumns], the existing row is
   /// updated with the new values. Otherwise, a new row is inserted.
   ///
   /// The returned [ObjectUser]s will have their `id` fields set.
@@ -418,31 +418,31 @@ class ObjectUserRepository {
   Future<List<ObjectUser>> upsert(
     _i1.DatabaseSession session,
     List<ObjectUser> rows, {
-    required _i1.ColumnSelections<ObjectUserTable> uniqueColumns,
+    required _i1.ColumnSelections<ObjectUserTable> conflictColumns,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsert<ObjectUser>(
       rows,
-      uniqueColumns: uniqueColumns(ObjectUser.t),
+      conflictColumns: conflictColumns(ObjectUser.t),
       transaction: transaction,
     );
   }
 
   /// Upserts a single [ObjectUser] and returns the resulting row.
   ///
-  /// If the row conflicts on the given [uniqueColumns], the existing row is
+  /// If the row conflicts on the given [conflictColumns], the existing row is
   /// updated. Otherwise, a new row is inserted.
   ///
   /// The returned [ObjectUser] will have its `id` field set.
   Future<ObjectUser> upsertRow(
     _i1.DatabaseSession session,
     ObjectUser row, {
-    required _i1.ColumnSelections<ObjectUserTable> uniqueColumns,
+    required _i1.ColumnSelections<ObjectUserTable> conflictColumns,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsertRow<ObjectUser>(
       row,
-      uniqueColumns: uniqueColumns(ObjectUser.t),
+      conflictColumns: conflictColumns(ObjectUser.t),
       transaction: transaction,
     );
   }

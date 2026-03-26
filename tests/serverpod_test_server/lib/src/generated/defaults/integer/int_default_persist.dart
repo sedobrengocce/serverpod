@@ -333,7 +333,7 @@ class IntDefaultPersistRepository {
 
   /// Upserts all [IntDefaultPersist]s in the list and returns the resulting rows.
   ///
-  /// If a row conflicts on the given [uniqueColumns], the existing row is
+  /// If a row conflicts on the given [conflictColumns], the existing row is
   /// updated with the new values. Otherwise, a new row is inserted.
   ///
   /// The returned [IntDefaultPersist]s will have their `id` fields set.
@@ -343,31 +343,31 @@ class IntDefaultPersistRepository {
   Future<List<IntDefaultPersist>> upsert(
     _i1.DatabaseSession session,
     List<IntDefaultPersist> rows, {
-    required _i1.ColumnSelections<IntDefaultPersistTable> uniqueColumns,
+    required _i1.ColumnSelections<IntDefaultPersistTable> conflictColumns,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsert<IntDefaultPersist>(
       rows,
-      uniqueColumns: uniqueColumns(IntDefaultPersist.t),
+      conflictColumns: conflictColumns(IntDefaultPersist.t),
       transaction: transaction,
     );
   }
 
   /// Upserts a single [IntDefaultPersist] and returns the resulting row.
   ///
-  /// If the row conflicts on the given [uniqueColumns], the existing row is
+  /// If the row conflicts on the given [conflictColumns], the existing row is
   /// updated. Otherwise, a new row is inserted.
   ///
   /// The returned [IntDefaultPersist] will have its `id` field set.
   Future<IntDefaultPersist> upsertRow(
     _i1.DatabaseSession session,
     IntDefaultPersist row, {
-    required _i1.ColumnSelections<IntDefaultPersistTable> uniqueColumns,
+    required _i1.ColumnSelections<IntDefaultPersistTable> conflictColumns,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsertRow<IntDefaultPersist>(
       row,
-      uniqueColumns: uniqueColumns(IntDefaultPersist.t),
+      conflictColumns: conflictColumns(IntDefaultPersist.t),
       transaction: transaction,
     );
   }

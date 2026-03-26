@@ -484,7 +484,7 @@ class ObjectWithVectorRepository {
 
   /// Upserts all [ObjectWithVector]s in the list and returns the resulting rows.
   ///
-  /// If a row conflicts on the given [uniqueColumns], the existing row is
+  /// If a row conflicts on the given [conflictColumns], the existing row is
   /// updated with the new values. Otherwise, a new row is inserted.
   ///
   /// The returned [ObjectWithVector]s will have their `id` fields set.
@@ -494,31 +494,31 @@ class ObjectWithVectorRepository {
   Future<List<ObjectWithVector>> upsert(
     _i1.DatabaseSession session,
     List<ObjectWithVector> rows, {
-    required _i1.ColumnSelections<ObjectWithVectorTable> uniqueColumns,
+    required _i1.ColumnSelections<ObjectWithVectorTable> conflictColumns,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsert<ObjectWithVector>(
       rows,
-      uniqueColumns: uniqueColumns(ObjectWithVector.t),
+      conflictColumns: conflictColumns(ObjectWithVector.t),
       transaction: transaction,
     );
   }
 
   /// Upserts a single [ObjectWithVector] and returns the resulting row.
   ///
-  /// If the row conflicts on the given [uniqueColumns], the existing row is
+  /// If the row conflicts on the given [conflictColumns], the existing row is
   /// updated. Otherwise, a new row is inserted.
   ///
   /// The returned [ObjectWithVector] will have its `id` field set.
   Future<ObjectWithVector> upsertRow(
     _i1.DatabaseSession session,
     ObjectWithVector row, {
-    required _i1.ColumnSelections<ObjectWithVectorTable> uniqueColumns,
+    required _i1.ColumnSelections<ObjectWithVectorTable> conflictColumns,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsertRow<ObjectWithVector>(
       row,
-      uniqueColumns: uniqueColumns(ObjectWithVector.t),
+      conflictColumns: conflictColumns(ObjectWithVector.t),
       transaction: transaction,
     );
   }

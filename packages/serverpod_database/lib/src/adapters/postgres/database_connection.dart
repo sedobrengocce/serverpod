@@ -214,7 +214,9 @@ class PostgresDatabaseConnection
   Future<List<T>> upsert<T extends TableRow>(
     DatabaseSession session,
     List<T> rows, {
-    required List<Column> uniqueColumns,
+    required List<Column> conflictColumns,
+    List<Column>? updateColumns,
+    Expression? conflictWhere,
     Transaction? transaction,
   }) async {
     if (rows.isEmpty) return [];
@@ -227,7 +229,9 @@ class PostgresDatabaseConnection
           ...await upsert<T>(
             session,
             [row],
-            uniqueColumns: uniqueColumns,
+            conflictColumns: conflictColumns,
+            updateColumns: updateColumns,
+            conflictWhere: conflictWhere,
             transaction: tx,
           ),
       ];
@@ -248,7 +252,9 @@ class PostgresDatabaseConnection
     var query = UpsertQueryBuilder(
       table: table,
       rows: rows,
-      uniqueColumns: uniqueColumns,
+      conflictColumns: conflictColumns,
+      updateColumns: updateColumns,
+      conflictWhere: conflictWhere,
     ).build();
 
     return (await _mappedResultsQuery(
@@ -264,13 +270,17 @@ class PostgresDatabaseConnection
   Future<T> upsertRow<T extends TableRow>(
     DatabaseSession session,
     T row, {
-    required List<Column> uniqueColumns,
+    required List<Column> conflictColumns,
+    List<Column>? updateColumns,
+    Expression? conflictWhere,
     Transaction? transaction,
   }) async {
     var result = await upsert<T>(
       session,
       [row],
-      uniqueColumns: uniqueColumns,
+      conflictColumns: conflictColumns,
+      updateColumns: updateColumns,
+      conflictWhere: conflictWhere,
       transaction: transaction,
     );
 

@@ -479,7 +479,7 @@ class GoogleAccountRepository {
 
   /// Upserts all [GoogleAccount]s in the list and returns the resulting rows.
   ///
-  /// If a row conflicts on the given [uniqueColumns], the existing row is
+  /// If a row conflicts on the given [conflictColumns], the existing row is
   /// updated with the new values. Otherwise, a new row is inserted.
   ///
   /// The returned [GoogleAccount]s will have their `id` fields set.
@@ -489,31 +489,31 @@ class GoogleAccountRepository {
   Future<List<GoogleAccount>> upsert(
     _i1.DatabaseSession session,
     List<GoogleAccount> rows, {
-    required _i1.ColumnSelections<GoogleAccountTable> uniqueColumns,
+    required _i1.ColumnSelections<GoogleAccountTable> conflictColumns,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsert<GoogleAccount>(
       rows,
-      uniqueColumns: uniqueColumns(GoogleAccount.t),
+      conflictColumns: conflictColumns(GoogleAccount.t),
       transaction: transaction,
     );
   }
 
   /// Upserts a single [GoogleAccount] and returns the resulting row.
   ///
-  /// If the row conflicts on the given [uniqueColumns], the existing row is
+  /// If the row conflicts on the given [conflictColumns], the existing row is
   /// updated. Otherwise, a new row is inserted.
   ///
   /// The returned [GoogleAccount] will have its `id` field set.
   Future<GoogleAccount> upsertRow(
     _i1.DatabaseSession session,
     GoogleAccount row, {
-    required _i1.ColumnSelections<GoogleAccountTable> uniqueColumns,
+    required _i1.ColumnSelections<GoogleAccountTable> conflictColumns,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsertRow<GoogleAccount>(
       row,
-      uniqueColumns: uniqueColumns(GoogleAccount.t),
+      conflictColumns: conflictColumns(GoogleAccount.t),
       transaction: transaction,
     );
   }

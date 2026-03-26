@@ -361,7 +361,7 @@ class DoubleDefaultRepository {
 
   /// Upserts all [DoubleDefault]s in the list and returns the resulting rows.
   ///
-  /// If a row conflicts on the given [uniqueColumns], the existing row is
+  /// If a row conflicts on the given [conflictColumns], the existing row is
   /// updated with the new values. Otherwise, a new row is inserted.
   ///
   /// The returned [DoubleDefault]s will have their `id` fields set.
@@ -371,31 +371,31 @@ class DoubleDefaultRepository {
   Future<List<DoubleDefault>> upsert(
     _i1.DatabaseSession session,
     List<DoubleDefault> rows, {
-    required _i1.ColumnSelections<DoubleDefaultTable> uniqueColumns,
+    required _i1.ColumnSelections<DoubleDefaultTable> conflictColumns,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsert<DoubleDefault>(
       rows,
-      uniqueColumns: uniqueColumns(DoubleDefault.t),
+      conflictColumns: conflictColumns(DoubleDefault.t),
       transaction: transaction,
     );
   }
 
   /// Upserts a single [DoubleDefault] and returns the resulting row.
   ///
-  /// If the row conflicts on the given [uniqueColumns], the existing row is
+  /// If the row conflicts on the given [conflictColumns], the existing row is
   /// updated. Otherwise, a new row is inserted.
   ///
   /// The returned [DoubleDefault] will have its `id` field set.
   Future<DoubleDefault> upsertRow(
     _i1.DatabaseSession session,
     DoubleDefault row, {
-    required _i1.ColumnSelections<DoubleDefaultTable> uniqueColumns,
+    required _i1.ColumnSelections<DoubleDefaultTable> conflictColumns,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsertRow<DoubleDefault>(
       row,
-      uniqueColumns: uniqueColumns(DoubleDefault.t),
+      conflictColumns: conflictColumns(DoubleDefault.t),
       transaction: transaction,
     );
   }

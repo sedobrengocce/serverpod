@@ -406,7 +406,7 @@ class CompanyUuidRepository {
 
   /// Upserts all [CompanyUuid]s in the list and returns the resulting rows.
   ///
-  /// If a row conflicts on the given [uniqueColumns], the existing row is
+  /// If a row conflicts on the given [conflictColumns], the existing row is
   /// updated with the new values. Otherwise, a new row is inserted.
   ///
   /// The returned [CompanyUuid]s will have their `id` fields set.
@@ -416,31 +416,31 @@ class CompanyUuidRepository {
   Future<List<CompanyUuid>> upsert(
     _i1.DatabaseSession session,
     List<CompanyUuid> rows, {
-    required _i1.ColumnSelections<CompanyUuidTable> uniqueColumns,
+    required _i1.ColumnSelections<CompanyUuidTable> conflictColumns,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsert<CompanyUuid>(
       rows,
-      uniqueColumns: uniqueColumns(CompanyUuid.t),
+      conflictColumns: conflictColumns(CompanyUuid.t),
       transaction: transaction,
     );
   }
 
   /// Upserts a single [CompanyUuid] and returns the resulting row.
   ///
-  /// If the row conflicts on the given [uniqueColumns], the existing row is
+  /// If the row conflicts on the given [conflictColumns], the existing row is
   /// updated. Otherwise, a new row is inserted.
   ///
   /// The returned [CompanyUuid] will have its `id` field set.
   Future<CompanyUuid> upsertRow(
     _i1.DatabaseSession session,
     CompanyUuid row, {
-    required _i1.ColumnSelections<CompanyUuidTable> uniqueColumns,
+    required _i1.ColumnSelections<CompanyUuidTable> conflictColumns,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsertRow<CompanyUuid>(
       row,
-      uniqueColumns: uniqueColumns(CompanyUuid.t),
+      conflictColumns: conflictColumns(CompanyUuid.t),
       transaction: transaction,
     );
   }

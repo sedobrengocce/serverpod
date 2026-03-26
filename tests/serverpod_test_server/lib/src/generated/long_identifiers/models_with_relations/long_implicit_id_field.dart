@@ -392,7 +392,7 @@ class LongImplicitIdFieldRepository {
 
   /// Upserts all [LongImplicitIdField]s in the list and returns the resulting rows.
   ///
-  /// If a row conflicts on the given [uniqueColumns], the existing row is
+  /// If a row conflicts on the given [conflictColumns], the existing row is
   /// updated with the new values. Otherwise, a new row is inserted.
   ///
   /// The returned [LongImplicitIdField]s will have their `id` fields set.
@@ -402,31 +402,31 @@ class LongImplicitIdFieldRepository {
   Future<List<LongImplicitIdField>> upsert(
     _i1.DatabaseSession session,
     List<LongImplicitIdField> rows, {
-    required _i1.ColumnSelections<LongImplicitIdFieldTable> uniqueColumns,
+    required _i1.ColumnSelections<LongImplicitIdFieldTable> conflictColumns,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsert<LongImplicitIdField>(
       rows,
-      uniqueColumns: uniqueColumns(LongImplicitIdField.t),
+      conflictColumns: conflictColumns(LongImplicitIdField.t),
       transaction: transaction,
     );
   }
 
   /// Upserts a single [LongImplicitIdField] and returns the resulting row.
   ///
-  /// If the row conflicts on the given [uniqueColumns], the existing row is
+  /// If the row conflicts on the given [conflictColumns], the existing row is
   /// updated. Otherwise, a new row is inserted.
   ///
   /// The returned [LongImplicitIdField] will have its `id` field set.
   Future<LongImplicitIdField> upsertRow(
     _i1.DatabaseSession session,
     LongImplicitIdField row, {
-    required _i1.ColumnSelections<LongImplicitIdFieldTable> uniqueColumns,
+    required _i1.ColumnSelections<LongImplicitIdFieldTable> conflictColumns,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsertRow<LongImplicitIdField>(
       row,
-      uniqueColumns: uniqueColumns(LongImplicitIdField.t),
+      conflictColumns: conflictColumns(LongImplicitIdField.t),
       transaction: transaction,
     );
   }

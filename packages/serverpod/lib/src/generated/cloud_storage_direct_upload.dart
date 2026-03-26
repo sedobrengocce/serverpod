@@ -416,7 +416,7 @@ class CloudStorageDirectUploadEntryRepository {
 
   /// Upserts all [CloudStorageDirectUploadEntry]s in the list and returns the resulting rows.
   ///
-  /// If a row conflicts on the given [uniqueColumns], the existing row is
+  /// If a row conflicts on the given [conflictColumns], the existing row is
   /// updated with the new values. Otherwise, a new row is inserted.
   ///
   /// The returned [CloudStorageDirectUploadEntry]s will have their `id` fields set.
@@ -427,19 +427,19 @@ class CloudStorageDirectUploadEntryRepository {
     _i1.DatabaseSession session,
     List<CloudStorageDirectUploadEntry> rows, {
     required _i1.ColumnSelections<CloudStorageDirectUploadEntryTable>
-    uniqueColumns,
+    conflictColumns,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsert<CloudStorageDirectUploadEntry>(
       rows,
-      uniqueColumns: uniqueColumns(CloudStorageDirectUploadEntry.t),
+      conflictColumns: conflictColumns(CloudStorageDirectUploadEntry.t),
       transaction: transaction,
     );
   }
 
   /// Upserts a single [CloudStorageDirectUploadEntry] and returns the resulting row.
   ///
-  /// If the row conflicts on the given [uniqueColumns], the existing row is
+  /// If the row conflicts on the given [conflictColumns], the existing row is
   /// updated. Otherwise, a new row is inserted.
   ///
   /// The returned [CloudStorageDirectUploadEntry] will have its `id` field set.
@@ -447,12 +447,12 @@ class CloudStorageDirectUploadEntryRepository {
     _i1.DatabaseSession session,
     CloudStorageDirectUploadEntry row, {
     required _i1.ColumnSelections<CloudStorageDirectUploadEntryTable>
-    uniqueColumns,
+    conflictColumns,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsertRow<CloudStorageDirectUploadEntry>(
       row,
-      uniqueColumns: uniqueColumns(CloudStorageDirectUploadEntry.t),
+      conflictColumns: conflictColumns(CloudStorageDirectUploadEntry.t),
       transaction: transaction,
     );
   }

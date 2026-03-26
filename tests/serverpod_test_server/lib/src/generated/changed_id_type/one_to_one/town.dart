@@ -408,7 +408,7 @@ class TownIntRepository {
 
   /// Upserts all [TownInt]s in the list and returns the resulting rows.
   ///
-  /// If a row conflicts on the given [uniqueColumns], the existing row is
+  /// If a row conflicts on the given [conflictColumns], the existing row is
   /// updated with the new values. Otherwise, a new row is inserted.
   ///
   /// The returned [TownInt]s will have their `id` fields set.
@@ -418,31 +418,31 @@ class TownIntRepository {
   Future<List<TownInt>> upsert(
     _i1.DatabaseSession session,
     List<TownInt> rows, {
-    required _i1.ColumnSelections<TownIntTable> uniqueColumns,
+    required _i1.ColumnSelections<TownIntTable> conflictColumns,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsert<TownInt>(
       rows,
-      uniqueColumns: uniqueColumns(TownInt.t),
+      conflictColumns: conflictColumns(TownInt.t),
       transaction: transaction,
     );
   }
 
   /// Upserts a single [TownInt] and returns the resulting row.
   ///
-  /// If the row conflicts on the given [uniqueColumns], the existing row is
+  /// If the row conflicts on the given [conflictColumns], the existing row is
   /// updated. Otherwise, a new row is inserted.
   ///
   /// The returned [TownInt] will have its `id` field set.
   Future<TownInt> upsertRow(
     _i1.DatabaseSession session,
     TownInt row, {
-    required _i1.ColumnSelections<TownIntTable> uniqueColumns,
+    required _i1.ColumnSelections<TownIntTable> conflictColumns,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsertRow<TownInt>(
       row,
-      uniqueColumns: uniqueColumns(TownInt.t),
+      conflictColumns: conflictColumns(TownInt.t),
       transaction: transaction,
     );
   }

@@ -493,7 +493,7 @@ class PersonWithLongTableNameRepository {
 
   /// Upserts all [PersonWithLongTableName]s in the list and returns the resulting rows.
   ///
-  /// If a row conflicts on the given [uniqueColumns], the existing row is
+  /// If a row conflicts on the given [conflictColumns], the existing row is
   /// updated with the new values. Otherwise, a new row is inserted.
   ///
   /// The returned [PersonWithLongTableName]s will have their `id` fields set.
@@ -503,31 +503,31 @@ class PersonWithLongTableNameRepository {
   Future<List<PersonWithLongTableName>> upsert(
     _i1.DatabaseSession session,
     List<PersonWithLongTableName> rows, {
-    required _i1.ColumnSelections<PersonWithLongTableNameTable> uniqueColumns,
+    required _i1.ColumnSelections<PersonWithLongTableNameTable> conflictColumns,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsert<PersonWithLongTableName>(
       rows,
-      uniqueColumns: uniqueColumns(PersonWithLongTableName.t),
+      conflictColumns: conflictColumns(PersonWithLongTableName.t),
       transaction: transaction,
     );
   }
 
   /// Upserts a single [PersonWithLongTableName] and returns the resulting row.
   ///
-  /// If the row conflicts on the given [uniqueColumns], the existing row is
+  /// If the row conflicts on the given [conflictColumns], the existing row is
   /// updated. Otherwise, a new row is inserted.
   ///
   /// The returned [PersonWithLongTableName] will have its `id` field set.
   Future<PersonWithLongTableName> upsertRow(
     _i1.DatabaseSession session,
     PersonWithLongTableName row, {
-    required _i1.ColumnSelections<PersonWithLongTableNameTable> uniqueColumns,
+    required _i1.ColumnSelections<PersonWithLongTableNameTable> conflictColumns,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsertRow<PersonWithLongTableName>(
       row,
-      uniqueColumns: uniqueColumns(PersonWithLongTableName.t),
+      conflictColumns: conflictColumns(PersonWithLongTableName.t),
       transaction: transaction,
     );
   }

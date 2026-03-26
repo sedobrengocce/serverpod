@@ -483,7 +483,7 @@ class GitHubAccountRepository {
 
   /// Upserts all [GitHubAccount]s in the list and returns the resulting rows.
   ///
-  /// If a row conflicts on the given [uniqueColumns], the existing row is
+  /// If a row conflicts on the given [conflictColumns], the existing row is
   /// updated with the new values. Otherwise, a new row is inserted.
   ///
   /// The returned [GitHubAccount]s will have their `id` fields set.
@@ -493,31 +493,31 @@ class GitHubAccountRepository {
   Future<List<GitHubAccount>> upsert(
     _i1.DatabaseSession session,
     List<GitHubAccount> rows, {
-    required _i1.ColumnSelections<GitHubAccountTable> uniqueColumns,
+    required _i1.ColumnSelections<GitHubAccountTable> conflictColumns,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsert<GitHubAccount>(
       rows,
-      uniqueColumns: uniqueColumns(GitHubAccount.t),
+      conflictColumns: conflictColumns(GitHubAccount.t),
       transaction: transaction,
     );
   }
 
   /// Upserts a single [GitHubAccount] and returns the resulting row.
   ///
-  /// If the row conflicts on the given [uniqueColumns], the existing row is
+  /// If the row conflicts on the given [conflictColumns], the existing row is
   /// updated. Otherwise, a new row is inserted.
   ///
   /// The returned [GitHubAccount] will have its `id` field set.
   Future<GitHubAccount> upsertRow(
     _i1.DatabaseSession session,
     GitHubAccount row, {
-    required _i1.ColumnSelections<GitHubAccountTable> uniqueColumns,
+    required _i1.ColumnSelections<GitHubAccountTable> conflictColumns,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsertRow<GitHubAccount>(
       row,
-      uniqueColumns: uniqueColumns(GitHubAccount.t),
+      conflictColumns: conflictColumns(GitHubAccount.t),
       transaction: transaction,
     );
   }

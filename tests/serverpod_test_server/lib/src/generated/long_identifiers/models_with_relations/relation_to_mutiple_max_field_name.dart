@@ -437,7 +437,7 @@ class RelationToMultipleMaxFieldNameRepository {
 
   /// Upserts all [RelationToMultipleMaxFieldName]s in the list and returns the resulting rows.
   ///
-  /// If a row conflicts on the given [uniqueColumns], the existing row is
+  /// If a row conflicts on the given [conflictColumns], the existing row is
   /// updated with the new values. Otherwise, a new row is inserted.
   ///
   /// The returned [RelationToMultipleMaxFieldName]s will have their `id` fields set.
@@ -448,19 +448,19 @@ class RelationToMultipleMaxFieldNameRepository {
     _i1.DatabaseSession session,
     List<RelationToMultipleMaxFieldName> rows, {
     required _i1.ColumnSelections<RelationToMultipleMaxFieldNameTable>
-    uniqueColumns,
+    conflictColumns,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsert<RelationToMultipleMaxFieldName>(
       rows,
-      uniqueColumns: uniqueColumns(RelationToMultipleMaxFieldName.t),
+      conflictColumns: conflictColumns(RelationToMultipleMaxFieldName.t),
       transaction: transaction,
     );
   }
 
   /// Upserts a single [RelationToMultipleMaxFieldName] and returns the resulting row.
   ///
-  /// If the row conflicts on the given [uniqueColumns], the existing row is
+  /// If the row conflicts on the given [conflictColumns], the existing row is
   /// updated. Otherwise, a new row is inserted.
   ///
   /// The returned [RelationToMultipleMaxFieldName] will have its `id` field set.
@@ -468,12 +468,12 @@ class RelationToMultipleMaxFieldNameRepository {
     _i1.DatabaseSession session,
     RelationToMultipleMaxFieldName row, {
     required _i1.ColumnSelections<RelationToMultipleMaxFieldNameTable>
-    uniqueColumns,
+    conflictColumns,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsertRow<RelationToMultipleMaxFieldName>(
       row,
-      uniqueColumns: uniqueColumns(RelationToMultipleMaxFieldName.t),
+      conflictColumns: conflictColumns(RelationToMultipleMaxFieldName.t),
       transaction: transaction,
     );
   }

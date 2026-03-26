@@ -384,7 +384,7 @@ class UserImageRepository {
 
   /// Upserts all [UserImage]s in the list and returns the resulting rows.
   ///
-  /// If a row conflicts on the given [uniqueColumns], the existing row is
+  /// If a row conflicts on the given [conflictColumns], the existing row is
   /// updated with the new values. Otherwise, a new row is inserted.
   ///
   /// The returned [UserImage]s will have their `id` fields set.
@@ -394,31 +394,31 @@ class UserImageRepository {
   Future<List<UserImage>> upsert(
     _i1.DatabaseSession session,
     List<UserImage> rows, {
-    required _i1.ColumnSelections<UserImageTable> uniqueColumns,
+    required _i1.ColumnSelections<UserImageTable> conflictColumns,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsert<UserImage>(
       rows,
-      uniqueColumns: uniqueColumns(UserImage.t),
+      conflictColumns: conflictColumns(UserImage.t),
       transaction: transaction,
     );
   }
 
   /// Upserts a single [UserImage] and returns the resulting row.
   ///
-  /// If the row conflicts on the given [uniqueColumns], the existing row is
+  /// If the row conflicts on the given [conflictColumns], the existing row is
   /// updated. Otherwise, a new row is inserted.
   ///
   /// The returned [UserImage] will have its `id` field set.
   Future<UserImage> upsertRow(
     _i1.DatabaseSession session,
     UserImage row, {
-    required _i1.ColumnSelections<UserImageTable> uniqueColumns,
+    required _i1.ColumnSelections<UserImageTable> conflictColumns,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsertRow<UserImage>(
       row,
-      uniqueColumns: uniqueColumns(UserImage.t),
+      conflictColumns: conflictColumns(UserImage.t),
       transaction: transaction,
     );
   }

@@ -458,7 +458,7 @@ class ObjectWithEnumRepository {
 
   /// Upserts all [ObjectWithEnum]s in the list and returns the resulting rows.
   ///
-  /// If a row conflicts on the given [uniqueColumns], the existing row is
+  /// If a row conflicts on the given [conflictColumns], the existing row is
   /// updated with the new values. Otherwise, a new row is inserted.
   ///
   /// The returned [ObjectWithEnum]s will have their `id` fields set.
@@ -468,31 +468,31 @@ class ObjectWithEnumRepository {
   Future<List<ObjectWithEnum>> upsert(
     _i1.DatabaseSession session,
     List<ObjectWithEnum> rows, {
-    required _i1.ColumnSelections<ObjectWithEnumTable> uniqueColumns,
+    required _i1.ColumnSelections<ObjectWithEnumTable> conflictColumns,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsert<ObjectWithEnum>(
       rows,
-      uniqueColumns: uniqueColumns(ObjectWithEnum.t),
+      conflictColumns: conflictColumns(ObjectWithEnum.t),
       transaction: transaction,
     );
   }
 
   /// Upserts a single [ObjectWithEnum] and returns the resulting row.
   ///
-  /// If the row conflicts on the given [uniqueColumns], the existing row is
+  /// If the row conflicts on the given [conflictColumns], the existing row is
   /// updated. Otherwise, a new row is inserted.
   ///
   /// The returned [ObjectWithEnum] will have its `id` field set.
   Future<ObjectWithEnum> upsertRow(
     _i1.DatabaseSession session,
     ObjectWithEnum row, {
-    required _i1.ColumnSelections<ObjectWithEnumTable> uniqueColumns,
+    required _i1.ColumnSelections<ObjectWithEnumTable> conflictColumns,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsertRow<ObjectWithEnum>(
       row,
-      uniqueColumns: uniqueColumns(ObjectWithEnum.t),
+      conflictColumns: conflictColumns(ObjectWithEnum.t),
       transaction: transaction,
     );
   }

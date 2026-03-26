@@ -425,22 +425,31 @@ SELECT * FROM insertWithIdNotNull
 /// This is typically only used internally by the serverpod framework.
 class UpsertQueryBuilder {
   final Table _table;
-  final List<Column> _uniqueColumns;
+  final List<Column> _conflictColumns;
+  final List<Column>? _updateColumns;
+  final Expression? _conflictWhere;
   late final List<TableRow> _rows;
 
   /// Creates a new [UpsertQueryBuilder].
   ///
   /// [table] is the target table.
   /// [rows] is the list of rows to upsert (must not be empty).
-  /// [uniqueColumns] defines which columns form the conflict target
+  /// [conflictColumns] defines which columns form the conflict target
   /// (must not be empty, must be a subset of [table.columns], and must not
   /// include the `id` column).
+  /// [updateColumns] optionally specifies which columns to update on conflict.
+  /// If null, all non-conflict, non-id columns are updated.
+  /// [conflictWhere] optionally adds a WHERE clause to the conflict resolution.
   UpsertQueryBuilder({
     required Table table,
     required List<TableRow> rows,
-    required List<Column> uniqueColumns,
+    required List<Column> conflictColumns,
+    List<Column>? updateColumns,
+    Expression? conflictWhere,
   }) : _table = table,
-       _uniqueColumns = uniqueColumns {
+       _conflictColumns = conflictColumns,
+       _updateColumns = updateColumns,
+       _conflictWhere = conflictWhere {
     if (rows.isEmpty) {
       throw ArgumentError.value(
         rows,
@@ -449,29 +458,65 @@ class UpsertQueryBuilder {
       );
     }
 
-    if (uniqueColumns.isEmpty) {
+    if (conflictColumns.isEmpty) {
       throw ArgumentError.value(
-        uniqueColumns,
-        'uniqueColumns',
+        conflictColumns,
+        'conflictColumns',
         'Cannot be empty',
       );
     }
 
     var tableColumnNames = table.columns.map((c) => c.columnName).toSet();
-    for (var col in uniqueColumns) {
+    for (var col in conflictColumns) {
       if (!tableColumnNames.contains(col.columnName)) {
         throw ArgumentError.value(
-          uniqueColumns,
-          'uniqueColumns',
+          conflictColumns,
+          'conflictColumns',
           'Column "${col.columnName}" is not a column of table "${table.tableName}"',
         );
       }
       if (col.columnName == 'id') {
         throw ArgumentError.value(
-          uniqueColumns,
-          'uniqueColumns',
-          'The "id" column cannot be used as a unique column for upsert',
+          conflictColumns,
+          'conflictColumns',
+          'The "id" column cannot be used as a conflict column for upsert',
         );
+      }
+    }
+
+    if (updateColumns != null) {
+      if (updateColumns.isEmpty) {
+        throw ArgumentError.value(
+          updateColumns,
+          'updateColumns',
+          'Cannot be empty',
+        );
+      }
+
+      var conflictColumnNames =
+          conflictColumns.map((c) => c.columnName).toSet();
+      for (var col in updateColumns) {
+        if (!tableColumnNames.contains(col.columnName)) {
+          throw ArgumentError.value(
+            updateColumns,
+            'updateColumns',
+            'Column "${col.columnName}" is not a column of table "${table.tableName}"',
+          );
+        }
+        if (col.columnName == 'id') {
+          throw ArgumentError.value(
+            updateColumns,
+            'updateColumns',
+            'The "id" column cannot be used as an update column for upsert',
+          );
+        }
+        if (conflictColumnNames.contains(col.columnName)) {
+          throw ArgumentError.value(
+            updateColumns,
+            'updateColumns',
+            'Column "${col.columnName}" cannot be both a conflict column and an update column',
+          );
+        }
       }
     }
 
@@ -510,27 +555,37 @@ class UpsertQueryBuilder {
         })
         .join(', ');
 
-    var uniqueColumnNames = _uniqueColumns
+    var conflictColumnNames = _conflictColumns
         .map((c) => '"${c.columnName}"')
         .join(', ');
 
-    // Build the DO UPDATE SET clause: update all non-unique, non-id columns
-    var uniqueColumnNameSet = _uniqueColumns.map((c) => c.columnName).toSet();
-    var updateColumns = selectedColumns.where(
-      (c) =>
-          c.columnName != 'id' && !uniqueColumnNameSet.contains(c.columnName),
-    );
-    var setClause = updateColumns
+    // Build the DO UPDATE SET clause
+    Iterable<Column> columnsToUpdate;
+    if (_updateColumns != null) {
+      columnsToUpdate = _updateColumns;
+    } else {
+      var conflictColumnNameSet =
+          _conflictColumns.map((c) => c.columnName).toSet();
+      columnsToUpdate = selectedColumns.where(
+        (c) =>
+            c.columnName != 'id' &&
+            !conflictColumnNameSet.contains(c.columnName),
+      );
+    }
+    var setClause = columnsToUpdate
         .map((c) => '"${c.columnName}" = EXCLUDED."${c.columnName}"')
         .join(', ');
 
     var returning = buildReturningClause(_table);
     if (setClause.isEmpty) {
-      final noOpColumn = _uniqueColumns.first.columnName;
+      final noOpColumn = _conflictColumns.first.columnName;
       setClause = '"$noOpColumn" = EXCLUDED."$noOpColumn"';
     }
     var onConflict =
-        ' ON CONFLICT ($uniqueColumnNames) DO UPDATE SET $setClause';
+        ' ON CONFLICT ($conflictColumnNames) DO UPDATE SET $setClause';
+    if (_conflictWhere != null) {
+      onConflict += ' WHERE $_conflictWhere';
+    }
 
     return columnNames.isEmpty
         ? 'INSERT INTO "${_table.tableName}" DEFAULT VALUES$onConflict RETURNING $returning'

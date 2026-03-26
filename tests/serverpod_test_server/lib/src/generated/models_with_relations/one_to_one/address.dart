@@ -410,7 +410,7 @@ class AddressRepository {
 
   /// Upserts all [Address]s in the list and returns the resulting rows.
   ///
-  /// If a row conflicts on the given [uniqueColumns], the existing row is
+  /// If a row conflicts on the given [conflictColumns], the existing row is
   /// updated with the new values. Otherwise, a new row is inserted.
   ///
   /// The returned [Address]s will have their `id` fields set.
@@ -420,31 +420,31 @@ class AddressRepository {
   Future<List<Address>> upsert(
     _i1.DatabaseSession session,
     List<Address> rows, {
-    required _i1.ColumnSelections<AddressTable> uniqueColumns,
+    required _i1.ColumnSelections<AddressTable> conflictColumns,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsert<Address>(
       rows,
-      uniqueColumns: uniqueColumns(Address.t),
+      conflictColumns: conflictColumns(Address.t),
       transaction: transaction,
     );
   }
 
   /// Upserts a single [Address] and returns the resulting row.
   ///
-  /// If the row conflicts on the given [uniqueColumns], the existing row is
+  /// If the row conflicts on the given [conflictColumns], the existing row is
   /// updated. Otherwise, a new row is inserted.
   ///
   /// The returned [Address] will have its `id` field set.
   Future<Address> upsertRow(
     _i1.DatabaseSession session,
     Address row, {
-    required _i1.ColumnSelections<AddressTable> uniqueColumns,
+    required _i1.ColumnSelections<AddressTable> conflictColumns,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsertRow<Address>(
       row,
-      uniqueColumns: uniqueColumns(Address.t),
+      conflictColumns: conflictColumns(Address.t),
       transaction: transaction,
     );
   }

@@ -411,7 +411,7 @@ class DateTimeDefaultModelRepository {
 
   /// Upserts all [DateTimeDefaultModel]s in the list and returns the resulting rows.
   ///
-  /// If a row conflicts on the given [uniqueColumns], the existing row is
+  /// If a row conflicts on the given [conflictColumns], the existing row is
   /// updated with the new values. Otherwise, a new row is inserted.
   ///
   /// The returned [DateTimeDefaultModel]s will have their `id` fields set.
@@ -421,31 +421,31 @@ class DateTimeDefaultModelRepository {
   Future<List<DateTimeDefaultModel>> upsert(
     _i1.DatabaseSession session,
     List<DateTimeDefaultModel> rows, {
-    required _i1.ColumnSelections<DateTimeDefaultModelTable> uniqueColumns,
+    required _i1.ColumnSelections<DateTimeDefaultModelTable> conflictColumns,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsert<DateTimeDefaultModel>(
       rows,
-      uniqueColumns: uniqueColumns(DateTimeDefaultModel.t),
+      conflictColumns: conflictColumns(DateTimeDefaultModel.t),
       transaction: transaction,
     );
   }
 
   /// Upserts a single [DateTimeDefaultModel] and returns the resulting row.
   ///
-  /// If the row conflicts on the given [uniqueColumns], the existing row is
+  /// If the row conflicts on the given [conflictColumns], the existing row is
   /// updated. Otherwise, a new row is inserted.
   ///
   /// The returned [DateTimeDefaultModel] will have its `id` field set.
   Future<DateTimeDefaultModel> upsertRow(
     _i1.DatabaseSession session,
     DateTimeDefaultModel row, {
-    required _i1.ColumnSelections<DateTimeDefaultModelTable> uniqueColumns,
+    required _i1.ColumnSelections<DateTimeDefaultModelTable> conflictColumns,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsertRow<DateTimeDefaultModel>(
       row,
-      uniqueColumns: uniqueColumns(DateTimeDefaultModel.t),
+      conflictColumns: conflictColumns(DateTimeDefaultModel.t),
       transaction: transaction,
     );
   }

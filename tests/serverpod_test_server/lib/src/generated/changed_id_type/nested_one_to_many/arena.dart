@@ -384,7 +384,7 @@ class ArenaUuidRepository {
 
   /// Upserts all [ArenaUuid]s in the list and returns the resulting rows.
   ///
-  /// If a row conflicts on the given [uniqueColumns], the existing row is
+  /// If a row conflicts on the given [conflictColumns], the existing row is
   /// updated with the new values. Otherwise, a new row is inserted.
   ///
   /// The returned [ArenaUuid]s will have their `id` fields set.
@@ -394,31 +394,31 @@ class ArenaUuidRepository {
   Future<List<ArenaUuid>> upsert(
     _i1.DatabaseSession session,
     List<ArenaUuid> rows, {
-    required _i1.ColumnSelections<ArenaUuidTable> uniqueColumns,
+    required _i1.ColumnSelections<ArenaUuidTable> conflictColumns,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsert<ArenaUuid>(
       rows,
-      uniqueColumns: uniqueColumns(ArenaUuid.t),
+      conflictColumns: conflictColumns(ArenaUuid.t),
       transaction: transaction,
     );
   }
 
   /// Upserts a single [ArenaUuid] and returns the resulting row.
   ///
-  /// If the row conflicts on the given [uniqueColumns], the existing row is
+  /// If the row conflicts on the given [conflictColumns], the existing row is
   /// updated. Otherwise, a new row is inserted.
   ///
   /// The returned [ArenaUuid] will have its `id` field set.
   Future<ArenaUuid> upsertRow(
     _i1.DatabaseSession session,
     ArenaUuid row, {
-    required _i1.ColumnSelections<ArenaUuidTable> uniqueColumns,
+    required _i1.ColumnSelections<ArenaUuidTable> conflictColumns,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsertRow<ArenaUuid>(
       row,
-      uniqueColumns: uniqueColumns(ArenaUuid.t),
+      conflictColumns: conflictColumns(ArenaUuid.t),
       transaction: transaction,
     );
   }

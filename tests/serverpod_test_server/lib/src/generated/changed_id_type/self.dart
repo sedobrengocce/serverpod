@@ -607,7 +607,7 @@ class ChangedIdTypeSelfRepository {
 
   /// Upserts all [ChangedIdTypeSelf]s in the list and returns the resulting rows.
   ///
-  /// If a row conflicts on the given [uniqueColumns], the existing row is
+  /// If a row conflicts on the given [conflictColumns], the existing row is
   /// updated with the new values. Otherwise, a new row is inserted.
   ///
   /// The returned [ChangedIdTypeSelf]s will have their `id` fields set.
@@ -617,31 +617,31 @@ class ChangedIdTypeSelfRepository {
   Future<List<ChangedIdTypeSelf>> upsert(
     _i1.DatabaseSession session,
     List<ChangedIdTypeSelf> rows, {
-    required _i1.ColumnSelections<ChangedIdTypeSelfTable> uniqueColumns,
+    required _i1.ColumnSelections<ChangedIdTypeSelfTable> conflictColumns,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsert<ChangedIdTypeSelf>(
       rows,
-      uniqueColumns: uniqueColumns(ChangedIdTypeSelf.t),
+      conflictColumns: conflictColumns(ChangedIdTypeSelf.t),
       transaction: transaction,
     );
   }
 
   /// Upserts a single [ChangedIdTypeSelf] and returns the resulting row.
   ///
-  /// If the row conflicts on the given [uniqueColumns], the existing row is
+  /// If the row conflicts on the given [conflictColumns], the existing row is
   /// updated. Otherwise, a new row is inserted.
   ///
   /// The returned [ChangedIdTypeSelf] will have its `id` field set.
   Future<ChangedIdTypeSelf> upsertRow(
     _i1.DatabaseSession session,
     ChangedIdTypeSelf row, {
-    required _i1.ColumnSelections<ChangedIdTypeSelfTable> uniqueColumns,
+    required _i1.ColumnSelections<ChangedIdTypeSelfTable> conflictColumns,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsertRow<ChangedIdTypeSelf>(
       row,
-      uniqueColumns: uniqueColumns(ChangedIdTypeSelf.t),
+      conflictColumns: conflictColumns(ChangedIdTypeSelf.t),
       transaction: transaction,
     );
   }

@@ -458,7 +458,7 @@ class BlockingRepository {
 
   /// Upserts all [Blocking]s in the list and returns the resulting rows.
   ///
-  /// If a row conflicts on the given [uniqueColumns], the existing row is
+  /// If a row conflicts on the given [conflictColumns], the existing row is
   /// updated with the new values. Otherwise, a new row is inserted.
   ///
   /// The returned [Blocking]s will have their `id` fields set.
@@ -468,31 +468,31 @@ class BlockingRepository {
   Future<List<Blocking>> upsert(
     _i1.DatabaseSession session,
     List<Blocking> rows, {
-    required _i1.ColumnSelections<BlockingTable> uniqueColumns,
+    required _i1.ColumnSelections<BlockingTable> conflictColumns,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsert<Blocking>(
       rows,
-      uniqueColumns: uniqueColumns(Blocking.t),
+      conflictColumns: conflictColumns(Blocking.t),
       transaction: transaction,
     );
   }
 
   /// Upserts a single [Blocking] and returns the resulting row.
   ///
-  /// If the row conflicts on the given [uniqueColumns], the existing row is
+  /// If the row conflicts on the given [conflictColumns], the existing row is
   /// updated. Otherwise, a new row is inserted.
   ///
   /// The returned [Blocking] will have its `id` field set.
   Future<Blocking> upsertRow(
     _i1.DatabaseSession session,
     Blocking row, {
-    required _i1.ColumnSelections<BlockingTable> uniqueColumns,
+    required _i1.ColumnSelections<BlockingTable> conflictColumns,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsertRow<Blocking>(
       row,
-      uniqueColumns: uniqueColumns(Blocking.t),
+      conflictColumns: conflictColumns(Blocking.t),
       transaction: transaction,
     );
   }

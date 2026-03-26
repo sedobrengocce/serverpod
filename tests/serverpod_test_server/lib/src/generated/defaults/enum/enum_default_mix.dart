@@ -424,7 +424,7 @@ class EnumDefaultMixRepository {
 
   /// Upserts all [EnumDefaultMix]s in the list and returns the resulting rows.
   ///
-  /// If a row conflicts on the given [uniqueColumns], the existing row is
+  /// If a row conflicts on the given [conflictColumns], the existing row is
   /// updated with the new values. Otherwise, a new row is inserted.
   ///
   /// The returned [EnumDefaultMix]s will have their `id` fields set.
@@ -434,31 +434,31 @@ class EnumDefaultMixRepository {
   Future<List<EnumDefaultMix>> upsert(
     _i1.DatabaseSession session,
     List<EnumDefaultMix> rows, {
-    required _i1.ColumnSelections<EnumDefaultMixTable> uniqueColumns,
+    required _i1.ColumnSelections<EnumDefaultMixTable> conflictColumns,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsert<EnumDefaultMix>(
       rows,
-      uniqueColumns: uniqueColumns(EnumDefaultMix.t),
+      conflictColumns: conflictColumns(EnumDefaultMix.t),
       transaction: transaction,
     );
   }
 
   /// Upserts a single [EnumDefaultMix] and returns the resulting row.
   ///
-  /// If the row conflicts on the given [uniqueColumns], the existing row is
+  /// If the row conflicts on the given [conflictColumns], the existing row is
   /// updated. Otherwise, a new row is inserted.
   ///
   /// The returned [EnumDefaultMix] will have its `id` field set.
   Future<EnumDefaultMix> upsertRow(
     _i1.DatabaseSession session,
     EnumDefaultMix row, {
-    required _i1.ColumnSelections<EnumDefaultMixTable> uniqueColumns,
+    required _i1.ColumnSelections<EnumDefaultMixTable> conflictColumns,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsertRow<EnumDefaultMix>(
       row,
-      uniqueColumns: uniqueColumns(EnumDefaultMix.t),
+      conflictColumns: conflictColumns(EnumDefaultMix.t),
       transaction: transaction,
     );
   }

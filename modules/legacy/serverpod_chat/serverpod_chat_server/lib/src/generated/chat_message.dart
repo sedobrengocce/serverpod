@@ -529,7 +529,7 @@ class ChatMessageRepository {
 
   /// Upserts all [ChatMessage]s in the list and returns the resulting rows.
   ///
-  /// If a row conflicts on the given [uniqueColumns], the existing row is
+  /// If a row conflicts on the given [conflictColumns], the existing row is
   /// updated with the new values. Otherwise, a new row is inserted.
   ///
   /// The returned [ChatMessage]s will have their `id` fields set.
@@ -539,31 +539,31 @@ class ChatMessageRepository {
   Future<List<ChatMessage>> upsert(
     _i1.DatabaseSession session,
     List<ChatMessage> rows, {
-    required _i1.ColumnSelections<ChatMessageTable> uniqueColumns,
+    required _i1.ColumnSelections<ChatMessageTable> conflictColumns,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsert<ChatMessage>(
       rows,
-      uniqueColumns: uniqueColumns(ChatMessage.t),
+      conflictColumns: conflictColumns(ChatMessage.t),
       transaction: transaction,
     );
   }
 
   /// Upserts a single [ChatMessage] and returns the resulting row.
   ///
-  /// If the row conflicts on the given [uniqueColumns], the existing row is
+  /// If the row conflicts on the given [conflictColumns], the existing row is
   /// updated. Otherwise, a new row is inserted.
   ///
   /// The returned [ChatMessage] will have its `id` field set.
   Future<ChatMessage> upsertRow(
     _i1.DatabaseSession session,
     ChatMessage row, {
-    required _i1.ColumnSelections<ChatMessageTable> uniqueColumns,
+    required _i1.ColumnSelections<ChatMessageTable> conflictColumns,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsertRow<ChatMessage>(
       row,
-      uniqueColumns: uniqueColumns(ChatMessage.t),
+      conflictColumns: conflictColumns(ChatMessage.t),
       transaction: transaction,
     );
   }

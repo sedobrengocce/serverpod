@@ -433,7 +433,7 @@ class RuntimeSettingsRepository {
 
   /// Upserts all [RuntimeSettings]s in the list and returns the resulting rows.
   ///
-  /// If a row conflicts on the given [uniqueColumns], the existing row is
+  /// If a row conflicts on the given [conflictColumns], the existing row is
   /// updated with the new values. Otherwise, a new row is inserted.
   ///
   /// The returned [RuntimeSettings]s will have their `id` fields set.
@@ -443,31 +443,31 @@ class RuntimeSettingsRepository {
   Future<List<RuntimeSettings>> upsert(
     _i1.DatabaseSession session,
     List<RuntimeSettings> rows, {
-    required _i1.ColumnSelections<RuntimeSettingsTable> uniqueColumns,
+    required _i1.ColumnSelections<RuntimeSettingsTable> conflictColumns,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsert<RuntimeSettings>(
       rows,
-      uniqueColumns: uniqueColumns(RuntimeSettings.t),
+      conflictColumns: conflictColumns(RuntimeSettings.t),
       transaction: transaction,
     );
   }
 
   /// Upserts a single [RuntimeSettings] and returns the resulting row.
   ///
-  /// If the row conflicts on the given [uniqueColumns], the existing row is
+  /// If the row conflicts on the given [conflictColumns], the existing row is
   /// updated. Otherwise, a new row is inserted.
   ///
   /// The returned [RuntimeSettings] will have its `id` field set.
   Future<RuntimeSettings> upsertRow(
     _i1.DatabaseSession session,
     RuntimeSettings row, {
-    required _i1.ColumnSelections<RuntimeSettingsTable> uniqueColumns,
+    required _i1.ColumnSelections<RuntimeSettingsTable> conflictColumns,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsertRow<RuntimeSettings>(
       row,
-      uniqueColumns: uniqueColumns(RuntimeSettings.t),
+      conflictColumns: conflictColumns(RuntimeSettings.t),
       transaction: transaction,
     );
   }

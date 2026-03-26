@@ -409,7 +409,7 @@ class CommentIntRepository {
 
   /// Upserts all [CommentInt]s in the list and returns the resulting rows.
   ///
-  /// If a row conflicts on the given [uniqueColumns], the existing row is
+  /// If a row conflicts on the given [conflictColumns], the existing row is
   /// updated with the new values. Otherwise, a new row is inserted.
   ///
   /// The returned [CommentInt]s will have their `id` fields set.
@@ -419,31 +419,31 @@ class CommentIntRepository {
   Future<List<CommentInt>> upsert(
     _i1.DatabaseSession session,
     List<CommentInt> rows, {
-    required _i1.ColumnSelections<CommentIntTable> uniqueColumns,
+    required _i1.ColumnSelections<CommentIntTable> conflictColumns,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsert<CommentInt>(
       rows,
-      uniqueColumns: uniqueColumns(CommentInt.t),
+      conflictColumns: conflictColumns(CommentInt.t),
       transaction: transaction,
     );
   }
 
   /// Upserts a single [CommentInt] and returns the resulting row.
   ///
-  /// If the row conflicts on the given [uniqueColumns], the existing row is
+  /// If the row conflicts on the given [conflictColumns], the existing row is
   /// updated. Otherwise, a new row is inserted.
   ///
   /// The returned [CommentInt] will have its `id` field set.
   Future<CommentInt> upsertRow(
     _i1.DatabaseSession session,
     CommentInt row, {
-    required _i1.ColumnSelections<CommentIntTable> uniqueColumns,
+    required _i1.ColumnSelections<CommentIntTable> conflictColumns,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsertRow<CommentInt>(
       row,
-      uniqueColumns: uniqueColumns(CommentInt.t),
+      conflictColumns: conflictColumns(CommentInt.t),
       transaction: transaction,
     );
   }

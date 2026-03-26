@@ -353,7 +353,7 @@ class ObjectWithIndexRepository {
 
   /// Upserts all [ObjectWithIndex]s in the list and returns the resulting rows.
   ///
-  /// If a row conflicts on the given [uniqueColumns], the existing row is
+  /// If a row conflicts on the given [conflictColumns], the existing row is
   /// updated with the new values. Otherwise, a new row is inserted.
   ///
   /// The returned [ObjectWithIndex]s will have their `id` fields set.
@@ -363,31 +363,31 @@ class ObjectWithIndexRepository {
   Future<List<ObjectWithIndex>> upsert(
     _i1.DatabaseSession session,
     List<ObjectWithIndex> rows, {
-    required _i1.ColumnSelections<ObjectWithIndexTable> uniqueColumns,
+    required _i1.ColumnSelections<ObjectWithIndexTable> conflictColumns,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsert<ObjectWithIndex>(
       rows,
-      uniqueColumns: uniqueColumns(ObjectWithIndex.t),
+      conflictColumns: conflictColumns(ObjectWithIndex.t),
       transaction: transaction,
     );
   }
 
   /// Upserts a single [ObjectWithIndex] and returns the resulting row.
   ///
-  /// If the row conflicts on the given [uniqueColumns], the existing row is
+  /// If the row conflicts on the given [conflictColumns], the existing row is
   /// updated. Otherwise, a new row is inserted.
   ///
   /// The returned [ObjectWithIndex] will have its `id` field set.
   Future<ObjectWithIndex> upsertRow(
     _i1.DatabaseSession session,
     ObjectWithIndex row, {
-    required _i1.ColumnSelections<ObjectWithIndexTable> uniqueColumns,
+    required _i1.ColumnSelections<ObjectWithIndexTable> conflictColumns,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsertRow<ObjectWithIndex>(
       row,
-      uniqueColumns: uniqueColumns(ObjectWithIndex.t),
+      conflictColumns: conflictColumns(ObjectWithIndex.t),
       transaction: transaction,
     );
   }

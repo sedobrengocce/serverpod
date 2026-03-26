@@ -413,7 +413,7 @@ class BookRepository {
 
   /// Upserts all [Book]s in the list and returns the resulting rows.
   ///
-  /// If a row conflicts on the given [uniqueColumns], the existing row is
+  /// If a row conflicts on the given [conflictColumns], the existing row is
   /// updated with the new values. Otherwise, a new row is inserted.
   ///
   /// The returned [Book]s will have their `id` fields set.
@@ -423,31 +423,31 @@ class BookRepository {
   Future<List<Book>> upsert(
     _i1.DatabaseSession session,
     List<Book> rows, {
-    required _i1.ColumnSelections<BookTable> uniqueColumns,
+    required _i1.ColumnSelections<BookTable> conflictColumns,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsert<Book>(
       rows,
-      uniqueColumns: uniqueColumns(Book.t),
+      conflictColumns: conflictColumns(Book.t),
       transaction: transaction,
     );
   }
 
   /// Upserts a single [Book] and returns the resulting row.
   ///
-  /// If the row conflicts on the given [uniqueColumns], the existing row is
+  /// If the row conflicts on the given [conflictColumns], the existing row is
   /// updated. Otherwise, a new row is inserted.
   ///
   /// The returned [Book] will have its `id` field set.
   Future<Book> upsertRow(
     _i1.DatabaseSession session,
     Book row, {
-    required _i1.ColumnSelections<BookTable> uniqueColumns,
+    required _i1.ColumnSelections<BookTable> conflictColumns,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsertRow<Book>(
       row,
-      uniqueColumns: uniqueColumns(Book.t),
+      conflictColumns: conflictColumns(Book.t),
       transaction: transaction,
     );
   }

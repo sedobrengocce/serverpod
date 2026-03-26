@@ -359,7 +359,7 @@ class TableWithExplicitColumnNameRepository {
 
   /// Upserts all [TableWithExplicitColumnName]s in the list and returns the resulting rows.
   ///
-  /// If a row conflicts on the given [uniqueColumns], the existing row is
+  /// If a row conflicts on the given [conflictColumns], the existing row is
   /// updated with the new values. Otherwise, a new row is inserted.
   ///
   /// The returned [TableWithExplicitColumnName]s will have their `id` fields set.
@@ -370,19 +370,19 @@ class TableWithExplicitColumnNameRepository {
     _i1.DatabaseSession session,
     List<TableWithExplicitColumnName> rows, {
     required _i1.ColumnSelections<TableWithExplicitColumnNameTable>
-    uniqueColumns,
+    conflictColumns,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsert<TableWithExplicitColumnName>(
       rows,
-      uniqueColumns: uniqueColumns(TableWithExplicitColumnName.t),
+      conflictColumns: conflictColumns(TableWithExplicitColumnName.t),
       transaction: transaction,
     );
   }
 
   /// Upserts a single [TableWithExplicitColumnName] and returns the resulting row.
   ///
-  /// If the row conflicts on the given [uniqueColumns], the existing row is
+  /// If the row conflicts on the given [conflictColumns], the existing row is
   /// updated. Otherwise, a new row is inserted.
   ///
   /// The returned [TableWithExplicitColumnName] will have its `id` field set.
@@ -390,12 +390,12 @@ class TableWithExplicitColumnNameRepository {
     _i1.DatabaseSession session,
     TableWithExplicitColumnName row, {
     required _i1.ColumnSelections<TableWithExplicitColumnNameTable>
-    uniqueColumns,
+    conflictColumns,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsertRow<TableWithExplicitColumnName>(
       row,
-      uniqueColumns: uniqueColumns(TableWithExplicitColumnName.t),
+      conflictColumns: conflictColumns(TableWithExplicitColumnName.t),
       transaction: transaction,
     );
   }

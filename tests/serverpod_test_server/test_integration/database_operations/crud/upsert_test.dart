@@ -25,7 +25,7 @@ void main() async {
         var result = await UniqueData.db.upsert(
           session,
           data,
-          uniqueColumns: (t) => [t.email],
+          conflictColumns: (t) => [t.email],
         );
 
         expect(result, hasLength(2));
@@ -45,7 +45,7 @@ void main() async {
         var result = await UniqueData.db.upsertRow(
           session,
           UniqueData(number: 1, email: 'single@serverpod.dev'),
-          uniqueColumns: (t) => [t.email],
+          conflictColumns: (t) => [t.email],
         );
 
         expect(result.id, isNotNull);
@@ -74,7 +74,7 @@ void main() async {
         var result = await UniqueData.db.upsertRow(
           session,
           UniqueData(number: 42, email: 'existing@serverpod.dev'),
-          uniqueColumns: (t) => [t.email],
+          conflictColumns: (t) => [t.email],
         );
 
         expect(result.id, existingRow.id);
@@ -93,7 +93,7 @@ void main() async {
         var result = await UniqueData.db.upsertRow(
           session,
           UniqueData(number: 2, email: 'new@serverpod.dev'),
-          uniqueColumns: (t) => [t.email],
+          conflictColumns: (t) => [t.email],
         );
 
         expect(result.id, isNotNull);
@@ -116,7 +116,7 @@ void main() async {
         var result = await UniqueData.db.upsert(
           session,
           data,
-          uniqueColumns: (t) => [t.email],
+          conflictColumns: (t) => [t.email],
         );
 
         expect(result, hasLength(2));
@@ -144,7 +144,7 @@ void main() async {
           var result = await UniqueData.db.upsertRow(
             session,
             UniqueData(number: 77, email: 'existing@serverpod.dev'),
-            uniqueColumns: (t) => [t.email],
+            conflictColumns: (t) => [t.email],
             transaction: transaction,
           );
 

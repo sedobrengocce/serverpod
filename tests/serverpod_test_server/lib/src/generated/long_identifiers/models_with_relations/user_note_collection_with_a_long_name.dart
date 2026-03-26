@@ -430,7 +430,7 @@ class UserNoteCollectionWithALongNameRepository {
 
   /// Upserts all [UserNoteCollectionWithALongName]s in the list and returns the resulting rows.
   ///
-  /// If a row conflicts on the given [uniqueColumns], the existing row is
+  /// If a row conflicts on the given [conflictColumns], the existing row is
   /// updated with the new values. Otherwise, a new row is inserted.
   ///
   /// The returned [UserNoteCollectionWithALongName]s will have their `id` fields set.
@@ -441,19 +441,19 @@ class UserNoteCollectionWithALongNameRepository {
     _i1.DatabaseSession session,
     List<UserNoteCollectionWithALongName> rows, {
     required _i1.ColumnSelections<UserNoteCollectionWithALongNameTable>
-    uniqueColumns,
+    conflictColumns,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsert<UserNoteCollectionWithALongName>(
       rows,
-      uniqueColumns: uniqueColumns(UserNoteCollectionWithALongName.t),
+      conflictColumns: conflictColumns(UserNoteCollectionWithALongName.t),
       transaction: transaction,
     );
   }
 
   /// Upserts a single [UserNoteCollectionWithALongName] and returns the resulting row.
   ///
-  /// If the row conflicts on the given [uniqueColumns], the existing row is
+  /// If the row conflicts on the given [conflictColumns], the existing row is
   /// updated. Otherwise, a new row is inserted.
   ///
   /// The returned [UserNoteCollectionWithALongName] will have its `id` field set.
@@ -461,12 +461,12 @@ class UserNoteCollectionWithALongNameRepository {
     _i1.DatabaseSession session,
     UserNoteCollectionWithALongName row, {
     required _i1.ColumnSelections<UserNoteCollectionWithALongNameTable>
-    uniqueColumns,
+    conflictColumns,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsertRow<UserNoteCollectionWithALongName>(
       row,
-      uniqueColumns: uniqueColumns(UserNoteCollectionWithALongName.t),
+      conflictColumns: conflictColumns(UserNoteCollectionWithALongName.t),
       transaction: transaction,
     );
   }

@@ -352,7 +352,7 @@ class UniqueDataRepository {
 
   /// Upserts all [UniqueData]s in the list and returns the resulting rows.
   ///
-  /// If a row conflicts on the given [uniqueColumns], the existing row is
+  /// If a row conflicts on the given [conflictColumns], the existing row is
   /// updated with the new values. Otherwise, a new row is inserted.
   ///
   /// The returned [UniqueData]s will have their `id` fields set.
@@ -362,31 +362,31 @@ class UniqueDataRepository {
   Future<List<UniqueData>> upsert(
     _i1.DatabaseSession session,
     List<UniqueData> rows, {
-    required _i1.ColumnSelections<UniqueDataTable> uniqueColumns,
+    required _i1.ColumnSelections<UniqueDataTable> conflictColumns,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsert<UniqueData>(
       rows,
-      uniqueColumns: uniqueColumns(UniqueData.t),
+      conflictColumns: conflictColumns(UniqueData.t),
       transaction: transaction,
     );
   }
 
   /// Upserts a single [UniqueData] and returns the resulting row.
   ///
-  /// If the row conflicts on the given [uniqueColumns], the existing row is
+  /// If the row conflicts on the given [conflictColumns], the existing row is
   /// updated. Otherwise, a new row is inserted.
   ///
   /// The returned [UniqueData] will have its `id` field set.
   Future<UniqueData> upsertRow(
     _i1.DatabaseSession session,
     UniqueData row, {
-    required _i1.ColumnSelections<UniqueDataTable> uniqueColumns,
+    required _i1.ColumnSelections<UniqueDataTable> conflictColumns,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsertRow<UniqueData>(
       row,
-      uniqueColumns: uniqueColumns(UniqueData.t),
+      conflictColumns: conflictColumns(UniqueData.t),
       transaction: transaction,
     );
   }

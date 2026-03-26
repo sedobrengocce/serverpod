@@ -95,7 +95,9 @@ abstract class DatabaseConnection<D extends DatabasePoolManager> {
   Future<List<T>> upsert<T extends TableRow>(
     DatabaseSession session,
     List<T> rows, {
-    required List<Column> uniqueColumns,
+    required List<Column> conflictColumns,
+    List<Column>? updateColumns,
+    Expression? conflictWhere,
     Transaction? transaction,
   });
 
@@ -103,7 +105,9 @@ abstract class DatabaseConnection<D extends DatabasePoolManager> {
   Future<T> upsertRow<T extends TableRow>(
     DatabaseSession session,
     T row, {
-    required List<Column> uniqueColumns,
+    required List<Column> conflictColumns,
+    List<Column>? updateColumns,
+    Expression? conflictWhere,
     Transaction? transaction,
   });
 

@@ -360,7 +360,7 @@ class StringDefaultRepository {
 
   /// Upserts all [StringDefault]s in the list and returns the resulting rows.
   ///
-  /// If a row conflicts on the given [uniqueColumns], the existing row is
+  /// If a row conflicts on the given [conflictColumns], the existing row is
   /// updated with the new values. Otherwise, a new row is inserted.
   ///
   /// The returned [StringDefault]s will have their `id` fields set.
@@ -370,31 +370,31 @@ class StringDefaultRepository {
   Future<List<StringDefault>> upsert(
     _i1.DatabaseSession session,
     List<StringDefault> rows, {
-    required _i1.ColumnSelections<StringDefaultTable> uniqueColumns,
+    required _i1.ColumnSelections<StringDefaultTable> conflictColumns,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsert<StringDefault>(
       rows,
-      uniqueColumns: uniqueColumns(StringDefault.t),
+      conflictColumns: conflictColumns(StringDefault.t),
       transaction: transaction,
     );
   }
 
   /// Upserts a single [StringDefault] and returns the resulting row.
   ///
-  /// If the row conflicts on the given [uniqueColumns], the existing row is
+  /// If the row conflicts on the given [conflictColumns], the existing row is
   /// updated. Otherwise, a new row is inserted.
   ///
   /// The returned [StringDefault] will have its `id` field set.
   Future<StringDefault> upsertRow(
     _i1.DatabaseSession session,
     StringDefault row, {
-    required _i1.ColumnSelections<StringDefaultTable> uniqueColumns,
+    required _i1.ColumnSelections<StringDefaultTable> conflictColumns,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsertRow<StringDefault>(
       row,
-      uniqueColumns: uniqueColumns(StringDefault.t),
+      conflictColumns: conflictColumns(StringDefault.t),
       transaction: transaction,
     );
   }

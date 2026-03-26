@@ -366,7 +366,7 @@ class ScopeNoneFieldsRepository {
 
   /// Upserts all [ScopeNoneFields]s in the list and returns the resulting rows.
   ///
-  /// If a row conflicts on the given [uniqueColumns], the existing row is
+  /// If a row conflicts on the given [conflictColumns], the existing row is
   /// updated with the new values. Otherwise, a new row is inserted.
   ///
   /// The returned [ScopeNoneFields]s will have their `id` fields set.
@@ -376,31 +376,31 @@ class ScopeNoneFieldsRepository {
   Future<List<ScopeNoneFields>> upsert(
     _i1.DatabaseSession session,
     List<ScopeNoneFields> rows, {
-    required _i1.ColumnSelections<ScopeNoneFieldsTable> uniqueColumns,
+    required _i1.ColumnSelections<ScopeNoneFieldsTable> conflictColumns,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsert<ScopeNoneFields>(
       rows,
-      uniqueColumns: uniqueColumns(ScopeNoneFields.t),
+      conflictColumns: conflictColumns(ScopeNoneFields.t),
       transaction: transaction,
     );
   }
 
   /// Upserts a single [ScopeNoneFields] and returns the resulting row.
   ///
-  /// If the row conflicts on the given [uniqueColumns], the existing row is
+  /// If the row conflicts on the given [conflictColumns], the existing row is
   /// updated. Otherwise, a new row is inserted.
   ///
   /// The returned [ScopeNoneFields] will have its `id` field set.
   Future<ScopeNoneFields> upsertRow(
     _i1.DatabaseSession session,
     ScopeNoneFields row, {
-    required _i1.ColumnSelections<ScopeNoneFieldsTable> uniqueColumns,
+    required _i1.ColumnSelections<ScopeNoneFieldsTable> conflictColumns,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsertRow<ScopeNoneFields>(
       row,
-      uniqueColumns: uniqueColumns(ScopeNoneFields.t),
+      conflictColumns: conflictColumns(ScopeNoneFields.t),
       transaction: transaction,
     );
   }

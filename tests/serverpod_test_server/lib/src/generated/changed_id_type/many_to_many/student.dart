@@ -415,7 +415,7 @@ class StudentUuidRepository {
 
   /// Upserts all [StudentUuid]s in the list and returns the resulting rows.
   ///
-  /// If a row conflicts on the given [uniqueColumns], the existing row is
+  /// If a row conflicts on the given [conflictColumns], the existing row is
   /// updated with the new values. Otherwise, a new row is inserted.
   ///
   /// The returned [StudentUuid]s will have their `id` fields set.
@@ -425,31 +425,31 @@ class StudentUuidRepository {
   Future<List<StudentUuid>> upsert(
     _i1.DatabaseSession session,
     List<StudentUuid> rows, {
-    required _i1.ColumnSelections<StudentUuidTable> uniqueColumns,
+    required _i1.ColumnSelections<StudentUuidTable> conflictColumns,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsert<StudentUuid>(
       rows,
-      uniqueColumns: uniqueColumns(StudentUuid.t),
+      conflictColumns: conflictColumns(StudentUuid.t),
       transaction: transaction,
     );
   }
 
   /// Upserts a single [StudentUuid] and returns the resulting row.
   ///
-  /// If the row conflicts on the given [uniqueColumns], the existing row is
+  /// If the row conflicts on the given [conflictColumns], the existing row is
   /// updated. Otherwise, a new row is inserted.
   ///
   /// The returned [StudentUuid] will have its `id` field set.
   Future<StudentUuid> upsertRow(
     _i1.DatabaseSession session,
     StudentUuid row, {
-    required _i1.ColumnSelections<StudentUuidTable> uniqueColumns,
+    required _i1.ColumnSelections<StudentUuidTable> conflictColumns,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsertRow<StudentUuid>(
       row,
-      uniqueColumns: uniqueColumns(StudentUuid.t),
+      conflictColumns: conflictColumns(StudentUuid.t),
       transaction: transaction,
     );
   }

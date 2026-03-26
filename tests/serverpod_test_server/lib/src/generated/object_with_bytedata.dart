@@ -334,7 +334,7 @@ class ObjectWithByteDataRepository {
 
   /// Upserts all [ObjectWithByteData]s in the list and returns the resulting rows.
   ///
-  /// If a row conflicts on the given [uniqueColumns], the existing row is
+  /// If a row conflicts on the given [conflictColumns], the existing row is
   /// updated with the new values. Otherwise, a new row is inserted.
   ///
   /// The returned [ObjectWithByteData]s will have their `id` fields set.
@@ -344,31 +344,31 @@ class ObjectWithByteDataRepository {
   Future<List<ObjectWithByteData>> upsert(
     _i1.DatabaseSession session,
     List<ObjectWithByteData> rows, {
-    required _i1.ColumnSelections<ObjectWithByteDataTable> uniqueColumns,
+    required _i1.ColumnSelections<ObjectWithByteDataTable> conflictColumns,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsert<ObjectWithByteData>(
       rows,
-      uniqueColumns: uniqueColumns(ObjectWithByteData.t),
+      conflictColumns: conflictColumns(ObjectWithByteData.t),
       transaction: transaction,
     );
   }
 
   /// Upserts a single [ObjectWithByteData] and returns the resulting row.
   ///
-  /// If the row conflicts on the given [uniqueColumns], the existing row is
+  /// If the row conflicts on the given [conflictColumns], the existing row is
   /// updated. Otherwise, a new row is inserted.
   ///
   /// The returned [ObjectWithByteData] will have its `id` field set.
   Future<ObjectWithByteData> upsertRow(
     _i1.DatabaseSession session,
     ObjectWithByteData row, {
-    required _i1.ColumnSelections<ObjectWithByteDataTable> uniqueColumns,
+    required _i1.ColumnSelections<ObjectWithByteDataTable> conflictColumns,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsertRow<ObjectWithByteData>(
       row,
-      uniqueColumns: uniqueColumns(ObjectWithByteData.t),
+      conflictColumns: conflictColumns(ObjectWithByteData.t),
       transaction: transaction,
     );
   }

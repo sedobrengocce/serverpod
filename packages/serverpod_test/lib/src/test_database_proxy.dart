@@ -221,13 +221,17 @@ class TestDatabaseProxy implements Database {
   @override
   Future<List<T>> upsert<T extends TableRow>(
     List<T> rows, {
-    required List<Column> uniqueColumns,
+    required List<Column> conflictColumns,
+    List<Column>? updateColumns,
+    Expression? conflictWhere,
     Transaction? transaction,
   }) {
     return _rollbackSingleOperationIfDatabaseException(
       () => _db.upsert<T>(
         rows,
-        uniqueColumns: uniqueColumns,
+        conflictColumns: conflictColumns,
+        updateColumns: updateColumns,
+        conflictWhere: conflictWhere,
         transaction: transaction,
       ),
       isPartOfUserTransaction: transaction != null,
@@ -237,13 +241,17 @@ class TestDatabaseProxy implements Database {
   @override
   Future<T> upsertRow<T extends TableRow>(
     T row, {
-    required List<Column> uniqueColumns,
+    required List<Column> conflictColumns,
+    List<Column>? updateColumns,
+    Expression? conflictWhere,
     Transaction? transaction,
   }) {
     return _rollbackSingleOperationIfDatabaseException(
       () => _db.upsertRow<T>(
         row,
-        uniqueColumns: uniqueColumns,
+        conflictColumns: conflictColumns,
+        updateColumns: updateColumns,
+        conflictWhere: conflictWhere,
         transaction: transaction,
       ),
       isPartOfUserTransaction: transaction != null,

@@ -380,7 +380,7 @@ class DateTimeDefaultPersistRepository {
 
   /// Upserts all [DateTimeDefaultPersist]s in the list and returns the resulting rows.
   ///
-  /// If a row conflicts on the given [uniqueColumns], the existing row is
+  /// If a row conflicts on the given [conflictColumns], the existing row is
   /// updated with the new values. Otherwise, a new row is inserted.
   ///
   /// The returned [DateTimeDefaultPersist]s will have their `id` fields set.
@@ -390,31 +390,31 @@ class DateTimeDefaultPersistRepository {
   Future<List<DateTimeDefaultPersist>> upsert(
     _i1.DatabaseSession session,
     List<DateTimeDefaultPersist> rows, {
-    required _i1.ColumnSelections<DateTimeDefaultPersistTable> uniqueColumns,
+    required _i1.ColumnSelections<DateTimeDefaultPersistTable> conflictColumns,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsert<DateTimeDefaultPersist>(
       rows,
-      uniqueColumns: uniqueColumns(DateTimeDefaultPersist.t),
+      conflictColumns: conflictColumns(DateTimeDefaultPersist.t),
       transaction: transaction,
     );
   }
 
   /// Upserts a single [DateTimeDefaultPersist] and returns the resulting row.
   ///
-  /// If the row conflicts on the given [uniqueColumns], the existing row is
+  /// If the row conflicts on the given [conflictColumns], the existing row is
   /// updated. Otherwise, a new row is inserted.
   ///
   /// The returned [DateTimeDefaultPersist] will have its `id` field set.
   Future<DateTimeDefaultPersist> upsertRow(
     _i1.DatabaseSession session,
     DateTimeDefaultPersist row, {
-    required _i1.ColumnSelections<DateTimeDefaultPersistTable> uniqueColumns,
+    required _i1.ColumnSelections<DateTimeDefaultPersistTable> conflictColumns,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsertRow<DateTimeDefaultPersist>(
       row,
-      uniqueColumns: uniqueColumns(DateTimeDefaultPersist.t),
+      conflictColumns: conflictColumns(DateTimeDefaultPersist.t),
       transaction: transaction,
     );
   }

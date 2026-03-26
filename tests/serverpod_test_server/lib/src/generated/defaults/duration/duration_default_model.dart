@@ -389,7 +389,7 @@ class DurationDefaultModelRepository {
 
   /// Upserts all [DurationDefaultModel]s in the list and returns the resulting rows.
   ///
-  /// If a row conflicts on the given [uniqueColumns], the existing row is
+  /// If a row conflicts on the given [conflictColumns], the existing row is
   /// updated with the new values. Otherwise, a new row is inserted.
   ///
   /// The returned [DurationDefaultModel]s will have their `id` fields set.
@@ -399,31 +399,31 @@ class DurationDefaultModelRepository {
   Future<List<DurationDefaultModel>> upsert(
     _i1.DatabaseSession session,
     List<DurationDefaultModel> rows, {
-    required _i1.ColumnSelections<DurationDefaultModelTable> uniqueColumns,
+    required _i1.ColumnSelections<DurationDefaultModelTable> conflictColumns,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsert<DurationDefaultModel>(
       rows,
-      uniqueColumns: uniqueColumns(DurationDefaultModel.t),
+      conflictColumns: conflictColumns(DurationDefaultModel.t),
       transaction: transaction,
     );
   }
 
   /// Upserts a single [DurationDefaultModel] and returns the resulting row.
   ///
-  /// If the row conflicts on the given [uniqueColumns], the existing row is
+  /// If the row conflicts on the given [conflictColumns], the existing row is
   /// updated. Otherwise, a new row is inserted.
   ///
   /// The returned [DurationDefaultModel] will have its `id` field set.
   Future<DurationDefaultModel> upsertRow(
     _i1.DatabaseSession session,
     DurationDefaultModel row, {
-    required _i1.ColumnSelections<DurationDefaultModelTable> uniqueColumns,
+    required _i1.ColumnSelections<DurationDefaultModelTable> conflictColumns,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsertRow<DurationDefaultModel>(
       row,
-      uniqueColumns: uniqueColumns(DurationDefaultModel.t),
+      conflictColumns: conflictColumns(DurationDefaultModel.t),
       transaction: transaction,
     );
   }

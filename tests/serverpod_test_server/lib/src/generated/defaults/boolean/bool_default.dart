@@ -398,7 +398,7 @@ class BoolDefaultRepository {
 
   /// Upserts all [BoolDefault]s in the list and returns the resulting rows.
   ///
-  /// If a row conflicts on the given [uniqueColumns], the existing row is
+  /// If a row conflicts on the given [conflictColumns], the existing row is
   /// updated with the new values. Otherwise, a new row is inserted.
   ///
   /// The returned [BoolDefault]s will have their `id` fields set.
@@ -408,31 +408,31 @@ class BoolDefaultRepository {
   Future<List<BoolDefault>> upsert(
     _i1.DatabaseSession session,
     List<BoolDefault> rows, {
-    required _i1.ColumnSelections<BoolDefaultTable> uniqueColumns,
+    required _i1.ColumnSelections<BoolDefaultTable> conflictColumns,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsert<BoolDefault>(
       rows,
-      uniqueColumns: uniqueColumns(BoolDefault.t),
+      conflictColumns: conflictColumns(BoolDefault.t),
       transaction: transaction,
     );
   }
 
   /// Upserts a single [BoolDefault] and returns the resulting row.
   ///
-  /// If the row conflicts on the given [uniqueColumns], the existing row is
+  /// If the row conflicts on the given [conflictColumns], the existing row is
   /// updated. Otherwise, a new row is inserted.
   ///
   /// The returned [BoolDefault] will have its `id` field set.
   Future<BoolDefault> upsertRow(
     _i1.DatabaseSession session,
     BoolDefault row, {
-    required _i1.ColumnSelections<BoolDefaultTable> uniqueColumns,
+    required _i1.ColumnSelections<BoolDefaultTable> conflictColumns,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsertRow<BoolDefault>(
       row,
-      uniqueColumns: uniqueColumns(BoolDefault.t),
+      conflictColumns: conflictColumns(BoolDefault.t),
       transaction: transaction,
     );
   }

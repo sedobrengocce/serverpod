@@ -415,7 +415,7 @@ class BigIntDefaultMixRepository {
 
   /// Upserts all [BigIntDefaultMix]s in the list and returns the resulting rows.
   ///
-  /// If a row conflicts on the given [uniqueColumns], the existing row is
+  /// If a row conflicts on the given [conflictColumns], the existing row is
   /// updated with the new values. Otherwise, a new row is inserted.
   ///
   /// The returned [BigIntDefaultMix]s will have their `id` fields set.
@@ -425,31 +425,31 @@ class BigIntDefaultMixRepository {
   Future<List<BigIntDefaultMix>> upsert(
     _i1.DatabaseSession session,
     List<BigIntDefaultMix> rows, {
-    required _i1.ColumnSelections<BigIntDefaultMixTable> uniqueColumns,
+    required _i1.ColumnSelections<BigIntDefaultMixTable> conflictColumns,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsert<BigIntDefaultMix>(
       rows,
-      uniqueColumns: uniqueColumns(BigIntDefaultMix.t),
+      conflictColumns: conflictColumns(BigIntDefaultMix.t),
       transaction: transaction,
     );
   }
 
   /// Upserts a single [BigIntDefaultMix] and returns the resulting row.
   ///
-  /// If the row conflicts on the given [uniqueColumns], the existing row is
+  /// If the row conflicts on the given [conflictColumns], the existing row is
   /// updated. Otherwise, a new row is inserted.
   ///
   /// The returned [BigIntDefaultMix] will have its `id` field set.
   Future<BigIntDefaultMix> upsertRow(
     _i1.DatabaseSession session,
     BigIntDefaultMix row, {
-    required _i1.ColumnSelections<BigIntDefaultMixTable> uniqueColumns,
+    required _i1.ColumnSelections<BigIntDefaultMixTable> conflictColumns,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsertRow<BigIntDefaultMix>(
       row,
-      uniqueColumns: uniqueColumns(BigIntDefaultMix.t),
+      conflictColumns: conflictColumns(BigIntDefaultMix.t),
       transaction: transaction,
     );
   }

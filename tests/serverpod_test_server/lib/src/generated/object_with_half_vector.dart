@@ -496,7 +496,7 @@ class ObjectWithHalfVectorRepository {
 
   /// Upserts all [ObjectWithHalfVector]s in the list and returns the resulting rows.
   ///
-  /// If a row conflicts on the given [uniqueColumns], the existing row is
+  /// If a row conflicts on the given [conflictColumns], the existing row is
   /// updated with the new values. Otherwise, a new row is inserted.
   ///
   /// The returned [ObjectWithHalfVector]s will have their `id` fields set.
@@ -506,31 +506,31 @@ class ObjectWithHalfVectorRepository {
   Future<List<ObjectWithHalfVector>> upsert(
     _i1.DatabaseSession session,
     List<ObjectWithHalfVector> rows, {
-    required _i1.ColumnSelections<ObjectWithHalfVectorTable> uniqueColumns,
+    required _i1.ColumnSelections<ObjectWithHalfVectorTable> conflictColumns,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsert<ObjectWithHalfVector>(
       rows,
-      uniqueColumns: uniqueColumns(ObjectWithHalfVector.t),
+      conflictColumns: conflictColumns(ObjectWithHalfVector.t),
       transaction: transaction,
     );
   }
 
   /// Upserts a single [ObjectWithHalfVector] and returns the resulting row.
   ///
-  /// If the row conflicts on the given [uniqueColumns], the existing row is
+  /// If the row conflicts on the given [conflictColumns], the existing row is
   /// updated. Otherwise, a new row is inserted.
   ///
   /// The returned [ObjectWithHalfVector] will have its `id` field set.
   Future<ObjectWithHalfVector> upsertRow(
     _i1.DatabaseSession session,
     ObjectWithHalfVector row, {
-    required _i1.ColumnSelections<ObjectWithHalfVectorTable> uniqueColumns,
+    required _i1.ColumnSelections<ObjectWithHalfVectorTable> conflictColumns,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsertRow<ObjectWithHalfVector>(
       row,
-      uniqueColumns: uniqueColumns(ObjectWithHalfVector.t),
+      conflictColumns: conflictColumns(ObjectWithHalfVector.t),
       transaction: transaction,
     );
   }

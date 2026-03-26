@@ -693,7 +693,7 @@ class ObjectWithObjectRepository {
 
   /// Upserts all [ObjectWithObject]s in the list and returns the resulting rows.
   ///
-  /// If a row conflicts on the given [uniqueColumns], the existing row is
+  /// If a row conflicts on the given [conflictColumns], the existing row is
   /// updated with the new values. Otherwise, a new row is inserted.
   ///
   /// The returned [ObjectWithObject]s will have their `id` fields set.
@@ -703,31 +703,31 @@ class ObjectWithObjectRepository {
   Future<List<ObjectWithObject>> upsert(
     _i1.DatabaseSession session,
     List<ObjectWithObject> rows, {
-    required _i1.ColumnSelections<ObjectWithObjectTable> uniqueColumns,
+    required _i1.ColumnSelections<ObjectWithObjectTable> conflictColumns,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsert<ObjectWithObject>(
       rows,
-      uniqueColumns: uniqueColumns(ObjectWithObject.t),
+      conflictColumns: conflictColumns(ObjectWithObject.t),
       transaction: transaction,
     );
   }
 
   /// Upserts a single [ObjectWithObject] and returns the resulting row.
   ///
-  /// If the row conflicts on the given [uniqueColumns], the existing row is
+  /// If the row conflicts on the given [conflictColumns], the existing row is
   /// updated. Otherwise, a new row is inserted.
   ///
   /// The returned [ObjectWithObject] will have its `id` field set.
   Future<ObjectWithObject> upsertRow(
     _i1.DatabaseSession session,
     ObjectWithObject row, {
-    required _i1.ColumnSelections<ObjectWithObjectTable> uniqueColumns,
+    required _i1.ColumnSelections<ObjectWithObjectTable> conflictColumns,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsertRow<ObjectWithObject>(
       row,
-      uniqueColumns: uniqueColumns(ObjectWithObject.t),
+      conflictColumns: conflictColumns(ObjectWithObject.t),
       transaction: transaction,
     );
   }

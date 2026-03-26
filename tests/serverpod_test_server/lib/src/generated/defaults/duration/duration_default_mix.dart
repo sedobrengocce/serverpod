@@ -438,7 +438,7 @@ class DurationDefaultMixRepository {
 
   /// Upserts all [DurationDefaultMix]s in the list and returns the resulting rows.
   ///
-  /// If a row conflicts on the given [uniqueColumns], the existing row is
+  /// If a row conflicts on the given [conflictColumns], the existing row is
   /// updated with the new values. Otherwise, a new row is inserted.
   ///
   /// The returned [DurationDefaultMix]s will have their `id` fields set.
@@ -448,31 +448,31 @@ class DurationDefaultMixRepository {
   Future<List<DurationDefaultMix>> upsert(
     _i1.DatabaseSession session,
     List<DurationDefaultMix> rows, {
-    required _i1.ColumnSelections<DurationDefaultMixTable> uniqueColumns,
+    required _i1.ColumnSelections<DurationDefaultMixTable> conflictColumns,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsert<DurationDefaultMix>(
       rows,
-      uniqueColumns: uniqueColumns(DurationDefaultMix.t),
+      conflictColumns: conflictColumns(DurationDefaultMix.t),
       transaction: transaction,
     );
   }
 
   /// Upserts a single [DurationDefaultMix] and returns the resulting row.
   ///
-  /// If the row conflicts on the given [uniqueColumns], the existing row is
+  /// If the row conflicts on the given [conflictColumns], the existing row is
   /// updated. Otherwise, a new row is inserted.
   ///
   /// The returned [DurationDefaultMix] will have its `id` field set.
   Future<DurationDefaultMix> upsertRow(
     _i1.DatabaseSession session,
     DurationDefaultMix row, {
-    required _i1.ColumnSelections<DurationDefaultMixTable> uniqueColumns,
+    required _i1.ColumnSelections<DurationDefaultMixTable> conflictColumns,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsertRow<DurationDefaultMix>(
       row,
-      uniqueColumns: uniqueColumns(DurationDefaultMix.t),
+      conflictColumns: conflictColumns(DurationDefaultMix.t),
       transaction: transaction,
     );
   }

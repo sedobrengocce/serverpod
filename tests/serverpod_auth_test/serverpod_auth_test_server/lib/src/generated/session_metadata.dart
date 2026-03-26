@@ -492,7 +492,7 @@ class SessionMetadataRepository {
 
   /// Upserts all [SessionMetadata]s in the list and returns the resulting rows.
   ///
-  /// If a row conflicts on the given [uniqueColumns], the existing row is
+  /// If a row conflicts on the given [conflictColumns], the existing row is
   /// updated with the new values. Otherwise, a new row is inserted.
   ///
   /// The returned [SessionMetadata]s will have their `id` fields set.
@@ -502,31 +502,31 @@ class SessionMetadataRepository {
   Future<List<SessionMetadata>> upsert(
     _i1.DatabaseSession session,
     List<SessionMetadata> rows, {
-    required _i1.ColumnSelections<SessionMetadataTable> uniqueColumns,
+    required _i1.ColumnSelections<SessionMetadataTable> conflictColumns,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsert<SessionMetadata>(
       rows,
-      uniqueColumns: uniqueColumns(SessionMetadata.t),
+      conflictColumns: conflictColumns(SessionMetadata.t),
       transaction: transaction,
     );
   }
 
   /// Upserts a single [SessionMetadata] and returns the resulting row.
   ///
-  /// If the row conflicts on the given [uniqueColumns], the existing row is
+  /// If the row conflicts on the given [conflictColumns], the existing row is
   /// updated. Otherwise, a new row is inserted.
   ///
   /// The returned [SessionMetadata] will have its `id` field set.
   Future<SessionMetadata> upsertRow(
     _i1.DatabaseSession session,
     SessionMetadata row, {
-    required _i1.ColumnSelections<SessionMetadataTable> uniqueColumns,
+    required _i1.ColumnSelections<SessionMetadataTable> conflictColumns,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsertRow<SessionMetadata>(
       row,
-      uniqueColumns: uniqueColumns(SessionMetadata.t),
+      conflictColumns: conflictColumns(SessionMetadata.t),
       transaction: transaction,
     );
   }

@@ -390,7 +390,7 @@ class EmptyModelRelationItemRepository {
 
   /// Upserts all [EmptyModelRelationItem]s in the list and returns the resulting rows.
   ///
-  /// If a row conflicts on the given [uniqueColumns], the existing row is
+  /// If a row conflicts on the given [conflictColumns], the existing row is
   /// updated with the new values. Otherwise, a new row is inserted.
   ///
   /// The returned [EmptyModelRelationItem]s will have their `id` fields set.
@@ -400,31 +400,31 @@ class EmptyModelRelationItemRepository {
   Future<List<EmptyModelRelationItem>> upsert(
     _i1.DatabaseSession session,
     List<EmptyModelRelationItem> rows, {
-    required _i1.ColumnSelections<EmptyModelRelationItemTable> uniqueColumns,
+    required _i1.ColumnSelections<EmptyModelRelationItemTable> conflictColumns,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsert<EmptyModelRelationItem>(
       rows,
-      uniqueColumns: uniqueColumns(EmptyModelRelationItem.t),
+      conflictColumns: conflictColumns(EmptyModelRelationItem.t),
       transaction: transaction,
     );
   }
 
   /// Upserts a single [EmptyModelRelationItem] and returns the resulting row.
   ///
-  /// If the row conflicts on the given [uniqueColumns], the existing row is
+  /// If the row conflicts on the given [conflictColumns], the existing row is
   /// updated. Otherwise, a new row is inserted.
   ///
   /// The returned [EmptyModelRelationItem] will have its `id` field set.
   Future<EmptyModelRelationItem> upsertRow(
     _i1.DatabaseSession session,
     EmptyModelRelationItem row, {
-    required _i1.ColumnSelections<EmptyModelRelationItemTable> uniqueColumns,
+    required _i1.ColumnSelections<EmptyModelRelationItemTable> conflictColumns,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsertRow<EmptyModelRelationItem>(
       row,
-      uniqueColumns: uniqueColumns(EmptyModelRelationItem.t),
+      conflictColumns: conflictColumns(EmptyModelRelationItem.t),
       transaction: transaction,
     );
   }

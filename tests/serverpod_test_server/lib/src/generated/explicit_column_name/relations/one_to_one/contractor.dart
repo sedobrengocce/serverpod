@@ -411,7 +411,7 @@ class ContractorRepository {
 
   /// Upserts all [Contractor]s in the list and returns the resulting rows.
   ///
-  /// If a row conflicts on the given [uniqueColumns], the existing row is
+  /// If a row conflicts on the given [conflictColumns], the existing row is
   /// updated with the new values. Otherwise, a new row is inserted.
   ///
   /// The returned [Contractor]s will have their `id` fields set.
@@ -421,31 +421,31 @@ class ContractorRepository {
   Future<List<Contractor>> upsert(
     _i1.DatabaseSession session,
     List<Contractor> rows, {
-    required _i1.ColumnSelections<ContractorTable> uniqueColumns,
+    required _i1.ColumnSelections<ContractorTable> conflictColumns,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsert<Contractor>(
       rows,
-      uniqueColumns: uniqueColumns(Contractor.t),
+      conflictColumns: conflictColumns(Contractor.t),
       transaction: transaction,
     );
   }
 
   /// Upserts a single [Contractor] and returns the resulting row.
   ///
-  /// If the row conflicts on the given [uniqueColumns], the existing row is
+  /// If the row conflicts on the given [conflictColumns], the existing row is
   /// updated. Otherwise, a new row is inserted.
   ///
   /// The returned [Contractor] will have its `id` field set.
   Future<Contractor> upsertRow(
     _i1.DatabaseSession session,
     Contractor row, {
-    required _i1.ColumnSelections<ContractorTable> uniqueColumns,
+    required _i1.ColumnSelections<ContractorTable> conflictColumns,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsertRow<Contractor>(
       row,
-      uniqueColumns: uniqueColumns(Contractor.t),
+      conflictColumns: conflictColumns(Contractor.t),
       transaction: transaction,
     );
   }
