@@ -493,8 +493,9 @@ class UpsertQueryBuilder {
         );
       }
 
-      var conflictColumnNames =
-          conflictColumns.map((c) => c.columnName).toSet();
+      var conflictColumnNames = conflictColumns
+          .map((c) => c.columnName)
+          .toSet();
       for (var col in updateColumns) {
         if (!tableColumnNames.contains(col.columnName)) {
           throw ArgumentError.value(
@@ -564,8 +565,9 @@ class UpsertQueryBuilder {
     if (_updateColumns != null) {
       columnsToUpdate = _updateColumns;
     } else {
-      var conflictColumnNameSet =
-          _conflictColumns.map((c) => c.columnName).toSet();
+      var conflictColumnNameSet = _conflictColumns
+          .map((c) => c.columnName)
+          .toSet();
       columnsToUpdate = selectedColumns.where(
         (c) =>
             c.columnName != 'id' &&
