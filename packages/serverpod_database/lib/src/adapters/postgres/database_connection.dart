@@ -39,20 +39,21 @@ class PostgresDatabaseConnection
     int? limit,
     int? offset,
     Column? orderBy,
+    List<Column>? orderByList,
+    @Deprecated('Use desc() on the orderBy column instead.')
     bool orderDescending = false,
-    List<Order>? orderByList,
     Include? include,
     Transaction? transaction,
     LockMode? lockMode,
     LockBehavior? lockBehavior,
   }) async {
     var table = _getTableOrAssert<T>(session, operation: 'find');
-    orderByList = _resolveOrderBy(orderByList, orderBy, orderDescending);
+    var orderByCols = _resolveOrderBy(orderByList, orderBy, orderDescending);
 
     var query = SelectQueryBuilder(table: table)
         .withSelectFields(table.columns)
         .withWhere(where)
-        .withOrderBy(orderByList)
+        .withOrderBy(orderByCols)
         .withLimit(limit)
         .withOffset(offset)
         .withInclude(include)
@@ -75,7 +76,8 @@ class PostgresDatabaseConnection
     Expression? where,
     int? offset,
     Column? orderBy,
-    List<Order>? orderByList,
+    List<Column>? orderByList,
+    @Deprecated('Use desc() on the orderBy column instead.')
     bool orderDescending = false,
     Transaction? transaction,
     Include? include,
@@ -89,6 +91,7 @@ class PostgresDatabaseConnection
       offset: offset,
       orderBy: orderBy,
       orderByList: orderByList,
+      // ignore: deprecated_member_use_from_same_package
       orderDescending: orderDescending,
       limit: 1,
       transaction: transaction,
@@ -161,15 +164,21 @@ class PostgresDatabaseConnection
     if (ignoreConflicts &&
         rows.length > 1 &&
         _hasNonPersistedFields(session, rows)) {
-      return [
-        for (var row in rows)
-          await insert<T>(
-            session,
-            [row],
-            transaction: transaction,
-            ignoreConflicts: ignoreConflicts,
-          ).then((results) => results.firstOrNull),
-      ].whereType<T>().toList();
+      // Wrap in a transaction or savepoint to ensure the per-row inserts are
+      // atomic as a whole.
+      return DatabaseUtil.runInTransactionOrSavepoint(
+        session.db,
+        transaction,
+        (tx) async => [
+          for (var row in rows)
+            await insert<T>(
+              session,
+              [row],
+              transaction: tx,
+              ignoreConflicts: ignoreConflicts,
+            ).then((results) => results.firstOrNull),
+        ].whereType<T>().toList(),
+      );
     }
 
     var table = rows.first.table;
@@ -414,7 +423,8 @@ class PostgresDatabaseConnection
     int? limit,
     int? offset,
     Column? orderBy,
-    List<Order>? orderByList,
+    List<Column>? orderByList,
+    @Deprecated('Use desc() on the orderBy column instead.')
     bool orderDescending = false,
     Transaction? transaction,
   }) async {
@@ -486,6 +496,10 @@ class PostgresDatabaseConnection
   Future<List<T>> delete<T extends TableRow>(
     DatabaseSession session,
     List<T> rows, {
+    Column? orderBy,
+    List<Column>? orderByList,
+    @Deprecated('Use desc() on the orderBy column instead.')
+    bool orderDescending = false,
     Transaction? transaction,
   }) async {
     if (rows.isEmpty) return [];
@@ -498,6 +512,10 @@ class PostgresDatabaseConnection
     return deleteWhere<T>(
       session,
       table.id.inSet(rows.map((row) => row.id!).castToIdType().toSet()),
+      orderBy: orderBy,
+      orderByList: orderByList,
+      // ignore: deprecated_member_use_from_same_package
+      orderDescending: orderDescending,
       transaction: transaction,
     );
   }
@@ -527,13 +545,21 @@ class PostgresDatabaseConnection
   Future<List<T>> deleteWhere<T extends TableRow>(
     DatabaseSession session,
     Expression where, {
+    Column? orderBy,
+    List<Column>? orderByList,
+    @Deprecated('Use desc() on the orderBy column instead.')
+    bool orderDescending = false,
     Transaction? transaction,
   }) async {
     var table = _getTableOrAssert<T>(session, operation: 'deleteWhere');
+    var orderByCols = _resolveOrderBy(orderByList, orderBy, orderDescending);
 
-    var query = DeleteQueryBuilder(
-      table: table,
-    ).withReturn(Returning.all).withWhere(where).build();
+    // Ordering applies to the returned deleted rows, not to which rows are deleted.
+    var query = DeleteQueryBuilder(table: table)
+        .withReturn(Returning.all)
+        .withWhere(where)
+        .withOrderBy(orderByCols)
+        .build();
 
     return await _deserializedMappedQuery(
       session,
@@ -838,40 +864,6 @@ class PostgresDatabaseConnection
     );
   }
 
-  /// Migrations on Postgres use a transaction to ensure that the advisory lock
-  /// is retained until the transaction is completed.
-  ///
-  /// The transaction ensures that the session used for acquiring the lock is
-  /// kept alive in the underlying connection pool, and that we can later use
-  /// that exact same session for releasing the lock. The transaction is thus
-  /// only used to get the desired behavior from the database driver, and does
-  /// not have any effect on the Postgres level.
-  ///
-  /// This ensures that we are only running migrations one at a time.
-  @override
-  Future<void> runMigrations(
-    DatabaseSession session,
-    Future<void> Function(Transaction? transaction) action,
-  ) async {
-    const String lockName = 'serverpod_migration_lock';
-
-    await session.db.transaction((transaction) async {
-      await session.db.unsafeExecute(
-        "SELECT pg_advisory_lock(hashtext('$lockName'));",
-        transaction: transaction,
-      );
-
-      try {
-        await action(null);
-      } finally {
-        await session.db.unsafeExecute(
-          "SELECT pg_advisory_unlock(hashtext('$lockName'));",
-          transaction: transaction,
-        );
-      }
-    });
-  }
-
   Future<Map<String, Map<Object, List<Map<String, dynamic>>>>>
   _queryIncludedLists(
     DatabaseSession session,
@@ -908,6 +900,7 @@ class PostgresDatabaseConnection
         var orderBy = _resolveOrderBy(
           nestedInclude.orderByList,
           nestedInclude.orderBy,
+          // ignore: deprecated_member_use_from_same_package
           nestedInclude.orderDescending,
         );
 
@@ -983,16 +976,17 @@ class PostgresDatabaseConnection
   }
 
   List<Order>? _resolveOrderBy(
-    List<Order>? orderByList,
+    List<Column>? orderByList,
     Column<dynamic>? orderBy,
     bool orderDescending,
   ) {
     assert(orderByList == null || orderBy == null);
     if (orderBy != null) {
-      // If order by is set then order by list is overridden.
-      return [Order(column: orderBy, orderDescending: orderDescending)];
+      if (orderBy is Order) return [orderBy];
+      return [orderDescending ? orderBy.desc() : orderBy.asc()];
     }
-    return orderByList;
+    if (orderByList == null || orderByList.isEmpty) return null;
+    return orderByList.asOrderBy();
   }
 
   String _createQueryValueList(

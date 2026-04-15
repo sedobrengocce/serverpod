@@ -95,6 +95,7 @@ abstract class DatabaseMigrationVersion
     int? limit,
     int? offset,
     _i2.OrderByBuilder<DatabaseMigrationVersionTable>? orderBy,
+    @Deprecated('Use desc() on the orderBy column instead.')
     bool orderDescending = false,
     _i2.OrderByListBuilder<DatabaseMigrationVersionTable>? orderByList,
     DatabaseMigrationVersionInclude? include,
@@ -104,7 +105,8 @@ abstract class DatabaseMigrationVersion
       limit: limit,
       offset: offset,
       orderBy: orderBy?.call(DatabaseMigrationVersion.t),
-      orderDescending: orderDescending,
+      orderDescending: // ignore: deprecated_member_use_from_same_package
+          orderDescending,
       orderByList: orderByList?.call(DatabaseMigrationVersion.t),
       include: include,
     );
@@ -225,6 +227,7 @@ class DatabaseMigrationVersionIncludeList extends _i2.IncludeList {
     super.limit,
     super.offset,
     super.orderBy,
+    @Deprecated('Use desc() on the orderBy column instead.')
     super.orderDescending,
     super.orderByList,
     super.include,
@@ -270,6 +273,7 @@ class DatabaseMigrationVersionRepository {
     int? limit,
     int? offset,
     _i2.OrderByBuilder<DatabaseMigrationVersionTable>? orderBy,
+    @Deprecated('Use desc() on the orderBy column instead.')
     bool orderDescending = false,
     _i2.OrderByListBuilder<DatabaseMigrationVersionTable>? orderByList,
     _i2.Transaction? transaction,
@@ -280,7 +284,8 @@ class DatabaseMigrationVersionRepository {
       where: where?.call(DatabaseMigrationVersion.t),
       orderBy: orderBy?.call(DatabaseMigrationVersion.t),
       orderByList: orderByList?.call(DatabaseMigrationVersion.t),
-      orderDescending: orderDescending,
+      orderDescending: // ignore: deprecated_member_use
+          orderDescending,
       limit: limit,
       offset: offset,
       transaction: transaction,
@@ -311,6 +316,7 @@ class DatabaseMigrationVersionRepository {
     _i2.WhereExpressionBuilder<DatabaseMigrationVersionTable>? where,
     int? offset,
     _i2.OrderByBuilder<DatabaseMigrationVersionTable>? orderBy,
+    @Deprecated('Use desc() on the orderBy column instead.')
     bool orderDescending = false,
     _i2.OrderByListBuilder<DatabaseMigrationVersionTable>? orderByList,
     _i2.Transaction? transaction,
@@ -321,7 +327,8 @@ class DatabaseMigrationVersionRepository {
       where: where?.call(DatabaseMigrationVersion.t),
       orderBy: orderBy?.call(DatabaseMigrationVersion.t),
       orderByList: orderByList?.call(DatabaseMigrationVersion.t),
-      orderDescending: orderDescending,
+      orderDescending: // ignore: deprecated_member_use
+          orderDescending,
       offset: offset,
       transaction: transaction,
       lockMode: lockMode,
@@ -486,6 +493,7 @@ class DatabaseMigrationVersionRepository {
     int? offset,
     _i2.OrderByBuilder<DatabaseMigrationVersionTable>? orderBy,
     _i2.OrderByListBuilder<DatabaseMigrationVersionTable>? orderByList,
+    @Deprecated('Use desc() on the orderBy column instead.')
     bool orderDescending = false,
     _i2.Transaction? transaction,
   }) async {
@@ -496,21 +504,34 @@ class DatabaseMigrationVersionRepository {
       offset: offset,
       orderBy: orderBy?.call(DatabaseMigrationVersion.t),
       orderByList: orderByList?.call(DatabaseMigrationVersion.t),
-      orderDescending: orderDescending,
+      orderDescending: // ignore: deprecated_member_use
+          orderDescending,
       transaction: transaction,
     );
   }
 
   /// Deletes all [DatabaseMigrationVersion]s in the list and returns the deleted rows.
+  ///
+  /// To specify the order of the returned rows use [orderBy] or [orderByList]
+  /// when sorting by multiple columns.
+  ///
   /// This is an atomic operation, meaning that if one of the rows fail to
   /// be deleted, none of the rows will be deleted.
   Future<List<DatabaseMigrationVersion>> delete(
     _i2.DatabaseSession session,
     List<DatabaseMigrationVersion> rows, {
+    _i2.OrderByBuilder<DatabaseMigrationVersionTable>? orderBy,
+    @Deprecated('Use desc() on the orderBy column instead.')
+    bool orderDescending = false,
+    _i2.OrderByListBuilder<DatabaseMigrationVersionTable>? orderByList,
     _i2.Transaction? transaction,
   }) async {
     return session.db.delete<DatabaseMigrationVersion>(
       rows,
+      orderBy: orderBy?.call(DatabaseMigrationVersion.t),
+      orderByList: orderByList?.call(DatabaseMigrationVersion.t),
+      orderDescending: // ignore: deprecated_member_use
+          orderDescending,
       transaction: transaction,
     );
   }
@@ -528,13 +549,24 @@ class DatabaseMigrationVersionRepository {
   }
 
   /// Deletes all rows matching the [where] expression.
+  ///
+  /// To specify the order of the returned rows use [orderBy] or [orderByList]
+  /// when sorting by multiple columns.
   Future<List<DatabaseMigrationVersion>> deleteWhere(
     _i2.DatabaseSession session, {
     required _i2.WhereExpressionBuilder<DatabaseMigrationVersionTable> where,
+    _i2.OrderByBuilder<DatabaseMigrationVersionTable>? orderBy,
+    @Deprecated('Use desc() on the orderBy column instead.')
+    bool orderDescending = false,
+    _i2.OrderByListBuilder<DatabaseMigrationVersionTable>? orderByList,
     _i2.Transaction? transaction,
   }) async {
     return session.db.deleteWhere<DatabaseMigrationVersion>(
       where: where(DatabaseMigrationVersion.t),
+      orderBy: orderBy?.call(DatabaseMigrationVersion.t),
+      orderByList: orderByList?.call(DatabaseMigrationVersion.t),
+      orderDescending: // ignore: deprecated_member_use
+          orderDescending,
       transaction: transaction,
     );
   }

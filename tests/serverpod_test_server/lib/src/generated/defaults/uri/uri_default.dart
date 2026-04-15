@@ -91,6 +91,7 @@ abstract class UriDefault
     int? limit,
     int? offset,
     _i1.OrderByBuilder<UriDefaultTable>? orderBy,
+    @Deprecated('Use desc() on the orderBy column instead.')
     bool orderDescending = false,
     _i1.OrderByListBuilder<UriDefaultTable>? orderByList,
     UriDefaultInclude? include,
@@ -100,7 +101,8 @@ abstract class UriDefault
       limit: limit,
       offset: offset,
       orderBy: orderBy?.call(UriDefault.t),
-      orderDescending: orderDescending,
+      orderDescending: // ignore: deprecated_member_use_from_same_package
+          orderDescending,
       orderByList: orderByList?.call(UriDefault.t),
       include: include,
     );
@@ -203,6 +205,7 @@ class UriDefaultIncludeList extends _i1.IncludeList {
     super.limit,
     super.offset,
     super.orderBy,
+    @Deprecated('Use desc() on the orderBy column instead.')
     super.orderDescending,
     super.orderByList,
     super.include,
@@ -248,6 +251,7 @@ class UriDefaultRepository {
     int? limit,
     int? offset,
     _i1.OrderByBuilder<UriDefaultTable>? orderBy,
+    @Deprecated('Use desc() on the orderBy column instead.')
     bool orderDescending = false,
     _i1.OrderByListBuilder<UriDefaultTable>? orderByList,
     _i1.Transaction? transaction,
@@ -258,7 +262,8 @@ class UriDefaultRepository {
       where: where?.call(UriDefault.t),
       orderBy: orderBy?.call(UriDefault.t),
       orderByList: orderByList?.call(UriDefault.t),
-      orderDescending: orderDescending,
+      orderDescending: // ignore: deprecated_member_use
+          orderDescending,
       limit: limit,
       offset: offset,
       transaction: transaction,
@@ -289,6 +294,7 @@ class UriDefaultRepository {
     _i1.WhereExpressionBuilder<UriDefaultTable>? where,
     int? offset,
     _i1.OrderByBuilder<UriDefaultTable>? orderBy,
+    @Deprecated('Use desc() on the orderBy column instead.')
     bool orderDescending = false,
     _i1.OrderByListBuilder<UriDefaultTable>? orderByList,
     _i1.Transaction? transaction,
@@ -299,7 +305,8 @@ class UriDefaultRepository {
       where: where?.call(UriDefault.t),
       orderBy: orderBy?.call(UriDefault.t),
       orderByList: orderByList?.call(UriDefault.t),
-      orderDescending: orderDescending,
+      orderDescending: // ignore: deprecated_member_use
+          orderDescending,
       offset: offset,
       transaction: transaction,
       lockMode: lockMode,
@@ -468,6 +475,7 @@ class UriDefaultRepository {
     int? offset,
     _i1.OrderByBuilder<UriDefaultTable>? orderBy,
     _i1.OrderByListBuilder<UriDefaultTable>? orderByList,
+    @Deprecated('Use desc() on the orderBy column instead.')
     bool orderDescending = false,
     _i1.Transaction? transaction,
   }) async {
@@ -478,21 +486,34 @@ class UriDefaultRepository {
       offset: offset,
       orderBy: orderBy?.call(UriDefault.t),
       orderByList: orderByList?.call(UriDefault.t),
-      orderDescending: orderDescending,
+      orderDescending: // ignore: deprecated_member_use
+          orderDescending,
       transaction: transaction,
     );
   }
 
   /// Deletes all [UriDefault]s in the list and returns the deleted rows.
+  ///
+  /// To specify the order of the returned rows use [orderBy] or [orderByList]
+  /// when sorting by multiple columns.
+  ///
   /// This is an atomic operation, meaning that if one of the rows fail to
   /// be deleted, none of the rows will be deleted.
   Future<List<UriDefault>> delete(
     _i1.DatabaseSession session,
     List<UriDefault> rows, {
+    _i1.OrderByBuilder<UriDefaultTable>? orderBy,
+    @Deprecated('Use desc() on the orderBy column instead.')
+    bool orderDescending = false,
+    _i1.OrderByListBuilder<UriDefaultTable>? orderByList,
     _i1.Transaction? transaction,
   }) async {
     return session.db.delete<UriDefault>(
       rows,
+      orderBy: orderBy?.call(UriDefault.t),
+      orderByList: orderByList?.call(UriDefault.t),
+      orderDescending: // ignore: deprecated_member_use
+          orderDescending,
       transaction: transaction,
     );
   }
@@ -510,13 +531,24 @@ class UriDefaultRepository {
   }
 
   /// Deletes all rows matching the [where] expression.
+  ///
+  /// To specify the order of the returned rows use [orderBy] or [orderByList]
+  /// when sorting by multiple columns.
   Future<List<UriDefault>> deleteWhere(
     _i1.DatabaseSession session, {
     required _i1.WhereExpressionBuilder<UriDefaultTable> where,
+    _i1.OrderByBuilder<UriDefaultTable>? orderBy,
+    @Deprecated('Use desc() on the orderBy column instead.')
+    bool orderDescending = false,
+    _i1.OrderByListBuilder<UriDefaultTable>? orderByList,
     _i1.Transaction? transaction,
   }) async {
     return session.db.deleteWhere<UriDefault>(
       where: where(UriDefault.t),
+      orderBy: orderBy?.call(UriDefault.t),
+      orderByList: orderByList?.call(UriDefault.t),
+      orderDescending: // ignore: deprecated_member_use
+          orderDescending,
       transaction: transaction,
     );
   }

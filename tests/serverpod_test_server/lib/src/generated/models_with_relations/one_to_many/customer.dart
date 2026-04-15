@@ -94,6 +94,7 @@ abstract class Customer
     int? limit,
     int? offset,
     _i1.OrderByBuilder<CustomerTable>? orderBy,
+    @Deprecated('Use desc() on the orderBy column instead.')
     bool orderDescending = false,
     _i1.OrderByListBuilder<CustomerTable>? orderByList,
     CustomerInclude? include,
@@ -103,7 +104,8 @@ abstract class Customer
       limit: limit,
       offset: offset,
       orderBy: orderBy?.call(Customer.t),
-      orderDescending: orderDescending,
+      orderDescending: // ignore: deprecated_member_use_from_same_package
+          orderDescending,
       orderByList: orderByList?.call(Customer.t),
       include: include,
     );
@@ -240,6 +242,7 @@ class CustomerIncludeList extends _i1.IncludeList {
     super.limit,
     super.offset,
     super.orderBy,
+    @Deprecated('Use desc() on the orderBy column instead.')
     super.orderDescending,
     super.orderByList,
     super.include,
@@ -293,6 +296,7 @@ class CustomerRepository {
     int? limit,
     int? offset,
     _i1.OrderByBuilder<CustomerTable>? orderBy,
+    @Deprecated('Use desc() on the orderBy column instead.')
     bool orderDescending = false,
     _i1.OrderByListBuilder<CustomerTable>? orderByList,
     _i1.Transaction? transaction,
@@ -304,7 +308,8 @@ class CustomerRepository {
       where: where?.call(Customer.t),
       orderBy: orderBy?.call(Customer.t),
       orderByList: orderByList?.call(Customer.t),
-      orderDescending: orderDescending,
+      orderDescending: // ignore: deprecated_member_use
+          orderDescending,
       limit: limit,
       offset: offset,
       transaction: transaction,
@@ -336,6 +341,7 @@ class CustomerRepository {
     _i1.WhereExpressionBuilder<CustomerTable>? where,
     int? offset,
     _i1.OrderByBuilder<CustomerTable>? orderBy,
+    @Deprecated('Use desc() on the orderBy column instead.')
     bool orderDescending = false,
     _i1.OrderByListBuilder<CustomerTable>? orderByList,
     _i1.Transaction? transaction,
@@ -347,7 +353,8 @@ class CustomerRepository {
       where: where?.call(Customer.t),
       orderBy: orderBy?.call(Customer.t),
       orderByList: orderByList?.call(Customer.t),
-      orderDescending: orderDescending,
+      orderDescending: // ignore: deprecated_member_use
+          orderDescending,
       offset: offset,
       transaction: transaction,
       include: include,
@@ -519,6 +526,7 @@ class CustomerRepository {
     int? offset,
     _i1.OrderByBuilder<CustomerTable>? orderBy,
     _i1.OrderByListBuilder<CustomerTable>? orderByList,
+    @Deprecated('Use desc() on the orderBy column instead.')
     bool orderDescending = false,
     _i1.Transaction? transaction,
   }) async {
@@ -529,21 +537,34 @@ class CustomerRepository {
       offset: offset,
       orderBy: orderBy?.call(Customer.t),
       orderByList: orderByList?.call(Customer.t),
-      orderDescending: orderDescending,
+      orderDescending: // ignore: deprecated_member_use
+          orderDescending,
       transaction: transaction,
     );
   }
 
   /// Deletes all [Customer]s in the list and returns the deleted rows.
+  ///
+  /// To specify the order of the returned rows use [orderBy] or [orderByList]
+  /// when sorting by multiple columns.
+  ///
   /// This is an atomic operation, meaning that if one of the rows fail to
   /// be deleted, none of the rows will be deleted.
   Future<List<Customer>> delete(
     _i1.DatabaseSession session,
     List<Customer> rows, {
+    _i1.OrderByBuilder<CustomerTable>? orderBy,
+    @Deprecated('Use desc() on the orderBy column instead.')
+    bool orderDescending = false,
+    _i1.OrderByListBuilder<CustomerTable>? orderByList,
     _i1.Transaction? transaction,
   }) async {
     return session.db.delete<Customer>(
       rows,
+      orderBy: orderBy?.call(Customer.t),
+      orderByList: orderByList?.call(Customer.t),
+      orderDescending: // ignore: deprecated_member_use
+          orderDescending,
       transaction: transaction,
     );
   }
@@ -561,13 +582,24 @@ class CustomerRepository {
   }
 
   /// Deletes all rows matching the [where] expression.
+  ///
+  /// To specify the order of the returned rows use [orderBy] or [orderByList]
+  /// when sorting by multiple columns.
   Future<List<Customer>> deleteWhere(
     _i1.DatabaseSession session, {
     required _i1.WhereExpressionBuilder<CustomerTable> where,
+    _i1.OrderByBuilder<CustomerTable>? orderBy,
+    @Deprecated('Use desc() on the orderBy column instead.')
+    bool orderDescending = false,
+    _i1.OrderByListBuilder<CustomerTable>? orderByList,
     _i1.Transaction? transaction,
   }) async {
     return session.db.deleteWhere<Customer>(
       where: where(Customer.t),
+      orderBy: orderBy?.call(Customer.t),
+      orderByList: orderByList?.call(Customer.t),
+      orderDescending: // ignore: deprecated_member_use
+          orderDescending,
       transaction: transaction,
     );
   }

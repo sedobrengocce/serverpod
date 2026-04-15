@@ -86,6 +86,7 @@ abstract class IntDefaultModel
     int? limit,
     int? offset,
     _i1.OrderByBuilder<IntDefaultModelTable>? orderBy,
+    @Deprecated('Use desc() on the orderBy column instead.')
     bool orderDescending = false,
     _i1.OrderByListBuilder<IntDefaultModelTable>? orderByList,
     IntDefaultModelInclude? include,
@@ -95,7 +96,8 @@ abstract class IntDefaultModel
       limit: limit,
       offset: offset,
       orderBy: orderBy?.call(IntDefaultModel.t),
-      orderDescending: orderDescending,
+      orderDescending: // ignore: deprecated_member_use_from_same_package
+          orderDescending,
       orderByList: orderByList?.call(IntDefaultModel.t),
       include: include,
     );
@@ -195,6 +197,7 @@ class IntDefaultModelIncludeList extends _i1.IncludeList {
     super.limit,
     super.offset,
     super.orderBy,
+    @Deprecated('Use desc() on the orderBy column instead.')
     super.orderDescending,
     super.orderByList,
     super.include,
@@ -240,6 +243,7 @@ class IntDefaultModelRepository {
     int? limit,
     int? offset,
     _i1.OrderByBuilder<IntDefaultModelTable>? orderBy,
+    @Deprecated('Use desc() on the orderBy column instead.')
     bool orderDescending = false,
     _i1.OrderByListBuilder<IntDefaultModelTable>? orderByList,
     _i1.Transaction? transaction,
@@ -250,7 +254,8 @@ class IntDefaultModelRepository {
       where: where?.call(IntDefaultModel.t),
       orderBy: orderBy?.call(IntDefaultModel.t),
       orderByList: orderByList?.call(IntDefaultModel.t),
-      orderDescending: orderDescending,
+      orderDescending: // ignore: deprecated_member_use
+          orderDescending,
       limit: limit,
       offset: offset,
       transaction: transaction,
@@ -281,6 +286,7 @@ class IntDefaultModelRepository {
     _i1.WhereExpressionBuilder<IntDefaultModelTable>? where,
     int? offset,
     _i1.OrderByBuilder<IntDefaultModelTable>? orderBy,
+    @Deprecated('Use desc() on the orderBy column instead.')
     bool orderDescending = false,
     _i1.OrderByListBuilder<IntDefaultModelTable>? orderByList,
     _i1.Transaction? transaction,
@@ -291,7 +297,8 @@ class IntDefaultModelRepository {
       where: where?.call(IntDefaultModel.t),
       orderBy: orderBy?.call(IntDefaultModel.t),
       orderByList: orderByList?.call(IntDefaultModel.t),
-      orderDescending: orderDescending,
+      orderDescending: // ignore: deprecated_member_use
+          orderDescending,
       offset: offset,
       transaction: transaction,
       lockMode: lockMode,
@@ -462,6 +469,7 @@ class IntDefaultModelRepository {
     int? offset,
     _i1.OrderByBuilder<IntDefaultModelTable>? orderBy,
     _i1.OrderByListBuilder<IntDefaultModelTable>? orderByList,
+    @Deprecated('Use desc() on the orderBy column instead.')
     bool orderDescending = false,
     _i1.Transaction? transaction,
   }) async {
@@ -472,21 +480,34 @@ class IntDefaultModelRepository {
       offset: offset,
       orderBy: orderBy?.call(IntDefaultModel.t),
       orderByList: orderByList?.call(IntDefaultModel.t),
-      orderDescending: orderDescending,
+      orderDescending: // ignore: deprecated_member_use
+          orderDescending,
       transaction: transaction,
     );
   }
 
   /// Deletes all [IntDefaultModel]s in the list and returns the deleted rows.
+  ///
+  /// To specify the order of the returned rows use [orderBy] or [orderByList]
+  /// when sorting by multiple columns.
+  ///
   /// This is an atomic operation, meaning that if one of the rows fail to
   /// be deleted, none of the rows will be deleted.
   Future<List<IntDefaultModel>> delete(
     _i1.DatabaseSession session,
     List<IntDefaultModel> rows, {
+    _i1.OrderByBuilder<IntDefaultModelTable>? orderBy,
+    @Deprecated('Use desc() on the orderBy column instead.')
+    bool orderDescending = false,
+    _i1.OrderByListBuilder<IntDefaultModelTable>? orderByList,
     _i1.Transaction? transaction,
   }) async {
     return session.db.delete<IntDefaultModel>(
       rows,
+      orderBy: orderBy?.call(IntDefaultModel.t),
+      orderByList: orderByList?.call(IntDefaultModel.t),
+      orderDescending: // ignore: deprecated_member_use
+          orderDescending,
       transaction: transaction,
     );
   }
@@ -504,13 +525,24 @@ class IntDefaultModelRepository {
   }
 
   /// Deletes all rows matching the [where] expression.
+  ///
+  /// To specify the order of the returned rows use [orderBy] or [orderByList]
+  /// when sorting by multiple columns.
   Future<List<IntDefaultModel>> deleteWhere(
     _i1.DatabaseSession session, {
     required _i1.WhereExpressionBuilder<IntDefaultModelTable> where,
+    _i1.OrderByBuilder<IntDefaultModelTable>? orderBy,
+    @Deprecated('Use desc() on the orderBy column instead.')
+    bool orderDescending = false,
+    _i1.OrderByListBuilder<IntDefaultModelTable>? orderByList,
     _i1.Transaction? transaction,
   }) async {
     return session.db.deleteWhere<IntDefaultModel>(
       where: where(IntDefaultModel.t),
+      orderBy: orderBy?.call(IntDefaultModel.t),
+      orderByList: orderByList?.call(IntDefaultModel.t),
+      orderDescending: // ignore: deprecated_member_use
+          orderDescending,
       transaction: transaction,
     );
   }

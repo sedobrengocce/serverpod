@@ -89,6 +89,7 @@ abstract class Arena implements _i1.TableRow<int?>, _i1.ProtocolSerialization {
     int? limit,
     int? offset,
     _i1.OrderByBuilder<ArenaTable>? orderBy,
+    @Deprecated('Use desc() on the orderBy column instead.')
     bool orderDescending = false,
     _i1.OrderByListBuilder<ArenaTable>? orderByList,
     ArenaInclude? include,
@@ -98,7 +99,8 @@ abstract class Arena implements _i1.TableRow<int?>, _i1.ProtocolSerialization {
       limit: limit,
       offset: offset,
       orderBy: orderBy?.call(Arena.t),
-      orderDescending: orderDescending,
+      orderDescending: // ignore: deprecated_member_use_from_same_package
+          orderDescending,
       orderByList: orderByList?.call(Arena.t),
       include: include,
     );
@@ -212,6 +214,7 @@ class ArenaIncludeList extends _i1.IncludeList {
     super.limit,
     super.offset,
     super.orderBy,
+    @Deprecated('Use desc() on the orderBy column instead.')
     super.orderDescending,
     super.orderByList,
     super.include,
@@ -261,6 +264,7 @@ class ArenaRepository {
     int? limit,
     int? offset,
     _i1.OrderByBuilder<ArenaTable>? orderBy,
+    @Deprecated('Use desc() on the orderBy column instead.')
     bool orderDescending = false,
     _i1.OrderByListBuilder<ArenaTable>? orderByList,
     _i1.Transaction? transaction,
@@ -272,7 +276,8 @@ class ArenaRepository {
       where: where?.call(Arena.t),
       orderBy: orderBy?.call(Arena.t),
       orderByList: orderByList?.call(Arena.t),
-      orderDescending: orderDescending,
+      orderDescending: // ignore: deprecated_member_use
+          orderDescending,
       limit: limit,
       offset: offset,
       transaction: transaction,
@@ -304,6 +309,7 @@ class ArenaRepository {
     _i1.WhereExpressionBuilder<ArenaTable>? where,
     int? offset,
     _i1.OrderByBuilder<ArenaTable>? orderBy,
+    @Deprecated('Use desc() on the orderBy column instead.')
     bool orderDescending = false,
     _i1.OrderByListBuilder<ArenaTable>? orderByList,
     _i1.Transaction? transaction,
@@ -315,7 +321,8 @@ class ArenaRepository {
       where: where?.call(Arena.t),
       orderBy: orderBy?.call(Arena.t),
       orderByList: orderByList?.call(Arena.t),
-      orderDescending: orderDescending,
+      orderDescending: // ignore: deprecated_member_use
+          orderDescending,
       offset: offset,
       transaction: transaction,
       include: include,
@@ -487,6 +494,7 @@ class ArenaRepository {
     int? offset,
     _i1.OrderByBuilder<ArenaTable>? orderBy,
     _i1.OrderByListBuilder<ArenaTable>? orderByList,
+    @Deprecated('Use desc() on the orderBy column instead.')
     bool orderDescending = false,
     _i1.Transaction? transaction,
   }) async {
@@ -497,21 +505,34 @@ class ArenaRepository {
       offset: offset,
       orderBy: orderBy?.call(Arena.t),
       orderByList: orderByList?.call(Arena.t),
-      orderDescending: orderDescending,
+      orderDescending: // ignore: deprecated_member_use
+          orderDescending,
       transaction: transaction,
     );
   }
 
   /// Deletes all [Arena]s in the list and returns the deleted rows.
+  ///
+  /// To specify the order of the returned rows use [orderBy] or [orderByList]
+  /// when sorting by multiple columns.
+  ///
   /// This is an atomic operation, meaning that if one of the rows fail to
   /// be deleted, none of the rows will be deleted.
   Future<List<Arena>> delete(
     _i1.DatabaseSession session,
     List<Arena> rows, {
+    _i1.OrderByBuilder<ArenaTable>? orderBy,
+    @Deprecated('Use desc() on the orderBy column instead.')
+    bool orderDescending = false,
+    _i1.OrderByListBuilder<ArenaTable>? orderByList,
     _i1.Transaction? transaction,
   }) async {
     return session.db.delete<Arena>(
       rows,
+      orderBy: orderBy?.call(Arena.t),
+      orderByList: orderByList?.call(Arena.t),
+      orderDescending: // ignore: deprecated_member_use
+          orderDescending,
       transaction: transaction,
     );
   }
@@ -529,13 +550,24 @@ class ArenaRepository {
   }
 
   /// Deletes all rows matching the [where] expression.
+  ///
+  /// To specify the order of the returned rows use [orderBy] or [orderByList]
+  /// when sorting by multiple columns.
   Future<List<Arena>> deleteWhere(
     _i1.DatabaseSession session, {
     required _i1.WhereExpressionBuilder<ArenaTable> where,
+    _i1.OrderByBuilder<ArenaTable>? orderBy,
+    @Deprecated('Use desc() on the orderBy column instead.')
+    bool orderDescending = false,
+    _i1.OrderByListBuilder<ArenaTable>? orderByList,
     _i1.Transaction? transaction,
   }) async {
     return session.db.deleteWhere<Arena>(
       where: where(Arena.t),
+      orderBy: orderBy?.call(Arena.t),
+      orderByList: orderByList?.call(Arena.t),
+      orderDescending: // ignore: deprecated_member_use
+          orderDescending,
       transaction: transaction,
     );
   }

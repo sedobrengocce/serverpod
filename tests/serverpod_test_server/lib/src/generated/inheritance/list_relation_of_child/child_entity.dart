@@ -92,6 +92,7 @@ abstract class ChildEntity extends _i1.BaseEntity
     int? limit,
     int? offset,
     _i2.OrderByBuilder<ChildEntityTable>? orderBy,
+    @Deprecated('Use desc() on the orderBy column instead.')
     bool orderDescending = false,
     _i2.OrderByListBuilder<ChildEntityTable>? orderByList,
     ChildEntityInclude? include,
@@ -101,7 +102,8 @@ abstract class ChildEntity extends _i1.BaseEntity
       limit: limit,
       offset: offset,
       orderBy: orderBy?.call(ChildEntity.t),
-      orderDescending: orderDescending,
+      orderDescending: // ignore: deprecated_member_use_from_same_package
+          orderDescending,
       orderByList: orderByList?.call(ChildEntity.t),
       include: include,
     );
@@ -253,6 +255,7 @@ class ChildEntityIncludeList extends _i2.IncludeList {
     super.limit,
     super.offset,
     super.orderBy,
+    @Deprecated('Use desc() on the orderBy column instead.')
     super.orderDescending,
     super.orderByList,
     super.include,
@@ -298,6 +301,7 @@ class ChildEntityRepository {
     int? limit,
     int? offset,
     _i2.OrderByBuilder<ChildEntityTable>? orderBy,
+    @Deprecated('Use desc() on the orderBy column instead.')
     bool orderDescending = false,
     _i2.OrderByListBuilder<ChildEntityTable>? orderByList,
     _i2.Transaction? transaction,
@@ -308,7 +312,8 @@ class ChildEntityRepository {
       where: where?.call(ChildEntity.t),
       orderBy: orderBy?.call(ChildEntity.t),
       orderByList: orderByList?.call(ChildEntity.t),
-      orderDescending: orderDescending,
+      orderDescending: // ignore: deprecated_member_use
+          orderDescending,
       limit: limit,
       offset: offset,
       transaction: transaction,
@@ -339,6 +344,7 @@ class ChildEntityRepository {
     _i2.WhereExpressionBuilder<ChildEntityTable>? where,
     int? offset,
     _i2.OrderByBuilder<ChildEntityTable>? orderBy,
+    @Deprecated('Use desc() on the orderBy column instead.')
     bool orderDescending = false,
     _i2.OrderByListBuilder<ChildEntityTable>? orderByList,
     _i2.Transaction? transaction,
@@ -349,7 +355,8 @@ class ChildEntityRepository {
       where: where?.call(ChildEntity.t),
       orderBy: orderBy?.call(ChildEntity.t),
       orderByList: orderByList?.call(ChildEntity.t),
-      orderDescending: orderDescending,
+      orderDescending: // ignore: deprecated_member_use
+          orderDescending,
       offset: offset,
       transaction: transaction,
       lockMode: lockMode,
@@ -518,6 +525,7 @@ class ChildEntityRepository {
     int? offset,
     _i2.OrderByBuilder<ChildEntityTable>? orderBy,
     _i2.OrderByListBuilder<ChildEntityTable>? orderByList,
+    @Deprecated('Use desc() on the orderBy column instead.')
     bool orderDescending = false,
     _i2.Transaction? transaction,
   }) async {
@@ -528,21 +536,34 @@ class ChildEntityRepository {
       offset: offset,
       orderBy: orderBy?.call(ChildEntity.t),
       orderByList: orderByList?.call(ChildEntity.t),
-      orderDescending: orderDescending,
+      orderDescending: // ignore: deprecated_member_use
+          orderDescending,
       transaction: transaction,
     );
   }
 
   /// Deletes all [ChildEntity]s in the list and returns the deleted rows.
+  ///
+  /// To specify the order of the returned rows use [orderBy] or [orderByList]
+  /// when sorting by multiple columns.
+  ///
   /// This is an atomic operation, meaning that if one of the rows fail to
   /// be deleted, none of the rows will be deleted.
   Future<List<ChildEntity>> delete(
     _i2.DatabaseSession session,
     List<ChildEntity> rows, {
+    _i2.OrderByBuilder<ChildEntityTable>? orderBy,
+    @Deprecated('Use desc() on the orderBy column instead.')
+    bool orderDescending = false,
+    _i2.OrderByListBuilder<ChildEntityTable>? orderByList,
     _i2.Transaction? transaction,
   }) async {
     return session.db.delete<ChildEntity>(
       rows,
+      orderBy: orderBy?.call(ChildEntity.t),
+      orderByList: orderByList?.call(ChildEntity.t),
+      orderDescending: // ignore: deprecated_member_use
+          orderDescending,
       transaction: transaction,
     );
   }
@@ -560,13 +581,24 @@ class ChildEntityRepository {
   }
 
   /// Deletes all rows matching the [where] expression.
+  ///
+  /// To specify the order of the returned rows use [orderBy] or [orderByList]
+  /// when sorting by multiple columns.
   Future<List<ChildEntity>> deleteWhere(
     _i2.DatabaseSession session, {
     required _i2.WhereExpressionBuilder<ChildEntityTable> where,
+    _i2.OrderByBuilder<ChildEntityTable>? orderBy,
+    @Deprecated('Use desc() on the orderBy column instead.')
+    bool orderDescending = false,
+    _i2.OrderByListBuilder<ChildEntityTable>? orderByList,
     _i2.Transaction? transaction,
   }) async {
     return session.db.deleteWhere<ChildEntity>(
       where: where(ChildEntity.t),
+      orderBy: orderBy?.call(ChildEntity.t),
+      orderByList: orderByList?.call(ChildEntity.t),
+      orderDescending: // ignore: deprecated_member_use
+          orderDescending,
       transaction: transaction,
     );
   }

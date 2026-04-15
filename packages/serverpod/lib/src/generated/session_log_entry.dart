@@ -204,6 +204,7 @@ abstract class SessionLogEntry
     int? limit,
     int? offset,
     _i1.OrderByBuilder<SessionLogEntryTable>? orderBy,
+    @Deprecated('Use desc() on the orderBy column instead.')
     bool orderDescending = false,
     _i1.OrderByListBuilder<SessionLogEntryTable>? orderByList,
     SessionLogEntryInclude? include,
@@ -213,7 +214,8 @@ abstract class SessionLogEntry
       limit: limit,
       offset: offset,
       orderBy: orderBy?.call(SessionLogEntry.t),
-      orderDescending: orderDescending,
+      orderDescending: // ignore: deprecated_member_use_from_same_package
+          orderDescending,
       orderByList: orderByList?.call(SessionLogEntry.t),
       include: include,
     );
@@ -526,6 +528,7 @@ class SessionLogEntryIncludeList extends _i1.IncludeList {
     super.limit,
     super.offset,
     super.orderBy,
+    @Deprecated('Use desc() on the orderBy column instead.')
     super.orderDescending,
     super.orderByList,
     super.include,
@@ -571,6 +574,7 @@ class SessionLogEntryRepository {
     int? limit,
     int? offset,
     _i1.OrderByBuilder<SessionLogEntryTable>? orderBy,
+    @Deprecated('Use desc() on the orderBy column instead.')
     bool orderDescending = false,
     _i1.OrderByListBuilder<SessionLogEntryTable>? orderByList,
     _i1.Transaction? transaction,
@@ -581,7 +585,8 @@ class SessionLogEntryRepository {
       where: where?.call(SessionLogEntry.t),
       orderBy: orderBy?.call(SessionLogEntry.t),
       orderByList: orderByList?.call(SessionLogEntry.t),
-      orderDescending: orderDescending,
+      orderDescending: // ignore: deprecated_member_use
+          orderDescending,
       limit: limit,
       offset: offset,
       transaction: transaction,
@@ -612,6 +617,7 @@ class SessionLogEntryRepository {
     _i1.WhereExpressionBuilder<SessionLogEntryTable>? where,
     int? offset,
     _i1.OrderByBuilder<SessionLogEntryTable>? orderBy,
+    @Deprecated('Use desc() on the orderBy column instead.')
     bool orderDescending = false,
     _i1.OrderByListBuilder<SessionLogEntryTable>? orderByList,
     _i1.Transaction? transaction,
@@ -622,7 +628,8 @@ class SessionLogEntryRepository {
       where: where?.call(SessionLogEntry.t),
       orderBy: orderBy?.call(SessionLogEntry.t),
       orderByList: orderByList?.call(SessionLogEntry.t),
-      orderDescending: orderDescending,
+      orderDescending: // ignore: deprecated_member_use
+          orderDescending,
       offset: offset,
       transaction: transaction,
       lockMode: lockMode,
@@ -785,6 +792,7 @@ class SessionLogEntryRepository {
     int? offset,
     _i1.OrderByBuilder<SessionLogEntryTable>? orderBy,
     _i1.OrderByListBuilder<SessionLogEntryTable>? orderByList,
+    @Deprecated('Use desc() on the orderBy column instead.')
     bool orderDescending = false,
     _i1.Transaction? transaction,
   }) async {
@@ -795,21 +803,34 @@ class SessionLogEntryRepository {
       offset: offset,
       orderBy: orderBy?.call(SessionLogEntry.t),
       orderByList: orderByList?.call(SessionLogEntry.t),
-      orderDescending: orderDescending,
+      orderDescending: // ignore: deprecated_member_use
+          orderDescending,
       transaction: transaction,
     );
   }
 
   /// Deletes all [SessionLogEntry]s in the list and returns the deleted rows.
+  ///
+  /// To specify the order of the returned rows use [orderBy] or [orderByList]
+  /// when sorting by multiple columns.
+  ///
   /// This is an atomic operation, meaning that if one of the rows fail to
   /// be deleted, none of the rows will be deleted.
   Future<List<SessionLogEntry>> delete(
     _i1.DatabaseSession session,
     List<SessionLogEntry> rows, {
+    _i1.OrderByBuilder<SessionLogEntryTable>? orderBy,
+    @Deprecated('Use desc() on the orderBy column instead.')
+    bool orderDescending = false,
+    _i1.OrderByListBuilder<SessionLogEntryTable>? orderByList,
     _i1.Transaction? transaction,
   }) async {
     return session.db.delete<SessionLogEntry>(
       rows,
+      orderBy: orderBy?.call(SessionLogEntry.t),
+      orderByList: orderByList?.call(SessionLogEntry.t),
+      orderDescending: // ignore: deprecated_member_use
+          orderDescending,
       transaction: transaction,
     );
   }
@@ -827,13 +848,24 @@ class SessionLogEntryRepository {
   }
 
   /// Deletes all rows matching the [where] expression.
+  ///
+  /// To specify the order of the returned rows use [orderBy] or [orderByList]
+  /// when sorting by multiple columns.
   Future<List<SessionLogEntry>> deleteWhere(
     _i1.DatabaseSession session, {
     required _i1.WhereExpressionBuilder<SessionLogEntryTable> where,
+    _i1.OrderByBuilder<SessionLogEntryTable>? orderBy,
+    @Deprecated('Use desc() on the orderBy column instead.')
+    bool orderDescending = false,
+    _i1.OrderByListBuilder<SessionLogEntryTable>? orderByList,
     _i1.Transaction? transaction,
   }) async {
     return session.db.deleteWhere<SessionLogEntry>(
       where: where(SessionLogEntry.t),
+      orderBy: orderBy?.call(SessionLogEntry.t),
+      orderByList: orderByList?.call(SessionLogEntry.t),
+      orderDescending: // ignore: deprecated_member_use
+          orderDescending,
       transaction: transaction,
     );
   }

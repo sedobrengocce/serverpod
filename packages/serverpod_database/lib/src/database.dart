@@ -1,7 +1,5 @@
 import 'dart:async';
 
-import 'package:serverpod_shared/serverpod_shared.dart';
-
 import '../serverpod_database.dart';
 import 'interface/database_connection.dart';
 
@@ -76,7 +74,8 @@ class Database {
     int? limit,
     int? offset,
     Column? orderBy,
-    List<Order>? orderByList,
+    List<Column>? orderByList,
+    @Deprecated('Use desc() on the orderBy column instead.')
     bool orderDescending = false,
     Transaction? transaction,
     Include? include,
@@ -99,6 +98,7 @@ class Database {
       offset: offset,
       orderBy: orderBy,
       orderByList: orderByList,
+      // ignore: deprecated_member_use_from_same_package
       orderDescending: orderDescending,
       transaction: resolvedTransaction,
       include: include,
@@ -126,7 +126,8 @@ class Database {
     Expression? where,
     int? offset,
     Column? orderBy,
-    List<Order>? orderByList,
+    List<Column>? orderByList,
+    @Deprecated('Use desc() on the orderBy column instead.')
     bool orderDescending = false,
     Transaction? transaction,
     Include? include,
@@ -148,6 +149,7 @@ class Database {
       offset: offset,
       orderBy: orderBy,
       orderByList: orderByList,
+      // ignore: deprecated_member_use_from_same_package
       orderDescending: orderDescending,
       transaction: resolvedTransaction,
       include: include,
@@ -282,7 +284,8 @@ class Database {
     int? limit,
     int? offset,
     Column? orderBy,
-    List<Order>? orderByList,
+    List<Column>? orderByList,
+    @Deprecated('Use desc() on the orderBy column instead.')
     bool orderDescending = false,
     Transaction? transaction,
   }) async {
@@ -294,6 +297,7 @@ class Database {
       offset: offset,
       orderBy: orderBy,
       orderByList: orderByList,
+      // ignore: deprecated_member_use_from_same_package
       orderDescending: orderDescending,
       // ignore: invalid_use_of_visible_for_testing_member
       transaction: transaction ?? _session.transaction,
@@ -390,15 +394,27 @@ class Database {
   }
 
   /// Deletes all [TableRow]s in the list and returns the deleted rows.
+  ///
+  /// To specify the order of the returned rows use [orderBy] or [orderByList]
+  /// when sorting by multiple columns.
+  ///
   /// This is an atomic operation, meaning that if one of the rows fails to
   /// be deleted, none of the rows will be deleted.
   Future<List<T>> delete<T extends TableRow>(
     List<T> rows, {
+    Column? orderBy,
+    List<Column>? orderByList,
+    @Deprecated('Use desc() on the orderBy column instead.')
+    bool orderDescending = false,
     Transaction? transaction,
   }) async {
     return _databaseConnection.delete<T>(
       _session,
       rows,
+      orderBy: orderBy,
+      orderByList: orderByList,
+      // ignore: deprecated_member_use_from_same_package
+      orderDescending: orderDescending,
       // ignore: invalid_use_of_visible_for_testing_member
       transaction: transaction ?? _session.transaction,
     );
@@ -417,14 +433,25 @@ class Database {
     );
   }
 
-  /// Deletes all rows matching the [where] expression.
+  /// Deletes all rows matching the [where] expression and returns the deleted rows.
+  ///
+  /// To specify the order of the returned rows use [orderBy] or [orderByList]
+  /// when sorting by multiple columns.
   Future<List<T>> deleteWhere<T extends TableRow>({
     required Expression where,
+    Column? orderBy,
+    List<Column>? orderByList,
+    @Deprecated('Use desc() on the orderBy column instead.')
+    bool orderDescending = false,
     Transaction? transaction,
   }) async {
     return _databaseConnection.deleteWhere<T>(
       _session,
       where,
+      orderBy: orderBy,
+      orderByList: orderByList,
+      // ignore: deprecated_member_use_from_same_package
+      orderDescending: orderDescending,
       // ignore: invalid_use_of_visible_for_testing_member
       transaction: transaction ?? _session.transaction,
     );

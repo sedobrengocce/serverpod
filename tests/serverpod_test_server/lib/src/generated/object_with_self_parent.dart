@@ -79,6 +79,7 @@ abstract class ObjectWithSelfParent
     int? limit,
     int? offset,
     _i1.OrderByBuilder<ObjectWithSelfParentTable>? orderBy,
+    @Deprecated('Use desc() on the orderBy column instead.')
     bool orderDescending = false,
     _i1.OrderByListBuilder<ObjectWithSelfParentTable>? orderByList,
     ObjectWithSelfParentInclude? include,
@@ -88,7 +89,8 @@ abstract class ObjectWithSelfParent
       limit: limit,
       offset: offset,
       orderBy: orderBy?.call(ObjectWithSelfParent.t),
-      orderDescending: orderDescending,
+      orderDescending: // ignore: deprecated_member_use_from_same_package
+          orderDescending,
       orderByList: orderByList?.call(ObjectWithSelfParent.t),
       include: include,
     );
@@ -173,6 +175,7 @@ class ObjectWithSelfParentIncludeList extends _i1.IncludeList {
     super.limit,
     super.offset,
     super.orderBy,
+    @Deprecated('Use desc() on the orderBy column instead.')
     super.orderDescending,
     super.orderByList,
     super.include,
@@ -218,6 +221,7 @@ class ObjectWithSelfParentRepository {
     int? limit,
     int? offset,
     _i1.OrderByBuilder<ObjectWithSelfParentTable>? orderBy,
+    @Deprecated('Use desc() on the orderBy column instead.')
     bool orderDescending = false,
     _i1.OrderByListBuilder<ObjectWithSelfParentTable>? orderByList,
     _i1.Transaction? transaction,
@@ -228,7 +232,8 @@ class ObjectWithSelfParentRepository {
       where: where?.call(ObjectWithSelfParent.t),
       orderBy: orderBy?.call(ObjectWithSelfParent.t),
       orderByList: orderByList?.call(ObjectWithSelfParent.t),
-      orderDescending: orderDescending,
+      orderDescending: // ignore: deprecated_member_use
+          orderDescending,
       limit: limit,
       offset: offset,
       transaction: transaction,
@@ -259,6 +264,7 @@ class ObjectWithSelfParentRepository {
     _i1.WhereExpressionBuilder<ObjectWithSelfParentTable>? where,
     int? offset,
     _i1.OrderByBuilder<ObjectWithSelfParentTable>? orderBy,
+    @Deprecated('Use desc() on the orderBy column instead.')
     bool orderDescending = false,
     _i1.OrderByListBuilder<ObjectWithSelfParentTable>? orderByList,
     _i1.Transaction? transaction,
@@ -269,7 +275,8 @@ class ObjectWithSelfParentRepository {
       where: where?.call(ObjectWithSelfParent.t),
       orderBy: orderBy?.call(ObjectWithSelfParent.t),
       orderByList: orderByList?.call(ObjectWithSelfParent.t),
-      orderDescending: orderDescending,
+      orderDescending: // ignore: deprecated_member_use
+          orderDescending,
       offset: offset,
       transaction: transaction,
       lockMode: lockMode,
@@ -440,6 +447,7 @@ class ObjectWithSelfParentRepository {
     int? offset,
     _i1.OrderByBuilder<ObjectWithSelfParentTable>? orderBy,
     _i1.OrderByListBuilder<ObjectWithSelfParentTable>? orderByList,
+    @Deprecated('Use desc() on the orderBy column instead.')
     bool orderDescending = false,
     _i1.Transaction? transaction,
   }) async {
@@ -450,21 +458,34 @@ class ObjectWithSelfParentRepository {
       offset: offset,
       orderBy: orderBy?.call(ObjectWithSelfParent.t),
       orderByList: orderByList?.call(ObjectWithSelfParent.t),
-      orderDescending: orderDescending,
+      orderDescending: // ignore: deprecated_member_use
+          orderDescending,
       transaction: transaction,
     );
   }
 
   /// Deletes all [ObjectWithSelfParent]s in the list and returns the deleted rows.
+  ///
+  /// To specify the order of the returned rows use [orderBy] or [orderByList]
+  /// when sorting by multiple columns.
+  ///
   /// This is an atomic operation, meaning that if one of the rows fail to
   /// be deleted, none of the rows will be deleted.
   Future<List<ObjectWithSelfParent>> delete(
     _i1.DatabaseSession session,
     List<ObjectWithSelfParent> rows, {
+    _i1.OrderByBuilder<ObjectWithSelfParentTable>? orderBy,
+    @Deprecated('Use desc() on the orderBy column instead.')
+    bool orderDescending = false,
+    _i1.OrderByListBuilder<ObjectWithSelfParentTable>? orderByList,
     _i1.Transaction? transaction,
   }) async {
     return session.db.delete<ObjectWithSelfParent>(
       rows,
+      orderBy: orderBy?.call(ObjectWithSelfParent.t),
+      orderByList: orderByList?.call(ObjectWithSelfParent.t),
+      orderDescending: // ignore: deprecated_member_use
+          orderDescending,
       transaction: transaction,
     );
   }
@@ -482,13 +503,24 @@ class ObjectWithSelfParentRepository {
   }
 
   /// Deletes all rows matching the [where] expression.
+  ///
+  /// To specify the order of the returned rows use [orderBy] or [orderByList]
+  /// when sorting by multiple columns.
   Future<List<ObjectWithSelfParent>> deleteWhere(
     _i1.DatabaseSession session, {
     required _i1.WhereExpressionBuilder<ObjectWithSelfParentTable> where,
+    _i1.OrderByBuilder<ObjectWithSelfParentTable>? orderBy,
+    @Deprecated('Use desc() on the orderBy column instead.')
+    bool orderDescending = false,
+    _i1.OrderByListBuilder<ObjectWithSelfParentTable>? orderByList,
     _i1.Transaction? transaction,
   }) async {
     return session.db.deleteWhere<ObjectWithSelfParent>(
       where: where(ObjectWithSelfParent.t),
+      orderBy: orderBy?.call(ObjectWithSelfParent.t),
+      orderByList: orderByList?.call(ObjectWithSelfParent.t),
+      orderDescending: // ignore: deprecated_member_use
+          orderDescending,
       transaction: transaction,
     );
   }

@@ -18,7 +18,7 @@ class TableWithColumnOverride extends Table<int?> {
 }
 
 void main() {
-  ValueEncoder.set(PostgresValueEncoder());
+  ValueEncoder.set(const PostgresValueEncoder());
 
   group('Given model with an explicit column field name', () {
     test(
@@ -169,10 +169,7 @@ void main() {
           tableName: citizenTable.tableName,
           relationAlias: 'friends',
         );
-        Order order = Order(
-          column: relationTable.manyRelation.count(),
-          orderDescending: false,
-        );
+        var order = relationTable.manyRelation.count().asc();
 
         var query = SelectQueryBuilder(
           table: relationTable,
@@ -298,6 +295,212 @@ void main() {
     var companyTable = Table<int?>(tableName: 'company');
 
     test(
+      'when deleting a table with explicit column names with where and order by then the order by uses the field alias in the sql',
+      () {
+        final table = TableWithColumnOverride();
+        final query =
+            DeleteQueryBuilder(
+                  table: table,
+                )
+                .withWhere(const Expression('"user_name"=test'))
+                .withReturn(Returning.all)
+                .withOrderBy([table.userName.asc()])
+                .build();
+
+        expect(
+          query,
+          'WITH deleted_rows AS (DELETE FROM "${table.tableName}" WHERE "user_name"=test '
+          'RETURNING "${table.tableName}"."id" AS "${table.tableName}.id", '
+          '"${table.tableName}"."user_name" AS "${table.tableName}.userName", '
+          '"${table.tableName}"."user_age" AS "${table.tableName}.userAge") '
+          'SELECT * FROM deleted_rows '
+          'ORDER BY "${table.tableName}.userName" ASC NULLS LAST',
+        );
+      },
+    );
+
+    test(
+      'when deleting a table with explicit column names and multiple order by columns then the order by uses the field aliases in the sql',
+      () {
+        final table = TableWithColumnOverride();
+        final query =
+            DeleteQueryBuilder(
+              table: table,
+            ).withReturn(Returning.all).withOrderBy([
+              table.userName.asc(),
+              table.userAge.desc(),
+            ]).build();
+
+        expect(
+          query,
+          'WITH deleted_rows AS (DELETE FROM "${table.tableName}" '
+          'RETURNING "${table.tableName}"."id" AS "${table.tableName}.id", '
+          '"${table.tableName}"."user_name" AS "${table.tableName}.userName", '
+          '"${table.tableName}"."user_age" AS "${table.tableName}.userAge") '
+          'SELECT * FROM deleted_rows '
+          'ORDER BY "${table.tableName}.userName" ASC NULLS LAST, '
+          '"${table.tableName}.userAge" DESC NULLS FIRST',
+        );
+      },
+    );
+
+    test(
+      'when query with return id and order by is built then format exception is thrown.',
+      () {
+        final table = TableWithColumnOverride();
+        final queryBuilder =
+            DeleteQueryBuilder(
+                table: table,
+              )
+              ..withReturn(Returning.id)
+              ..withOrderBy([table.userName.asc()]);
+
+        expect(
+          () => queryBuilder.build(),
+          throwsA(
+            isA<FormatException>().having(
+              (e) => e.toString(),
+              'message',
+              equals(
+                'FormatException: The following expressions need to be removed or modified:\n'
+                'Order by is not supported when returning is set to Returning.id.',
+              ),
+            ),
+          ),
+        );
+      },
+    );
+
+    test(
+      'when query with return none and order by is built then format exception is thrown.',
+      () {
+        final table = TableWithColumnOverride();
+        final queryBuilder =
+            DeleteQueryBuilder(
+                table: table,
+              )
+              ..withReturn(Returning.none)
+              ..withOrderBy([table.userName.asc()]);
+
+        expect(
+          () => queryBuilder.build(),
+          throwsA(
+            isA<FormatException>().having(
+              (e) => e.toString(),
+              'message',
+              equals(
+                'FormatException: The following expressions need to be removed or modified:\n'
+                'Order by is not supported when returning is set to Returning.none.',
+              ),
+            ),
+          ),
+        );
+      },
+    );
+
+    test(
+      'when delete query orders by a column that references its own table then format exception is thrown.',
+      () {
+        final table = TableWithColumnOverride();
+        var relationTable = TableWithExplicitColumn(
+          tableName: table.tableName,
+          tableRelation: TableRelation([
+            TableRelationEntry(
+              relationAlias: 'father',
+              field: ColumnInt('fatherId', table),
+              foreignField: ColumnInt('id', table),
+            ),
+          ]),
+        );
+
+        var queryBuilder =
+            DeleteQueryBuilder(
+                table: table,
+              )
+              ..withReturn(Returning.all)
+              ..withOrderBy([
+                ColumnString('user_age', relationTable).asc(),
+              ]);
+
+        expect(
+          () => queryBuilder.build(),
+          throwsA(
+            isA<FormatException>().having(
+              (e) => e.toString(),
+              'message',
+              equals(
+                'FormatException: The following expressions need to be removed or modified:\n'
+                'DeleteQueryBuilder orderBy only supports columns from "user" and its aliases. '
+                'Column "user_father_user"."user_age" resolves to alias "user_father_user.user_age", which is not present in the returned result.',
+              ),
+            ),
+          ),
+        );
+      },
+    );
+
+    test(
+      'when delete query orders by column count then format exception is thrown.',
+      () {
+        var relationTable = TableWithExplicitManyRelation(
+          tableName: citizenTable.tableName,
+          relationAlias: 'friends',
+        );
+
+        var queryBuilder =
+            DeleteQueryBuilder(
+                table: citizenTable,
+              )
+              ..withReturn(Returning.all)
+              ..withOrderBy([
+                relationTable.manyRelation.count().asc(),
+              ]);
+
+        expect(
+          () => queryBuilder.build(),
+          throwsA(
+            isA<FormatException>().having(
+              (e) => e.toString(),
+              'message',
+              equals(
+                'FormatException: The following expressions need to be removed or modified:\n'
+                'DeleteQueryBuilder does not support ordering returned rows by ColumnCount.',
+              ),
+            ),
+          ),
+        );
+      },
+    );
+
+    test(
+      'when delete query order by has different table as base then exception is thrown.',
+      () {
+        var queryBuilder =
+            DeleteQueryBuilder(
+                table: citizenTable,
+              )
+              ..withReturn(Returning.all)
+              ..withOrderBy([
+                ColumnString('name', companyTable).asc(),
+              ]);
+
+        expect(
+          () => queryBuilder.build(),
+          throwsA(
+            isA<FormatException>().having(
+              (e) => e.toString(),
+              'message',
+              equals(
+                'FormatException: The following expressions need to be removed or modified:\n'
+                'DeleteQueryBuilder orderBy only supports columns from "citizen".',
+              ),
+            ),
+          ),
+        );
+      },
+    );
+
+    test(
       'when where expression depends on relations then output includes using according to table relations.',
       () {
         var relationTable = TableWithExplicitColumn(
@@ -387,6 +590,33 @@ void main() {
         );
       },
     );
+
+    test(
+      'when any expression is used and order by is built then output is a valid SQL query.',
+      () {
+        final table = TableWithColumnOverride();
+        var relationTable = TableWithExplicitManyRelation(
+          tableName: table.tableName,
+          relationAlias: 'friends',
+        );
+
+        final query =
+            DeleteQueryBuilder(
+                  table: table,
+                )
+                .withWhere(relationTable.manyRelation.any())
+                .withReturn(Returning.all)
+                .withOrderBy([
+                  table.userAge.asc(),
+                ])
+                .build();
+
+        expect(
+          query,
+          'WITH "where_any_user_friends_user_0" AS (SELECT "user"."id" AS "user.id" FROM "user" LEFT JOIN "user" AS "user_friends_user" ON "user"."id" = "user_friends_user"."friend_id" WHERE "user_friends_user"."friend_id" IS NOT NULL GROUP BY "user"."id") , deleted_rows AS (DELETE FROM "user" WHERE "user"."id" IN (SELECT "where_any_user_friends_user_0"."user.id" FROM "where_any_user_friends_user_0") RETURNING "user"."id" AS "user.id", "user"."user_name" AS "user.userName", "user"."user_age" AS "user.userAge") SELECT * FROM deleted_rows ORDER BY "user.userAge" ASC NULLS LAST',
+        );
+      },
+    );
   });
 
   group('Given many relation joining on non-id column with explicit names', () {
@@ -417,12 +647,14 @@ void main() {
 
 class TableWithExplicitColumn extends Table<int?> {
   late final ColumnInt companyId;
+  late final ColumnInt userAge;
 
   TableWithExplicitColumn({
     required super.tableName,
     super.tableRelation,
   }) {
     companyId = ColumnInt('company_id', this, fieldName: 'companyId');
+    userAge = ColumnInt('user_age', this, fieldName: 'userAge');
   }
 
   @override
@@ -431,6 +663,7 @@ class TableWithExplicitColumn extends Table<int?> {
 
 class TableWithExplicitManyRelation extends Table<int?> {
   final String _relationAlias;
+
   TableWithExplicitManyRelation({
     String? relationAlias,
     required super.tableName,
@@ -438,6 +671,7 @@ class TableWithExplicitManyRelation extends Table<int?> {
   }) : _relationAlias = relationAlias ?? '';
 
   ManyRelation<TableWithExplicitManyRelation>? _manyRelation;
+
   ManyRelation<TableWithExplicitManyRelation> get manyRelation {
     if (_manyRelation != null) return _manyRelation!;
 
@@ -498,6 +732,7 @@ class TableWithManyRelationOnNonId extends Table<int?> {
   }
 
   ManyRelation<TableWithManyRelationOnNonId>? _manyRelation;
+
   ManyRelation<TableWithManyRelationOnNonId> get manyRelation {
     if (_manyRelation != null) return _manyRelation!;
 

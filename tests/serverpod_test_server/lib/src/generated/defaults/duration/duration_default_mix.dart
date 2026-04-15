@@ -138,6 +138,7 @@ abstract class DurationDefaultMix
     int? limit,
     int? offset,
     _i1.OrderByBuilder<DurationDefaultMixTable>? orderBy,
+    @Deprecated('Use desc() on the orderBy column instead.')
     bool orderDescending = false,
     _i1.OrderByListBuilder<DurationDefaultMixTable>? orderByList,
     DurationDefaultMixInclude? include,
@@ -147,7 +148,8 @@ abstract class DurationDefaultMix
       limit: limit,
       offset: offset,
       orderBy: orderBy?.call(DurationDefaultMix.t),
-      orderDescending: orderDescending,
+      orderDescending: // ignore: deprecated_member_use_from_same_package
+          orderDescending,
       orderByList: orderByList?.call(DurationDefaultMix.t),
       include: include,
     );
@@ -279,6 +281,7 @@ class DurationDefaultMixIncludeList extends _i1.IncludeList {
     super.limit,
     super.offset,
     super.orderBy,
+    @Deprecated('Use desc() on the orderBy column instead.')
     super.orderDescending,
     super.orderByList,
     super.include,
@@ -324,6 +327,7 @@ class DurationDefaultMixRepository {
     int? limit,
     int? offset,
     _i1.OrderByBuilder<DurationDefaultMixTable>? orderBy,
+    @Deprecated('Use desc() on the orderBy column instead.')
     bool orderDescending = false,
     _i1.OrderByListBuilder<DurationDefaultMixTable>? orderByList,
     _i1.Transaction? transaction,
@@ -334,7 +338,8 @@ class DurationDefaultMixRepository {
       where: where?.call(DurationDefaultMix.t),
       orderBy: orderBy?.call(DurationDefaultMix.t),
       orderByList: orderByList?.call(DurationDefaultMix.t),
-      orderDescending: orderDescending,
+      orderDescending: // ignore: deprecated_member_use
+          orderDescending,
       limit: limit,
       offset: offset,
       transaction: transaction,
@@ -365,6 +370,7 @@ class DurationDefaultMixRepository {
     _i1.WhereExpressionBuilder<DurationDefaultMixTable>? where,
     int? offset,
     _i1.OrderByBuilder<DurationDefaultMixTable>? orderBy,
+    @Deprecated('Use desc() on the orderBy column instead.')
     bool orderDescending = false,
     _i1.OrderByListBuilder<DurationDefaultMixTable>? orderByList,
     _i1.Transaction? transaction,
@@ -375,7 +381,8 @@ class DurationDefaultMixRepository {
       where: where?.call(DurationDefaultMix.t),
       orderBy: orderBy?.call(DurationDefaultMix.t),
       orderByList: orderByList?.call(DurationDefaultMix.t),
-      orderDescending: orderDescending,
+      orderDescending: // ignore: deprecated_member_use
+          orderDescending,
       offset: offset,
       transaction: transaction,
       lockMode: lockMode,
@@ -546,6 +553,7 @@ class DurationDefaultMixRepository {
     int? offset,
     _i1.OrderByBuilder<DurationDefaultMixTable>? orderBy,
     _i1.OrderByListBuilder<DurationDefaultMixTable>? orderByList,
+    @Deprecated('Use desc() on the orderBy column instead.')
     bool orderDescending = false,
     _i1.Transaction? transaction,
   }) async {
@@ -556,21 +564,34 @@ class DurationDefaultMixRepository {
       offset: offset,
       orderBy: orderBy?.call(DurationDefaultMix.t),
       orderByList: orderByList?.call(DurationDefaultMix.t),
-      orderDescending: orderDescending,
+      orderDescending: // ignore: deprecated_member_use
+          orderDescending,
       transaction: transaction,
     );
   }
 
   /// Deletes all [DurationDefaultMix]s in the list and returns the deleted rows.
+  ///
+  /// To specify the order of the returned rows use [orderBy] or [orderByList]
+  /// when sorting by multiple columns.
+  ///
   /// This is an atomic operation, meaning that if one of the rows fail to
   /// be deleted, none of the rows will be deleted.
   Future<List<DurationDefaultMix>> delete(
     _i1.DatabaseSession session,
     List<DurationDefaultMix> rows, {
+    _i1.OrderByBuilder<DurationDefaultMixTable>? orderBy,
+    @Deprecated('Use desc() on the orderBy column instead.')
+    bool orderDescending = false,
+    _i1.OrderByListBuilder<DurationDefaultMixTable>? orderByList,
     _i1.Transaction? transaction,
   }) async {
     return session.db.delete<DurationDefaultMix>(
       rows,
+      orderBy: orderBy?.call(DurationDefaultMix.t),
+      orderByList: orderByList?.call(DurationDefaultMix.t),
+      orderDescending: // ignore: deprecated_member_use
+          orderDescending,
       transaction: transaction,
     );
   }
@@ -588,13 +609,24 @@ class DurationDefaultMixRepository {
   }
 
   /// Deletes all rows matching the [where] expression.
+  ///
+  /// To specify the order of the returned rows use [orderBy] or [orderByList]
+  /// when sorting by multiple columns.
   Future<List<DurationDefaultMix>> deleteWhere(
     _i1.DatabaseSession session, {
     required _i1.WhereExpressionBuilder<DurationDefaultMixTable> where,
+    _i1.OrderByBuilder<DurationDefaultMixTable>? orderBy,
+    @Deprecated('Use desc() on the orderBy column instead.')
+    bool orderDescending = false,
+    _i1.OrderByListBuilder<DurationDefaultMixTable>? orderByList,
     _i1.Transaction? transaction,
   }) async {
     return session.db.deleteWhere<DurationDefaultMix>(
       where: where(DurationDefaultMix.t),
+      orderBy: orderBy?.call(DurationDefaultMix.t),
+      orderByList: orderByList?.call(DurationDefaultMix.t),
+      orderDescending: // ignore: deprecated_member_use
+          orderDescending,
       transaction: transaction,
     );
   }

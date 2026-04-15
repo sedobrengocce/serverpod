@@ -128,6 +128,7 @@ abstract class EnumDefault
     int? limit,
     int? offset,
     _i1.OrderByBuilder<EnumDefaultTable>? orderBy,
+    @Deprecated('Use desc() on the orderBy column instead.')
     bool orderDescending = false,
     _i1.OrderByListBuilder<EnumDefaultTable>? orderByList,
     EnumDefaultInclude? include,
@@ -137,7 +138,8 @@ abstract class EnumDefault
       limit: limit,
       offset: offset,
       orderBy: orderBy?.call(EnumDefault.t),
-      orderDescending: orderDescending,
+      orderDescending: // ignore: deprecated_member_use_from_same_package
+          orderDescending,
       orderByList: orderByList?.call(EnumDefault.t),
       include: include,
     );
@@ -288,6 +290,7 @@ class EnumDefaultIncludeList extends _i1.IncludeList {
     super.limit,
     super.offset,
     super.orderBy,
+    @Deprecated('Use desc() on the orderBy column instead.')
     super.orderDescending,
     super.orderByList,
     super.include,
@@ -333,6 +336,7 @@ class EnumDefaultRepository {
     int? limit,
     int? offset,
     _i1.OrderByBuilder<EnumDefaultTable>? orderBy,
+    @Deprecated('Use desc() on the orderBy column instead.')
     bool orderDescending = false,
     _i1.OrderByListBuilder<EnumDefaultTable>? orderByList,
     _i1.Transaction? transaction,
@@ -343,7 +347,8 @@ class EnumDefaultRepository {
       where: where?.call(EnumDefault.t),
       orderBy: orderBy?.call(EnumDefault.t),
       orderByList: orderByList?.call(EnumDefault.t),
-      orderDescending: orderDescending,
+      orderDescending: // ignore: deprecated_member_use
+          orderDescending,
       limit: limit,
       offset: offset,
       transaction: transaction,
@@ -374,6 +379,7 @@ class EnumDefaultRepository {
     _i1.WhereExpressionBuilder<EnumDefaultTable>? where,
     int? offset,
     _i1.OrderByBuilder<EnumDefaultTable>? orderBy,
+    @Deprecated('Use desc() on the orderBy column instead.')
     bool orderDescending = false,
     _i1.OrderByListBuilder<EnumDefaultTable>? orderByList,
     _i1.Transaction? transaction,
@@ -384,7 +390,8 @@ class EnumDefaultRepository {
       where: where?.call(EnumDefault.t),
       orderBy: orderBy?.call(EnumDefault.t),
       orderByList: orderByList?.call(EnumDefault.t),
-      orderDescending: orderDescending,
+      orderDescending: // ignore: deprecated_member_use
+          orderDescending,
       offset: offset,
       transaction: transaction,
       lockMode: lockMode,
@@ -553,6 +560,7 @@ class EnumDefaultRepository {
     int? offset,
     _i1.OrderByBuilder<EnumDefaultTable>? orderBy,
     _i1.OrderByListBuilder<EnumDefaultTable>? orderByList,
+    @Deprecated('Use desc() on the orderBy column instead.')
     bool orderDescending = false,
     _i1.Transaction? transaction,
   }) async {
@@ -563,21 +571,34 @@ class EnumDefaultRepository {
       offset: offset,
       orderBy: orderBy?.call(EnumDefault.t),
       orderByList: orderByList?.call(EnumDefault.t),
-      orderDescending: orderDescending,
+      orderDescending: // ignore: deprecated_member_use
+          orderDescending,
       transaction: transaction,
     );
   }
 
   /// Deletes all [EnumDefault]s in the list and returns the deleted rows.
+  ///
+  /// To specify the order of the returned rows use [orderBy] or [orderByList]
+  /// when sorting by multiple columns.
+  ///
   /// This is an atomic operation, meaning that if one of the rows fail to
   /// be deleted, none of the rows will be deleted.
   Future<List<EnumDefault>> delete(
     _i1.DatabaseSession session,
     List<EnumDefault> rows, {
+    _i1.OrderByBuilder<EnumDefaultTable>? orderBy,
+    @Deprecated('Use desc() on the orderBy column instead.')
+    bool orderDescending = false,
+    _i1.OrderByListBuilder<EnumDefaultTable>? orderByList,
     _i1.Transaction? transaction,
   }) async {
     return session.db.delete<EnumDefault>(
       rows,
+      orderBy: orderBy?.call(EnumDefault.t),
+      orderByList: orderByList?.call(EnumDefault.t),
+      orderDescending: // ignore: deprecated_member_use
+          orderDescending,
       transaction: transaction,
     );
   }
@@ -595,13 +616,24 @@ class EnumDefaultRepository {
   }
 
   /// Deletes all rows matching the [where] expression.
+  ///
+  /// To specify the order of the returned rows use [orderBy] or [orderByList]
+  /// when sorting by multiple columns.
   Future<List<EnumDefault>> deleteWhere(
     _i1.DatabaseSession session, {
     required _i1.WhereExpressionBuilder<EnumDefaultTable> where,
+    _i1.OrderByBuilder<EnumDefaultTable>? orderBy,
+    @Deprecated('Use desc() on the orderBy column instead.')
+    bool orderDescending = false,
+    _i1.OrderByListBuilder<EnumDefaultTable>? orderByList,
     _i1.Transaction? transaction,
   }) async {
     return session.db.deleteWhere<EnumDefault>(
       where: where(EnumDefault.t),
+      orderBy: orderBy?.call(EnumDefault.t),
+      orderByList: orderByList?.call(EnumDefault.t),
+      orderDescending: // ignore: deprecated_member_use
+          orderDescending,
       transaction: transaction,
     );
   }

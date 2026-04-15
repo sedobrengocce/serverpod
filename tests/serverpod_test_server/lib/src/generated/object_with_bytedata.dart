@@ -80,6 +80,7 @@ abstract class ObjectWithByteData
     int? limit,
     int? offset,
     _i1.OrderByBuilder<ObjectWithByteDataTable>? orderBy,
+    @Deprecated('Use desc() on the orderBy column instead.')
     bool orderDescending = false,
     _i1.OrderByListBuilder<ObjectWithByteDataTable>? orderByList,
     ObjectWithByteDataInclude? include,
@@ -89,7 +90,8 @@ abstract class ObjectWithByteData
       limit: limit,
       offset: offset,
       orderBy: orderBy?.call(ObjectWithByteData.t),
-      orderDescending: orderDescending,
+      orderDescending: // ignore: deprecated_member_use_from_same_package
+          orderDescending,
       orderByList: orderByList?.call(ObjectWithByteData.t),
       include: include,
     );
@@ -175,6 +177,7 @@ class ObjectWithByteDataIncludeList extends _i1.IncludeList {
     super.limit,
     super.offset,
     super.orderBy,
+    @Deprecated('Use desc() on the orderBy column instead.')
     super.orderDescending,
     super.orderByList,
     super.include,
@@ -220,6 +223,7 @@ class ObjectWithByteDataRepository {
     int? limit,
     int? offset,
     _i1.OrderByBuilder<ObjectWithByteDataTable>? orderBy,
+    @Deprecated('Use desc() on the orderBy column instead.')
     bool orderDescending = false,
     _i1.OrderByListBuilder<ObjectWithByteDataTable>? orderByList,
     _i1.Transaction? transaction,
@@ -230,7 +234,8 @@ class ObjectWithByteDataRepository {
       where: where?.call(ObjectWithByteData.t),
       orderBy: orderBy?.call(ObjectWithByteData.t),
       orderByList: orderByList?.call(ObjectWithByteData.t),
-      orderDescending: orderDescending,
+      orderDescending: // ignore: deprecated_member_use
+          orderDescending,
       limit: limit,
       offset: offset,
       transaction: transaction,
@@ -261,6 +266,7 @@ class ObjectWithByteDataRepository {
     _i1.WhereExpressionBuilder<ObjectWithByteDataTable>? where,
     int? offset,
     _i1.OrderByBuilder<ObjectWithByteDataTable>? orderBy,
+    @Deprecated('Use desc() on the orderBy column instead.')
     bool orderDescending = false,
     _i1.OrderByListBuilder<ObjectWithByteDataTable>? orderByList,
     _i1.Transaction? transaction,
@@ -271,7 +277,8 @@ class ObjectWithByteDataRepository {
       where: where?.call(ObjectWithByteData.t),
       orderBy: orderBy?.call(ObjectWithByteData.t),
       orderByList: orderByList?.call(ObjectWithByteData.t),
-      orderDescending: orderDescending,
+      orderDescending: // ignore: deprecated_member_use
+          orderDescending,
       offset: offset,
       transaction: transaction,
       lockMode: lockMode,
@@ -442,6 +449,7 @@ class ObjectWithByteDataRepository {
     int? offset,
     _i1.OrderByBuilder<ObjectWithByteDataTable>? orderBy,
     _i1.OrderByListBuilder<ObjectWithByteDataTable>? orderByList,
+    @Deprecated('Use desc() on the orderBy column instead.')
     bool orderDescending = false,
     _i1.Transaction? transaction,
   }) async {
@@ -452,21 +460,34 @@ class ObjectWithByteDataRepository {
       offset: offset,
       orderBy: orderBy?.call(ObjectWithByteData.t),
       orderByList: orderByList?.call(ObjectWithByteData.t),
-      orderDescending: orderDescending,
+      orderDescending: // ignore: deprecated_member_use
+          orderDescending,
       transaction: transaction,
     );
   }
 
   /// Deletes all [ObjectWithByteData]s in the list and returns the deleted rows.
+  ///
+  /// To specify the order of the returned rows use [orderBy] or [orderByList]
+  /// when sorting by multiple columns.
+  ///
   /// This is an atomic operation, meaning that if one of the rows fail to
   /// be deleted, none of the rows will be deleted.
   Future<List<ObjectWithByteData>> delete(
     _i1.DatabaseSession session,
     List<ObjectWithByteData> rows, {
+    _i1.OrderByBuilder<ObjectWithByteDataTable>? orderBy,
+    @Deprecated('Use desc() on the orderBy column instead.')
+    bool orderDescending = false,
+    _i1.OrderByListBuilder<ObjectWithByteDataTable>? orderByList,
     _i1.Transaction? transaction,
   }) async {
     return session.db.delete<ObjectWithByteData>(
       rows,
+      orderBy: orderBy?.call(ObjectWithByteData.t),
+      orderByList: orderByList?.call(ObjectWithByteData.t),
+      orderDescending: // ignore: deprecated_member_use
+          orderDescending,
       transaction: transaction,
     );
   }
@@ -484,13 +505,24 @@ class ObjectWithByteDataRepository {
   }
 
   /// Deletes all rows matching the [where] expression.
+  ///
+  /// To specify the order of the returned rows use [orderBy] or [orderByList]
+  /// when sorting by multiple columns.
   Future<List<ObjectWithByteData>> deleteWhere(
     _i1.DatabaseSession session, {
     required _i1.WhereExpressionBuilder<ObjectWithByteDataTable> where,
+    _i1.OrderByBuilder<ObjectWithByteDataTable>? orderBy,
+    @Deprecated('Use desc() on the orderBy column instead.')
+    bool orderDescending = false,
+    _i1.OrderByListBuilder<ObjectWithByteDataTable>? orderByList,
     _i1.Transaction? transaction,
   }) async {
     return session.db.deleteWhere<ObjectWithByteData>(
       where: where(ObjectWithByteData.t),
+      orderBy: orderBy?.call(ObjectWithByteData.t),
+      orderByList: orderByList?.call(ObjectWithByteData.t),
+      orderDescending: // ignore: deprecated_member_use
+          orderDescending,
       transaction: transaction,
     );
   }

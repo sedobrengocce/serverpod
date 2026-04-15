@@ -1,3 +1,11 @@
+## 3.5.0-beta.3
+
+- feat(EXPERIMENTAL): Adds MCP server to the serverpod CLI with `apply_migrations` tool.
+- feat: Ensures at-least-once semantics for future calls execution.
+- feat: Allows configuring localization for the sign in widgets. ([@justlunix](https://github.com/justlunix))
+- feat: Adds `onAfterAccountCreated` callbacks to all IDPs for custom post-account creation logic. ([@kamil-matula](https://github.com/kamil-matula))
+- fix: Fixes future calls generation if models were not previously available on the project (like when running with a clean `generated` folder).
+
 ## 3.5.0-beta.2
 
 - fix: Fixes time spinners not updating correctly when running the `generate` or `start` commands.
@@ -12,8 +20,23 @@
 - refactor: Decouples all database-related code from `serverpod` into the new `serverpod_database` package to allow supporting client-side databases in the future.
 - refactor: Removes database-specific default values from the definition files to allow supporting extra database dialects.
 - refactor: Reduces the time taken to run incremental generation steps with the `--watch` flag by x15 and regular `generate` command by 20%.
+
+## 3.4.6
+
+- fix: Removes wrong documentation link on `PasswordMissingException`.
+- fix: Adds top-level `.gitignore` on created projects to ignore the `.dart_tool` of the workspace.
+- fix: Allows `serverpod create .` in the current directory.
+- fix: Makes `insert` with `ignoreConflicts` and `!persist` fields atomic.
+- fix: Extends immutable non-constant default validation to cover id field.
+- fix: Adds missing `onSessionCreated` to `ServerSideSessionsConfigFromPasswords` constructor.
+- fix: Invalidates the cached refresh token before rotating in case the storage has changed.
+- chore: Bumps `jose` dependency on legacy auth to fix `CVE-2026-34240`. Also backported to 2.9.3.
+
+## 3.4.5
+
 - fix: Truncates logged error messages to prevent hanging on formatter issues during code generation.
 - fix: Fixes the CLI invoking the welcome page more than once per install.
+- chore: Moves the `flutter_secure_storage` override from the workspace to the created Flutter package on a new project.
 
 ## 3.4.4
 
@@ -331,6 +354,9 @@ Serverpod now supports polymorphism on models and endpoints. This allows you to 
 - chore: Marks legacy streaming endpoints and associated code as deprecated. Streaming methods are now the preferred way to handle streaming between the server and client.
 - chore: Marks `AuthenticationKeyManager` as deprecated in favour of the new `ClientAuthKeyProvider` interface.
 - chore: Bumps minimum Dart version to 3.8.0 and Flutter version to 3.32.0.
+
+### 2.9.3
+- chore: Bumps `jose` dependency on legacy auth to fix `CVE-2026-34240`. Backported from 3.4.6.
 
 ## 2.9.2
 - fix: Fixes a crash when persistent logging is disabled but database is enabled.

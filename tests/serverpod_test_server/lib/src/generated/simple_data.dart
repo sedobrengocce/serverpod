@@ -81,6 +81,7 @@ abstract class SimpleData
     int? limit,
     int? offset,
     _i1.OrderByBuilder<SimpleDataTable>? orderBy,
+    @Deprecated('Use desc() on the orderBy column instead.')
     bool orderDescending = false,
     _i1.OrderByListBuilder<SimpleDataTable>? orderByList,
     SimpleDataInclude? include,
@@ -90,7 +91,8 @@ abstract class SimpleData
       limit: limit,
       offset: offset,
       orderBy: orderBy?.call(SimpleData.t),
-      orderDescending: orderDescending,
+      orderDescending: // ignore: deprecated_member_use_from_same_package
+          orderDescending,
       orderByList: orderByList?.call(SimpleData.t),
       include: include,
     );
@@ -176,6 +178,7 @@ class SimpleDataIncludeList extends _i1.IncludeList {
     super.limit,
     super.offset,
     super.orderBy,
+    @Deprecated('Use desc() on the orderBy column instead.')
     super.orderDescending,
     super.orderByList,
     super.include,
@@ -221,6 +224,7 @@ class SimpleDataRepository {
     int? limit,
     int? offset,
     _i1.OrderByBuilder<SimpleDataTable>? orderBy,
+    @Deprecated('Use desc() on the orderBy column instead.')
     bool orderDescending = false,
     _i1.OrderByListBuilder<SimpleDataTable>? orderByList,
     _i1.Transaction? transaction,
@@ -231,7 +235,8 @@ class SimpleDataRepository {
       where: where?.call(SimpleData.t),
       orderBy: orderBy?.call(SimpleData.t),
       orderByList: orderByList?.call(SimpleData.t),
-      orderDescending: orderDescending,
+      orderDescending: // ignore: deprecated_member_use
+          orderDescending,
       limit: limit,
       offset: offset,
       transaction: transaction,
@@ -262,6 +267,7 @@ class SimpleDataRepository {
     _i1.WhereExpressionBuilder<SimpleDataTable>? where,
     int? offset,
     _i1.OrderByBuilder<SimpleDataTable>? orderBy,
+    @Deprecated('Use desc() on the orderBy column instead.')
     bool orderDescending = false,
     _i1.OrderByListBuilder<SimpleDataTable>? orderByList,
     _i1.Transaction? transaction,
@@ -272,7 +278,8 @@ class SimpleDataRepository {
       where: where?.call(SimpleData.t),
       orderBy: orderBy?.call(SimpleData.t),
       orderByList: orderByList?.call(SimpleData.t),
-      orderDescending: orderDescending,
+      orderDescending: // ignore: deprecated_member_use
+          orderDescending,
       offset: offset,
       transaction: transaction,
       lockMode: lockMode,
@@ -441,6 +448,7 @@ class SimpleDataRepository {
     int? offset,
     _i1.OrderByBuilder<SimpleDataTable>? orderBy,
     _i1.OrderByListBuilder<SimpleDataTable>? orderByList,
+    @Deprecated('Use desc() on the orderBy column instead.')
     bool orderDescending = false,
     _i1.Transaction? transaction,
   }) async {
@@ -451,21 +459,34 @@ class SimpleDataRepository {
       offset: offset,
       orderBy: orderBy?.call(SimpleData.t),
       orderByList: orderByList?.call(SimpleData.t),
-      orderDescending: orderDescending,
+      orderDescending: // ignore: deprecated_member_use
+          orderDescending,
       transaction: transaction,
     );
   }
 
   /// Deletes all [SimpleData]s in the list and returns the deleted rows.
+  ///
+  /// To specify the order of the returned rows use [orderBy] or [orderByList]
+  /// when sorting by multiple columns.
+  ///
   /// This is an atomic operation, meaning that if one of the rows fail to
   /// be deleted, none of the rows will be deleted.
   Future<List<SimpleData>> delete(
     _i1.DatabaseSession session,
     List<SimpleData> rows, {
+    _i1.OrderByBuilder<SimpleDataTable>? orderBy,
+    @Deprecated('Use desc() on the orderBy column instead.')
+    bool orderDescending = false,
+    _i1.OrderByListBuilder<SimpleDataTable>? orderByList,
     _i1.Transaction? transaction,
   }) async {
     return session.db.delete<SimpleData>(
       rows,
+      orderBy: orderBy?.call(SimpleData.t),
+      orderByList: orderByList?.call(SimpleData.t),
+      orderDescending: // ignore: deprecated_member_use
+          orderDescending,
       transaction: transaction,
     );
   }
@@ -483,13 +504,24 @@ class SimpleDataRepository {
   }
 
   /// Deletes all rows matching the [where] expression.
+  ///
+  /// To specify the order of the returned rows use [orderBy] or [orderByList]
+  /// when sorting by multiple columns.
   Future<List<SimpleData>> deleteWhere(
     _i1.DatabaseSession session, {
     required _i1.WhereExpressionBuilder<SimpleDataTable> where,
+    _i1.OrderByBuilder<SimpleDataTable>? orderBy,
+    @Deprecated('Use desc() on the orderBy column instead.')
+    bool orderDescending = false,
+    _i1.OrderByListBuilder<SimpleDataTable>? orderByList,
     _i1.Transaction? transaction,
   }) async {
     return session.db.deleteWhere<SimpleData>(
       where: where(SimpleData.t),
+      orderBy: orderBy?.call(SimpleData.t),
+      orderByList: orderByList?.call(SimpleData.t),
+      orderDescending: // ignore: deprecated_member_use
+          orderDescending,
       transaction: transaction,
     );
   }

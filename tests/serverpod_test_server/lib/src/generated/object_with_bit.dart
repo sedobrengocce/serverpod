@@ -127,6 +127,7 @@ abstract class ObjectWithBit
     int? limit,
     int? offset,
     _i1.OrderByBuilder<ObjectWithBitTable>? orderBy,
+    @Deprecated('Use desc() on the orderBy column instead.')
     bool orderDescending = false,
     _i1.OrderByListBuilder<ObjectWithBitTable>? orderByList,
     ObjectWithBitInclude? include,
@@ -136,7 +137,8 @@ abstract class ObjectWithBit
       limit: limit,
       offset: offset,
       orderBy: orderBy?.call(ObjectWithBit.t),
-      orderDescending: orderDescending,
+      orderDescending: // ignore: deprecated_member_use_from_same_package
+          orderDescending,
       orderByList: orderByList?.call(ObjectWithBit.t),
       include: include,
     );
@@ -317,6 +319,7 @@ class ObjectWithBitIncludeList extends _i1.IncludeList {
     super.limit,
     super.offset,
     super.orderBy,
+    @Deprecated('Use desc() on the orderBy column instead.')
     super.orderDescending,
     super.orderByList,
     super.include,
@@ -362,6 +365,7 @@ class ObjectWithBitRepository {
     int? limit,
     int? offset,
     _i1.OrderByBuilder<ObjectWithBitTable>? orderBy,
+    @Deprecated('Use desc() on the orderBy column instead.')
     bool orderDescending = false,
     _i1.OrderByListBuilder<ObjectWithBitTable>? orderByList,
     _i1.Transaction? transaction,
@@ -372,7 +376,8 @@ class ObjectWithBitRepository {
       where: where?.call(ObjectWithBit.t),
       orderBy: orderBy?.call(ObjectWithBit.t),
       orderByList: orderByList?.call(ObjectWithBit.t),
-      orderDescending: orderDescending,
+      orderDescending: // ignore: deprecated_member_use
+          orderDescending,
       limit: limit,
       offset: offset,
       transaction: transaction,
@@ -403,6 +408,7 @@ class ObjectWithBitRepository {
     _i1.WhereExpressionBuilder<ObjectWithBitTable>? where,
     int? offset,
     _i1.OrderByBuilder<ObjectWithBitTable>? orderBy,
+    @Deprecated('Use desc() on the orderBy column instead.')
     bool orderDescending = false,
     _i1.OrderByListBuilder<ObjectWithBitTable>? orderByList,
     _i1.Transaction? transaction,
@@ -413,7 +419,8 @@ class ObjectWithBitRepository {
       where: where?.call(ObjectWithBit.t),
       orderBy: orderBy?.call(ObjectWithBit.t),
       orderByList: orderByList?.call(ObjectWithBit.t),
-      orderDescending: orderDescending,
+      orderDescending: // ignore: deprecated_member_use
+          orderDescending,
       offset: offset,
       transaction: transaction,
       lockMode: lockMode,
@@ -582,6 +589,7 @@ class ObjectWithBitRepository {
     int? offset,
     _i1.OrderByBuilder<ObjectWithBitTable>? orderBy,
     _i1.OrderByListBuilder<ObjectWithBitTable>? orderByList,
+    @Deprecated('Use desc() on the orderBy column instead.')
     bool orderDescending = false,
     _i1.Transaction? transaction,
   }) async {
@@ -592,21 +600,34 @@ class ObjectWithBitRepository {
       offset: offset,
       orderBy: orderBy?.call(ObjectWithBit.t),
       orderByList: orderByList?.call(ObjectWithBit.t),
-      orderDescending: orderDescending,
+      orderDescending: // ignore: deprecated_member_use
+          orderDescending,
       transaction: transaction,
     );
   }
 
   /// Deletes all [ObjectWithBit]s in the list and returns the deleted rows.
+  ///
+  /// To specify the order of the returned rows use [orderBy] or [orderByList]
+  /// when sorting by multiple columns.
+  ///
   /// This is an atomic operation, meaning that if one of the rows fail to
   /// be deleted, none of the rows will be deleted.
   Future<List<ObjectWithBit>> delete(
     _i1.DatabaseSession session,
     List<ObjectWithBit> rows, {
+    _i1.OrderByBuilder<ObjectWithBitTable>? orderBy,
+    @Deprecated('Use desc() on the orderBy column instead.')
+    bool orderDescending = false,
+    _i1.OrderByListBuilder<ObjectWithBitTable>? orderByList,
     _i1.Transaction? transaction,
   }) async {
     return session.db.delete<ObjectWithBit>(
       rows,
+      orderBy: orderBy?.call(ObjectWithBit.t),
+      orderByList: orderByList?.call(ObjectWithBit.t),
+      orderDescending: // ignore: deprecated_member_use
+          orderDescending,
       transaction: transaction,
     );
   }
@@ -624,13 +645,24 @@ class ObjectWithBitRepository {
   }
 
   /// Deletes all rows matching the [where] expression.
+  ///
+  /// To specify the order of the returned rows use [orderBy] or [orderByList]
+  /// when sorting by multiple columns.
   Future<List<ObjectWithBit>> deleteWhere(
     _i1.DatabaseSession session, {
     required _i1.WhereExpressionBuilder<ObjectWithBitTable> where,
+    _i1.OrderByBuilder<ObjectWithBitTable>? orderBy,
+    @Deprecated('Use desc() on the orderBy column instead.')
+    bool orderDescending = false,
+    _i1.OrderByListBuilder<ObjectWithBitTable>? orderByList,
     _i1.Transaction? transaction,
   }) async {
     return session.db.deleteWhere<ObjectWithBit>(
       where: where(ObjectWithBit.t),
+      orderBy: orderBy?.call(ObjectWithBit.t),
+      orderByList: orderByList?.call(ObjectWithBit.t),
+      orderDescending: // ignore: deprecated_member_use
+          orderDescending,
       transaction: transaction,
     );
   }

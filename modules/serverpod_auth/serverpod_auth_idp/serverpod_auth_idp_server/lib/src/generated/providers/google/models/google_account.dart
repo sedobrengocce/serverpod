@@ -125,6 +125,7 @@ abstract class GoogleAccount
     int? limit,
     int? offset,
     _i1.OrderByBuilder<GoogleAccountTable>? orderBy,
+    @Deprecated('Use desc() on the orderBy column instead.')
     bool orderDescending = false,
     _i1.OrderByListBuilder<GoogleAccountTable>? orderByList,
     GoogleAccountInclude? include,
@@ -134,7 +135,8 @@ abstract class GoogleAccount
       limit: limit,
       offset: offset,
       orderBy: orderBy?.call(GoogleAccount.t),
-      orderDescending: orderDescending,
+      orderDescending: // ignore: deprecated_member_use_from_same_package
+          orderDescending,
       orderByList: orderByList?.call(GoogleAccount.t),
       include: include,
     );
@@ -312,6 +314,7 @@ class GoogleAccountIncludeList extends _i1.IncludeList {
     super.limit,
     super.offset,
     super.orderBy,
+    @Deprecated('Use desc() on the orderBy column instead.')
     super.orderDescending,
     super.orderByList,
     super.include,
@@ -359,6 +362,7 @@ class GoogleAccountRepository {
     int? limit,
     int? offset,
     _i1.OrderByBuilder<GoogleAccountTable>? orderBy,
+    @Deprecated('Use desc() on the orderBy column instead.')
     bool orderDescending = false,
     _i1.OrderByListBuilder<GoogleAccountTable>? orderByList,
     _i1.Transaction? transaction,
@@ -370,7 +374,8 @@ class GoogleAccountRepository {
       where: where?.call(GoogleAccount.t),
       orderBy: orderBy?.call(GoogleAccount.t),
       orderByList: orderByList?.call(GoogleAccount.t),
-      orderDescending: orderDescending,
+      orderDescending: // ignore: deprecated_member_use
+          orderDescending,
       limit: limit,
       offset: offset,
       transaction: transaction,
@@ -402,6 +407,7 @@ class GoogleAccountRepository {
     _i1.WhereExpressionBuilder<GoogleAccountTable>? where,
     int? offset,
     _i1.OrderByBuilder<GoogleAccountTable>? orderBy,
+    @Deprecated('Use desc() on the orderBy column instead.')
     bool orderDescending = false,
     _i1.OrderByListBuilder<GoogleAccountTable>? orderByList,
     _i1.Transaction? transaction,
@@ -413,7 +419,8 @@ class GoogleAccountRepository {
       where: where?.call(GoogleAccount.t),
       orderBy: orderBy?.call(GoogleAccount.t),
       orderByList: orderByList?.call(GoogleAccount.t),
-      orderDescending: orderDescending,
+      orderDescending: // ignore: deprecated_member_use
+          orderDescending,
       offset: offset,
       transaction: transaction,
       include: include,
@@ -577,6 +584,7 @@ class GoogleAccountRepository {
     int? offset,
     _i1.OrderByBuilder<GoogleAccountTable>? orderBy,
     _i1.OrderByListBuilder<GoogleAccountTable>? orderByList,
+    @Deprecated('Use desc() on the orderBy column instead.')
     bool orderDescending = false,
     _i1.Transaction? transaction,
   }) async {
@@ -587,21 +595,34 @@ class GoogleAccountRepository {
       offset: offset,
       orderBy: orderBy?.call(GoogleAccount.t),
       orderByList: orderByList?.call(GoogleAccount.t),
-      orderDescending: orderDescending,
+      orderDescending: // ignore: deprecated_member_use
+          orderDescending,
       transaction: transaction,
     );
   }
 
   /// Deletes all [GoogleAccount]s in the list and returns the deleted rows.
+  ///
+  /// To specify the order of the returned rows use [orderBy] or [orderByList]
+  /// when sorting by multiple columns.
+  ///
   /// This is an atomic operation, meaning that if one of the rows fail to
   /// be deleted, none of the rows will be deleted.
   Future<List<GoogleAccount>> delete(
     _i1.DatabaseSession session,
     List<GoogleAccount> rows, {
+    _i1.OrderByBuilder<GoogleAccountTable>? orderBy,
+    @Deprecated('Use desc() on the orderBy column instead.')
+    bool orderDescending = false,
+    _i1.OrderByListBuilder<GoogleAccountTable>? orderByList,
     _i1.Transaction? transaction,
   }) async {
     return session.db.delete<GoogleAccount>(
       rows,
+      orderBy: orderBy?.call(GoogleAccount.t),
+      orderByList: orderByList?.call(GoogleAccount.t),
+      orderDescending: // ignore: deprecated_member_use
+          orderDescending,
       transaction: transaction,
     );
   }
@@ -619,13 +640,24 @@ class GoogleAccountRepository {
   }
 
   /// Deletes all rows matching the [where] expression.
+  ///
+  /// To specify the order of the returned rows use [orderBy] or [orderByList]
+  /// when sorting by multiple columns.
   Future<List<GoogleAccount>> deleteWhere(
     _i1.DatabaseSession session, {
     required _i1.WhereExpressionBuilder<GoogleAccountTable> where,
+    _i1.OrderByBuilder<GoogleAccountTable>? orderBy,
+    @Deprecated('Use desc() on the orderBy column instead.')
+    bool orderDescending = false,
+    _i1.OrderByListBuilder<GoogleAccountTable>? orderByList,
     _i1.Transaction? transaction,
   }) async {
     return session.db.deleteWhere<GoogleAccount>(
       where: where(GoogleAccount.t),
+      orderBy: orderBy?.call(GoogleAccount.t),
+      orderByList: orderByList?.call(GoogleAccount.t),
+      orderDescending: // ignore: deprecated_member_use
+          orderDescending,
       transaction: transaction,
     );
   }

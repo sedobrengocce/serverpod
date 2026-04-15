@@ -93,6 +93,7 @@ abstract class ChildClassWithoutId extends _i1.ParentClassWithoutId
     int? limit,
     int? offset,
     _i2.OrderByBuilder<ChildClassWithoutIdTable>? orderBy,
+    @Deprecated('Use desc() on the orderBy column instead.')
     bool orderDescending = false,
     _i2.OrderByListBuilder<ChildClassWithoutIdTable>? orderByList,
     ChildClassWithoutIdInclude? include,
@@ -102,7 +103,8 @@ abstract class ChildClassWithoutId extends _i1.ParentClassWithoutId
       limit: limit,
       offset: offset,
       orderBy: orderBy?.call(ChildClassWithoutId.t),
-      orderDescending: orderDescending,
+      orderDescending: // ignore: deprecated_member_use_from_same_package
+          orderDescending,
       orderByList: orderByList?.call(ChildClassWithoutId.t),
       include: include,
     );
@@ -220,6 +222,7 @@ class ChildClassWithoutIdIncludeList extends _i2.IncludeList {
     super.limit,
     super.offset,
     super.orderBy,
+    @Deprecated('Use desc() on the orderBy column instead.')
     super.orderDescending,
     super.orderByList,
     super.include,
@@ -265,6 +268,7 @@ class ChildClassWithoutIdRepository {
     int? limit,
     int? offset,
     _i2.OrderByBuilder<ChildClassWithoutIdTable>? orderBy,
+    @Deprecated('Use desc() on the orderBy column instead.')
     bool orderDescending = false,
     _i2.OrderByListBuilder<ChildClassWithoutIdTable>? orderByList,
     _i2.Transaction? transaction,
@@ -275,7 +279,8 @@ class ChildClassWithoutIdRepository {
       where: where?.call(ChildClassWithoutId.t),
       orderBy: orderBy?.call(ChildClassWithoutId.t),
       orderByList: orderByList?.call(ChildClassWithoutId.t),
-      orderDescending: orderDescending,
+      orderDescending: // ignore: deprecated_member_use
+          orderDescending,
       limit: limit,
       offset: offset,
       transaction: transaction,
@@ -306,6 +311,7 @@ class ChildClassWithoutIdRepository {
     _i2.WhereExpressionBuilder<ChildClassWithoutIdTable>? where,
     int? offset,
     _i2.OrderByBuilder<ChildClassWithoutIdTable>? orderBy,
+    @Deprecated('Use desc() on the orderBy column instead.')
     bool orderDescending = false,
     _i2.OrderByListBuilder<ChildClassWithoutIdTable>? orderByList,
     _i2.Transaction? transaction,
@@ -316,7 +322,8 @@ class ChildClassWithoutIdRepository {
       where: where?.call(ChildClassWithoutId.t),
       orderBy: orderBy?.call(ChildClassWithoutId.t),
       orderByList: orderByList?.call(ChildClassWithoutId.t),
-      orderDescending: orderDescending,
+      orderDescending: // ignore: deprecated_member_use
+          orderDescending,
       offset: offset,
       transaction: transaction,
       lockMode: lockMode,
@@ -487,6 +494,7 @@ class ChildClassWithoutIdRepository {
     int? offset,
     _i2.OrderByBuilder<ChildClassWithoutIdTable>? orderBy,
     _i2.OrderByListBuilder<ChildClassWithoutIdTable>? orderByList,
+    @Deprecated('Use desc() on the orderBy column instead.')
     bool orderDescending = false,
     _i2.Transaction? transaction,
   }) async {
@@ -497,21 +505,34 @@ class ChildClassWithoutIdRepository {
       offset: offset,
       orderBy: orderBy?.call(ChildClassWithoutId.t),
       orderByList: orderByList?.call(ChildClassWithoutId.t),
-      orderDescending: orderDescending,
+      orderDescending: // ignore: deprecated_member_use
+          orderDescending,
       transaction: transaction,
     );
   }
 
   /// Deletes all [ChildClassWithoutId]s in the list and returns the deleted rows.
+  ///
+  /// To specify the order of the returned rows use [orderBy] or [orderByList]
+  /// when sorting by multiple columns.
+  ///
   /// This is an atomic operation, meaning that if one of the rows fail to
   /// be deleted, none of the rows will be deleted.
   Future<List<ChildClassWithoutId>> delete(
     _i2.DatabaseSession session,
     List<ChildClassWithoutId> rows, {
+    _i2.OrderByBuilder<ChildClassWithoutIdTable>? orderBy,
+    @Deprecated('Use desc() on the orderBy column instead.')
+    bool orderDescending = false,
+    _i2.OrderByListBuilder<ChildClassWithoutIdTable>? orderByList,
     _i2.Transaction? transaction,
   }) async {
     return session.db.delete<ChildClassWithoutId>(
       rows,
+      orderBy: orderBy?.call(ChildClassWithoutId.t),
+      orderByList: orderByList?.call(ChildClassWithoutId.t),
+      orderDescending: // ignore: deprecated_member_use
+          orderDescending,
       transaction: transaction,
     );
   }
@@ -529,13 +550,24 @@ class ChildClassWithoutIdRepository {
   }
 
   /// Deletes all rows matching the [where] expression.
+  ///
+  /// To specify the order of the returned rows use [orderBy] or [orderByList]
+  /// when sorting by multiple columns.
   Future<List<ChildClassWithoutId>> deleteWhere(
     _i2.DatabaseSession session, {
     required _i2.WhereExpressionBuilder<ChildClassWithoutIdTable> where,
+    _i2.OrderByBuilder<ChildClassWithoutIdTable>? orderBy,
+    @Deprecated('Use desc() on the orderBy column instead.')
+    bool orderDescending = false,
+    _i2.OrderByListBuilder<ChildClassWithoutIdTable>? orderByList,
     _i2.Transaction? transaction,
   }) async {
     return session.db.deleteWhere<ChildClassWithoutId>(
       where: where(ChildClassWithoutId.t),
+      orderBy: orderBy?.call(ChildClassWithoutId.t),
+      orderByList: orderByList?.call(ChildClassWithoutId.t),
+      orderDescending: // ignore: deprecated_member_use
+          orderDescending,
       transaction: transaction,
     );
   }

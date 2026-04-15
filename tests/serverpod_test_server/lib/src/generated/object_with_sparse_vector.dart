@@ -117,6 +117,7 @@ abstract class ObjectWithSparseVector
     int? limit,
     int? offset,
     _i1.OrderByBuilder<ObjectWithSparseVectorTable>? orderBy,
+    @Deprecated('Use desc() on the orderBy column instead.')
     bool orderDescending = false,
     _i1.OrderByListBuilder<ObjectWithSparseVectorTable>? orderByList,
     ObjectWithSparseVectorInclude? include,
@@ -126,7 +127,8 @@ abstract class ObjectWithSparseVector
       limit: limit,
       offset: offset,
       orderBy: orderBy?.call(ObjectWithSparseVector.t),
-      orderDescending: orderDescending,
+      orderDescending: // ignore: deprecated_member_use_from_same_package
+          orderDescending,
       orderByList: orderByList?.call(ObjectWithSparseVector.t),
       include: include,
     );
@@ -275,6 +277,7 @@ class ObjectWithSparseVectorIncludeList extends _i1.IncludeList {
     super.limit,
     super.offset,
     super.orderBy,
+    @Deprecated('Use desc() on the orderBy column instead.')
     super.orderDescending,
     super.orderByList,
     super.include,
@@ -320,6 +323,7 @@ class ObjectWithSparseVectorRepository {
     int? limit,
     int? offset,
     _i1.OrderByBuilder<ObjectWithSparseVectorTable>? orderBy,
+    @Deprecated('Use desc() on the orderBy column instead.')
     bool orderDescending = false,
     _i1.OrderByListBuilder<ObjectWithSparseVectorTable>? orderByList,
     _i1.Transaction? transaction,
@@ -330,7 +334,8 @@ class ObjectWithSparseVectorRepository {
       where: where?.call(ObjectWithSparseVector.t),
       orderBy: orderBy?.call(ObjectWithSparseVector.t),
       orderByList: orderByList?.call(ObjectWithSparseVector.t),
-      orderDescending: orderDescending,
+      orderDescending: // ignore: deprecated_member_use
+          orderDescending,
       limit: limit,
       offset: offset,
       transaction: transaction,
@@ -361,6 +366,7 @@ class ObjectWithSparseVectorRepository {
     _i1.WhereExpressionBuilder<ObjectWithSparseVectorTable>? where,
     int? offset,
     _i1.OrderByBuilder<ObjectWithSparseVectorTable>? orderBy,
+    @Deprecated('Use desc() on the orderBy column instead.')
     bool orderDescending = false,
     _i1.OrderByListBuilder<ObjectWithSparseVectorTable>? orderByList,
     _i1.Transaction? transaction,
@@ -371,7 +377,8 @@ class ObjectWithSparseVectorRepository {
       where: where?.call(ObjectWithSparseVector.t),
       orderBy: orderBy?.call(ObjectWithSparseVector.t),
       orderByList: orderByList?.call(ObjectWithSparseVector.t),
-      orderDescending: orderDescending,
+      orderDescending: // ignore: deprecated_member_use
+          orderDescending,
       offset: offset,
       transaction: transaction,
       lockMode: lockMode,
@@ -542,6 +549,7 @@ class ObjectWithSparseVectorRepository {
     int? offset,
     _i1.OrderByBuilder<ObjectWithSparseVectorTable>? orderBy,
     _i1.OrderByListBuilder<ObjectWithSparseVectorTable>? orderByList,
+    @Deprecated('Use desc() on the orderBy column instead.')
     bool orderDescending = false,
     _i1.Transaction? transaction,
   }) async {
@@ -552,21 +560,34 @@ class ObjectWithSparseVectorRepository {
       offset: offset,
       orderBy: orderBy?.call(ObjectWithSparseVector.t),
       orderByList: orderByList?.call(ObjectWithSparseVector.t),
-      orderDescending: orderDescending,
+      orderDescending: // ignore: deprecated_member_use
+          orderDescending,
       transaction: transaction,
     );
   }
 
   /// Deletes all [ObjectWithSparseVector]s in the list and returns the deleted rows.
+  ///
+  /// To specify the order of the returned rows use [orderBy] or [orderByList]
+  /// when sorting by multiple columns.
+  ///
   /// This is an atomic operation, meaning that if one of the rows fail to
   /// be deleted, none of the rows will be deleted.
   Future<List<ObjectWithSparseVector>> delete(
     _i1.DatabaseSession session,
     List<ObjectWithSparseVector> rows, {
+    _i1.OrderByBuilder<ObjectWithSparseVectorTable>? orderBy,
+    @Deprecated('Use desc() on the orderBy column instead.')
+    bool orderDescending = false,
+    _i1.OrderByListBuilder<ObjectWithSparseVectorTable>? orderByList,
     _i1.Transaction? transaction,
   }) async {
     return session.db.delete<ObjectWithSparseVector>(
       rows,
+      orderBy: orderBy?.call(ObjectWithSparseVector.t),
+      orderByList: orderByList?.call(ObjectWithSparseVector.t),
+      orderDescending: // ignore: deprecated_member_use
+          orderDescending,
       transaction: transaction,
     );
   }
@@ -584,13 +605,24 @@ class ObjectWithSparseVectorRepository {
   }
 
   /// Deletes all rows matching the [where] expression.
+  ///
+  /// To specify the order of the returned rows use [orderBy] or [orderByList]
+  /// when sorting by multiple columns.
   Future<List<ObjectWithSparseVector>> deleteWhere(
     _i1.DatabaseSession session, {
     required _i1.WhereExpressionBuilder<ObjectWithSparseVectorTable> where,
+    _i1.OrderByBuilder<ObjectWithSparseVectorTable>? orderBy,
+    @Deprecated('Use desc() on the orderBy column instead.')
+    bool orderDescending = false,
+    _i1.OrderByListBuilder<ObjectWithSparseVectorTable>? orderByList,
     _i1.Transaction? transaction,
   }) async {
     return session.db.deleteWhere<ObjectWithSparseVector>(
       where: where(ObjectWithSparseVector.t),
+      orderBy: orderBy?.call(ObjectWithSparseVector.t),
+      orderByList: orderByList?.call(ObjectWithSparseVector.t),
+      orderDescending: // ignore: deprecated_member_use
+          orderDescending,
       transaction: transaction,
     );
   }

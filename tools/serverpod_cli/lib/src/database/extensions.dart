@@ -6,6 +6,7 @@ import 'package:serverpod_service_client/serverpod_service_client.dart';
 // Export underlying dialect implementations.
 export 'package:serverpod_database/src/extensions.dart';
 export 'dialects/postgres.dart';
+export 'dialects/sqlite.dart';
 
 //
 // Comparisons of database models
@@ -31,6 +32,9 @@ extension ColumnComparisons on ColumnDefinition {
   bool like(ColumnDefinition other) =>
       db.ColumnComparisons(this).like(other).isEmpty;
 
+  /// Whether this column can be altered in place to match [other].
+  ///
+  /// This method ignores the physical [name] of the column.
   bool canMigrateTo(ColumnDefinition other) {
     // It's ok to change column default or nullability.
     if (other.dartType != null &&
@@ -44,7 +48,7 @@ extension ColumnComparisons on ColumnDefinition {
       return false;
     }
 
-    return other.columnType == columnType && other.name == name;
+    return other.columnType == columnType;
   }
 
   bool get canBeCreatedInTableMigration {
@@ -86,6 +90,7 @@ extension TableDiffComparisons on TableMigration {
       addColumns.isEmpty &&
       deleteColumns.isEmpty &&
       modifyColumns.isEmpty &&
+      (renameColumns?.isEmpty ?? true) &&
       addIndexes.isEmpty &&
       deleteIndexes.isEmpty &&
       addForeignKeys.isEmpty &&

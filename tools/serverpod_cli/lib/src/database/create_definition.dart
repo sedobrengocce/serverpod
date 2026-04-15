@@ -11,9 +11,8 @@ import 'package:serverpod_shared/serverpod_shared.dart';
 DatabaseDefinition createDatabaseDefinitionFromModels(
   List<SerializableModelDefinition> serializableModels,
   String moduleName,
-  List<ModuleConfig> allModules, {
-  DatabaseDialect dialect = DatabaseDialect.postgres,
-}) {
+  List<ModuleConfig> allModules,
+) {
   var tables = <TableDefinition>[
     for (var classDefinition in serializableModels)
       if (classDefinition is ModelClassDefinition &&
@@ -28,6 +27,7 @@ DatabaseDefinition createDatabaseDefinitionFromModels(
               if (column.shouldSerializeFieldForDatabase(true))
                 ColumnDefinition(
                   name: column.columnName,
+                  fieldName: column.name,
                   columnType: ColumnType.values.byName(
                     column.type.databaseTypeEnum,
                   ),

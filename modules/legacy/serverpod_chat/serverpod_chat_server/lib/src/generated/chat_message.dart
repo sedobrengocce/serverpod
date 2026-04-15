@@ -168,6 +168,7 @@ abstract class ChatMessage
     int? limit,
     int? offset,
     _i1.OrderByBuilder<ChatMessageTable>? orderBy,
+    @Deprecated('Use desc() on the orderBy column instead.')
     bool orderDescending = false,
     _i1.OrderByListBuilder<ChatMessageTable>? orderByList,
     ChatMessageInclude? include,
@@ -177,7 +178,8 @@ abstract class ChatMessage
       limit: limit,
       offset: offset,
       orderBy: orderBy?.call(ChatMessage.t),
-      orderDescending: orderDescending,
+      orderDescending: // ignore: deprecated_member_use_from_same_package
+          orderDescending,
       orderByList: orderByList?.call(ChatMessage.t),
       include: include,
     );
@@ -370,6 +372,7 @@ class ChatMessageIncludeList extends _i1.IncludeList {
     super.limit,
     super.offset,
     super.orderBy,
+    @Deprecated('Use desc() on the orderBy column instead.')
     super.orderDescending,
     super.orderByList,
     super.include,
@@ -415,6 +418,7 @@ class ChatMessageRepository {
     int? limit,
     int? offset,
     _i1.OrderByBuilder<ChatMessageTable>? orderBy,
+    @Deprecated('Use desc() on the orderBy column instead.')
     bool orderDescending = false,
     _i1.OrderByListBuilder<ChatMessageTable>? orderByList,
     _i1.Transaction? transaction,
@@ -425,7 +429,8 @@ class ChatMessageRepository {
       where: where?.call(ChatMessage.t),
       orderBy: orderBy?.call(ChatMessage.t),
       orderByList: orderByList?.call(ChatMessage.t),
-      orderDescending: orderDescending,
+      orderDescending: // ignore: deprecated_member_use
+          orderDescending,
       limit: limit,
       offset: offset,
       transaction: transaction,
@@ -456,6 +461,7 @@ class ChatMessageRepository {
     _i1.WhereExpressionBuilder<ChatMessageTable>? where,
     int? offset,
     _i1.OrderByBuilder<ChatMessageTable>? orderBy,
+    @Deprecated('Use desc() on the orderBy column instead.')
     bool orderDescending = false,
     _i1.OrderByListBuilder<ChatMessageTable>? orderByList,
     _i1.Transaction? transaction,
@@ -466,7 +472,8 @@ class ChatMessageRepository {
       where: where?.call(ChatMessage.t),
       orderBy: orderBy?.call(ChatMessage.t),
       orderByList: orderByList?.call(ChatMessage.t),
-      orderDescending: orderDescending,
+      orderDescending: // ignore: deprecated_member_use
+          orderDescending,
       offset: offset,
       transaction: transaction,
       lockMode: lockMode,
@@ -627,6 +634,7 @@ class ChatMessageRepository {
     int? offset,
     _i1.OrderByBuilder<ChatMessageTable>? orderBy,
     _i1.OrderByListBuilder<ChatMessageTable>? orderByList,
+    @Deprecated('Use desc() on the orderBy column instead.')
     bool orderDescending = false,
     _i1.Transaction? transaction,
   }) async {
@@ -637,21 +645,34 @@ class ChatMessageRepository {
       offset: offset,
       orderBy: orderBy?.call(ChatMessage.t),
       orderByList: orderByList?.call(ChatMessage.t),
-      orderDescending: orderDescending,
+      orderDescending: // ignore: deprecated_member_use
+          orderDescending,
       transaction: transaction,
     );
   }
 
   /// Deletes all [ChatMessage]s in the list and returns the deleted rows.
+  ///
+  /// To specify the order of the returned rows use [orderBy] or [orderByList]
+  /// when sorting by multiple columns.
+  ///
   /// This is an atomic operation, meaning that if one of the rows fail to
   /// be deleted, none of the rows will be deleted.
   Future<List<ChatMessage>> delete(
     _i1.DatabaseSession session,
     List<ChatMessage> rows, {
+    _i1.OrderByBuilder<ChatMessageTable>? orderBy,
+    @Deprecated('Use desc() on the orderBy column instead.')
+    bool orderDescending = false,
+    _i1.OrderByListBuilder<ChatMessageTable>? orderByList,
     _i1.Transaction? transaction,
   }) async {
     return session.db.delete<ChatMessage>(
       rows,
+      orderBy: orderBy?.call(ChatMessage.t),
+      orderByList: orderByList?.call(ChatMessage.t),
+      orderDescending: // ignore: deprecated_member_use
+          orderDescending,
       transaction: transaction,
     );
   }
@@ -669,13 +690,24 @@ class ChatMessageRepository {
   }
 
   /// Deletes all rows matching the [where] expression.
+  ///
+  /// To specify the order of the returned rows use [orderBy] or [orderByList]
+  /// when sorting by multiple columns.
   Future<List<ChatMessage>> deleteWhere(
     _i1.DatabaseSession session, {
     required _i1.WhereExpressionBuilder<ChatMessageTable> where,
+    _i1.OrderByBuilder<ChatMessageTable>? orderBy,
+    @Deprecated('Use desc() on the orderBy column instead.')
+    bool orderDescending = false,
+    _i1.OrderByListBuilder<ChatMessageTable>? orderByList,
     _i1.Transaction? transaction,
   }) async {
     return session.db.deleteWhere<ChatMessage>(
       where: where(ChatMessage.t),
+      orderBy: orderBy?.call(ChatMessage.t),
+      orderByList: orderByList?.call(ChatMessage.t),
+      orderDescending: // ignore: deprecated_member_use
+          orderDescending,
       transaction: transaction,
     );
   }

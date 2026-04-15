@@ -95,6 +95,7 @@ abstract class ModelWithRequiredField
     int? limit,
     int? offset,
     _i1.OrderByBuilder<ModelWithRequiredFieldTable>? orderBy,
+    @Deprecated('Use desc() on the orderBy column instead.')
     bool orderDescending = false,
     _i1.OrderByListBuilder<ModelWithRequiredFieldTable>? orderByList,
     ModelWithRequiredFieldInclude? include,
@@ -104,7 +105,8 @@ abstract class ModelWithRequiredField
       limit: limit,
       offset: offset,
       orderBy: orderBy?.call(ModelWithRequiredField.t),
-      orderDescending: orderDescending,
+      orderDescending: // ignore: deprecated_member_use_from_same_package
+          orderDescending,
       orderByList: orderByList?.call(ModelWithRequiredField.t),
       include: include,
     );
@@ -221,6 +223,7 @@ class ModelWithRequiredFieldIncludeList extends _i1.IncludeList {
     super.limit,
     super.offset,
     super.orderBy,
+    @Deprecated('Use desc() on the orderBy column instead.')
     super.orderDescending,
     super.orderByList,
     super.include,
@@ -266,6 +269,7 @@ class ModelWithRequiredFieldRepository {
     int? limit,
     int? offset,
     _i1.OrderByBuilder<ModelWithRequiredFieldTable>? orderBy,
+    @Deprecated('Use desc() on the orderBy column instead.')
     bool orderDescending = false,
     _i1.OrderByListBuilder<ModelWithRequiredFieldTable>? orderByList,
     _i1.Transaction? transaction,
@@ -276,7 +280,8 @@ class ModelWithRequiredFieldRepository {
       where: where?.call(ModelWithRequiredField.t),
       orderBy: orderBy?.call(ModelWithRequiredField.t),
       orderByList: orderByList?.call(ModelWithRequiredField.t),
-      orderDescending: orderDescending,
+      orderDescending: // ignore: deprecated_member_use
+          orderDescending,
       limit: limit,
       offset: offset,
       transaction: transaction,
@@ -307,6 +312,7 @@ class ModelWithRequiredFieldRepository {
     _i1.WhereExpressionBuilder<ModelWithRequiredFieldTable>? where,
     int? offset,
     _i1.OrderByBuilder<ModelWithRequiredFieldTable>? orderBy,
+    @Deprecated('Use desc() on the orderBy column instead.')
     bool orderDescending = false,
     _i1.OrderByListBuilder<ModelWithRequiredFieldTable>? orderByList,
     _i1.Transaction? transaction,
@@ -317,7 +323,8 @@ class ModelWithRequiredFieldRepository {
       where: where?.call(ModelWithRequiredField.t),
       orderBy: orderBy?.call(ModelWithRequiredField.t),
       orderByList: orderByList?.call(ModelWithRequiredField.t),
-      orderDescending: orderDescending,
+      orderDescending: // ignore: deprecated_member_use
+          orderDescending,
       offset: offset,
       transaction: transaction,
       lockMode: lockMode,
@@ -488,6 +495,7 @@ class ModelWithRequiredFieldRepository {
     int? offset,
     _i1.OrderByBuilder<ModelWithRequiredFieldTable>? orderBy,
     _i1.OrderByListBuilder<ModelWithRequiredFieldTable>? orderByList,
+    @Deprecated('Use desc() on the orderBy column instead.')
     bool orderDescending = false,
     _i1.Transaction? transaction,
   }) async {
@@ -498,21 +506,34 @@ class ModelWithRequiredFieldRepository {
       offset: offset,
       orderBy: orderBy?.call(ModelWithRequiredField.t),
       orderByList: orderByList?.call(ModelWithRequiredField.t),
-      orderDescending: orderDescending,
+      orderDescending: // ignore: deprecated_member_use
+          orderDescending,
       transaction: transaction,
     );
   }
 
   /// Deletes all [ModelWithRequiredField]s in the list and returns the deleted rows.
+  ///
+  /// To specify the order of the returned rows use [orderBy] or [orderByList]
+  /// when sorting by multiple columns.
+  ///
   /// This is an atomic operation, meaning that if one of the rows fail to
   /// be deleted, none of the rows will be deleted.
   Future<List<ModelWithRequiredField>> delete(
     _i1.DatabaseSession session,
     List<ModelWithRequiredField> rows, {
+    _i1.OrderByBuilder<ModelWithRequiredFieldTable>? orderBy,
+    @Deprecated('Use desc() on the orderBy column instead.')
+    bool orderDescending = false,
+    _i1.OrderByListBuilder<ModelWithRequiredFieldTable>? orderByList,
     _i1.Transaction? transaction,
   }) async {
     return session.db.delete<ModelWithRequiredField>(
       rows,
+      orderBy: orderBy?.call(ModelWithRequiredField.t),
+      orderByList: orderByList?.call(ModelWithRequiredField.t),
+      orderDescending: // ignore: deprecated_member_use
+          orderDescending,
       transaction: transaction,
     );
   }
@@ -530,13 +551,24 @@ class ModelWithRequiredFieldRepository {
   }
 
   /// Deletes all rows matching the [where] expression.
+  ///
+  /// To specify the order of the returned rows use [orderBy] or [orderByList]
+  /// when sorting by multiple columns.
   Future<List<ModelWithRequiredField>> deleteWhere(
     _i1.DatabaseSession session, {
     required _i1.WhereExpressionBuilder<ModelWithRequiredFieldTable> where,
+    _i1.OrderByBuilder<ModelWithRequiredFieldTable>? orderBy,
+    @Deprecated('Use desc() on the orderBy column instead.')
+    bool orderDescending = false,
+    _i1.OrderByListBuilder<ModelWithRequiredFieldTable>? orderByList,
     _i1.Transaction? transaction,
   }) async {
     return session.db.deleteWhere<ModelWithRequiredField>(
       where: where(ModelWithRequiredField.t),
+      orderBy: orderBy?.call(ModelWithRequiredField.t),
+      orderByList: orderByList?.call(ModelWithRequiredField.t),
+      orderDescending: // ignore: deprecated_member_use
+          orderDescending,
       transaction: transaction,
     );
   }

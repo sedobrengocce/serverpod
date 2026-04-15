@@ -77,6 +77,7 @@ abstract class IntDefaultPersist
     int? limit,
     int? offset,
     _i1.OrderByBuilder<IntDefaultPersistTable>? orderBy,
+    @Deprecated('Use desc() on the orderBy column instead.')
     bool orderDescending = false,
     _i1.OrderByListBuilder<IntDefaultPersistTable>? orderByList,
     IntDefaultPersistInclude? include,
@@ -86,7 +87,8 @@ abstract class IntDefaultPersist
       limit: limit,
       offset: offset,
       orderBy: orderBy?.call(IntDefaultPersist.t),
-      orderDescending: orderDescending,
+      orderDescending: // ignore: deprecated_member_use_from_same_package
+          orderDescending,
       orderByList: orderByList?.call(IntDefaultPersist.t),
       include: include,
     );
@@ -174,6 +176,7 @@ class IntDefaultPersistIncludeList extends _i1.IncludeList {
     super.limit,
     super.offset,
     super.orderBy,
+    @Deprecated('Use desc() on the orderBy column instead.')
     super.orderDescending,
     super.orderByList,
     super.include,
@@ -219,6 +222,7 @@ class IntDefaultPersistRepository {
     int? limit,
     int? offset,
     _i1.OrderByBuilder<IntDefaultPersistTable>? orderBy,
+    @Deprecated('Use desc() on the orderBy column instead.')
     bool orderDescending = false,
     _i1.OrderByListBuilder<IntDefaultPersistTable>? orderByList,
     _i1.Transaction? transaction,
@@ -229,7 +233,8 @@ class IntDefaultPersistRepository {
       where: where?.call(IntDefaultPersist.t),
       orderBy: orderBy?.call(IntDefaultPersist.t),
       orderByList: orderByList?.call(IntDefaultPersist.t),
-      orderDescending: orderDescending,
+      orderDescending: // ignore: deprecated_member_use
+          orderDescending,
       limit: limit,
       offset: offset,
       transaction: transaction,
@@ -260,6 +265,7 @@ class IntDefaultPersistRepository {
     _i1.WhereExpressionBuilder<IntDefaultPersistTable>? where,
     int? offset,
     _i1.OrderByBuilder<IntDefaultPersistTable>? orderBy,
+    @Deprecated('Use desc() on the orderBy column instead.')
     bool orderDescending = false,
     _i1.OrderByListBuilder<IntDefaultPersistTable>? orderByList,
     _i1.Transaction? transaction,
@@ -270,7 +276,8 @@ class IntDefaultPersistRepository {
       where: where?.call(IntDefaultPersist.t),
       orderBy: orderBy?.call(IntDefaultPersist.t),
       orderByList: orderByList?.call(IntDefaultPersist.t),
-      orderDescending: orderDescending,
+      orderDescending: // ignore: deprecated_member_use
+          orderDescending,
       offset: offset,
       transaction: transaction,
       lockMode: lockMode,
@@ -441,6 +448,7 @@ class IntDefaultPersistRepository {
     int? offset,
     _i1.OrderByBuilder<IntDefaultPersistTable>? orderBy,
     _i1.OrderByListBuilder<IntDefaultPersistTable>? orderByList,
+    @Deprecated('Use desc() on the orderBy column instead.')
     bool orderDescending = false,
     _i1.Transaction? transaction,
   }) async {
@@ -451,21 +459,34 @@ class IntDefaultPersistRepository {
       offset: offset,
       orderBy: orderBy?.call(IntDefaultPersist.t),
       orderByList: orderByList?.call(IntDefaultPersist.t),
-      orderDescending: orderDescending,
+      orderDescending: // ignore: deprecated_member_use
+          orderDescending,
       transaction: transaction,
     );
   }
 
   /// Deletes all [IntDefaultPersist]s in the list and returns the deleted rows.
+  ///
+  /// To specify the order of the returned rows use [orderBy] or [orderByList]
+  /// when sorting by multiple columns.
+  ///
   /// This is an atomic operation, meaning that if one of the rows fail to
   /// be deleted, none of the rows will be deleted.
   Future<List<IntDefaultPersist>> delete(
     _i1.DatabaseSession session,
     List<IntDefaultPersist> rows, {
+    _i1.OrderByBuilder<IntDefaultPersistTable>? orderBy,
+    @Deprecated('Use desc() on the orderBy column instead.')
+    bool orderDescending = false,
+    _i1.OrderByListBuilder<IntDefaultPersistTable>? orderByList,
     _i1.Transaction? transaction,
   }) async {
     return session.db.delete<IntDefaultPersist>(
       rows,
+      orderBy: orderBy?.call(IntDefaultPersist.t),
+      orderByList: orderByList?.call(IntDefaultPersist.t),
+      orderDescending: // ignore: deprecated_member_use
+          orderDescending,
       transaction: transaction,
     );
   }
@@ -483,13 +504,24 @@ class IntDefaultPersistRepository {
   }
 
   /// Deletes all rows matching the [where] expression.
+  ///
+  /// To specify the order of the returned rows use [orderBy] or [orderByList]
+  /// when sorting by multiple columns.
   Future<List<IntDefaultPersist>> deleteWhere(
     _i1.DatabaseSession session, {
     required _i1.WhereExpressionBuilder<IntDefaultPersistTable> where,
+    _i1.OrderByBuilder<IntDefaultPersistTable>? orderBy,
+    @Deprecated('Use desc() on the orderBy column instead.')
+    bool orderDescending = false,
+    _i1.OrderByListBuilder<IntDefaultPersistTable>? orderByList,
     _i1.Transaction? transaction,
   }) async {
     return session.db.deleteWhere<IntDefaultPersist>(
       where: where(IntDefaultPersist.t),
+      orderBy: orderBy?.call(IntDefaultPersist.t),
+      orderByList: orderByList?.call(IntDefaultPersist.t),
+      orderDescending: // ignore: deprecated_member_use
+          orderDescending,
       transaction: transaction,
     );
   }

@@ -123,6 +123,7 @@ abstract class TokenMetadata
     int? limit,
     int? offset,
     _i1.OrderByBuilder<TokenMetadataTable>? orderBy,
+    @Deprecated('Use desc() on the orderBy column instead.')
     bool orderDescending = false,
     _i1.OrderByListBuilder<TokenMetadataTable>? orderByList,
     TokenMetadataInclude? include,
@@ -132,7 +133,8 @@ abstract class TokenMetadata
       limit: limit,
       offset: offset,
       orderBy: orderBy?.call(TokenMetadata.t),
-      orderDescending: orderDescending,
+      orderDescending: // ignore: deprecated_member_use_from_same_package
+          orderDescending,
       orderByList: orderByList?.call(TokenMetadata.t),
       include: include,
     );
@@ -320,6 +322,7 @@ class TokenMetadataIncludeList extends _i1.IncludeList {
     super.limit,
     super.offset,
     super.orderBy,
+    @Deprecated('Use desc() on the orderBy column instead.')
     super.orderDescending,
     super.orderByList,
     super.include,
@@ -367,6 +370,7 @@ class TokenMetadataRepository {
     int? limit,
     int? offset,
     _i1.OrderByBuilder<TokenMetadataTable>? orderBy,
+    @Deprecated('Use desc() on the orderBy column instead.')
     bool orderDescending = false,
     _i1.OrderByListBuilder<TokenMetadataTable>? orderByList,
     _i1.Transaction? transaction,
@@ -378,7 +382,8 @@ class TokenMetadataRepository {
       where: where?.call(TokenMetadata.t),
       orderBy: orderBy?.call(TokenMetadata.t),
       orderByList: orderByList?.call(TokenMetadata.t),
-      orderDescending: orderDescending,
+      orderDescending: // ignore: deprecated_member_use
+          orderDescending,
       limit: limit,
       offset: offset,
       transaction: transaction,
@@ -410,6 +415,7 @@ class TokenMetadataRepository {
     _i1.WhereExpressionBuilder<TokenMetadataTable>? where,
     int? offset,
     _i1.OrderByBuilder<TokenMetadataTable>? orderBy,
+    @Deprecated('Use desc() on the orderBy column instead.')
     bool orderDescending = false,
     _i1.OrderByListBuilder<TokenMetadataTable>? orderByList,
     _i1.Transaction? transaction,
@@ -421,7 +427,8 @@ class TokenMetadataRepository {
       where: where?.call(TokenMetadata.t),
       orderBy: orderBy?.call(TokenMetadata.t),
       orderByList: orderByList?.call(TokenMetadata.t),
-      orderDescending: orderDescending,
+      orderDescending: // ignore: deprecated_member_use
+          orderDescending,
       offset: offset,
       transaction: transaction,
       include: include,
@@ -585,6 +592,7 @@ class TokenMetadataRepository {
     int? offset,
     _i1.OrderByBuilder<TokenMetadataTable>? orderBy,
     _i1.OrderByListBuilder<TokenMetadataTable>? orderByList,
+    @Deprecated('Use desc() on the orderBy column instead.')
     bool orderDescending = false,
     _i1.Transaction? transaction,
   }) async {
@@ -595,21 +603,34 @@ class TokenMetadataRepository {
       offset: offset,
       orderBy: orderBy?.call(TokenMetadata.t),
       orderByList: orderByList?.call(TokenMetadata.t),
-      orderDescending: orderDescending,
+      orderDescending: // ignore: deprecated_member_use
+          orderDescending,
       transaction: transaction,
     );
   }
 
   /// Deletes all [TokenMetadata]s in the list and returns the deleted rows.
+  ///
+  /// To specify the order of the returned rows use [orderBy] or [orderByList]
+  /// when sorting by multiple columns.
+  ///
   /// This is an atomic operation, meaning that if one of the rows fail to
   /// be deleted, none of the rows will be deleted.
   Future<List<TokenMetadata>> delete(
     _i1.DatabaseSession session,
     List<TokenMetadata> rows, {
+    _i1.OrderByBuilder<TokenMetadataTable>? orderBy,
+    @Deprecated('Use desc() on the orderBy column instead.')
+    bool orderDescending = false,
+    _i1.OrderByListBuilder<TokenMetadataTable>? orderByList,
     _i1.Transaction? transaction,
   }) async {
     return session.db.delete<TokenMetadata>(
       rows,
+      orderBy: orderBy?.call(TokenMetadata.t),
+      orderByList: orderByList?.call(TokenMetadata.t),
+      orderDescending: // ignore: deprecated_member_use
+          orderDescending,
       transaction: transaction,
     );
   }
@@ -627,13 +648,24 @@ class TokenMetadataRepository {
   }
 
   /// Deletes all rows matching the [where] expression.
+  ///
+  /// To specify the order of the returned rows use [orderBy] or [orderByList]
+  /// when sorting by multiple columns.
   Future<List<TokenMetadata>> deleteWhere(
     _i1.DatabaseSession session, {
     required _i1.WhereExpressionBuilder<TokenMetadataTable> where,
+    _i1.OrderByBuilder<TokenMetadataTable>? orderBy,
+    @Deprecated('Use desc() on the orderBy column instead.')
+    bool orderDescending = false,
+    _i1.OrderByListBuilder<TokenMetadataTable>? orderByList,
     _i1.Transaction? transaction,
   }) async {
     return session.db.deleteWhere<TokenMetadata>(
       where: where(TokenMetadata.t),
+      orderBy: orderBy?.call(TokenMetadata.t),
+      orderByList: orderByList?.call(TokenMetadata.t),
+      orderDescending: // ignore: deprecated_member_use
+          orderDescending,
       transaction: transaction,
     );
   }

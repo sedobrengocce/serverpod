@@ -34,8 +34,8 @@ jobs:
       matrix:
         flutter-version: ["3.32.0"]
     steps:
-      - uses: actions/checkout@v4
-      - uses: subosito/flutter-action@v2
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+      - uses: subosito/flutter-action@1a449444c387b1966244ae4d4f8c696479add0b2 # v2.23.0
         with:
           flutter-version: ${{ matrix.flutter-version }}
           cache: true
@@ -55,8 +55,8 @@ jobs:
         flutter-version: ["3.32.0"]
         os: [windows-latest, ubuntu-latest]
     steps:
-      - uses: actions/checkout@v4
-      - uses: subosito/flutter-action@v2
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+      - uses: subosito/flutter-action@1a449444c387b1966244ae4d4f8c696479add0b2 # v2.23.0
         with:
           flutter-version: ${{ matrix.flutter-version }}
           cache: true
@@ -75,8 +75,8 @@ jobs:
         flutter-version: ["3.41.5"]
         os: [windows-latest, ubuntu-latest]
     steps:
-      - uses: actions/checkout@v4
-      - uses: subosito/flutter-action@v2
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+      - uses: subosito/flutter-action@1a449444c387b1966244ae4d4f8c696479add0b2 # v2.23.0
         with:
           flutter-version: ${{ matrix.flutter-version }}
           cache: true
@@ -96,8 +96,8 @@ jobs:
         flutter-version: ["3.32.0", "3.41.5"]
         os: [windows-latest, ubuntu-latest]
     steps:
-      - uses: actions/checkout@v4
-      - uses: subosito/flutter-action@v2
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+      - uses: subosito/flutter-action@1a449444c387b1966244ae4d4f8c696479add0b2 # v2.23.0
         with:
           flutter-version: ${{ matrix.flutter-version }}
           cache: true
@@ -118,8 +118,8 @@ jobs:
         flutter-version: ["3.32.0", "3.41.5"]
         os: [ubuntu-latest, windows-latest]
     steps:
-      - uses: actions/checkout@v4
-      - uses: subosito/flutter-action@v2
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+      - uses: subosito/flutter-action@1a449444c387b1966244ae4d4f8c696479add0b2 # v2.23.0
         with:
           flutter-version: ${{ matrix.flutter-version }}
           cache: true
@@ -132,6 +132,13 @@ jobs:
         run: |
           git config core.safecrlf false
           util/run_tests_serverpod_generate
+      - name: Verify generate from scratch
+        shell: bash
+        run: |
+          rm -rf tests/serverpod_test_server/lib/src/generated
+          export SERVERPOD_HOME=$(pwd)
+          cd tests/serverpod_test_server
+          dart run "$SERVERPOD_HOME/tools/serverpod_cli/bin/serverpod_cli.dart" generate --no-analytics
 
   update_pubspecs:
     name: update pubspecs
@@ -140,8 +147,8 @@ jobs:
       matrix:
         flutter-version: ["3.32.0", "3.41.5"]
     steps:
-      - uses: actions/checkout@v4
-      - uses: subosito/flutter-action@v2
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+      - uses: subosito/flutter-action@1a449444c387b1966244ae4d4f8c696479add0b2 # v2.23.0
         with:
           flutter-version: ${{ matrix.flutter-version }}
           cache: true
@@ -156,8 +163,8 @@ jobs:
         flutter-version: ["3.32.0", "3.41.5"]
         os: [windows-latest, ubuntu-latest]
     steps:
-      - uses: actions/checkout@v4
-      - uses: subosito/flutter-action@v2
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+      - uses: subosito/flutter-action@1a449444c387b1966244ae4d4f8c696479add0b2 # v2.23.0
         with:
           flutter-version: ${{ matrix.flutter-version }}
           cache: true
@@ -183,12 +190,12 @@ jobs:
             compiler: dart2wasm
 
     steps:
-      - uses: actions/checkout@v4
-      - uses: subosito/flutter-action@v2
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+      - uses: subosito/flutter-action@1a449444c387b1966244ae4d4f8c696479add0b2 # v2.23.0
         with:
           flutter-version: ${{ matrix.flutter-version }}
           cache: true
-      - uses: browser-actions/setup-chrome@v1
+      - uses: browser-actions/setup-chrome@c785b87e244131f27c9f19c1a33e2ead956ab7ce # v1.7.3
       - name: Run unit tests
         run: >-
           dart test
@@ -206,8 +213,8 @@ jobs:
         os: [windows-latest, ubuntu-latest]
         path: ["packages/serverpod_flutter"]
     steps:
-      - uses: actions/checkout@v4
-      - uses: subosito/flutter-action@v2
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+      - uses: subosito/flutter-action@1a449444c387b1966244ae4d4f8c696479add0b2 # v2.23.0
         with:
           flutter-version: ${{ matrix.flutter-version }}
           cache: true
@@ -222,8 +229,8 @@ jobs:
       matrix:
         flutter-version: ["3.32.0", "3.41.5"]
     steps:
-      - uses: actions/checkout@v4
-      - uses: subosito/flutter-action@v2
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+      - uses: subosito/flutter-action@1a449444c387b1966244ae4d4f8c696479add0b2 # v2.23.0
         with:
           flutter-version: ${{ matrix.flutter-version }}
           cache: true
@@ -237,8 +244,8 @@ jobs:
       matrix:
         flutter-version: ["3.32.0", "3.41.5"]
     steps:
-      - uses: actions/checkout@v4
-      - uses: subosito/flutter-action@v2
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+      - uses: subosito/flutter-action@1a449444c387b1966244ae4d4f8c696479add0b2 # v2.23.0
         with:
           flutter-version: ${{ matrix.flutter-version }}
           cache: true
@@ -253,8 +260,8 @@ jobs:
         flutter-version: ["3.32.0", "3.41.5"]
         path: ["packages/serverpod_shared"]
     steps:
-      - uses: actions/checkout@v4
-      - uses: subosito/flutter-action@v2
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+      - uses: subosito/flutter-action@1a449444c387b1966244ae4d4f8c696479add0b2 # v2.23.0
         with:
           flutter-version: ${{ matrix.flutter-version }}
           cache: true
@@ -281,8 +288,8 @@ jobs:
             "modules/legacy/serverpod_auth/serverpod_auth_server",
           ]
     steps:
-      - uses: actions/checkout@v4
-      - uses: subosito/flutter-action@v2
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+      - uses: subosito/flutter-action@1a449444c387b1966244ae4d4f8c696479add0b2 # v2.23.0
         with:
           flutter-version: ${{ matrix.flutter-version }}
           cache: true
@@ -317,8 +324,8 @@ jobs:
           - server: tests/serverpod_auth_test/serverpod_auth_test_server
             client: tests/serverpod_auth_test/serverpod_auth_test_flutter
     steps:
-      - uses: actions/checkout@v4
-      - uses: subosito/flutter-action@v2
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+      - uses: subosito/flutter-action@1a449444c387b1966244ae4d4f8c696479add0b2 # v2.23.0
         with:
           flutter-version: ${{ matrix.flutter-version }}
           cache: true
@@ -355,8 +362,8 @@ jobs:
       matrix:
         flutter-version: ["3.32.0", "3.41.5"]
     steps:
-      - uses: actions/checkout@v4
-      - uses: subosito/flutter-action@v2
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+      - uses: subosito/flutter-action@1a449444c387b1966244ae4d4f8c696479add0b2 # v2.23.0
         with:
           flutter-version: ${{ matrix.flutter-version }}
           cache: true
@@ -370,13 +377,28 @@ jobs:
       matrix:
         flutter-version: ["3.32.0", "3.41.5"]
     steps:
-      - uses: actions/checkout@v4
-      - uses: subosito/flutter-action@v2
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+      - uses: subosito/flutter-action@1a449444c387b1966244ae4d4f8c696479add0b2 # v2.23.0
         with:
           flutter-version: ${{ matrix.flutter-version }}
           cache: true
       - name: Run integration tests
         run: util/run_tests_integration_concurrently
+
+  integration_test_sqlite_server:
+    name: Serverpod SQLite integration tests (server)
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        flutter-version: ["3.32.0", "3.41.5"]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: subosito/flutter-action@v2
+        with:
+          flutter-version: ${{ matrix.flutter-version }}
+          cache: true
+      - name: Run SQLite integration tests
+        run: util/run_tests_sqlite_integration
 
   bootstrap_tests:
     name: Bootstrap tests
@@ -388,8 +410,8 @@ jobs:
         os: [windows-latest, ubuntu-latest]
         path: ["tests/bootstrap_project"]
     steps:
-      - uses: actions/checkout@v4
-      - uses: subosito/flutter-action@v2
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+      - uses: subosito/flutter-action@1a449444c387b1966244ae4d4f8c696479add0b2 # v2.23.0
         with:
           flutter-version: ${{ matrix.flutter-version }}
           cache: true
@@ -414,13 +436,28 @@ jobs:
       matrix:
         flutter-version: ["3.32.0", "3.41.5"]
     steps:
-      - uses: actions/checkout@v4
-      - uses: subosito/flutter-action@v2
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+      - uses: subosito/flutter-action@1a449444c387b1966244ae4d4f8c696479add0b2 # v2.23.0
         with:
           flutter-version: ${{ matrix.flutter-version }}
           cache: true
       - name: Run e2e migration tests
         run: util/run_tests_migrations_e2e
+
+  migration_e2e_tests_sqlite:
+    name: Migration e2e tests (SQLite)
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        flutter-version: ["3.32.0", "3.41.5"]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: subosito/flutter-action@v2
+        with:
+          flutter-version: ${{ matrix.flutter-version }}
+          cache: true
+      - name: Run SQLite e2e migration tests
+        run: util/run_tests_sqlite_migrations_e2e
 
   cli_e2e_tests:
     name: CLI e2e tests
@@ -433,8 +470,8 @@ jobs:
         shard: [0, 1, 2]
         path: ["tests/serverpod_cli_e2e_test"]
     steps:
-      - uses: actions/checkout@v4
-      - uses: subosito/flutter-action@v2
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+      - uses: subosito/flutter-action@1a449444c387b1966244ae4d4f8c696479add0b2 # v2.23.0
         with:
           flutter-version: ${{ matrix.flutter-version }}
           cache: true
@@ -462,7 +499,7 @@ jobs:
     name: Serverpod integration tests (flutter)
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
       - name: Run integration tests in Docker
         run: util/run_tests_flutter_integration
 
@@ -470,8 +507,8 @@ jobs:
     name: Version change test
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: subosito/flutter-action@v2
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+      - uses: subosito/flutter-action@1a449444c387b1966244ae4d4f8c696479add0b2 # v2.23.0
         with:
           flutter-version: "3.32.0"
           cache: true
@@ -511,8 +548,8 @@ jobs:
       run:
         working-directory: integrations/serverpod_cloud_storage_s3
     steps:
-      - uses: actions/checkout@v4
-      - uses: dart-lang/setup-dart@v1
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+      - uses: dart-lang/setup-dart@65eb853c7ba17dde3be364c3d2858773e7144260 # v1.7.2
       - run: dart pub get
       - run: dart test test/integration --reporter=failures-only
 
@@ -530,8 +567,8 @@ jobs:
       run:
         working-directory: integrations/serverpod_cloud_storage_r2
     steps:
-      - uses: actions/checkout@v4
-      - uses: dart-lang/setup-dart@v1
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+      - uses: dart-lang/setup-dart@65eb853c7ba17dde3be364c3d2858773e7144260 # v1.7.2
       - run: dart pub get
       - run: dart test test/integration --reporter=failures-only
 
@@ -549,8 +586,8 @@ jobs:
       run:
         working-directory: integrations/serverpod_cloud_storage_gcp
     steps:
-      - uses: actions/checkout@v4
-      - uses: dart-lang/setup-dart@v1
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+      - uses: dart-lang/setup-dart@65eb853c7ba17dde3be364c3d2858773e7144260 # v1.7.2
       - run: dart pub get
       - run: dart test test/integration/gcp_s3_compat_integration_test.dart --reporter=failures-only
 
@@ -565,8 +602,8 @@ jobs:
       run:
         working-directory: integrations/serverpod_cloud_storage_gcp
     steps:
-      - uses: actions/checkout@v4
-      - uses: dart-lang/setup-dart@v1
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+      - uses: dart-lang/setup-dart@65eb853c7ba17dde3be364c3d2858773e7144260 # v1.7.2
       - run: dart pub get
       - run: dart test test/integration/native_gcp_integration_test.dart --reporter=failures-only
 
@@ -574,8 +611,8 @@ jobs:
     name: Publish check
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: subosito/flutter-action@v2
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+      - uses: subosito/flutter-action@1a449444c387b1966244ae4d4f8c696479add0b2 # v2.23.0
         with:
           flutter-version: "3.32.0"
           cache: true

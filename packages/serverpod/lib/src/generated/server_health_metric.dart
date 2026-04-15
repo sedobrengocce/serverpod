@@ -129,6 +129,7 @@ abstract class ServerHealthMetric
     int? limit,
     int? offset,
     _i1.OrderByBuilder<ServerHealthMetricTable>? orderBy,
+    @Deprecated('Use desc() on the orderBy column instead.')
     bool orderDescending = false,
     _i1.OrderByListBuilder<ServerHealthMetricTable>? orderByList,
     ServerHealthMetricInclude? include,
@@ -138,7 +139,8 @@ abstract class ServerHealthMetric
       limit: limit,
       offset: offset,
       orderBy: orderBy?.call(ServerHealthMetric.t),
-      orderDescending: orderDescending,
+      orderDescending: // ignore: deprecated_member_use_from_same_package
+          orderDescending,
       orderByList: orderByList?.call(ServerHealthMetric.t),
       include: include,
     );
@@ -311,6 +313,7 @@ class ServerHealthMetricIncludeList extends _i1.IncludeList {
     super.limit,
     super.offset,
     super.orderBy,
+    @Deprecated('Use desc() on the orderBy column instead.')
     super.orderDescending,
     super.orderByList,
     super.include,
@@ -356,6 +359,7 @@ class ServerHealthMetricRepository {
     int? limit,
     int? offset,
     _i1.OrderByBuilder<ServerHealthMetricTable>? orderBy,
+    @Deprecated('Use desc() on the orderBy column instead.')
     bool orderDescending = false,
     _i1.OrderByListBuilder<ServerHealthMetricTable>? orderByList,
     _i1.Transaction? transaction,
@@ -366,7 +370,8 @@ class ServerHealthMetricRepository {
       where: where?.call(ServerHealthMetric.t),
       orderBy: orderBy?.call(ServerHealthMetric.t),
       orderByList: orderByList?.call(ServerHealthMetric.t),
-      orderDescending: orderDescending,
+      orderDescending: // ignore: deprecated_member_use
+          orderDescending,
       limit: limit,
       offset: offset,
       transaction: transaction,
@@ -397,6 +402,7 @@ class ServerHealthMetricRepository {
     _i1.WhereExpressionBuilder<ServerHealthMetricTable>? where,
     int? offset,
     _i1.OrderByBuilder<ServerHealthMetricTable>? orderBy,
+    @Deprecated('Use desc() on the orderBy column instead.')
     bool orderDescending = false,
     _i1.OrderByListBuilder<ServerHealthMetricTable>? orderByList,
     _i1.Transaction? transaction,
@@ -407,7 +413,8 @@ class ServerHealthMetricRepository {
       where: where?.call(ServerHealthMetric.t),
       orderBy: orderBy?.call(ServerHealthMetric.t),
       orderByList: orderByList?.call(ServerHealthMetric.t),
-      orderDescending: orderDescending,
+      orderDescending: // ignore: deprecated_member_use
+          orderDescending,
       offset: offset,
       transaction: transaction,
       lockMode: lockMode,
@@ -570,6 +577,7 @@ class ServerHealthMetricRepository {
     int? offset,
     _i1.OrderByBuilder<ServerHealthMetricTable>? orderBy,
     _i1.OrderByListBuilder<ServerHealthMetricTable>? orderByList,
+    @Deprecated('Use desc() on the orderBy column instead.')
     bool orderDescending = false,
     _i1.Transaction? transaction,
   }) async {
@@ -580,21 +588,34 @@ class ServerHealthMetricRepository {
       offset: offset,
       orderBy: orderBy?.call(ServerHealthMetric.t),
       orderByList: orderByList?.call(ServerHealthMetric.t),
-      orderDescending: orderDescending,
+      orderDescending: // ignore: deprecated_member_use
+          orderDescending,
       transaction: transaction,
     );
   }
 
   /// Deletes all [ServerHealthMetric]s in the list and returns the deleted rows.
+  ///
+  /// To specify the order of the returned rows use [orderBy] or [orderByList]
+  /// when sorting by multiple columns.
+  ///
   /// This is an atomic operation, meaning that if one of the rows fail to
   /// be deleted, none of the rows will be deleted.
   Future<List<ServerHealthMetric>> delete(
     _i1.DatabaseSession session,
     List<ServerHealthMetric> rows, {
+    _i1.OrderByBuilder<ServerHealthMetricTable>? orderBy,
+    @Deprecated('Use desc() on the orderBy column instead.')
+    bool orderDescending = false,
+    _i1.OrderByListBuilder<ServerHealthMetricTable>? orderByList,
     _i1.Transaction? transaction,
   }) async {
     return session.db.delete<ServerHealthMetric>(
       rows,
+      orderBy: orderBy?.call(ServerHealthMetric.t),
+      orderByList: orderByList?.call(ServerHealthMetric.t),
+      orderDescending: // ignore: deprecated_member_use
+          orderDescending,
       transaction: transaction,
     );
   }
@@ -612,13 +633,24 @@ class ServerHealthMetricRepository {
   }
 
   /// Deletes all rows matching the [where] expression.
+  ///
+  /// To specify the order of the returned rows use [orderBy] or [orderByList]
+  /// when sorting by multiple columns.
   Future<List<ServerHealthMetric>> deleteWhere(
     _i1.DatabaseSession session, {
     required _i1.WhereExpressionBuilder<ServerHealthMetricTable> where,
+    _i1.OrderByBuilder<ServerHealthMetricTable>? orderBy,
+    @Deprecated('Use desc() on the orderBy column instead.')
+    bool orderDescending = false,
+    _i1.OrderByListBuilder<ServerHealthMetricTable>? orderByList,
     _i1.Transaction? transaction,
   }) async {
     return session.db.deleteWhere<ServerHealthMetric>(
       where: where(ServerHealthMetric.t),
+      orderBy: orderBy?.call(ServerHealthMetric.t),
+      orderByList: orderByList?.call(ServerHealthMetric.t),
+      orderDescending: // ignore: deprecated_member_use
+          orderDescending,
       transaction: transaction,
     );
   }

@@ -82,6 +82,7 @@ abstract class MaxFieldName
     int? limit,
     int? offset,
     _i1.OrderByBuilder<MaxFieldNameTable>? orderBy,
+    @Deprecated('Use desc() on the orderBy column instead.')
     bool orderDescending = false,
     _i1.OrderByListBuilder<MaxFieldNameTable>? orderByList,
     MaxFieldNameInclude? include,
@@ -91,7 +92,8 @@ abstract class MaxFieldName
       limit: limit,
       offset: offset,
       orderBy: orderBy?.call(MaxFieldName.t),
-      orderDescending: orderDescending,
+      orderDescending: // ignore: deprecated_member_use_from_same_package
+          orderDescending,
       orderByList: orderByList?.call(MaxFieldName.t),
       include: include,
     );
@@ -183,6 +185,7 @@ class MaxFieldNameIncludeList extends _i1.IncludeList {
     super.limit,
     super.offset,
     super.orderBy,
+    @Deprecated('Use desc() on the orderBy column instead.')
     super.orderDescending,
     super.orderByList,
     super.include,
@@ -228,6 +231,7 @@ class MaxFieldNameRepository {
     int? limit,
     int? offset,
     _i1.OrderByBuilder<MaxFieldNameTable>? orderBy,
+    @Deprecated('Use desc() on the orderBy column instead.')
     bool orderDescending = false,
     _i1.OrderByListBuilder<MaxFieldNameTable>? orderByList,
     _i1.Transaction? transaction,
@@ -238,7 +242,8 @@ class MaxFieldNameRepository {
       where: where?.call(MaxFieldName.t),
       orderBy: orderBy?.call(MaxFieldName.t),
       orderByList: orderByList?.call(MaxFieldName.t),
-      orderDescending: orderDescending,
+      orderDescending: // ignore: deprecated_member_use
+          orderDescending,
       limit: limit,
       offset: offset,
       transaction: transaction,
@@ -269,6 +274,7 @@ class MaxFieldNameRepository {
     _i1.WhereExpressionBuilder<MaxFieldNameTable>? where,
     int? offset,
     _i1.OrderByBuilder<MaxFieldNameTable>? orderBy,
+    @Deprecated('Use desc() on the orderBy column instead.')
     bool orderDescending = false,
     _i1.OrderByListBuilder<MaxFieldNameTable>? orderByList,
     _i1.Transaction? transaction,
@@ -279,7 +285,8 @@ class MaxFieldNameRepository {
       where: where?.call(MaxFieldName.t),
       orderBy: orderBy?.call(MaxFieldName.t),
       orderByList: orderByList?.call(MaxFieldName.t),
-      orderDescending: orderDescending,
+      orderDescending: // ignore: deprecated_member_use
+          orderDescending,
       offset: offset,
       transaction: transaction,
       lockMode: lockMode,
@@ -448,6 +455,7 @@ class MaxFieldNameRepository {
     int? offset,
     _i1.OrderByBuilder<MaxFieldNameTable>? orderBy,
     _i1.OrderByListBuilder<MaxFieldNameTable>? orderByList,
+    @Deprecated('Use desc() on the orderBy column instead.')
     bool orderDescending = false,
     _i1.Transaction? transaction,
   }) async {
@@ -458,21 +466,34 @@ class MaxFieldNameRepository {
       offset: offset,
       orderBy: orderBy?.call(MaxFieldName.t),
       orderByList: orderByList?.call(MaxFieldName.t),
-      orderDescending: orderDescending,
+      orderDescending: // ignore: deprecated_member_use
+          orderDescending,
       transaction: transaction,
     );
   }
 
   /// Deletes all [MaxFieldName]s in the list and returns the deleted rows.
+  ///
+  /// To specify the order of the returned rows use [orderBy] or [orderByList]
+  /// when sorting by multiple columns.
+  ///
   /// This is an atomic operation, meaning that if one of the rows fail to
   /// be deleted, none of the rows will be deleted.
   Future<List<MaxFieldName>> delete(
     _i1.DatabaseSession session,
     List<MaxFieldName> rows, {
+    _i1.OrderByBuilder<MaxFieldNameTable>? orderBy,
+    @Deprecated('Use desc() on the orderBy column instead.')
+    bool orderDescending = false,
+    _i1.OrderByListBuilder<MaxFieldNameTable>? orderByList,
     _i1.Transaction? transaction,
   }) async {
     return session.db.delete<MaxFieldName>(
       rows,
+      orderBy: orderBy?.call(MaxFieldName.t),
+      orderByList: orderByList?.call(MaxFieldName.t),
+      orderDescending: // ignore: deprecated_member_use
+          orderDescending,
       transaction: transaction,
     );
   }
@@ -490,13 +511,24 @@ class MaxFieldNameRepository {
   }
 
   /// Deletes all rows matching the [where] expression.
+  ///
+  /// To specify the order of the returned rows use [orderBy] or [orderByList]
+  /// when sorting by multiple columns.
   Future<List<MaxFieldName>> deleteWhere(
     _i1.DatabaseSession session, {
     required _i1.WhereExpressionBuilder<MaxFieldNameTable> where,
+    _i1.OrderByBuilder<MaxFieldNameTable>? orderBy,
+    @Deprecated('Use desc() on the orderBy column instead.')
+    bool orderDescending = false,
+    _i1.OrderByListBuilder<MaxFieldNameTable>? orderByList,
     _i1.Transaction? transaction,
   }) async {
     return session.db.deleteWhere<MaxFieldName>(
       where: where(MaxFieldName.t),
+      orderBy: orderBy?.call(MaxFieldName.t),
+      orderByList: orderByList?.call(MaxFieldName.t),
+      orderDescending: // ignore: deprecated_member_use
+          orderDescending,
       transaction: transaction,
     );
   }

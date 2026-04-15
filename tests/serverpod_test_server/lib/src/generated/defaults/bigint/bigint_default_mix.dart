@@ -117,6 +117,7 @@ abstract class BigIntDefaultMix
     int? limit,
     int? offset,
     _i1.OrderByBuilder<BigIntDefaultMixTable>? orderBy,
+    @Deprecated('Use desc() on the orderBy column instead.')
     bool orderDescending = false,
     _i1.OrderByListBuilder<BigIntDefaultMixTable>? orderByList,
     BigIntDefaultMixInclude? include,
@@ -126,7 +127,8 @@ abstract class BigIntDefaultMix
       limit: limit,
       offset: offset,
       orderBy: orderBy?.call(BigIntDefaultMix.t),
-      orderDescending: orderDescending,
+      orderDescending: // ignore: deprecated_member_use_from_same_package
+          orderDescending,
       orderByList: orderByList?.call(BigIntDefaultMix.t),
       include: include,
     );
@@ -256,6 +258,7 @@ class BigIntDefaultMixIncludeList extends _i1.IncludeList {
     super.limit,
     super.offset,
     super.orderBy,
+    @Deprecated('Use desc() on the orderBy column instead.')
     super.orderDescending,
     super.orderByList,
     super.include,
@@ -301,6 +304,7 @@ class BigIntDefaultMixRepository {
     int? limit,
     int? offset,
     _i1.OrderByBuilder<BigIntDefaultMixTable>? orderBy,
+    @Deprecated('Use desc() on the orderBy column instead.')
     bool orderDescending = false,
     _i1.OrderByListBuilder<BigIntDefaultMixTable>? orderByList,
     _i1.Transaction? transaction,
@@ -311,7 +315,8 @@ class BigIntDefaultMixRepository {
       where: where?.call(BigIntDefaultMix.t),
       orderBy: orderBy?.call(BigIntDefaultMix.t),
       orderByList: orderByList?.call(BigIntDefaultMix.t),
-      orderDescending: orderDescending,
+      orderDescending: // ignore: deprecated_member_use
+          orderDescending,
       limit: limit,
       offset: offset,
       transaction: transaction,
@@ -342,6 +347,7 @@ class BigIntDefaultMixRepository {
     _i1.WhereExpressionBuilder<BigIntDefaultMixTable>? where,
     int? offset,
     _i1.OrderByBuilder<BigIntDefaultMixTable>? orderBy,
+    @Deprecated('Use desc() on the orderBy column instead.')
     bool orderDescending = false,
     _i1.OrderByListBuilder<BigIntDefaultMixTable>? orderByList,
     _i1.Transaction? transaction,
@@ -352,7 +358,8 @@ class BigIntDefaultMixRepository {
       where: where?.call(BigIntDefaultMix.t),
       orderBy: orderBy?.call(BigIntDefaultMix.t),
       orderByList: orderByList?.call(BigIntDefaultMix.t),
-      orderDescending: orderDescending,
+      orderDescending: // ignore: deprecated_member_use
+          orderDescending,
       offset: offset,
       transaction: transaction,
       lockMode: lockMode,
@@ -523,6 +530,7 @@ class BigIntDefaultMixRepository {
     int? offset,
     _i1.OrderByBuilder<BigIntDefaultMixTable>? orderBy,
     _i1.OrderByListBuilder<BigIntDefaultMixTable>? orderByList,
+    @Deprecated('Use desc() on the orderBy column instead.')
     bool orderDescending = false,
     _i1.Transaction? transaction,
   }) async {
@@ -533,21 +541,34 @@ class BigIntDefaultMixRepository {
       offset: offset,
       orderBy: orderBy?.call(BigIntDefaultMix.t),
       orderByList: orderByList?.call(BigIntDefaultMix.t),
-      orderDescending: orderDescending,
+      orderDescending: // ignore: deprecated_member_use
+          orderDescending,
       transaction: transaction,
     );
   }
 
   /// Deletes all [BigIntDefaultMix]s in the list and returns the deleted rows.
+  ///
+  /// To specify the order of the returned rows use [orderBy] or [orderByList]
+  /// when sorting by multiple columns.
+  ///
   /// This is an atomic operation, meaning that if one of the rows fail to
   /// be deleted, none of the rows will be deleted.
   Future<List<BigIntDefaultMix>> delete(
     _i1.DatabaseSession session,
     List<BigIntDefaultMix> rows, {
+    _i1.OrderByBuilder<BigIntDefaultMixTable>? orderBy,
+    @Deprecated('Use desc() on the orderBy column instead.')
+    bool orderDescending = false,
+    _i1.OrderByListBuilder<BigIntDefaultMixTable>? orderByList,
     _i1.Transaction? transaction,
   }) async {
     return session.db.delete<BigIntDefaultMix>(
       rows,
+      orderBy: orderBy?.call(BigIntDefaultMix.t),
+      orderByList: orderByList?.call(BigIntDefaultMix.t),
+      orderDescending: // ignore: deprecated_member_use
+          orderDescending,
       transaction: transaction,
     );
   }
@@ -565,13 +586,24 @@ class BigIntDefaultMixRepository {
   }
 
   /// Deletes all rows matching the [where] expression.
+  ///
+  /// To specify the order of the returned rows use [orderBy] or [orderByList]
+  /// when sorting by multiple columns.
   Future<List<BigIntDefaultMix>> deleteWhere(
     _i1.DatabaseSession session, {
     required _i1.WhereExpressionBuilder<BigIntDefaultMixTable> where,
+    _i1.OrderByBuilder<BigIntDefaultMixTable>? orderBy,
+    @Deprecated('Use desc() on the orderBy column instead.')
+    bool orderDescending = false,
+    _i1.OrderByListBuilder<BigIntDefaultMixTable>? orderByList,
     _i1.Transaction? transaction,
   }) async {
     return session.db.deleteWhere<BigIntDefaultMix>(
       where: where(BigIntDefaultMix.t),
+      orderBy: orderBy?.call(BigIntDefaultMix.t),
+      orderByList: orderByList?.call(BigIntDefaultMix.t),
+      orderDescending: // ignore: deprecated_member_use
+          orderDescending,
       transaction: transaction,
     );
   }

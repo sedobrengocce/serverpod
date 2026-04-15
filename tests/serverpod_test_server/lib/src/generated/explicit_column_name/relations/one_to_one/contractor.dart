@@ -100,6 +100,7 @@ abstract class Contractor
     int? limit,
     int? offset,
     _i1.OrderByBuilder<ContractorTable>? orderBy,
+    @Deprecated('Use desc() on the orderBy column instead.')
     bool orderDescending = false,
     _i1.OrderByListBuilder<ContractorTable>? orderByList,
     ContractorInclude? include,
@@ -109,7 +110,8 @@ abstract class Contractor
       limit: limit,
       offset: offset,
       orderBy: orderBy?.call(Contractor.t),
-      orderDescending: orderDescending,
+      orderDescending: // ignore: deprecated_member_use_from_same_package
+          orderDescending,
       orderByList: orderByList?.call(Contractor.t),
       include: include,
     );
@@ -242,6 +244,7 @@ class ContractorIncludeList extends _i1.IncludeList {
     super.limit,
     super.offset,
     super.orderBy,
+    @Deprecated('Use desc() on the orderBy column instead.')
     super.orderDescending,
     super.orderByList,
     super.include,
@@ -291,6 +294,7 @@ class ContractorRepository {
     int? limit,
     int? offset,
     _i1.OrderByBuilder<ContractorTable>? orderBy,
+    @Deprecated('Use desc() on the orderBy column instead.')
     bool orderDescending = false,
     _i1.OrderByListBuilder<ContractorTable>? orderByList,
     _i1.Transaction? transaction,
@@ -302,7 +306,8 @@ class ContractorRepository {
       where: where?.call(Contractor.t),
       orderBy: orderBy?.call(Contractor.t),
       orderByList: orderByList?.call(Contractor.t),
-      orderDescending: orderDescending,
+      orderDescending: // ignore: deprecated_member_use
+          orderDescending,
       limit: limit,
       offset: offset,
       transaction: transaction,
@@ -334,6 +339,7 @@ class ContractorRepository {
     _i1.WhereExpressionBuilder<ContractorTable>? where,
     int? offset,
     _i1.OrderByBuilder<ContractorTable>? orderBy,
+    @Deprecated('Use desc() on the orderBy column instead.')
     bool orderDescending = false,
     _i1.OrderByListBuilder<ContractorTable>? orderByList,
     _i1.Transaction? transaction,
@@ -345,7 +351,8 @@ class ContractorRepository {
       where: where?.call(Contractor.t),
       orderBy: orderBy?.call(Contractor.t),
       orderByList: orderByList?.call(Contractor.t),
-      orderDescending: orderDescending,
+      orderDescending: // ignore: deprecated_member_use
+          orderDescending,
       offset: offset,
       transaction: transaction,
       include: include,
@@ -517,6 +524,7 @@ class ContractorRepository {
     int? offset,
     _i1.OrderByBuilder<ContractorTable>? orderBy,
     _i1.OrderByListBuilder<ContractorTable>? orderByList,
+    @Deprecated('Use desc() on the orderBy column instead.')
     bool orderDescending = false,
     _i1.Transaction? transaction,
   }) async {
@@ -527,21 +535,34 @@ class ContractorRepository {
       offset: offset,
       orderBy: orderBy?.call(Contractor.t),
       orderByList: orderByList?.call(Contractor.t),
-      orderDescending: orderDescending,
+      orderDescending: // ignore: deprecated_member_use
+          orderDescending,
       transaction: transaction,
     );
   }
 
   /// Deletes all [Contractor]s in the list and returns the deleted rows.
+  ///
+  /// To specify the order of the returned rows use [orderBy] or [orderByList]
+  /// when sorting by multiple columns.
+  ///
   /// This is an atomic operation, meaning that if one of the rows fail to
   /// be deleted, none of the rows will be deleted.
   Future<List<Contractor>> delete(
     _i1.DatabaseSession session,
     List<Contractor> rows, {
+    _i1.OrderByBuilder<ContractorTable>? orderBy,
+    @Deprecated('Use desc() on the orderBy column instead.')
+    bool orderDescending = false,
+    _i1.OrderByListBuilder<ContractorTable>? orderByList,
     _i1.Transaction? transaction,
   }) async {
     return session.db.delete<Contractor>(
       rows,
+      orderBy: orderBy?.call(Contractor.t),
+      orderByList: orderByList?.call(Contractor.t),
+      orderDescending: // ignore: deprecated_member_use
+          orderDescending,
       transaction: transaction,
     );
   }
@@ -559,13 +580,24 @@ class ContractorRepository {
   }
 
   /// Deletes all rows matching the [where] expression.
+  ///
+  /// To specify the order of the returned rows use [orderBy] or [orderByList]
+  /// when sorting by multiple columns.
   Future<List<Contractor>> deleteWhere(
     _i1.DatabaseSession session, {
     required _i1.WhereExpressionBuilder<ContractorTable> where,
+    _i1.OrderByBuilder<ContractorTable>? orderBy,
+    @Deprecated('Use desc() on the orderBy column instead.')
+    bool orderDescending = false,
+    _i1.OrderByListBuilder<ContractorTable>? orderByList,
     _i1.Transaction? transaction,
   }) async {
     return session.db.deleteWhere<Contractor>(
       where: where(Contractor.t),
+      orderBy: orderBy?.call(Contractor.t),
+      orderByList: orderByList?.call(Contractor.t),
+      orderDescending: // ignore: deprecated_member_use
+          orderDescending,
       transaction: transaction,
     );
   }

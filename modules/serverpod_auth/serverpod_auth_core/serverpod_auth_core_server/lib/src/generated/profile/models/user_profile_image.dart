@@ -138,6 +138,7 @@ abstract class UserProfileImage
     int? limit,
     int? offset,
     _i1.OrderByBuilder<UserProfileImageTable>? orderBy,
+    @Deprecated('Use desc() on the orderBy column instead.')
     bool orderDescending = false,
     _i1.OrderByListBuilder<UserProfileImageTable>? orderByList,
     UserProfileImageInclude? include,
@@ -147,7 +148,8 @@ abstract class UserProfileImage
       limit: limit,
       offset: offset,
       orderBy: orderBy?.call(UserProfileImage.t),
-      orderDescending: orderDescending,
+      orderDescending: // ignore: deprecated_member_use_from_same_package
+          orderDescending,
       orderByList: orderByList?.call(UserProfileImage.t),
       include: include,
     );
@@ -338,6 +340,7 @@ class UserProfileImageIncludeList extends _i1.IncludeList {
     super.limit,
     super.offset,
     super.orderBy,
+    @Deprecated('Use desc() on the orderBy column instead.')
     super.orderDescending,
     super.orderByList,
     super.include,
@@ -385,6 +388,7 @@ class UserProfileImageRepository {
     int? limit,
     int? offset,
     _i1.OrderByBuilder<UserProfileImageTable>? orderBy,
+    @Deprecated('Use desc() on the orderBy column instead.')
     bool orderDescending = false,
     _i1.OrderByListBuilder<UserProfileImageTable>? orderByList,
     _i1.Transaction? transaction,
@@ -396,7 +400,8 @@ class UserProfileImageRepository {
       where: where?.call(UserProfileImage.t),
       orderBy: orderBy?.call(UserProfileImage.t),
       orderByList: orderByList?.call(UserProfileImage.t),
-      orderDescending: orderDescending,
+      orderDescending: // ignore: deprecated_member_use
+          orderDescending,
       limit: limit,
       offset: offset,
       transaction: transaction,
@@ -428,6 +433,7 @@ class UserProfileImageRepository {
     _i1.WhereExpressionBuilder<UserProfileImageTable>? where,
     int? offset,
     _i1.OrderByBuilder<UserProfileImageTable>? orderBy,
+    @Deprecated('Use desc() on the orderBy column instead.')
     bool orderDescending = false,
     _i1.OrderByListBuilder<UserProfileImageTable>? orderByList,
     _i1.Transaction? transaction,
@@ -439,7 +445,8 @@ class UserProfileImageRepository {
       where: where?.call(UserProfileImage.t),
       orderBy: orderBy?.call(UserProfileImage.t),
       orderByList: orderByList?.call(UserProfileImage.t),
-      orderDescending: orderDescending,
+      orderDescending: // ignore: deprecated_member_use
+          orderDescending,
       offset: offset,
       transaction: transaction,
       include: include,
@@ -605,6 +612,7 @@ class UserProfileImageRepository {
     int? offset,
     _i1.OrderByBuilder<UserProfileImageTable>? orderBy,
     _i1.OrderByListBuilder<UserProfileImageTable>? orderByList,
+    @Deprecated('Use desc() on the orderBy column instead.')
     bool orderDescending = false,
     _i1.Transaction? transaction,
   }) async {
@@ -615,21 +623,34 @@ class UserProfileImageRepository {
       offset: offset,
       orderBy: orderBy?.call(UserProfileImage.t),
       orderByList: orderByList?.call(UserProfileImage.t),
-      orderDescending: orderDescending,
+      orderDescending: // ignore: deprecated_member_use
+          orderDescending,
       transaction: transaction,
     );
   }
 
   /// Deletes all [UserProfileImage]s in the list and returns the deleted rows.
+  ///
+  /// To specify the order of the returned rows use [orderBy] or [orderByList]
+  /// when sorting by multiple columns.
+  ///
   /// This is an atomic operation, meaning that if one of the rows fail to
   /// be deleted, none of the rows will be deleted.
   Future<List<UserProfileImage>> delete(
     _i1.DatabaseSession session,
     List<UserProfileImage> rows, {
+    _i1.OrderByBuilder<UserProfileImageTable>? orderBy,
+    @Deprecated('Use desc() on the orderBy column instead.')
+    bool orderDescending = false,
+    _i1.OrderByListBuilder<UserProfileImageTable>? orderByList,
     _i1.Transaction? transaction,
   }) async {
     return session.db.delete<UserProfileImage>(
       rows,
+      orderBy: orderBy?.call(UserProfileImage.t),
+      orderByList: orderByList?.call(UserProfileImage.t),
+      orderDescending: // ignore: deprecated_member_use
+          orderDescending,
       transaction: transaction,
     );
   }
@@ -647,13 +668,24 @@ class UserProfileImageRepository {
   }
 
   /// Deletes all rows matching the [where] expression.
+  ///
+  /// To specify the order of the returned rows use [orderBy] or [orderByList]
+  /// when sorting by multiple columns.
   Future<List<UserProfileImage>> deleteWhere(
     _i1.DatabaseSession session, {
     required _i1.WhereExpressionBuilder<UserProfileImageTable> where,
+    _i1.OrderByBuilder<UserProfileImageTable>? orderBy,
+    @Deprecated('Use desc() on the orderBy column instead.')
+    bool orderDescending = false,
+    _i1.OrderByListBuilder<UserProfileImageTable>? orderByList,
     _i1.Transaction? transaction,
   }) async {
     return session.db.deleteWhere<UserProfileImage>(
       where: where(UserProfileImage.t),
+      orderBy: orderBy?.call(UserProfileImage.t),
+      orderByList: orderByList?.call(UserProfileImage.t),
+      orderDescending: // ignore: deprecated_member_use
+          orderDescending,
       transaction: transaction,
     );
   }

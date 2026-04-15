@@ -147,6 +147,7 @@ abstract class EmailAccountRequest
     int? limit,
     int? offset,
     _i1.OrderByBuilder<EmailAccountRequestTable>? orderBy,
+    @Deprecated('Use desc() on the orderBy column instead.')
     bool orderDescending = false,
     _i1.OrderByListBuilder<EmailAccountRequestTable>? orderByList,
     EmailAccountRequestInclude? include,
@@ -156,7 +157,8 @@ abstract class EmailAccountRequest
       limit: limit,
       offset: offset,
       orderBy: orderBy?.call(EmailAccountRequest.t),
-      orderDescending: orderDescending,
+      orderDescending: // ignore: deprecated_member_use_from_same_package
+          orderDescending,
       orderByList: orderByList?.call(EmailAccountRequest.t),
       include: include,
     );
@@ -370,6 +372,7 @@ class EmailAccountRequestIncludeList extends _i1.IncludeList {
     super.limit,
     super.offset,
     super.orderBy,
+    @Deprecated('Use desc() on the orderBy column instead.')
     super.orderDescending,
     super.orderByList,
     super.include,
@@ -419,6 +422,7 @@ class EmailAccountRequestRepository {
     int? limit,
     int? offset,
     _i1.OrderByBuilder<EmailAccountRequestTable>? orderBy,
+    @Deprecated('Use desc() on the orderBy column instead.')
     bool orderDescending = false,
     _i1.OrderByListBuilder<EmailAccountRequestTable>? orderByList,
     _i1.Transaction? transaction,
@@ -430,7 +434,8 @@ class EmailAccountRequestRepository {
       where: where?.call(EmailAccountRequest.t),
       orderBy: orderBy?.call(EmailAccountRequest.t),
       orderByList: orderByList?.call(EmailAccountRequest.t),
-      orderDescending: orderDescending,
+      orderDescending: // ignore: deprecated_member_use
+          orderDescending,
       limit: limit,
       offset: offset,
       transaction: transaction,
@@ -462,6 +467,7 @@ class EmailAccountRequestRepository {
     _i1.WhereExpressionBuilder<EmailAccountRequestTable>? where,
     int? offset,
     _i1.OrderByBuilder<EmailAccountRequestTable>? orderBy,
+    @Deprecated('Use desc() on the orderBy column instead.')
     bool orderDescending = false,
     _i1.OrderByListBuilder<EmailAccountRequestTable>? orderByList,
     _i1.Transaction? transaction,
@@ -473,7 +479,8 @@ class EmailAccountRequestRepository {
       where: where?.call(EmailAccountRequest.t),
       orderBy: orderBy?.call(EmailAccountRequest.t),
       orderByList: orderByList?.call(EmailAccountRequest.t),
-      orderDescending: orderDescending,
+      orderDescending: // ignore: deprecated_member_use
+          orderDescending,
       offset: offset,
       transaction: transaction,
       include: include,
@@ -639,6 +646,7 @@ class EmailAccountRequestRepository {
     int? offset,
     _i1.OrderByBuilder<EmailAccountRequestTable>? orderBy,
     _i1.OrderByListBuilder<EmailAccountRequestTable>? orderByList,
+    @Deprecated('Use desc() on the orderBy column instead.')
     bool orderDescending = false,
     _i1.Transaction? transaction,
   }) async {
@@ -649,21 +657,34 @@ class EmailAccountRequestRepository {
       offset: offset,
       orderBy: orderBy?.call(EmailAccountRequest.t),
       orderByList: orderByList?.call(EmailAccountRequest.t),
-      orderDescending: orderDescending,
+      orderDescending: // ignore: deprecated_member_use
+          orderDescending,
       transaction: transaction,
     );
   }
 
   /// Deletes all [EmailAccountRequest]s in the list and returns the deleted rows.
+  ///
+  /// To specify the order of the returned rows use [orderBy] or [orderByList]
+  /// when sorting by multiple columns.
+  ///
   /// This is an atomic operation, meaning that if one of the rows fail to
   /// be deleted, none of the rows will be deleted.
   Future<List<EmailAccountRequest>> delete(
     _i1.DatabaseSession session,
     List<EmailAccountRequest> rows, {
+    _i1.OrderByBuilder<EmailAccountRequestTable>? orderBy,
+    @Deprecated('Use desc() on the orderBy column instead.')
+    bool orderDescending = false,
+    _i1.OrderByListBuilder<EmailAccountRequestTable>? orderByList,
     _i1.Transaction? transaction,
   }) async {
     return session.db.delete<EmailAccountRequest>(
       rows,
+      orderBy: orderBy?.call(EmailAccountRequest.t),
+      orderByList: orderByList?.call(EmailAccountRequest.t),
+      orderDescending: // ignore: deprecated_member_use
+          orderDescending,
       transaction: transaction,
     );
   }
@@ -681,13 +702,24 @@ class EmailAccountRequestRepository {
   }
 
   /// Deletes all rows matching the [where] expression.
+  ///
+  /// To specify the order of the returned rows use [orderBy] or [orderByList]
+  /// when sorting by multiple columns.
   Future<List<EmailAccountRequest>> deleteWhere(
     _i1.DatabaseSession session, {
     required _i1.WhereExpressionBuilder<EmailAccountRequestTable> where,
+    _i1.OrderByBuilder<EmailAccountRequestTable>? orderBy,
+    @Deprecated('Use desc() on the orderBy column instead.')
+    bool orderDescending = false,
+    _i1.OrderByListBuilder<EmailAccountRequestTable>? orderByList,
     _i1.Transaction? transaction,
   }) async {
     return session.db.deleteWhere<EmailAccountRequest>(
       where: where(EmailAccountRequest.t),
+      orderBy: orderBy?.call(EmailAccountRequest.t),
+      orderByList: orderByList?.call(EmailAccountRequest.t),
+      orderDescending: // ignore: deprecated_member_use
+          orderDescending,
       transaction: transaction,
     );
   }
