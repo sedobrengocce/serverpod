@@ -478,11 +478,16 @@ class LongImplicitIdFieldCollectionRepository {
     List<LongImplicitIdFieldCollection> rows, {
     required _i1.ColumnSelections<LongImplicitIdFieldCollectionTable>
     conflictColumns,
+    _i1.ColumnSelections<LongImplicitIdFieldCollectionTable>? updateColumns,
+    _i1.WhereExpressionBuilder<LongImplicitIdFieldCollectionTable>?
+    conflictWhere,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsert<LongImplicitIdFieldCollection>(
       rows,
       conflictColumns: conflictColumns(LongImplicitIdFieldCollection.t),
+      updateColumns: updateColumns?.call(LongImplicitIdFieldCollection.t),
+      conflictWhere: conflictWhere?.call(LongImplicitIdFieldCollection.t),
       transaction: transaction,
     );
   }
@@ -498,11 +503,16 @@ class LongImplicitIdFieldCollectionRepository {
     LongImplicitIdFieldCollection row, {
     required _i1.ColumnSelections<LongImplicitIdFieldCollectionTable>
     conflictColumns,
+    _i1.ColumnSelections<LongImplicitIdFieldCollectionTable>? updateColumns,
+    _i1.WhereExpressionBuilder<LongImplicitIdFieldCollectionTable>?
+    conflictWhere,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsertRow<LongImplicitIdFieldCollection>(
       row,
       conflictColumns: conflictColumns(LongImplicitIdFieldCollection.t),
+      updateColumns: updateColumns?.call(LongImplicitIdFieldCollection.t),
+      conflictWhere: conflictWhere?.call(LongImplicitIdFieldCollection.t),
       transaction: transaction,
     );
   }

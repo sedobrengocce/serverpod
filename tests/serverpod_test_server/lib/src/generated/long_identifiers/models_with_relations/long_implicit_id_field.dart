@@ -403,11 +403,15 @@ class LongImplicitIdFieldRepository {
     _i1.DatabaseSession session,
     List<LongImplicitIdField> rows, {
     required _i1.ColumnSelections<LongImplicitIdFieldTable> conflictColumns,
+    _i1.ColumnSelections<LongImplicitIdFieldTable>? updateColumns,
+    _i1.WhereExpressionBuilder<LongImplicitIdFieldTable>? conflictWhere,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsert<LongImplicitIdField>(
       rows,
       conflictColumns: conflictColumns(LongImplicitIdField.t),
+      updateColumns: updateColumns?.call(LongImplicitIdField.t),
+      conflictWhere: conflictWhere?.call(LongImplicitIdField.t),
       transaction: transaction,
     );
   }
@@ -422,11 +426,15 @@ class LongImplicitIdFieldRepository {
     _i1.DatabaseSession session,
     LongImplicitIdField row, {
     required _i1.ColumnSelections<LongImplicitIdFieldTable> conflictColumns,
+    _i1.ColumnSelections<LongImplicitIdFieldTable>? updateColumns,
+    _i1.WhereExpressionBuilder<LongImplicitIdFieldTable>? conflictWhere,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsertRow<LongImplicitIdField>(
       row,
       conflictColumns: conflictColumns(LongImplicitIdField.t),
+      updateColumns: updateColumns?.call(LongImplicitIdField.t),
+      conflictWhere: conflictWhere?.call(LongImplicitIdField.t),
       transaction: transaction,
     );
   }

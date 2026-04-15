@@ -422,11 +422,15 @@ class StudentRepository {
     _i1.DatabaseSession session,
     List<Student> rows, {
     required _i1.ColumnSelections<StudentTable> conflictColumns,
+    _i1.ColumnSelections<StudentTable>? updateColumns,
+    _i1.WhereExpressionBuilder<StudentTable>? conflictWhere,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsert<Student>(
       rows,
       conflictColumns: conflictColumns(Student.t),
+      updateColumns: updateColumns?.call(Student.t),
+      conflictWhere: conflictWhere?.call(Student.t),
       transaction: transaction,
     );
   }
@@ -441,11 +445,15 @@ class StudentRepository {
     _i1.DatabaseSession session,
     Student row, {
     required _i1.ColumnSelections<StudentTable> conflictColumns,
+    _i1.ColumnSelections<StudentTable>? updateColumns,
+    _i1.WhereExpressionBuilder<StudentTable>? conflictWhere,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsertRow<Student>(
       row,
       conflictColumns: conflictColumns(Student.t),
+      updateColumns: updateColumns?.call(Student.t),
+      conflictWhere: conflictWhere?.call(Student.t),
       transaction: transaction,
     );
   }

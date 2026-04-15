@@ -421,11 +421,15 @@ class RelatedUniqueDataRepository {
     _i1.DatabaseSession session,
     List<RelatedUniqueData> rows, {
     required _i1.ColumnSelections<RelatedUniqueDataTable> conflictColumns,
+    _i1.ColumnSelections<RelatedUniqueDataTable>? updateColumns,
+    _i1.WhereExpressionBuilder<RelatedUniqueDataTable>? conflictWhere,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsert<RelatedUniqueData>(
       rows,
       conflictColumns: conflictColumns(RelatedUniqueData.t),
+      updateColumns: updateColumns?.call(RelatedUniqueData.t),
+      conflictWhere: conflictWhere?.call(RelatedUniqueData.t),
       transaction: transaction,
     );
   }
@@ -440,11 +444,15 @@ class RelatedUniqueDataRepository {
     _i1.DatabaseSession session,
     RelatedUniqueData row, {
     required _i1.ColumnSelections<RelatedUniqueDataTable> conflictColumns,
+    _i1.ColumnSelections<RelatedUniqueDataTable>? updateColumns,
+    _i1.WhereExpressionBuilder<RelatedUniqueDataTable>? conflictWhere,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsertRow<RelatedUniqueData>(
       row,
       conflictColumns: conflictColumns(RelatedUniqueData.t),
+      updateColumns: updateColumns?.call(RelatedUniqueData.t),
+      conflictWhere: conflictWhere?.call(RelatedUniqueData.t),
       transaction: transaction,
     );
   }

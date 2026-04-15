@@ -423,11 +423,15 @@ class ChildEntityRepository {
     _i2.DatabaseSession session,
     List<ChildEntity> rows, {
     required _i2.ColumnSelections<ChildEntityTable> conflictColumns,
+    _i2.ColumnSelections<ChildEntityTable>? updateColumns,
+    _i2.WhereExpressionBuilder<ChildEntityTable>? conflictWhere,
     _i2.Transaction? transaction,
   }) async {
     return session.db.upsert<ChildEntity>(
       rows,
       conflictColumns: conflictColumns(ChildEntity.t),
+      updateColumns: updateColumns?.call(ChildEntity.t),
+      conflictWhere: conflictWhere?.call(ChildEntity.t),
       transaction: transaction,
     );
   }
@@ -442,11 +446,15 @@ class ChildEntityRepository {
     _i2.DatabaseSession session,
     ChildEntity row, {
     required _i2.ColumnSelections<ChildEntityTable> conflictColumns,
+    _i2.ColumnSelections<ChildEntityTable>? updateColumns,
+    _i2.WhereExpressionBuilder<ChildEntityTable>? conflictWhere,
     _i2.Transaction? transaction,
   }) async {
     return session.db.upsertRow<ChildEntity>(
       row,
       conflictColumns: conflictColumns(ChildEntity.t),
+      updateColumns: updateColumns?.call(ChildEntity.t),
+      conflictWhere: conflictWhere?.call(ChildEntity.t),
       transaction: transaction,
     );
   }

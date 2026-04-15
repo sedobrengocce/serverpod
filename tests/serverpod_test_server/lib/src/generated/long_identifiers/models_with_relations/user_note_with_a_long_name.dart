@@ -405,11 +405,15 @@ class UserNoteWithALongNameRepository {
     _i1.DatabaseSession session,
     List<UserNoteWithALongName> rows, {
     required _i1.ColumnSelections<UserNoteWithALongNameTable> conflictColumns,
+    _i1.ColumnSelections<UserNoteWithALongNameTable>? updateColumns,
+    _i1.WhereExpressionBuilder<UserNoteWithALongNameTable>? conflictWhere,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsert<UserNoteWithALongName>(
       rows,
       conflictColumns: conflictColumns(UserNoteWithALongName.t),
+      updateColumns: updateColumns?.call(UserNoteWithALongName.t),
+      conflictWhere: conflictWhere?.call(UserNoteWithALongName.t),
       transaction: transaction,
     );
   }
@@ -424,11 +428,15 @@ class UserNoteWithALongNameRepository {
     _i1.DatabaseSession session,
     UserNoteWithALongName row, {
     required _i1.ColumnSelections<UserNoteWithALongNameTable> conflictColumns,
+    _i1.ColumnSelections<UserNoteWithALongNameTable>? updateColumns,
+    _i1.WhereExpressionBuilder<UserNoteWithALongNameTable>? conflictWhere,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsertRow<UserNoteWithALongName>(
       row,
       conflictColumns: conflictColumns(UserNoteWithALongName.t),
+      updateColumns: updateColumns?.call(UserNoteWithALongName.t),
+      conflictWhere: conflictWhere?.call(UserNoteWithALongName.t),
       transaction: transaction,
     );
   }

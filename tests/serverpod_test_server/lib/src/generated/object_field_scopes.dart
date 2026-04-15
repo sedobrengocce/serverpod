@@ -376,11 +376,15 @@ class ObjectFieldScopesRepository {
     _i1.DatabaseSession session,
     List<ObjectFieldScopes> rows, {
     required _i1.ColumnSelections<ObjectFieldScopesTable> conflictColumns,
+    _i1.ColumnSelections<ObjectFieldScopesTable>? updateColumns,
+    _i1.WhereExpressionBuilder<ObjectFieldScopesTable>? conflictWhere,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsert<ObjectFieldScopes>(
       rows,
       conflictColumns: conflictColumns(ObjectFieldScopes.t),
+      updateColumns: updateColumns?.call(ObjectFieldScopes.t),
+      conflictWhere: conflictWhere?.call(ObjectFieldScopes.t),
       transaction: transaction,
     );
   }
@@ -395,11 +399,15 @@ class ObjectFieldScopesRepository {
     _i1.DatabaseSession session,
     ObjectFieldScopes row, {
     required _i1.ColumnSelections<ObjectFieldScopesTable> conflictColumns,
+    _i1.ColumnSelections<ObjectFieldScopesTable>? updateColumns,
+    _i1.WhereExpressionBuilder<ObjectFieldScopesTable>? conflictWhere,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsertRow<ObjectFieldScopes>(
       row,
       conflictColumns: conflictColumns(ObjectFieldScopes.t),
+      updateColumns: updateColumns?.call(ObjectFieldScopes.t),
+      conflictWhere: conflictWhere?.call(ObjectFieldScopes.t),
       transaction: transaction,
     );
   }

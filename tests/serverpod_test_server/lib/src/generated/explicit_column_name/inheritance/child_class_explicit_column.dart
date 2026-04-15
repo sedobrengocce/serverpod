@@ -371,11 +371,15 @@ class ChildClassExplicitColumnRepository {
     List<ChildClassExplicitColumn> rows, {
     required _i2.ColumnSelections<ChildClassExplicitColumnTable>
     conflictColumns,
+    _i2.ColumnSelections<ChildClassExplicitColumnTable>? updateColumns,
+    _i2.WhereExpressionBuilder<ChildClassExplicitColumnTable>? conflictWhere,
     _i2.Transaction? transaction,
   }) async {
     return session.db.upsert<ChildClassExplicitColumn>(
       rows,
       conflictColumns: conflictColumns(ChildClassExplicitColumn.t),
+      updateColumns: updateColumns?.call(ChildClassExplicitColumn.t),
+      conflictWhere: conflictWhere?.call(ChildClassExplicitColumn.t),
       transaction: transaction,
     );
   }
@@ -391,11 +395,15 @@ class ChildClassExplicitColumnRepository {
     ChildClassExplicitColumn row, {
     required _i2.ColumnSelections<ChildClassExplicitColumnTable>
     conflictColumns,
+    _i2.ColumnSelections<ChildClassExplicitColumnTable>? updateColumns,
+    _i2.WhereExpressionBuilder<ChildClassExplicitColumnTable>? conflictWhere,
     _i2.Transaction? transaction,
   }) async {
     return session.db.upsertRow<ChildClassExplicitColumn>(
       row,
       conflictColumns: conflictColumns(ChildClassExplicitColumn.t),
+      updateColumns: updateColumns?.call(ChildClassExplicitColumn.t),
+      conflictWhere: conflictWhere?.call(ChildClassExplicitColumn.t),
       transaction: transaction,
     );
   }

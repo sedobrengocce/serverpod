@@ -449,11 +449,16 @@ class RelationToMultipleMaxFieldNameRepository {
     List<RelationToMultipleMaxFieldName> rows, {
     required _i1.ColumnSelections<RelationToMultipleMaxFieldNameTable>
     conflictColumns,
+    _i1.ColumnSelections<RelationToMultipleMaxFieldNameTable>? updateColumns,
+    _i1.WhereExpressionBuilder<RelationToMultipleMaxFieldNameTable>?
+    conflictWhere,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsert<RelationToMultipleMaxFieldName>(
       rows,
       conflictColumns: conflictColumns(RelationToMultipleMaxFieldName.t),
+      updateColumns: updateColumns?.call(RelationToMultipleMaxFieldName.t),
+      conflictWhere: conflictWhere?.call(RelationToMultipleMaxFieldName.t),
       transaction: transaction,
     );
   }
@@ -469,11 +474,16 @@ class RelationToMultipleMaxFieldNameRepository {
     RelationToMultipleMaxFieldName row, {
     required _i1.ColumnSelections<RelationToMultipleMaxFieldNameTable>
     conflictColumns,
+    _i1.ColumnSelections<RelationToMultipleMaxFieldNameTable>? updateColumns,
+    _i1.WhereExpressionBuilder<RelationToMultipleMaxFieldNameTable>?
+    conflictWhere,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsertRow<RelationToMultipleMaxFieldName>(
       row,
       conflictColumns: conflictColumns(RelationToMultipleMaxFieldName.t),
+      updateColumns: updateColumns?.call(RelationToMultipleMaxFieldName.t),
+      conflictWhere: conflictWhere?.call(RelationToMultipleMaxFieldName.t),
       transaction: transaction,
     );
   }

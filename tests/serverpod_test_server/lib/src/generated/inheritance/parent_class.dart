@@ -337,11 +337,15 @@ class ParentClassRepository {
     _i2.DatabaseSession session,
     List<ParentClass> rows, {
     required _i2.ColumnSelections<ParentClassTable> conflictColumns,
+    _i2.ColumnSelections<ParentClassTable>? updateColumns,
+    _i2.WhereExpressionBuilder<ParentClassTable>? conflictWhere,
     _i2.Transaction? transaction,
   }) async {
     return session.db.upsert<ParentClass>(
       rows,
       conflictColumns: conflictColumns(ParentClass.t),
+      updateColumns: updateColumns?.call(ParentClass.t),
+      conflictWhere: conflictWhere?.call(ParentClass.t),
       transaction: transaction,
     );
   }
@@ -356,11 +360,15 @@ class ParentClassRepository {
     _i2.DatabaseSession session,
     ParentClass row, {
     required _i2.ColumnSelections<ParentClassTable> conflictColumns,
+    _i2.ColumnSelections<ParentClassTable>? updateColumns,
+    _i2.WhereExpressionBuilder<ParentClassTable>? conflictWhere,
     _i2.Transaction? transaction,
   }) async {
     return session.db.upsertRow<ParentClass>(
       row,
       conflictColumns: conflictColumns(ParentClass.t),
+      updateColumns: updateColumns?.call(ParentClass.t),
+      conflictWhere: conflictWhere?.call(ParentClass.t),
       transaction: transaction,
     );
   }

@@ -424,11 +424,15 @@ class CustomerIntRepository {
     _i1.DatabaseSession session,
     List<CustomerInt> rows, {
     required _i1.ColumnSelections<CustomerIntTable> conflictColumns,
+    _i1.ColumnSelections<CustomerIntTable>? updateColumns,
+    _i1.WhereExpressionBuilder<CustomerIntTable>? conflictWhere,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsert<CustomerInt>(
       rows,
       conflictColumns: conflictColumns(CustomerInt.t),
+      updateColumns: updateColumns?.call(CustomerInt.t),
+      conflictWhere: conflictWhere?.call(CustomerInt.t),
       transaction: transaction,
     );
   }
@@ -443,11 +447,15 @@ class CustomerIntRepository {
     _i1.DatabaseSession session,
     CustomerInt row, {
     required _i1.ColumnSelections<CustomerIntTable> conflictColumns,
+    _i1.ColumnSelections<CustomerIntTable>? updateColumns,
+    _i1.WhereExpressionBuilder<CustomerIntTable>? conflictWhere,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsertRow<CustomerInt>(
       row,
       conflictColumns: conflictColumns(CustomerInt.t),
+      updateColumns: updateColumns?.call(CustomerInt.t),
+      conflictWhere: conflictWhere?.call(CustomerInt.t),
       transaction: transaction,
     );
   }

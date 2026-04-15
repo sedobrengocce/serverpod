@@ -425,11 +425,15 @@ class UuidDefaultMixRepository {
     _i1.DatabaseSession session,
     List<UuidDefaultMix> rows, {
     required _i1.ColumnSelections<UuidDefaultMixTable> conflictColumns,
+    _i1.ColumnSelections<UuidDefaultMixTable>? updateColumns,
+    _i1.WhereExpressionBuilder<UuidDefaultMixTable>? conflictWhere,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsert<UuidDefaultMix>(
       rows,
       conflictColumns: conflictColumns(UuidDefaultMix.t),
+      updateColumns: updateColumns?.call(UuidDefaultMix.t),
+      conflictWhere: conflictWhere?.call(UuidDefaultMix.t),
       transaction: transaction,
     );
   }
@@ -444,11 +448,15 @@ class UuidDefaultMixRepository {
     _i1.DatabaseSession session,
     UuidDefaultMix row, {
     required _i1.ColumnSelections<UuidDefaultMixTable> conflictColumns,
+    _i1.ColumnSelections<UuidDefaultMixTable>? updateColumns,
+    _i1.WhereExpressionBuilder<UuidDefaultMixTable>? conflictWhere,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsertRow<UuidDefaultMix>(
       row,
       conflictColumns: conflictColumns(UuidDefaultMix.t),
+      updateColumns: updateColumns?.call(UuidDefaultMix.t),
+      conflictWhere: conflictWhere?.call(UuidDefaultMix.t),
       transaction: transaction,
     );
   }

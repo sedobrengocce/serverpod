@@ -345,11 +345,15 @@ class ObjectWithByteDataRepository {
     _i1.DatabaseSession session,
     List<ObjectWithByteData> rows, {
     required _i1.ColumnSelections<ObjectWithByteDataTable> conflictColumns,
+    _i1.ColumnSelections<ObjectWithByteDataTable>? updateColumns,
+    _i1.WhereExpressionBuilder<ObjectWithByteDataTable>? conflictWhere,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsert<ObjectWithByteData>(
       rows,
       conflictColumns: conflictColumns(ObjectWithByteData.t),
+      updateColumns: updateColumns?.call(ObjectWithByteData.t),
+      conflictWhere: conflictWhere?.call(ObjectWithByteData.t),
       transaction: transaction,
     );
   }
@@ -364,11 +368,15 @@ class ObjectWithByteDataRepository {
     _i1.DatabaseSession session,
     ObjectWithByteData row, {
     required _i1.ColumnSelections<ObjectWithByteDataTable> conflictColumns,
+    _i1.ColumnSelections<ObjectWithByteDataTable>? updateColumns,
+    _i1.WhereExpressionBuilder<ObjectWithByteDataTable>? conflictWhere,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsertRow<ObjectWithByteData>(
       row,
       conflictColumns: conflictColumns(ObjectWithByteData.t),
+      updateColumns: updateColumns?.call(ObjectWithByteData.t),
+      conflictWhere: conflictWhere?.call(ObjectWithByteData.t),
       transaction: transaction,
     );
   }

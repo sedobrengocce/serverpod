@@ -501,11 +501,15 @@ class TeamIntRepository {
     _i1.DatabaseSession session,
     List<TeamInt> rows, {
     required _i1.ColumnSelections<TeamIntTable> conflictColumns,
+    _i1.ColumnSelections<TeamIntTable>? updateColumns,
+    _i1.WhereExpressionBuilder<TeamIntTable>? conflictWhere,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsert<TeamInt>(
       rows,
       conflictColumns: conflictColumns(TeamInt.t),
+      updateColumns: updateColumns?.call(TeamInt.t),
+      conflictWhere: conflictWhere?.call(TeamInt.t),
       transaction: transaction,
     );
   }
@@ -520,11 +524,15 @@ class TeamIntRepository {
     _i1.DatabaseSession session,
     TeamInt row, {
     required _i1.ColumnSelections<TeamIntTable> conflictColumns,
+    _i1.ColumnSelections<TeamIntTable>? updateColumns,
+    _i1.WhereExpressionBuilder<TeamIntTable>? conflictWhere,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsertRow<TeamInt>(
       row,
       conflictColumns: conflictColumns(TeamInt.t),
+      updateColumns: updateColumns?.call(TeamInt.t),
+      conflictWhere: conflictWhere?.call(TeamInt.t),
       transaction: transaction,
     );
   }

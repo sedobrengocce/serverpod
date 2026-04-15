@@ -395,11 +395,15 @@ class ArenaUuidRepository {
     _i1.DatabaseSession session,
     List<ArenaUuid> rows, {
     required _i1.ColumnSelections<ArenaUuidTable> conflictColumns,
+    _i1.ColumnSelections<ArenaUuidTable>? updateColumns,
+    _i1.WhereExpressionBuilder<ArenaUuidTable>? conflictWhere,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsert<ArenaUuid>(
       rows,
       conflictColumns: conflictColumns(ArenaUuid.t),
+      updateColumns: updateColumns?.call(ArenaUuid.t),
+      conflictWhere: conflictWhere?.call(ArenaUuid.t),
       transaction: transaction,
     );
   }
@@ -414,11 +418,15 @@ class ArenaUuidRepository {
     _i1.DatabaseSession session,
     ArenaUuid row, {
     required _i1.ColumnSelections<ArenaUuidTable> conflictColumns,
+    _i1.ColumnSelections<ArenaUuidTable>? updateColumns,
+    _i1.WhereExpressionBuilder<ArenaUuidTable>? conflictWhere,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsertRow<ArenaUuid>(
       row,
       conflictColumns: conflictColumns(ArenaUuid.t),
+      updateColumns: updateColumns?.call(ArenaUuid.t),
+      conflictWhere: conflictWhere?.call(ArenaUuid.t),
       transaction: transaction,
     );
   }

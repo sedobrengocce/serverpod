@@ -398,11 +398,15 @@ class ParentEntityRepository {
     _i1.DatabaseSession session,
     List<ParentEntity> rows, {
     required _i1.ColumnSelections<ParentEntityTable> conflictColumns,
+    _i1.ColumnSelections<ParentEntityTable>? updateColumns,
+    _i1.WhereExpressionBuilder<ParentEntityTable>? conflictWhere,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsert<ParentEntity>(
       rows,
       conflictColumns: conflictColumns(ParentEntity.t),
+      updateColumns: updateColumns?.call(ParentEntity.t),
+      conflictWhere: conflictWhere?.call(ParentEntity.t),
       transaction: transaction,
     );
   }
@@ -417,11 +421,15 @@ class ParentEntityRepository {
     _i1.DatabaseSession session,
     ParentEntity row, {
     required _i1.ColumnSelections<ParentEntityTable> conflictColumns,
+    _i1.ColumnSelections<ParentEntityTable>? updateColumns,
+    _i1.WhereExpressionBuilder<ParentEntityTable>? conflictWhere,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsertRow<ParentEntity>(
       row,
       conflictColumns: conflictColumns(ParentEntity.t),
+      updateColumns: updateColumns?.call(ParentEntity.t),
+      conflictWhere: conflictWhere?.call(ParentEntity.t),
       transaction: transaction,
     );
   }

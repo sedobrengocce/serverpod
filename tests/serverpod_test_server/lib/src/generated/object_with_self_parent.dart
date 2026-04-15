@@ -343,11 +343,15 @@ class ObjectWithSelfParentRepository {
     _i1.DatabaseSession session,
     List<ObjectWithSelfParent> rows, {
     required _i1.ColumnSelections<ObjectWithSelfParentTable> conflictColumns,
+    _i1.ColumnSelections<ObjectWithSelfParentTable>? updateColumns,
+    _i1.WhereExpressionBuilder<ObjectWithSelfParentTable>? conflictWhere,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsert<ObjectWithSelfParent>(
       rows,
       conflictColumns: conflictColumns(ObjectWithSelfParent.t),
+      updateColumns: updateColumns?.call(ObjectWithSelfParent.t),
+      conflictWhere: conflictWhere?.call(ObjectWithSelfParent.t),
       transaction: transaction,
     );
   }
@@ -362,11 +366,15 @@ class ObjectWithSelfParentRepository {
     _i1.DatabaseSession session,
     ObjectWithSelfParent row, {
     required _i1.ColumnSelections<ObjectWithSelfParentTable> conflictColumns,
+    _i1.ColumnSelections<ObjectWithSelfParentTable>? updateColumns,
+    _i1.WhereExpressionBuilder<ObjectWithSelfParentTable>? conflictWhere,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsertRow<ObjectWithSelfParent>(
       row,
       conflictColumns: conflictColumns(ObjectWithSelfParent.t),
+      updateColumns: updateColumns?.call(ObjectWithSelfParent.t),
+      conflictWhere: conflictWhere?.call(ObjectWithSelfParent.t),
       transaction: transaction,
     );
   }

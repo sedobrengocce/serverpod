@@ -445,11 +445,15 @@ class ObjectWithSparseVectorRepository {
     _i1.DatabaseSession session,
     List<ObjectWithSparseVector> rows, {
     required _i1.ColumnSelections<ObjectWithSparseVectorTable> conflictColumns,
+    _i1.ColumnSelections<ObjectWithSparseVectorTable>? updateColumns,
+    _i1.WhereExpressionBuilder<ObjectWithSparseVectorTable>? conflictWhere,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsert<ObjectWithSparseVector>(
       rows,
       conflictColumns: conflictColumns(ObjectWithSparseVector.t),
+      updateColumns: updateColumns?.call(ObjectWithSparseVector.t),
+      conflictWhere: conflictWhere?.call(ObjectWithSparseVector.t),
       transaction: transaction,
     );
   }
@@ -464,11 +468,15 @@ class ObjectWithSparseVectorRepository {
     _i1.DatabaseSession session,
     ObjectWithSparseVector row, {
     required _i1.ColumnSelections<ObjectWithSparseVectorTable> conflictColumns,
+    _i1.ColumnSelections<ObjectWithSparseVectorTable>? updateColumns,
+    _i1.WhereExpressionBuilder<ObjectWithSparseVectorTable>? conflictWhere,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsertRow<ObjectWithSparseVector>(
       row,
       conflictColumns: conflictColumns(ObjectWithSparseVector.t),
+      updateColumns: updateColumns?.call(ObjectWithSparseVector.t),
+      conflictWhere: conflictWhere?.call(ObjectWithSparseVector.t),
       transaction: transaction,
     );
   }

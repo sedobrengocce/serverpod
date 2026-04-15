@@ -425,11 +425,15 @@ class CourseRepository {
     _i1.DatabaseSession session,
     List<Course> rows, {
     required _i1.ColumnSelections<CourseTable> conflictColumns,
+    _i1.ColumnSelections<CourseTable>? updateColumns,
+    _i1.WhereExpressionBuilder<CourseTable>? conflictWhere,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsert<Course>(
       rows,
       conflictColumns: conflictColumns(Course.t),
+      updateColumns: updateColumns?.call(Course.t),
+      conflictWhere: conflictWhere?.call(Course.t),
       transaction: transaction,
     );
   }
@@ -444,11 +448,15 @@ class CourseRepository {
     _i1.DatabaseSession session,
     Course row, {
     required _i1.ColumnSelections<CourseTable> conflictColumns,
+    _i1.ColumnSelections<CourseTable>? updateColumns,
+    _i1.WhereExpressionBuilder<CourseTable>? conflictWhere,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsertRow<Course>(
       row,
       conflictColumns: conflictColumns(Course.t),
+      updateColumns: updateColumns?.call(Course.t),
+      conflictWhere: conflictWhere?.call(Course.t),
       transaction: transaction,
     );
   }

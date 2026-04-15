@@ -429,11 +429,15 @@ class ChildWithInheritedIdRepository {
     _i2.DatabaseSession session,
     List<ChildWithInheritedId> rows, {
     required _i2.ColumnSelections<ChildWithInheritedIdTable> conflictColumns,
+    _i2.ColumnSelections<ChildWithInheritedIdTable>? updateColumns,
+    _i2.WhereExpressionBuilder<ChildWithInheritedIdTable>? conflictWhere,
     _i2.Transaction? transaction,
   }) async {
     return session.db.upsert<ChildWithInheritedId>(
       rows,
       conflictColumns: conflictColumns(ChildWithInheritedId.t),
+      updateColumns: updateColumns?.call(ChildWithInheritedId.t),
+      conflictWhere: conflictWhere?.call(ChildWithInheritedId.t),
       transaction: transaction,
     );
   }
@@ -448,11 +452,15 @@ class ChildWithInheritedIdRepository {
     _i2.DatabaseSession session,
     ChildWithInheritedId row, {
     required _i2.ColumnSelections<ChildWithInheritedIdTable> conflictColumns,
+    _i2.ColumnSelections<ChildWithInheritedIdTable>? updateColumns,
+    _i2.WhereExpressionBuilder<ChildWithInheritedIdTable>? conflictWhere,
     _i2.Transaction? transaction,
   }) async {
     return session.db.upsertRow<ChildWithInheritedId>(
       row,
       conflictColumns: conflictColumns(ChildWithInheritedId.t),
+      updateColumns: updateColumns?.call(ChildWithInheritedId.t),
+      conflictWhere: conflictWhere?.call(ChildWithInheritedId.t),
       transaction: transaction,
     );
   }

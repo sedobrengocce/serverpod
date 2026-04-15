@@ -496,11 +496,15 @@ class OrganizationRepository {
     _i1.DatabaseSession session,
     List<Organization> rows, {
     required _i1.ColumnSelections<OrganizationTable> conflictColumns,
+    _i1.ColumnSelections<OrganizationTable>? updateColumns,
+    _i1.WhereExpressionBuilder<OrganizationTable>? conflictWhere,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsert<Organization>(
       rows,
       conflictColumns: conflictColumns(Organization.t),
+      updateColumns: updateColumns?.call(Organization.t),
+      conflictWhere: conflictWhere?.call(Organization.t),
       transaction: transaction,
     );
   }
@@ -515,11 +519,15 @@ class OrganizationRepository {
     _i1.DatabaseSession session,
     Organization row, {
     required _i1.ColumnSelections<OrganizationTable> conflictColumns,
+    _i1.ColumnSelections<OrganizationTable>? updateColumns,
+    _i1.WhereExpressionBuilder<OrganizationTable>? conflictWhere,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsertRow<Organization>(
       row,
       conflictColumns: conflictColumns(Organization.t),
+      updateColumns: updateColumns?.call(Organization.t),
+      conflictWhere: conflictWhere?.call(Organization.t),
       transaction: transaction,
     );
   }

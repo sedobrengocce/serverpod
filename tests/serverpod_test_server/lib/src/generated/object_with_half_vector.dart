@@ -507,11 +507,15 @@ class ObjectWithHalfVectorRepository {
     _i1.DatabaseSession session,
     List<ObjectWithHalfVector> rows, {
     required _i1.ColumnSelections<ObjectWithHalfVectorTable> conflictColumns,
+    _i1.ColumnSelections<ObjectWithHalfVectorTable>? updateColumns,
+    _i1.WhereExpressionBuilder<ObjectWithHalfVectorTable>? conflictWhere,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsert<ObjectWithHalfVector>(
       rows,
       conflictColumns: conflictColumns(ObjectWithHalfVector.t),
+      updateColumns: updateColumns?.call(ObjectWithHalfVector.t),
+      conflictWhere: conflictWhere?.call(ObjectWithHalfVector.t),
       transaction: transaction,
     );
   }
@@ -526,11 +530,15 @@ class ObjectWithHalfVectorRepository {
     _i1.DatabaseSession session,
     ObjectWithHalfVector row, {
     required _i1.ColumnSelections<ObjectWithHalfVectorTable> conflictColumns,
+    _i1.ColumnSelections<ObjectWithHalfVectorTable>? updateColumns,
+    _i1.WhereExpressionBuilder<ObjectWithHalfVectorTable>? conflictWhere,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsertRow<ObjectWithHalfVector>(
       row,
       conflictColumns: conflictColumns(ObjectWithHalfVector.t),
+      updateColumns: updateColumns?.call(ObjectWithHalfVector.t),
+      conflictWhere: conflictWhere?.call(ObjectWithHalfVector.t),
       transaction: transaction,
     );
   }

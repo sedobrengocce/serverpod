@@ -386,11 +386,15 @@ class BigIntDefaultModelRepository {
     _i1.DatabaseSession session,
     List<BigIntDefaultModel> rows, {
     required _i1.ColumnSelections<BigIntDefaultModelTable> conflictColumns,
+    _i1.ColumnSelections<BigIntDefaultModelTable>? updateColumns,
+    _i1.WhereExpressionBuilder<BigIntDefaultModelTable>? conflictWhere,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsert<BigIntDefaultModel>(
       rows,
       conflictColumns: conflictColumns(BigIntDefaultModel.t),
+      updateColumns: updateColumns?.call(BigIntDefaultModel.t),
+      conflictWhere: conflictWhere?.call(BigIntDefaultModel.t),
       transaction: transaction,
     );
   }
@@ -405,11 +409,15 @@ class BigIntDefaultModelRepository {
     _i1.DatabaseSession session,
     BigIntDefaultModel row, {
     required _i1.ColumnSelections<BigIntDefaultModelTable> conflictColumns,
+    _i1.ColumnSelections<BigIntDefaultModelTable>? updateColumns,
+    _i1.WhereExpressionBuilder<BigIntDefaultModelTable>? conflictWhere,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsertRow<BigIntDefaultModel>(
       row,
       conflictColumns: conflictColumns(BigIntDefaultModel.t),
+      updateColumns: updateColumns?.call(BigIntDefaultModel.t),
+      conflictWhere: conflictWhere?.call(BigIntDefaultModel.t),
       transaction: transaction,
     );
   }

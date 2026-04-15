@@ -480,11 +480,15 @@ class PersonRepository {
     _i1.DatabaseSession session,
     List<Person> rows, {
     required _i1.ColumnSelections<PersonTable> conflictColumns,
+    _i1.ColumnSelections<PersonTable>? updateColumns,
+    _i1.WhereExpressionBuilder<PersonTable>? conflictWhere,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsert<Person>(
       rows,
       conflictColumns: conflictColumns(Person.t),
+      updateColumns: updateColumns?.call(Person.t),
+      conflictWhere: conflictWhere?.call(Person.t),
       transaction: transaction,
     );
   }
@@ -499,11 +503,15 @@ class PersonRepository {
     _i1.DatabaseSession session,
     Person row, {
     required _i1.ColumnSelections<PersonTable> conflictColumns,
+    _i1.ColumnSelections<PersonTable>? updateColumns,
+    _i1.WhereExpressionBuilder<PersonTable>? conflictWhere,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsertRow<Person>(
       row,
       conflictColumns: conflictColumns(Person.t),
+      updateColumns: updateColumns?.call(Person.t),
+      conflictWhere: conflictWhere?.call(Person.t),
       transaction: transaction,
     );
   }

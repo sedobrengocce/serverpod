@@ -364,11 +364,15 @@ class EmployeeRepository {
     _i1.DatabaseSession session,
     List<Employee> rows, {
     required _i1.ColumnSelections<EmployeeTable> conflictColumns,
+    _i1.ColumnSelections<EmployeeTable>? updateColumns,
+    _i1.WhereExpressionBuilder<EmployeeTable>? conflictWhere,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsert<Employee>(
       rows,
       conflictColumns: conflictColumns(Employee.t),
+      updateColumns: updateColumns?.call(Employee.t),
+      conflictWhere: conflictWhere?.call(Employee.t),
       transaction: transaction,
     );
   }
@@ -383,11 +387,15 @@ class EmployeeRepository {
     _i1.DatabaseSession session,
     Employee row, {
     required _i1.ColumnSelections<EmployeeTable> conflictColumns,
+    _i1.ColumnSelections<EmployeeTable>? updateColumns,
+    _i1.WhereExpressionBuilder<EmployeeTable>? conflictWhere,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsertRow<Employee>(
       row,
       conflictColumns: conflictColumns(Employee.t),
+      updateColumns: updateColumns?.call(Employee.t),
+      conflictWhere: conflictWhere?.call(Employee.t),
       transaction: transaction,
     );
   }

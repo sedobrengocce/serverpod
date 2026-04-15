@@ -500,11 +500,15 @@ class CityRepository {
     _i1.DatabaseSession session,
     List<City> rows, {
     required _i1.ColumnSelections<CityTable> conflictColumns,
+    _i1.ColumnSelections<CityTable>? updateColumns,
+    _i1.WhereExpressionBuilder<CityTable>? conflictWhere,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsert<City>(
       rows,
       conflictColumns: conflictColumns(City.t),
+      updateColumns: updateColumns?.call(City.t),
+      conflictWhere: conflictWhere?.call(City.t),
       transaction: transaction,
     );
   }
@@ -519,11 +523,15 @@ class CityRepository {
     _i1.DatabaseSession session,
     City row, {
     required _i1.ColumnSelections<CityTable> conflictColumns,
+    _i1.ColumnSelections<CityTable>? updateColumns,
+    _i1.WhereExpressionBuilder<CityTable>? conflictWhere,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsertRow<City>(
       row,
       conflictColumns: conflictColumns(City.t),
+      updateColumns: updateColumns?.call(City.t),
+      conflictWhere: conflictWhere?.call(City.t),
       transaction: transaction,
     );
   }

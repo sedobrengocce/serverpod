@@ -487,11 +487,15 @@ class ObjectWithBitRepository {
     _i1.DatabaseSession session,
     List<ObjectWithBit> rows, {
     required _i1.ColumnSelections<ObjectWithBitTable> conflictColumns,
+    _i1.ColumnSelections<ObjectWithBitTable>? updateColumns,
+    _i1.WhereExpressionBuilder<ObjectWithBitTable>? conflictWhere,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsert<ObjectWithBit>(
       rows,
       conflictColumns: conflictColumns(ObjectWithBit.t),
+      updateColumns: updateColumns?.call(ObjectWithBit.t),
+      conflictWhere: conflictWhere?.call(ObjectWithBit.t),
       transaction: transaction,
     );
   }
@@ -506,11 +510,15 @@ class ObjectWithBitRepository {
     _i1.DatabaseSession session,
     ObjectWithBit row, {
     required _i1.ColumnSelections<ObjectWithBitTable> conflictColumns,
+    _i1.ColumnSelections<ObjectWithBitTable>? updateColumns,
+    _i1.WhereExpressionBuilder<ObjectWithBitTable>? conflictWhere,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsertRow<ObjectWithBit>(
       row,
       conflictColumns: conflictColumns(ObjectWithBit.t),
+      updateColumns: updateColumns?.call(ObjectWithBit.t),
+      conflictWhere: conflictWhere?.call(ObjectWithBit.t),
       transaction: transaction,
     );
   }

@@ -467,11 +467,15 @@ class MultipleMaxFieldNameRepository {
     _i1.DatabaseSession session,
     List<MultipleMaxFieldName> rows, {
     required _i1.ColumnSelections<MultipleMaxFieldNameTable> conflictColumns,
+    _i1.ColumnSelections<MultipleMaxFieldNameTable>? updateColumns,
+    _i1.WhereExpressionBuilder<MultipleMaxFieldNameTable>? conflictWhere,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsert<MultipleMaxFieldName>(
       rows,
       conflictColumns: conflictColumns(MultipleMaxFieldName.t),
+      updateColumns: updateColumns?.call(MultipleMaxFieldName.t),
+      conflictWhere: conflictWhere?.call(MultipleMaxFieldName.t),
       transaction: transaction,
     );
   }
@@ -486,11 +490,15 @@ class MultipleMaxFieldNameRepository {
     _i1.DatabaseSession session,
     MultipleMaxFieldName row, {
     required _i1.ColumnSelections<MultipleMaxFieldNameTable> conflictColumns,
+    _i1.ColumnSelections<MultipleMaxFieldNameTable>? updateColumns,
+    _i1.WhereExpressionBuilder<MultipleMaxFieldNameTable>? conflictWhere,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsertRow<MultipleMaxFieldName>(
       row,
       conflictColumns: conflictColumns(MultipleMaxFieldName.t),
+      updateColumns: updateColumns?.call(MultipleMaxFieldName.t),
+      conflictWhere: conflictWhere?.call(MultipleMaxFieldName.t),
       transaction: transaction,
     );
   }

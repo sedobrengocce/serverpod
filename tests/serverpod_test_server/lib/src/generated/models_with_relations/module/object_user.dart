@@ -419,11 +419,15 @@ class ObjectUserRepository {
     _i1.DatabaseSession session,
     List<ObjectUser> rows, {
     required _i1.ColumnSelections<ObjectUserTable> conflictColumns,
+    _i1.ColumnSelections<ObjectUserTable>? updateColumns,
+    _i1.WhereExpressionBuilder<ObjectUserTable>? conflictWhere,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsert<ObjectUser>(
       rows,
       conflictColumns: conflictColumns(ObjectUser.t),
+      updateColumns: updateColumns?.call(ObjectUser.t),
+      conflictWhere: conflictWhere?.call(ObjectUser.t),
       transaction: transaction,
     );
   }
@@ -438,11 +442,15 @@ class ObjectUserRepository {
     _i1.DatabaseSession session,
     ObjectUser row, {
     required _i1.ColumnSelections<ObjectUserTable> conflictColumns,
+    _i1.ColumnSelections<ObjectUserTable>? updateColumns,
+    _i1.WhereExpressionBuilder<ObjectUserTable>? conflictWhere,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsertRow<ObjectUser>(
       row,
       conflictColumns: conflictColumns(ObjectUser.t),
+      updateColumns: updateColumns?.call(ObjectUser.t),
+      conflictWhere: conflictWhere?.call(ObjectUser.t),
       transaction: transaction,
     );
   }

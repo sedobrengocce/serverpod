@@ -504,11 +504,15 @@ class PersonWithLongTableNameRepository {
     _i1.DatabaseSession session,
     List<PersonWithLongTableName> rows, {
     required _i1.ColumnSelections<PersonWithLongTableNameTable> conflictColumns,
+    _i1.ColumnSelections<PersonWithLongTableNameTable>? updateColumns,
+    _i1.WhereExpressionBuilder<PersonWithLongTableNameTable>? conflictWhere,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsert<PersonWithLongTableName>(
       rows,
       conflictColumns: conflictColumns(PersonWithLongTableName.t),
+      updateColumns: updateColumns?.call(PersonWithLongTableName.t),
+      conflictWhere: conflictWhere?.call(PersonWithLongTableName.t),
       transaction: transaction,
     );
   }
@@ -523,11 +527,15 @@ class PersonWithLongTableNameRepository {
     _i1.DatabaseSession session,
     PersonWithLongTableName row, {
     required _i1.ColumnSelections<PersonWithLongTableNameTable> conflictColumns,
+    _i1.ColumnSelections<PersonWithLongTableNameTable>? updateColumns,
+    _i1.WhereExpressionBuilder<PersonWithLongTableNameTable>? conflictWhere,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsertRow<PersonWithLongTableName>(
       row,
       conflictColumns: conflictColumns(PersonWithLongTableName.t),
+      updateColumns: updateColumns?.call(PersonWithLongTableName.t),
+      conflictWhere: conflictWhere?.call(PersonWithLongTableName.t),
       transaction: transaction,
     );
   }

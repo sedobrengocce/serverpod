@@ -372,11 +372,15 @@ class DoubleDefaultRepository {
     _i1.DatabaseSession session,
     List<DoubleDefault> rows, {
     required _i1.ColumnSelections<DoubleDefaultTable> conflictColumns,
+    _i1.ColumnSelections<DoubleDefaultTable>? updateColumns,
+    _i1.WhereExpressionBuilder<DoubleDefaultTable>? conflictWhere,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsert<DoubleDefault>(
       rows,
       conflictColumns: conflictColumns(DoubleDefault.t),
+      updateColumns: updateColumns?.call(DoubleDefault.t),
+      conflictWhere: conflictWhere?.call(DoubleDefault.t),
       transaction: transaction,
     );
   }
@@ -391,11 +395,15 @@ class DoubleDefaultRepository {
     _i1.DatabaseSession session,
     DoubleDefault row, {
     required _i1.ColumnSelections<DoubleDefaultTable> conflictColumns,
+    _i1.ColumnSelections<DoubleDefaultTable>? updateColumns,
+    _i1.WhereExpressionBuilder<DoubleDefaultTable>? conflictWhere,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsertRow<DoubleDefault>(
       row,
       conflictColumns: conflictColumns(DoubleDefault.t),
+      updateColumns: updateColumns?.call(DoubleDefault.t),
+      conflictWhere: conflictWhere?.call(DoubleDefault.t),
       transaction: transaction,
     );
   }

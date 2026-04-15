@@ -496,11 +496,15 @@ class MemberRepository {
     _i1.DatabaseSession session,
     List<Member> rows, {
     required _i1.ColumnSelections<MemberTable> conflictColumns,
+    _i1.ColumnSelections<MemberTable>? updateColumns,
+    _i1.WhereExpressionBuilder<MemberTable>? conflictWhere,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsert<Member>(
       rows,
       conflictColumns: conflictColumns(Member.t),
+      updateColumns: updateColumns?.call(Member.t),
+      conflictWhere: conflictWhere?.call(Member.t),
       transaction: transaction,
     );
   }
@@ -515,11 +519,15 @@ class MemberRepository {
     _i1.DatabaseSession session,
     Member row, {
     required _i1.ColumnSelections<MemberTable> conflictColumns,
+    _i1.ColumnSelections<MemberTable>? updateColumns,
+    _i1.WhereExpressionBuilder<MemberTable>? conflictWhere,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsertRow<Member>(
       row,
       conflictColumns: conflictColumns(Member.t),
+      updateColumns: updateColumns?.call(Member.t),
+      conflictWhere: conflictWhere?.call(Member.t),
       transaction: transaction,
     );
   }

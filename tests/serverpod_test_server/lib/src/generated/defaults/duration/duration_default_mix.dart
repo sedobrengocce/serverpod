@@ -449,11 +449,15 @@ class DurationDefaultMixRepository {
     _i1.DatabaseSession session,
     List<DurationDefaultMix> rows, {
     required _i1.ColumnSelections<DurationDefaultMixTable> conflictColumns,
+    _i1.ColumnSelections<DurationDefaultMixTable>? updateColumns,
+    _i1.WhereExpressionBuilder<DurationDefaultMixTable>? conflictWhere,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsert<DurationDefaultMix>(
       rows,
       conflictColumns: conflictColumns(DurationDefaultMix.t),
+      updateColumns: updateColumns?.call(DurationDefaultMix.t),
+      conflictWhere: conflictWhere?.call(DurationDefaultMix.t),
       transaction: transaction,
     );
   }
@@ -468,11 +472,15 @@ class DurationDefaultMixRepository {
     _i1.DatabaseSession session,
     DurationDefaultMix row, {
     required _i1.ColumnSelections<DurationDefaultMixTable> conflictColumns,
+    _i1.ColumnSelections<DurationDefaultMixTable>? updateColumns,
+    _i1.WhereExpressionBuilder<DurationDefaultMixTable>? conflictWhere,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsertRow<DurationDefaultMix>(
       row,
       conflictColumns: conflictColumns(DurationDefaultMix.t),
+      updateColumns: updateColumns?.call(DurationDefaultMix.t),
+      conflictWhere: conflictWhere?.call(DurationDefaultMix.t),
       transaction: transaction,
     );
   }

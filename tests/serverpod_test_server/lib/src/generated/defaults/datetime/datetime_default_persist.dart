@@ -391,11 +391,15 @@ class DateTimeDefaultPersistRepository {
     _i1.DatabaseSession session,
     List<DateTimeDefaultPersist> rows, {
     required _i1.ColumnSelections<DateTimeDefaultPersistTable> conflictColumns,
+    _i1.ColumnSelections<DateTimeDefaultPersistTable>? updateColumns,
+    _i1.WhereExpressionBuilder<DateTimeDefaultPersistTable>? conflictWhere,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsert<DateTimeDefaultPersist>(
       rows,
       conflictColumns: conflictColumns(DateTimeDefaultPersist.t),
+      updateColumns: updateColumns?.call(DateTimeDefaultPersist.t),
+      conflictWhere: conflictWhere?.call(DateTimeDefaultPersist.t),
       transaction: transaction,
     );
   }
@@ -410,11 +414,15 @@ class DateTimeDefaultPersistRepository {
     _i1.DatabaseSession session,
     DateTimeDefaultPersist row, {
     required _i1.ColumnSelections<DateTimeDefaultPersistTable> conflictColumns,
+    _i1.ColumnSelections<DateTimeDefaultPersistTable>? updateColumns,
+    _i1.WhereExpressionBuilder<DateTimeDefaultPersistTable>? conflictWhere,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsertRow<DateTimeDefaultPersist>(
       row,
       conflictColumns: conflictColumns(DateTimeDefaultPersist.t),
+      updateColumns: updateColumns?.call(DateTimeDefaultPersist.t),
+      conflictWhere: conflictWhere?.call(DateTimeDefaultPersist.t),
       transaction: transaction,
     );
   }

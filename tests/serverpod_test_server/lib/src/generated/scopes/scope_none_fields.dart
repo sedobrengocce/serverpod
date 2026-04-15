@@ -377,11 +377,15 @@ class ScopeNoneFieldsRepository {
     _i1.DatabaseSession session,
     List<ScopeNoneFields> rows, {
     required _i1.ColumnSelections<ScopeNoneFieldsTable> conflictColumns,
+    _i1.ColumnSelections<ScopeNoneFieldsTable>? updateColumns,
+    _i1.WhereExpressionBuilder<ScopeNoneFieldsTable>? conflictWhere,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsert<ScopeNoneFields>(
       rows,
       conflictColumns: conflictColumns(ScopeNoneFields.t),
+      updateColumns: updateColumns?.call(ScopeNoneFields.t),
+      conflictWhere: conflictWhere?.call(ScopeNoneFields.t),
       transaction: transaction,
     );
   }
@@ -396,11 +400,15 @@ class ScopeNoneFieldsRepository {
     _i1.DatabaseSession session,
     ScopeNoneFields row, {
     required _i1.ColumnSelections<ScopeNoneFieldsTable> conflictColumns,
+    _i1.ColumnSelections<ScopeNoneFieldsTable>? updateColumns,
+    _i1.WhereExpressionBuilder<ScopeNoneFieldsTable>? conflictWhere,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsertRow<ScopeNoneFields>(
       row,
       conflictColumns: conflictColumns(ScopeNoneFields.t),
+      updateColumns: updateColumns?.call(ScopeNoneFields.t),
+      conflictWhere: conflictWhere?.call(ScopeNoneFields.t),
       transaction: transaction,
     );
   }

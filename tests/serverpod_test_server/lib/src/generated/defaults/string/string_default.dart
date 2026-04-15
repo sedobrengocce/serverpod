@@ -371,11 +371,15 @@ class StringDefaultRepository {
     _i1.DatabaseSession session,
     List<StringDefault> rows, {
     required _i1.ColumnSelections<StringDefaultTable> conflictColumns,
+    _i1.ColumnSelections<StringDefaultTable>? updateColumns,
+    _i1.WhereExpressionBuilder<StringDefaultTable>? conflictWhere,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsert<StringDefault>(
       rows,
       conflictColumns: conflictColumns(StringDefault.t),
+      updateColumns: updateColumns?.call(StringDefault.t),
+      conflictWhere: conflictWhere?.call(StringDefault.t),
       transaction: transaction,
     );
   }
@@ -390,11 +394,15 @@ class StringDefaultRepository {
     _i1.DatabaseSession session,
     StringDefault row, {
     required _i1.ColumnSelections<StringDefaultTable> conflictColumns,
+    _i1.ColumnSelections<StringDefaultTable>? updateColumns,
+    _i1.WhereExpressionBuilder<StringDefaultTable>? conflictWhere,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsertRow<StringDefault>(
       row,
       conflictColumns: conflictColumns(StringDefault.t),
+      updateColumns: updateColumns?.call(StringDefault.t),
+      conflictWhere: conflictWhere?.call(StringDefault.t),
       transaction: transaction,
     );
   }

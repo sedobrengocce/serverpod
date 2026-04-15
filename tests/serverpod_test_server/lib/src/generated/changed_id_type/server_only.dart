@@ -306,11 +306,16 @@ class ServerOnlyChangedIdFieldClassRepository {
     List<ServerOnlyChangedIdFieldClass> rows, {
     required _i1.ColumnSelections<ServerOnlyChangedIdFieldClassTable>
     conflictColumns,
+    _i1.ColumnSelections<ServerOnlyChangedIdFieldClassTable>? updateColumns,
+    _i1.WhereExpressionBuilder<ServerOnlyChangedIdFieldClassTable>?
+    conflictWhere,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsert<ServerOnlyChangedIdFieldClass>(
       rows,
       conflictColumns: conflictColumns(ServerOnlyChangedIdFieldClass.t),
+      updateColumns: updateColumns?.call(ServerOnlyChangedIdFieldClass.t),
+      conflictWhere: conflictWhere?.call(ServerOnlyChangedIdFieldClass.t),
       transaction: transaction,
     );
   }
@@ -326,11 +331,16 @@ class ServerOnlyChangedIdFieldClassRepository {
     ServerOnlyChangedIdFieldClass row, {
     required _i1.ColumnSelections<ServerOnlyChangedIdFieldClassTable>
     conflictColumns,
+    _i1.ColumnSelections<ServerOnlyChangedIdFieldClassTable>? updateColumns,
+    _i1.WhereExpressionBuilder<ServerOnlyChangedIdFieldClassTable>?
+    conflictWhere,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsertRow<ServerOnlyChangedIdFieldClass>(
       row,
       conflictColumns: conflictColumns(ServerOnlyChangedIdFieldClass.t),
+      updateColumns: updateColumns?.call(ServerOnlyChangedIdFieldClass.t),
+      conflictWhere: conflictWhere?.call(ServerOnlyChangedIdFieldClass.t),
       transaction: transaction,
     );
   }

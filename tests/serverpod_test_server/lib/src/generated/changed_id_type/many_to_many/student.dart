@@ -426,11 +426,15 @@ class StudentUuidRepository {
     _i1.DatabaseSession session,
     List<StudentUuid> rows, {
     required _i1.ColumnSelections<StudentUuidTable> conflictColumns,
+    _i1.ColumnSelections<StudentUuidTable>? updateColumns,
+    _i1.WhereExpressionBuilder<StudentUuidTable>? conflictWhere,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsert<StudentUuid>(
       rows,
       conflictColumns: conflictColumns(StudentUuid.t),
+      updateColumns: updateColumns?.call(StudentUuid.t),
+      conflictWhere: conflictWhere?.call(StudentUuid.t),
       transaction: transaction,
     );
   }
@@ -445,11 +449,15 @@ class StudentUuidRepository {
     _i1.DatabaseSession session,
     StudentUuid row, {
     required _i1.ColumnSelections<StudentUuidTable> conflictColumns,
+    _i1.ColumnSelections<StudentUuidTable>? updateColumns,
+    _i1.WhereExpressionBuilder<StudentUuidTable>? conflictWhere,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsertRow<StudentUuid>(
       row,
       conflictColumns: conflictColumns(StudentUuid.t),
+      updateColumns: updateColumns?.call(StudentUuid.t),
+      conflictWhere: conflictWhere?.call(StudentUuid.t),
       transaction: transaction,
     );
   }

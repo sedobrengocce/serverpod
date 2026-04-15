@@ -371,11 +371,15 @@ class ObjectFieldPersistRepository {
     _i1.DatabaseSession session,
     List<ObjectFieldPersist> rows, {
     required _i1.ColumnSelections<ObjectFieldPersistTable> conflictColumns,
+    _i1.ColumnSelections<ObjectFieldPersistTable>? updateColumns,
+    _i1.WhereExpressionBuilder<ObjectFieldPersistTable>? conflictWhere,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsert<ObjectFieldPersist>(
       rows,
       conflictColumns: conflictColumns(ObjectFieldPersist.t),
+      updateColumns: updateColumns?.call(ObjectFieldPersist.t),
+      conflictWhere: conflictWhere?.call(ObjectFieldPersist.t),
       transaction: transaction,
     );
   }
@@ -390,11 +394,15 @@ class ObjectFieldPersistRepository {
     _i1.DatabaseSession session,
     ObjectFieldPersist row, {
     required _i1.ColumnSelections<ObjectFieldPersistTable> conflictColumns,
+    _i1.ColumnSelections<ObjectFieldPersistTable>? updateColumns,
+    _i1.WhereExpressionBuilder<ObjectFieldPersistTable>? conflictWhere,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsertRow<ObjectFieldPersist>(
       row,
       conflictColumns: conflictColumns(ObjectFieldPersist.t),
+      updateColumns: updateColumns?.call(ObjectFieldPersist.t),
+      conflictWhere: conflictWhere?.call(ObjectFieldPersist.t),
       transaction: transaction,
     );
   }

@@ -400,11 +400,15 @@ class UserNoteRepository {
     _i1.DatabaseSession session,
     List<UserNote> rows, {
     required _i1.ColumnSelections<UserNoteTable> conflictColumns,
+    _i1.ColumnSelections<UserNoteTable>? updateColumns,
+    _i1.WhereExpressionBuilder<UserNoteTable>? conflictWhere,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsert<UserNote>(
       rows,
       conflictColumns: conflictColumns(UserNote.t),
+      updateColumns: updateColumns?.call(UserNote.t),
+      conflictWhere: conflictWhere?.call(UserNote.t),
       transaction: transaction,
     );
   }
@@ -419,11 +423,15 @@ class UserNoteRepository {
     _i1.DatabaseSession session,
     UserNote row, {
     required _i1.ColumnSelections<UserNoteTable> conflictColumns,
+    _i1.ColumnSelections<UserNoteTable>? updateColumns,
+    _i1.WhereExpressionBuilder<UserNoteTable>? conflictWhere,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsertRow<UserNote>(
       row,
       conflictColumns: conflictColumns(UserNote.t),
+      updateColumns: updateColumns?.call(UserNote.t),
+      conflictWhere: conflictWhere?.call(UserNote.t),
       transaction: transaction,
     );
   }

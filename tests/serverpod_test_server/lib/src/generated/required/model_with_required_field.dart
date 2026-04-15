@@ -391,11 +391,15 @@ class ModelWithRequiredFieldRepository {
     _i1.DatabaseSession session,
     List<ModelWithRequiredField> rows, {
     required _i1.ColumnSelections<ModelWithRequiredFieldTable> conflictColumns,
+    _i1.ColumnSelections<ModelWithRequiredFieldTable>? updateColumns,
+    _i1.WhereExpressionBuilder<ModelWithRequiredFieldTable>? conflictWhere,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsert<ModelWithRequiredField>(
       rows,
       conflictColumns: conflictColumns(ModelWithRequiredField.t),
+      updateColumns: updateColumns?.call(ModelWithRequiredField.t),
+      conflictWhere: conflictWhere?.call(ModelWithRequiredField.t),
       transaction: transaction,
     );
   }
@@ -410,11 +414,15 @@ class ModelWithRequiredFieldRepository {
     _i1.DatabaseSession session,
     ModelWithRequiredField row, {
     required _i1.ColumnSelections<ModelWithRequiredFieldTable> conflictColumns,
+    _i1.ColumnSelections<ModelWithRequiredFieldTable>? updateColumns,
+    _i1.WhereExpressionBuilder<ModelWithRequiredFieldTable>? conflictWhere,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsertRow<ModelWithRequiredField>(
       row,
       conflictColumns: conflictColumns(ModelWithRequiredField.t),
+      updateColumns: updateColumns?.call(ModelWithRequiredField.t),
+      conflictWhere: conflictWhere?.call(ModelWithRequiredField.t),
       transaction: transaction,
     );
   }

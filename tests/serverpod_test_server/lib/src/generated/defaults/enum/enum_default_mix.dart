@@ -435,11 +435,15 @@ class EnumDefaultMixRepository {
     _i1.DatabaseSession session,
     List<EnumDefaultMix> rows, {
     required _i1.ColumnSelections<EnumDefaultMixTable> conflictColumns,
+    _i1.ColumnSelections<EnumDefaultMixTable>? updateColumns,
+    _i1.WhereExpressionBuilder<EnumDefaultMixTable>? conflictWhere,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsert<EnumDefaultMix>(
       rows,
       conflictColumns: conflictColumns(EnumDefaultMix.t),
+      updateColumns: updateColumns?.call(EnumDefaultMix.t),
+      conflictWhere: conflictWhere?.call(EnumDefaultMix.t),
       transaction: transaction,
     );
   }
@@ -454,11 +458,15 @@ class EnumDefaultMixRepository {
     _i1.DatabaseSession session,
     EnumDefaultMix row, {
     required _i1.ColumnSelections<EnumDefaultMixTable> conflictColumns,
+    _i1.ColumnSelections<EnumDefaultMixTable>? updateColumns,
+    _i1.WhereExpressionBuilder<EnumDefaultMixTable>? conflictWhere,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsertRow<EnumDefaultMix>(
       row,
       conflictColumns: conflictColumns(EnumDefaultMix.t),
+      updateColumns: updateColumns?.call(EnumDefaultMix.t),
+      conflictWhere: conflictWhere?.call(EnumDefaultMix.t),
       transaction: transaction,
     );
   }

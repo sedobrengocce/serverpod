@@ -380,11 +380,15 @@ class UniqueDataWithNonPersistRepository {
     List<UniqueDataWithNonPersist> rows, {
     required _i1.ColumnSelections<UniqueDataWithNonPersistTable>
     conflictColumns,
+    _i1.ColumnSelections<UniqueDataWithNonPersistTable>? updateColumns,
+    _i1.WhereExpressionBuilder<UniqueDataWithNonPersistTable>? conflictWhere,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsert<UniqueDataWithNonPersist>(
       rows,
       conflictColumns: conflictColumns(UniqueDataWithNonPersist.t),
+      updateColumns: updateColumns?.call(UniqueDataWithNonPersist.t),
+      conflictWhere: conflictWhere?.call(UniqueDataWithNonPersist.t),
       transaction: transaction,
     );
   }
@@ -400,11 +404,15 @@ class UniqueDataWithNonPersistRepository {
     UniqueDataWithNonPersist row, {
     required _i1.ColumnSelections<UniqueDataWithNonPersistTable>
     conflictColumns,
+    _i1.ColumnSelections<UniqueDataWithNonPersistTable>? updateColumns,
+    _i1.WhereExpressionBuilder<UniqueDataWithNonPersistTable>? conflictWhere,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsertRow<UniqueDataWithNonPersist>(
       row,
       conflictColumns: conflictColumns(UniqueDataWithNonPersist.t),
+      updateColumns: updateColumns?.call(UniqueDataWithNonPersist.t),
+      conflictWhere: conflictWhere?.call(UniqueDataWithNonPersist.t),
       transaction: transaction,
     );
   }

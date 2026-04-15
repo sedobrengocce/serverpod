@@ -495,11 +495,15 @@ class OrderRepository {
     _i1.DatabaseSession session,
     List<Order> rows, {
     required _i1.ColumnSelections<OrderTable> conflictColumns,
+    _i1.ColumnSelections<OrderTable>? updateColumns,
+    _i1.WhereExpressionBuilder<OrderTable>? conflictWhere,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsert<Order>(
       rows,
       conflictColumns: conflictColumns(Order.t),
+      updateColumns: updateColumns?.call(Order.t),
+      conflictWhere: conflictWhere?.call(Order.t),
       transaction: transaction,
     );
   }
@@ -514,11 +518,15 @@ class OrderRepository {
     _i1.DatabaseSession session,
     Order row, {
     required _i1.ColumnSelections<OrderTable> conflictColumns,
+    _i1.ColumnSelections<OrderTable>? updateColumns,
+    _i1.WhereExpressionBuilder<OrderTable>? conflictWhere,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsertRow<Order>(
       row,
       conflictColumns: conflictColumns(Order.t),
+      updateColumns: updateColumns?.call(Order.t),
+      conflictWhere: conflictWhere?.call(Order.t),
       transaction: transaction,
     );
   }

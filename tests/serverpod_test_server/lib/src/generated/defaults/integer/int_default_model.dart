@@ -365,11 +365,15 @@ class IntDefaultModelRepository {
     _i1.DatabaseSession session,
     List<IntDefaultModel> rows, {
     required _i1.ColumnSelections<IntDefaultModelTable> conflictColumns,
+    _i1.ColumnSelections<IntDefaultModelTable>? updateColumns,
+    _i1.WhereExpressionBuilder<IntDefaultModelTable>? conflictWhere,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsert<IntDefaultModel>(
       rows,
       conflictColumns: conflictColumns(IntDefaultModel.t),
+      updateColumns: updateColumns?.call(IntDefaultModel.t),
+      conflictWhere: conflictWhere?.call(IntDefaultModel.t),
       transaction: transaction,
     );
   }
@@ -384,11 +388,15 @@ class IntDefaultModelRepository {
     _i1.DatabaseSession session,
     IntDefaultModel row, {
     required _i1.ColumnSelections<IntDefaultModelTable> conflictColumns,
+    _i1.ColumnSelections<IntDefaultModelTable>? updateColumns,
+    _i1.WhereExpressionBuilder<IntDefaultModelTable>? conflictWhere,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsertRow<IntDefaultModel>(
       row,
       conflictColumns: conflictColumns(IntDefaultModel.t),
+      updateColumns: updateColumns?.call(IntDefaultModel.t),
+      conflictWhere: conflictWhere?.call(IntDefaultModel.t),
       transaction: transaction,
     );
   }

@@ -502,11 +502,15 @@ class ObjectWithEnumEnhancedRepository {
     _i1.DatabaseSession session,
     List<ObjectWithEnumEnhanced> rows, {
     required _i1.ColumnSelections<ObjectWithEnumEnhancedTable> conflictColumns,
+    _i1.ColumnSelections<ObjectWithEnumEnhancedTable>? updateColumns,
+    _i1.WhereExpressionBuilder<ObjectWithEnumEnhancedTable>? conflictWhere,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsert<ObjectWithEnumEnhanced>(
       rows,
       conflictColumns: conflictColumns(ObjectWithEnumEnhanced.t),
+      updateColumns: updateColumns?.call(ObjectWithEnumEnhanced.t),
+      conflictWhere: conflictWhere?.call(ObjectWithEnumEnhanced.t),
       transaction: transaction,
     );
   }
@@ -521,11 +525,15 @@ class ObjectWithEnumEnhancedRepository {
     _i1.DatabaseSession session,
     ObjectWithEnumEnhanced row, {
     required _i1.ColumnSelections<ObjectWithEnumEnhancedTable> conflictColumns,
+    _i1.ColumnSelections<ObjectWithEnumEnhancedTable>? updateColumns,
+    _i1.WhereExpressionBuilder<ObjectWithEnumEnhancedTable>? conflictWhere,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsertRow<ObjectWithEnumEnhanced>(
       row,
       conflictColumns: conflictColumns(ObjectWithEnumEnhanced.t),
+      updateColumns: updateColumns?.call(ObjectWithEnumEnhanced.t),
+      conflictWhere: conflictWhere?.call(ObjectWithEnumEnhanced.t),
       transaction: transaction,
     );
   }

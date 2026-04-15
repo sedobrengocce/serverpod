@@ -378,11 +378,15 @@ class UriDefaultModelRepository {
     _i1.DatabaseSession session,
     List<UriDefaultModel> rows, {
     required _i1.ColumnSelections<UriDefaultModelTable> conflictColumns,
+    _i1.ColumnSelections<UriDefaultModelTable>? updateColumns,
+    _i1.WhereExpressionBuilder<UriDefaultModelTable>? conflictWhere,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsert<UriDefaultModel>(
       rows,
       conflictColumns: conflictColumns(UriDefaultModel.t),
+      updateColumns: updateColumns?.call(UriDefaultModel.t),
+      conflictWhere: conflictWhere?.call(UriDefaultModel.t),
       transaction: transaction,
     );
   }
@@ -397,11 +401,15 @@ class UriDefaultModelRepository {
     _i1.DatabaseSession session,
     UriDefaultModel row, {
     required _i1.ColumnSelections<UriDefaultModelTable> conflictColumns,
+    _i1.ColumnSelections<UriDefaultModelTable>? updateColumns,
+    _i1.WhereExpressionBuilder<UriDefaultModelTable>? conflictWhere,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsertRow<UriDefaultModel>(
       row,
       conflictColumns: conflictColumns(UriDefaultModel.t),
+      updateColumns: updateColumns?.call(UriDefaultModel.t),
+      conflictWhere: conflictWhere?.call(UriDefaultModel.t),
       transaction: transaction,
     );
   }

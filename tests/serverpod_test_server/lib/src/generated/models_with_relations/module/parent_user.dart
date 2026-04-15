@@ -363,11 +363,15 @@ class ParentUserRepository {
     _i1.DatabaseSession session,
     List<ParentUser> rows, {
     required _i1.ColumnSelections<ParentUserTable> conflictColumns,
+    _i1.ColumnSelections<ParentUserTable>? updateColumns,
+    _i1.WhereExpressionBuilder<ParentUserTable>? conflictWhere,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsert<ParentUser>(
       rows,
       conflictColumns: conflictColumns(ParentUser.t),
+      updateColumns: updateColumns?.call(ParentUser.t),
+      conflictWhere: conflictWhere?.call(ParentUser.t),
       transaction: transaction,
     );
   }
@@ -382,11 +386,15 @@ class ParentUserRepository {
     _i1.DatabaseSession session,
     ParentUser row, {
     required _i1.ColumnSelections<ParentUserTable> conflictColumns,
+    _i1.ColumnSelections<ParentUserTable>? updateColumns,
+    _i1.WhereExpressionBuilder<ParentUserTable>? conflictWhere,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsertRow<ParentUser>(
       row,
       conflictColumns: conflictColumns(ParentUser.t),
+      updateColumns: updateColumns?.call(ParentUser.t),
+      conflictWhere: conflictWhere?.call(ParentUser.t),
       transaction: transaction,
     );
   }

@@ -890,11 +890,15 @@ class TypesRepository {
     _i1.DatabaseSession session,
     List<Types> rows, {
     required _i1.ColumnSelections<TypesTable> conflictColumns,
+    _i1.ColumnSelections<TypesTable>? updateColumns,
+    _i1.WhereExpressionBuilder<TypesTable>? conflictWhere,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsert<Types>(
       rows,
       conflictColumns: conflictColumns(Types.t),
+      updateColumns: updateColumns?.call(Types.t),
+      conflictWhere: conflictWhere?.call(Types.t),
       transaction: transaction,
     );
   }
@@ -909,11 +913,15 @@ class TypesRepository {
     _i1.DatabaseSession session,
     Types row, {
     required _i1.ColumnSelections<TypesTable> conflictColumns,
+    _i1.ColumnSelections<TypesTable>? updateColumns,
+    _i1.WhereExpressionBuilder<TypesTable>? conflictWhere,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsertRow<Types>(
       row,
       conflictColumns: conflictColumns(Types.t),
+      updateColumns: updateColumns?.call(Types.t),
+      conflictWhere: conflictWhere?.call(Types.t),
       transaction: transaction,
     );
   }

@@ -475,11 +475,15 @@ class EnrollmentIntRepository {
     _i1.DatabaseSession session,
     List<EnrollmentInt> rows, {
     required _i1.ColumnSelections<EnrollmentIntTable> conflictColumns,
+    _i1.ColumnSelections<EnrollmentIntTable>? updateColumns,
+    _i1.WhereExpressionBuilder<EnrollmentIntTable>? conflictWhere,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsert<EnrollmentInt>(
       rows,
       conflictColumns: conflictColumns(EnrollmentInt.t),
+      updateColumns: updateColumns?.call(EnrollmentInt.t),
+      conflictWhere: conflictWhere?.call(EnrollmentInt.t),
       transaction: transaction,
     );
   }
@@ -494,11 +498,15 @@ class EnrollmentIntRepository {
     _i1.DatabaseSession session,
     EnrollmentInt row, {
     required _i1.ColumnSelections<EnrollmentIntTable> conflictColumns,
+    _i1.ColumnSelections<EnrollmentIntTable>? updateColumns,
+    _i1.WhereExpressionBuilder<EnrollmentIntTable>? conflictWhere,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsertRow<EnrollmentInt>(
       row,
       conflictColumns: conflictColumns(EnrollmentInt.t),
+      updateColumns: updateColumns?.call(EnrollmentInt.t),
+      conflictWhere: conflictWhere?.call(EnrollmentInt.t),
       transaction: transaction,
     );
   }

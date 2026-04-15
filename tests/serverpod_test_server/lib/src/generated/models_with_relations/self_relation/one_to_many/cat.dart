@@ -495,11 +495,15 @@ class CatRepository {
     _i1.DatabaseSession session,
     List<Cat> rows, {
     required _i1.ColumnSelections<CatTable> conflictColumns,
+    _i1.ColumnSelections<CatTable>? updateColumns,
+    _i1.WhereExpressionBuilder<CatTable>? conflictWhere,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsert<Cat>(
       rows,
       conflictColumns: conflictColumns(Cat.t),
+      updateColumns: updateColumns?.call(Cat.t),
+      conflictWhere: conflictWhere?.call(Cat.t),
       transaction: transaction,
     );
   }
@@ -514,11 +518,15 @@ class CatRepository {
     _i1.DatabaseSession session,
     Cat row, {
     required _i1.ColumnSelections<CatTable> conflictColumns,
+    _i1.ColumnSelections<CatTable>? updateColumns,
+    _i1.WhereExpressionBuilder<CatTable>? conflictWhere,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsertRow<Cat>(
       row,
       conflictColumns: conflictColumns(Cat.t),
+      updateColumns: updateColumns?.call(Cat.t),
+      conflictWhere: conflictWhere?.call(Cat.t),
       transaction: transaction,
     );
   }

@@ -400,11 +400,15 @@ class DurationDefaultModelRepository {
     _i1.DatabaseSession session,
     List<DurationDefaultModel> rows, {
     required _i1.ColumnSelections<DurationDefaultModelTable> conflictColumns,
+    _i1.ColumnSelections<DurationDefaultModelTable>? updateColumns,
+    _i1.WhereExpressionBuilder<DurationDefaultModelTable>? conflictWhere,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsert<DurationDefaultModel>(
       rows,
       conflictColumns: conflictColumns(DurationDefaultModel.t),
+      updateColumns: updateColumns?.call(DurationDefaultModel.t),
+      conflictWhere: conflictWhere?.call(DurationDefaultModel.t),
       transaction: transaction,
     );
   }
@@ -419,11 +423,15 @@ class DurationDefaultModelRepository {
     _i1.DatabaseSession session,
     DurationDefaultModel row, {
     required _i1.ColumnSelections<DurationDefaultModelTable> conflictColumns,
+    _i1.ColumnSelections<DurationDefaultModelTable>? updateColumns,
+    _i1.WhereExpressionBuilder<DurationDefaultModelTable>? conflictWhere,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsertRow<DurationDefaultModel>(
       row,
       conflictColumns: conflictColumns(DurationDefaultModel.t),
+      updateColumns: updateColumns?.call(DurationDefaultModel.t),
+      conflictWhere: conflictWhere?.call(DurationDefaultModel.t),
       transaction: transaction,
     );
   }

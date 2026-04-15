@@ -536,11 +536,15 @@ class CitizenRepository {
     _i1.DatabaseSession session,
     List<Citizen> rows, {
     required _i1.ColumnSelections<CitizenTable> conflictColumns,
+    _i1.ColumnSelections<CitizenTable>? updateColumns,
+    _i1.WhereExpressionBuilder<CitizenTable>? conflictWhere,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsert<Citizen>(
       rows,
       conflictColumns: conflictColumns(Citizen.t),
+      updateColumns: updateColumns?.call(Citizen.t),
+      conflictWhere: conflictWhere?.call(Citizen.t),
       transaction: transaction,
     );
   }
@@ -555,11 +559,15 @@ class CitizenRepository {
     _i1.DatabaseSession session,
     Citizen row, {
     required _i1.ColumnSelections<CitizenTable> conflictColumns,
+    _i1.ColumnSelections<CitizenTable>? updateColumns,
+    _i1.WhereExpressionBuilder<CitizenTable>? conflictWhere,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsertRow<Citizen>(
       row,
       conflictColumns: conflictColumns(Citizen.t),
+      updateColumns: updateColumns?.call(Citizen.t),
+      conflictWhere: conflictWhere?.call(Citizen.t),
       transaction: transaction,
     );
   }

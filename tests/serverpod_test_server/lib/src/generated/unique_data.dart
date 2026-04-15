@@ -363,11 +363,15 @@ class UniqueDataRepository {
     _i1.DatabaseSession session,
     List<UniqueData> rows, {
     required _i1.ColumnSelections<UniqueDataTable> conflictColumns,
+    _i1.ColumnSelections<UniqueDataTable>? updateColumns,
+    _i1.WhereExpressionBuilder<UniqueDataTable>? conflictWhere,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsert<UniqueData>(
       rows,
       conflictColumns: conflictColumns(UniqueData.t),
+      updateColumns: updateColumns?.call(UniqueData.t),
+      conflictWhere: conflictWhere?.call(UniqueData.t),
       transaction: transaction,
     );
   }
@@ -382,11 +386,15 @@ class UniqueDataRepository {
     _i1.DatabaseSession session,
     UniqueData row, {
     required _i1.ColumnSelections<UniqueDataTable> conflictColumns,
+    _i1.ColumnSelections<UniqueDataTable>? updateColumns,
+    _i1.WhereExpressionBuilder<UniqueDataTable>? conflictWhere,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsertRow<UniqueData>(
       row,
       conflictColumns: conflictColumns(UniqueData.t),
+      updateColumns: updateColumns?.call(UniqueData.t),
+      conflictWhere: conflictWhere?.call(UniqueData.t),
       transaction: transaction,
     );
   }

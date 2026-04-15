@@ -416,11 +416,15 @@ class TownRepository {
     _i1.DatabaseSession session,
     List<Town> rows, {
     required _i1.ColumnSelections<TownTable> conflictColumns,
+    _i1.ColumnSelections<TownTable>? updateColumns,
+    _i1.WhereExpressionBuilder<TownTable>? conflictWhere,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsert<Town>(
       rows,
       conflictColumns: conflictColumns(Town.t),
+      updateColumns: updateColumns?.call(Town.t),
+      conflictWhere: conflictWhere?.call(Town.t),
       transaction: transaction,
     );
   }
@@ -435,11 +439,15 @@ class TownRepository {
     _i1.DatabaseSession session,
     Town row, {
     required _i1.ColumnSelections<TownTable> conflictColumns,
+    _i1.ColumnSelections<TownTable>? updateColumns,
+    _i1.WhereExpressionBuilder<TownTable>? conflictWhere,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsertRow<Town>(
       row,
       conflictColumns: conflictColumns(Town.t),
+      updateColumns: updateColumns?.call(Town.t),
+      conflictWhere: conflictWhere?.call(Town.t),
       transaction: transaction,
     );
   }

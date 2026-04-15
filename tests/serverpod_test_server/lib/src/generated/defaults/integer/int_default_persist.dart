@@ -344,11 +344,15 @@ class IntDefaultPersistRepository {
     _i1.DatabaseSession session,
     List<IntDefaultPersist> rows, {
     required _i1.ColumnSelections<IntDefaultPersistTable> conflictColumns,
+    _i1.ColumnSelections<IntDefaultPersistTable>? updateColumns,
+    _i1.WhereExpressionBuilder<IntDefaultPersistTable>? conflictWhere,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsert<IntDefaultPersist>(
       rows,
       conflictColumns: conflictColumns(IntDefaultPersist.t),
+      updateColumns: updateColumns?.call(IntDefaultPersist.t),
+      conflictWhere: conflictWhere?.call(IntDefaultPersist.t),
       transaction: transaction,
     );
   }
@@ -363,11 +367,15 @@ class IntDefaultPersistRepository {
     _i1.DatabaseSession session,
     IntDefaultPersist row, {
     required _i1.ColumnSelections<IntDefaultPersistTable> conflictColumns,
+    _i1.ColumnSelections<IntDefaultPersistTable>? updateColumns,
+    _i1.WhereExpressionBuilder<IntDefaultPersistTable>? conflictWhere,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsertRow<IntDefaultPersist>(
       row,
       conflictColumns: conflictColumns(IntDefaultPersist.t),
+      updateColumns: updateColumns?.call(IntDefaultPersist.t),
+      conflictWhere: conflictWhere?.call(IntDefaultPersist.t),
       transaction: transaction,
     );
   }

@@ -346,11 +346,15 @@ class SimpleDateTimeRepository {
     _i1.DatabaseSession session,
     List<SimpleDateTime> rows, {
     required _i1.ColumnSelections<SimpleDateTimeTable> conflictColumns,
+    _i1.ColumnSelections<SimpleDateTimeTable>? updateColumns,
+    _i1.WhereExpressionBuilder<SimpleDateTimeTable>? conflictWhere,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsert<SimpleDateTime>(
       rows,
       conflictColumns: conflictColumns(SimpleDateTime.t),
+      updateColumns: updateColumns?.call(SimpleDateTime.t),
+      conflictWhere: conflictWhere?.call(SimpleDateTime.t),
       transaction: transaction,
     );
   }
@@ -365,11 +369,15 @@ class SimpleDateTimeRepository {
     _i1.DatabaseSession session,
     SimpleDateTime row, {
     required _i1.ColumnSelections<SimpleDateTimeTable> conflictColumns,
+    _i1.ColumnSelections<SimpleDateTimeTable>? updateColumns,
+    _i1.WhereExpressionBuilder<SimpleDateTimeTable>? conflictWhere,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsertRow<SimpleDateTime>(
       row,
       conflictColumns: conflictColumns(SimpleDateTime.t),
+      updateColumns: updateColumns?.call(SimpleDateTime.t),
+      conflictWhere: conflictWhere?.call(SimpleDateTime.t),
       transaction: transaction,
     );
   }

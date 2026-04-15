@@ -353,11 +353,15 @@ class MaxFieldNameRepository {
     _i1.DatabaseSession session,
     List<MaxFieldName> rows, {
     required _i1.ColumnSelections<MaxFieldNameTable> conflictColumns,
+    _i1.ColumnSelections<MaxFieldNameTable>? updateColumns,
+    _i1.WhereExpressionBuilder<MaxFieldNameTable>? conflictWhere,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsert<MaxFieldName>(
       rows,
       conflictColumns: conflictColumns(MaxFieldName.t),
+      updateColumns: updateColumns?.call(MaxFieldName.t),
+      conflictWhere: conflictWhere?.call(MaxFieldName.t),
       transaction: transaction,
     );
   }
@@ -372,11 +376,15 @@ class MaxFieldNameRepository {
     _i1.DatabaseSession session,
     MaxFieldName row, {
     required _i1.ColumnSelections<MaxFieldNameTable> conflictColumns,
+    _i1.ColumnSelections<MaxFieldNameTable>? updateColumns,
+    _i1.WhereExpressionBuilder<MaxFieldNameTable>? conflictWhere,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsertRow<MaxFieldName>(
       row,
       conflictColumns: conflictColumns(MaxFieldName.t),
+      updateColumns: updateColumns?.call(MaxFieldName.t),
+      conflictWhere: conflictWhere?.call(MaxFieldName.t),
       transaction: transaction,
     );
   }

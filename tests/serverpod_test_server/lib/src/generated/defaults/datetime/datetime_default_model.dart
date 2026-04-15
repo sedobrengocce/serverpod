@@ -422,11 +422,15 @@ class DateTimeDefaultModelRepository {
     _i1.DatabaseSession session,
     List<DateTimeDefaultModel> rows, {
     required _i1.ColumnSelections<DateTimeDefaultModelTable> conflictColumns,
+    _i1.ColumnSelections<DateTimeDefaultModelTable>? updateColumns,
+    _i1.WhereExpressionBuilder<DateTimeDefaultModelTable>? conflictWhere,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsert<DateTimeDefaultModel>(
       rows,
       conflictColumns: conflictColumns(DateTimeDefaultModel.t),
+      updateColumns: updateColumns?.call(DateTimeDefaultModel.t),
+      conflictWhere: conflictWhere?.call(DateTimeDefaultModel.t),
       transaction: transaction,
     );
   }
@@ -441,11 +445,15 @@ class DateTimeDefaultModelRepository {
     _i1.DatabaseSession session,
     DateTimeDefaultModel row, {
     required _i1.ColumnSelections<DateTimeDefaultModelTable> conflictColumns,
+    _i1.ColumnSelections<DateTimeDefaultModelTable>? updateColumns,
+    _i1.WhereExpressionBuilder<DateTimeDefaultModelTable>? conflictWhere,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsertRow<DateTimeDefaultModel>(
       row,
       conflictColumns: conflictColumns(DateTimeDefaultModel.t),
+      updateColumns: updateColumns?.call(DateTimeDefaultModel.t),
+      conflictWhere: conflictWhere?.call(DateTimeDefaultModel.t),
       transaction: transaction,
     );
   }

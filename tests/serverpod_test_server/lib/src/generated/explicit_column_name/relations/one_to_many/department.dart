@@ -423,11 +423,15 @@ class DepartmentRepository {
     _i1.DatabaseSession session,
     List<Department> rows, {
     required _i1.ColumnSelections<DepartmentTable> conflictColumns,
+    _i1.ColumnSelections<DepartmentTable>? updateColumns,
+    _i1.WhereExpressionBuilder<DepartmentTable>? conflictWhere,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsert<Department>(
       rows,
       conflictColumns: conflictColumns(Department.t),
+      updateColumns: updateColumns?.call(Department.t),
+      conflictWhere: conflictWhere?.call(Department.t),
       transaction: transaction,
     );
   }
@@ -442,11 +446,15 @@ class DepartmentRepository {
     _i1.DatabaseSession session,
     Department row, {
     required _i1.ColumnSelections<DepartmentTable> conflictColumns,
+    _i1.ColumnSelections<DepartmentTable>? updateColumns,
+    _i1.WhereExpressionBuilder<DepartmentTable>? conflictWhere,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsertRow<Department>(
       row,
       conflictColumns: conflictColumns(Department.t),
+      updateColumns: updateColumns?.call(Department.t),
+      conflictWhere: conflictWhere?.call(Department.t),
       transaction: transaction,
     );
   }

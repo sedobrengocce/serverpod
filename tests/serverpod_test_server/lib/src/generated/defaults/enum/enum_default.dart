@@ -458,11 +458,15 @@ class EnumDefaultRepository {
     _i1.DatabaseSession session,
     List<EnumDefault> rows, {
     required _i1.ColumnSelections<EnumDefaultTable> conflictColumns,
+    _i1.ColumnSelections<EnumDefaultTable>? updateColumns,
+    _i1.WhereExpressionBuilder<EnumDefaultTable>? conflictWhere,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsert<EnumDefault>(
       rows,
       conflictColumns: conflictColumns(EnumDefault.t),
+      updateColumns: updateColumns?.call(EnumDefault.t),
+      conflictWhere: conflictWhere?.call(EnumDefault.t),
       transaction: transaction,
     );
   }
@@ -477,11 +481,15 @@ class EnumDefaultRepository {
     _i1.DatabaseSession session,
     EnumDefault row, {
     required _i1.ColumnSelections<EnumDefaultTable> conflictColumns,
+    _i1.ColumnSelections<EnumDefaultTable>? updateColumns,
+    _i1.WhereExpressionBuilder<EnumDefaultTable>? conflictWhere,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsertRow<EnumDefault>(
       row,
       conflictColumns: conflictColumns(EnumDefault.t),
+      updateColumns: updateColumns?.call(EnumDefault.t),
+      conflictWhere: conflictWhere?.call(EnumDefault.t),
       transaction: transaction,
     );
   }

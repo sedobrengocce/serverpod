@@ -704,11 +704,15 @@ class ObjectWithObjectRepository {
     _i1.DatabaseSession session,
     List<ObjectWithObject> rows, {
     required _i1.ColumnSelections<ObjectWithObjectTable> conflictColumns,
+    _i1.ColumnSelections<ObjectWithObjectTable>? updateColumns,
+    _i1.WhereExpressionBuilder<ObjectWithObjectTable>? conflictWhere,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsert<ObjectWithObject>(
       rows,
       conflictColumns: conflictColumns(ObjectWithObject.t),
+      updateColumns: updateColumns?.call(ObjectWithObject.t),
+      conflictWhere: conflictWhere?.call(ObjectWithObject.t),
       transaction: transaction,
     );
   }
@@ -723,11 +727,15 @@ class ObjectWithObjectRepository {
     _i1.DatabaseSession session,
     ObjectWithObject row, {
     required _i1.ColumnSelections<ObjectWithObjectTable> conflictColumns,
+    _i1.ColumnSelections<ObjectWithObjectTable>? updateColumns,
+    _i1.WhereExpressionBuilder<ObjectWithObjectTable>? conflictWhere,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsertRow<ObjectWithObject>(
       row,
       conflictColumns: conflictColumns(ObjectWithObject.t),
+      updateColumns: updateColumns?.call(ObjectWithObject.t),
+      conflictWhere: conflictWhere?.call(ObjectWithObject.t),
       transaction: transaction,
     );
   }

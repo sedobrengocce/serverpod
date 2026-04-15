@@ -1095,11 +1095,15 @@ class SharedModelContainerRepository {
     _i1.DatabaseSession session,
     List<SharedModelContainer> rows, {
     required _i1.ColumnSelections<SharedModelContainerTable> conflictColumns,
+    _i1.ColumnSelections<SharedModelContainerTable>? updateColumns,
+    _i1.WhereExpressionBuilder<SharedModelContainerTable>? conflictWhere,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsert<SharedModelContainer>(
       rows,
       conflictColumns: conflictColumns(SharedModelContainer.t),
+      updateColumns: updateColumns?.call(SharedModelContainer.t),
+      conflictWhere: conflictWhere?.call(SharedModelContainer.t),
       transaction: transaction,
     );
   }
@@ -1114,11 +1118,15 @@ class SharedModelContainerRepository {
     _i1.DatabaseSession session,
     SharedModelContainer row, {
     required _i1.ColumnSelections<SharedModelContainerTable> conflictColumns,
+    _i1.ColumnSelections<SharedModelContainerTable>? updateColumns,
+    _i1.WhereExpressionBuilder<SharedModelContainerTable>? conflictWhere,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsertRow<SharedModelContainer>(
       row,
       conflictColumns: conflictColumns(SharedModelContainer.t),
+      updateColumns: updateColumns?.call(SharedModelContainer.t),
+      conflictWhere: conflictWhere?.call(SharedModelContainer.t),
       transaction: transaction,
     );
   }

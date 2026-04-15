@@ -424,11 +424,15 @@ class UuidDefaultPersistRepository {
     _i1.DatabaseSession session,
     List<UuidDefaultPersist> rows, {
     required _i1.ColumnSelections<UuidDefaultPersistTable> conflictColumns,
+    _i1.ColumnSelections<UuidDefaultPersistTable>? updateColumns,
+    _i1.WhereExpressionBuilder<UuidDefaultPersistTable>? conflictWhere,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsert<UuidDefaultPersist>(
       rows,
       conflictColumns: conflictColumns(UuidDefaultPersist.t),
+      updateColumns: updateColumns?.call(UuidDefaultPersist.t),
+      conflictWhere: conflictWhere?.call(UuidDefaultPersist.t),
       transaction: transaction,
     );
   }
@@ -443,11 +447,15 @@ class UuidDefaultPersistRepository {
     _i1.DatabaseSession session,
     UuidDefaultPersist row, {
     required _i1.ColumnSelections<UuidDefaultPersistTable> conflictColumns,
+    _i1.ColumnSelections<UuidDefaultPersistTable>? updateColumns,
+    _i1.WhereExpressionBuilder<UuidDefaultPersistTable>? conflictWhere,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsertRow<UuidDefaultPersist>(
       row,
       conflictColumns: conflictColumns(UuidDefaultPersist.t),
+      updateColumns: updateColumns?.call(UuidDefaultPersist.t),
+      conflictWhere: conflictWhere?.call(UuidDefaultPersist.t),
       transaction: transaction,
     );
   }

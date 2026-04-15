@@ -464,11 +464,15 @@ class PostRepository {
     _i1.DatabaseSession session,
     List<Post> rows, {
     required _i1.ColumnSelections<PostTable> conflictColumns,
+    _i1.ColumnSelections<PostTable>? updateColumns,
+    _i1.WhereExpressionBuilder<PostTable>? conflictWhere,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsert<Post>(
       rows,
       conflictColumns: conflictColumns(Post.t),
+      updateColumns: updateColumns?.call(Post.t),
+      conflictWhere: conflictWhere?.call(Post.t),
       transaction: transaction,
     );
   }
@@ -483,11 +487,15 @@ class PostRepository {
     _i1.DatabaseSession session,
     Post row, {
     required _i1.ColumnSelections<PostTable> conflictColumns,
+    _i1.ColumnSelections<PostTable>? updateColumns,
+    _i1.WhereExpressionBuilder<PostTable>? conflictWhere,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsertRow<Post>(
       row,
       conflictColumns: conflictColumns(Post.t),
+      updateColumns: updateColumns?.call(Post.t),
+      conflictWhere: conflictWhere?.call(Post.t),
       transaction: transaction,
     );
   }

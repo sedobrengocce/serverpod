@@ -415,11 +415,15 @@ class CommentRepository {
     _i1.DatabaseSession session,
     List<Comment> rows, {
     required _i1.ColumnSelections<CommentTable> conflictColumns,
+    _i1.ColumnSelections<CommentTable>? updateColumns,
+    _i1.WhereExpressionBuilder<CommentTable>? conflictWhere,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsert<Comment>(
       rows,
       conflictColumns: conflictColumns(Comment.t),
+      updateColumns: updateColumns?.call(Comment.t),
+      conflictWhere: conflictWhere?.call(Comment.t),
       transaction: transaction,
     );
   }
@@ -434,11 +438,15 @@ class CommentRepository {
     _i1.DatabaseSession session,
     Comment row, {
     required _i1.ColumnSelections<CommentTable> conflictColumns,
+    _i1.ColumnSelections<CommentTable>? updateColumns,
+    _i1.WhereExpressionBuilder<CommentTable>? conflictWhere,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsertRow<Comment>(
       row,
       conflictColumns: conflictColumns(Comment.t),
+      updateColumns: updateColumns?.call(Comment.t),
+      conflictWhere: conflictWhere?.call(Comment.t),
       transaction: transaction,
     );
   }

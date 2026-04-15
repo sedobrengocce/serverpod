@@ -424,11 +424,15 @@ class BookRepository {
     _i1.DatabaseSession session,
     List<Book> rows, {
     required _i1.ColumnSelections<BookTable> conflictColumns,
+    _i1.ColumnSelections<BookTable>? updateColumns,
+    _i1.WhereExpressionBuilder<BookTable>? conflictWhere,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsert<Book>(
       rows,
       conflictColumns: conflictColumns(Book.t),
+      updateColumns: updateColumns?.call(Book.t),
+      conflictWhere: conflictWhere?.call(Book.t),
       transaction: transaction,
     );
   }
@@ -443,11 +447,15 @@ class BookRepository {
     _i1.DatabaseSession session,
     Book row, {
     required _i1.ColumnSelections<BookTable> conflictColumns,
+    _i1.ColumnSelections<BookTable>? updateColumns,
+    _i1.WhereExpressionBuilder<BookTable>? conflictWhere,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsertRow<Book>(
       row,
       conflictColumns: conflictColumns(Book.t),
+      updateColumns: updateColumns?.call(Book.t),
+      conflictWhere: conflictWhere?.call(Book.t),
       transaction: transaction,
     );
   }

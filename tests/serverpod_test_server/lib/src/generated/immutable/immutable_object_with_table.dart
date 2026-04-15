@@ -374,11 +374,15 @@ class ImmutableObjectWithTableRepository {
     List<ImmutableObjectWithTable> rows, {
     required _i1.ColumnSelections<ImmutableObjectWithTableTable>
     conflictColumns,
+    _i1.ColumnSelections<ImmutableObjectWithTableTable>? updateColumns,
+    _i1.WhereExpressionBuilder<ImmutableObjectWithTableTable>? conflictWhere,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsert<ImmutableObjectWithTable>(
       rows,
       conflictColumns: conflictColumns(ImmutableObjectWithTable.t),
+      updateColumns: updateColumns?.call(ImmutableObjectWithTable.t),
+      conflictWhere: conflictWhere?.call(ImmutableObjectWithTable.t),
       transaction: transaction,
     );
   }
@@ -394,11 +398,15 @@ class ImmutableObjectWithTableRepository {
     ImmutableObjectWithTable row, {
     required _i1.ColumnSelections<ImmutableObjectWithTableTable>
     conflictColumns,
+    _i1.ColumnSelections<ImmutableObjectWithTableTable>? updateColumns,
+    _i1.WhereExpressionBuilder<ImmutableObjectWithTableTable>? conflictWhere,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsertRow<ImmutableObjectWithTable>(
       row,
       conflictColumns: conflictColumns(ImmutableObjectWithTable.t),
+      updateColumns: updateColumns?.call(ImmutableObjectWithTable.t),
+      conflictWhere: conflictWhere?.call(ImmutableObjectWithTable.t),
       transaction: transaction,
     );
   }

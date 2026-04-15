@@ -422,11 +422,15 @@ class ContractorRepository {
     _i1.DatabaseSession session,
     List<Contractor> rows, {
     required _i1.ColumnSelections<ContractorTable> conflictColumns,
+    _i1.ColumnSelections<ContractorTable>? updateColumns,
+    _i1.WhereExpressionBuilder<ContractorTable>? conflictWhere,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsert<Contractor>(
       rows,
       conflictColumns: conflictColumns(Contractor.t),
+      updateColumns: updateColumns?.call(Contractor.t),
+      conflictWhere: conflictWhere?.call(Contractor.t),
       transaction: transaction,
     );
   }
@@ -441,11 +445,15 @@ class ContractorRepository {
     _i1.DatabaseSession session,
     Contractor row, {
     required _i1.ColumnSelections<ContractorTable> conflictColumns,
+    _i1.ColumnSelections<ContractorTable>? updateColumns,
+    _i1.WhereExpressionBuilder<ContractorTable>? conflictWhere,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsertRow<Contractor>(
       row,
       conflictColumns: conflictColumns(Contractor.t),
+      updateColumns: updateColumns?.call(Contractor.t),
+      conflictWhere: conflictWhere?.call(Contractor.t),
       transaction: transaction,
     );
   }

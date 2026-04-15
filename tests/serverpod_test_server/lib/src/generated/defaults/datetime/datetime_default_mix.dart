@@ -431,11 +431,15 @@ class DateTimeDefaultMixRepository {
     _i1.DatabaseSession session,
     List<DateTimeDefaultMix> rows, {
     required _i1.ColumnSelections<DateTimeDefaultMixTable> conflictColumns,
+    _i1.ColumnSelections<DateTimeDefaultMixTable>? updateColumns,
+    _i1.WhereExpressionBuilder<DateTimeDefaultMixTable>? conflictWhere,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsert<DateTimeDefaultMix>(
       rows,
       conflictColumns: conflictColumns(DateTimeDefaultMix.t),
+      updateColumns: updateColumns?.call(DateTimeDefaultMix.t),
+      conflictWhere: conflictWhere?.call(DateTimeDefaultMix.t),
       transaction: transaction,
     );
   }
@@ -450,11 +454,15 @@ class DateTimeDefaultMixRepository {
     _i1.DatabaseSession session,
     DateTimeDefaultMix row, {
     required _i1.ColumnSelections<DateTimeDefaultMixTable> conflictColumns,
+    _i1.ColumnSelections<DateTimeDefaultMixTable>? updateColumns,
+    _i1.WhereExpressionBuilder<DateTimeDefaultMixTable>? conflictWhere,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsertRow<DateTimeDefaultMix>(
       row,
       conflictColumns: conflictColumns(DateTimeDefaultMix.t),
+      updateColumns: updateColumns?.call(DateTimeDefaultMix.t),
+      conflictWhere: conflictWhere?.call(DateTimeDefaultMix.t),
       transaction: transaction,
     );
   }

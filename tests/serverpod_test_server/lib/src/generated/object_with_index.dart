@@ -364,11 +364,15 @@ class ObjectWithIndexRepository {
     _i1.DatabaseSession session,
     List<ObjectWithIndex> rows, {
     required _i1.ColumnSelections<ObjectWithIndexTable> conflictColumns,
+    _i1.ColumnSelections<ObjectWithIndexTable>? updateColumns,
+    _i1.WhereExpressionBuilder<ObjectWithIndexTable>? conflictWhere,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsert<ObjectWithIndex>(
       rows,
       conflictColumns: conflictColumns(ObjectWithIndex.t),
+      updateColumns: updateColumns?.call(ObjectWithIndex.t),
+      conflictWhere: conflictWhere?.call(ObjectWithIndex.t),
       transaction: transaction,
     );
   }
@@ -383,11 +387,15 @@ class ObjectWithIndexRepository {
     _i1.DatabaseSession session,
     ObjectWithIndex row, {
     required _i1.ColumnSelections<ObjectWithIndexTable> conflictColumns,
+    _i1.ColumnSelections<ObjectWithIndexTable>? updateColumns,
+    _i1.WhereExpressionBuilder<ObjectWithIndexTable>? conflictWhere,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsertRow<ObjectWithIndex>(
       row,
       conflictColumns: conflictColumns(ObjectWithIndex.t),
+      updateColumns: updateColumns?.call(ObjectWithIndex.t),
+      conflictWhere: conflictWhere?.call(ObjectWithIndex.t),
       transaction: transaction,
     );
   }

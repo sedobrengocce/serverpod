@@ -371,11 +371,15 @@ class TableWithExplicitColumnNameRepository {
     List<TableWithExplicitColumnName> rows, {
     required _i1.ColumnSelections<TableWithExplicitColumnNameTable>
     conflictColumns,
+    _i1.ColumnSelections<TableWithExplicitColumnNameTable>? updateColumns,
+    _i1.WhereExpressionBuilder<TableWithExplicitColumnNameTable>? conflictWhere,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsert<TableWithExplicitColumnName>(
       rows,
       conflictColumns: conflictColumns(TableWithExplicitColumnName.t),
+      updateColumns: updateColumns?.call(TableWithExplicitColumnName.t),
+      conflictWhere: conflictWhere?.call(TableWithExplicitColumnName.t),
       transaction: transaction,
     );
   }
@@ -391,11 +395,15 @@ class TableWithExplicitColumnNameRepository {
     TableWithExplicitColumnName row, {
     required _i1.ColumnSelections<TableWithExplicitColumnNameTable>
     conflictColumns,
+    _i1.ColumnSelections<TableWithExplicitColumnNameTable>? updateColumns,
+    _i1.WhereExpressionBuilder<TableWithExplicitColumnNameTable>? conflictWhere,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsertRow<TableWithExplicitColumnName>(
       row,
       conflictColumns: conflictColumns(TableWithExplicitColumnName.t),
+      updateColumns: updateColumns?.call(TableWithExplicitColumnName.t),
+      conflictWhere: conflictWhere?.call(TableWithExplicitColumnName.t),
       transaction: transaction,
     );
   }

@@ -851,6 +851,23 @@ class BuildRepositoryClass {
               ..type = TypeReference(
                 (b) => b
                   ..isNullable = true
+                  ..symbol = 'ColumnSelections<${className}Table>'
+                  ..url = 'package:serverpod/serverpod.dart',
+              )
+              ..name = 'updateColumns'
+              ..named = true,
+          ),
+          Parameter(
+            (p) => p
+              ..type = typeWhereExpressionBuilder(className, true)
+              ..name = 'conflictWhere'
+              ..named = true,
+          ),
+          Parameter(
+            (p) => p
+              ..type = TypeReference(
+                (b) => b
+                  ..isNullable = true
                   ..symbol = 'Transaction'
                   ..url = 'package:serverpod/serverpod.dart',
               )
@@ -868,6 +885,12 @@ class BuildRepositoryClass {
                 'conflictColumns': refer('conflictColumns').call([
                   refer(className).property('t'),
                 ]),
+                'updateColumns': refer('updateColumns')
+                    .nullSafeProperty('call')
+                    .call([refer(className).property('t')]),
+                'conflictWhere': refer('conflictWhere')
+                    .nullSafeProperty('call')
+                    .call([refer(className).property('t')]),
                 'transaction': refer('transaction'),
               },
               [refer(className)],
@@ -922,6 +945,23 @@ class BuildRepositoryClass {
               ..type = TypeReference(
                 (b) => b
                   ..isNullable = true
+                  ..symbol = 'ColumnSelections<${className}Table>'
+                  ..url = 'package:serverpod/serverpod.dart',
+              )
+              ..name = 'updateColumns'
+              ..named = true,
+          ),
+          Parameter(
+            (p) => p
+              ..type = typeWhereExpressionBuilder(className, true)
+              ..name = 'conflictWhere'
+              ..named = true,
+          ),
+          Parameter(
+            (p) => p
+              ..type = TypeReference(
+                (b) => b
+                  ..isNullable = true
                   ..symbol = 'Transaction'
                   ..url = 'package:serverpod/serverpod.dart',
               )
@@ -939,6 +979,12 @@ class BuildRepositoryClass {
                 'conflictColumns': refer('conflictColumns').call([
                   refer(className).property('t'),
                 ]),
+                'updateColumns': refer('updateColumns')
+                    .nullSafeProperty('call')
+                    .call([refer(className).property('t')]),
+                'conflictWhere': refer('conflictWhere')
+                    .nullSafeProperty('call')
+                    .call([refer(className).property('t')]),
                 'transaction': refer('transaction'),
               },
               [refer(className)],

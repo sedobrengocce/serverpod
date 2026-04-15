@@ -487,11 +487,15 @@ class UuidDefaultRepository {
     _i1.DatabaseSession session,
     List<UuidDefault> rows, {
     required _i1.ColumnSelections<UuidDefaultTable> conflictColumns,
+    _i1.ColumnSelections<UuidDefaultTable>? updateColumns,
+    _i1.WhereExpressionBuilder<UuidDefaultTable>? conflictWhere,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsert<UuidDefault>(
       rows,
       conflictColumns: conflictColumns(UuidDefault.t),
+      updateColumns: updateColumns?.call(UuidDefault.t),
+      conflictWhere: conflictWhere?.call(UuidDefault.t),
       transaction: transaction,
     );
   }
@@ -506,11 +510,15 @@ class UuidDefaultRepository {
     _i1.DatabaseSession session,
     UuidDefault row, {
     required _i1.ColumnSelections<UuidDefaultTable> conflictColumns,
+    _i1.ColumnSelections<UuidDefaultTable>? updateColumns,
+    _i1.WhereExpressionBuilder<UuidDefaultTable>? conflictWhere,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsertRow<UuidDefault>(
       row,
       conflictColumns: conflictColumns(UuidDefault.t),
+      updateColumns: updateColumns?.call(UuidDefault.t),
+      conflictWhere: conflictWhere?.call(UuidDefault.t),
       transaction: transaction,
     );
   }

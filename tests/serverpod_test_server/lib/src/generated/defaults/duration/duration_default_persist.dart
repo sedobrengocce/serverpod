@@ -354,11 +354,15 @@ class DurationDefaultPersistRepository {
     _i1.DatabaseSession session,
     List<DurationDefaultPersist> rows, {
     required _i1.ColumnSelections<DurationDefaultPersistTable> conflictColumns,
+    _i1.ColumnSelections<DurationDefaultPersistTable>? updateColumns,
+    _i1.WhereExpressionBuilder<DurationDefaultPersistTable>? conflictWhere,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsert<DurationDefaultPersist>(
       rows,
       conflictColumns: conflictColumns(DurationDefaultPersist.t),
+      updateColumns: updateColumns?.call(DurationDefaultPersist.t),
+      conflictWhere: conflictWhere?.call(DurationDefaultPersist.t),
       transaction: transaction,
     );
   }
@@ -373,11 +377,15 @@ class DurationDefaultPersistRepository {
     _i1.DatabaseSession session,
     DurationDefaultPersist row, {
     required _i1.ColumnSelections<DurationDefaultPersistTable> conflictColumns,
+    _i1.ColumnSelections<DurationDefaultPersistTable>? updateColumns,
+    _i1.WhereExpressionBuilder<DurationDefaultPersistTable>? conflictWhere,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsertRow<DurationDefaultPersist>(
       row,
       conflictColumns: conflictColumns(DurationDefaultPersist.t),
+      updateColumns: updateColumns?.call(DurationDefaultPersist.t),
+      conflictWhere: conflictWhere?.call(DurationDefaultPersist.t),
       transaction: transaction,
     );
   }

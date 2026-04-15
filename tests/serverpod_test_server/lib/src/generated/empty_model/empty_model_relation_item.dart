@@ -401,11 +401,15 @@ class EmptyModelRelationItemRepository {
     _i1.DatabaseSession session,
     List<EmptyModelRelationItem> rows, {
     required _i1.ColumnSelections<EmptyModelRelationItemTable> conflictColumns,
+    _i1.ColumnSelections<EmptyModelRelationItemTable>? updateColumns,
+    _i1.WhereExpressionBuilder<EmptyModelRelationItemTable>? conflictWhere,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsert<EmptyModelRelationItem>(
       rows,
       conflictColumns: conflictColumns(EmptyModelRelationItem.t),
+      updateColumns: updateColumns?.call(EmptyModelRelationItem.t),
+      conflictWhere: conflictWhere?.call(EmptyModelRelationItem.t),
       transaction: transaction,
     );
   }
@@ -420,11 +424,15 @@ class EmptyModelRelationItemRepository {
     _i1.DatabaseSession session,
     EmptyModelRelationItem row, {
     required _i1.ColumnSelections<EmptyModelRelationItemTable> conflictColumns,
+    _i1.ColumnSelections<EmptyModelRelationItemTable>? updateColumns,
+    _i1.WhereExpressionBuilder<EmptyModelRelationItemTable>? conflictWhere,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsertRow<EmptyModelRelationItem>(
       row,
       conflictColumns: conflictColumns(EmptyModelRelationItem.t),
+      updateColumns: updateColumns?.call(EmptyModelRelationItem.t),
+      conflictWhere: conflictWhere?.call(EmptyModelRelationItem.t),
       transaction: transaction,
     );
   }

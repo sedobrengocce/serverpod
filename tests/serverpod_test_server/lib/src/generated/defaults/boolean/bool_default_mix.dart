@@ -416,11 +416,15 @@ class BoolDefaultMixRepository {
     _i1.DatabaseSession session,
     List<BoolDefaultMix> rows, {
     required _i1.ColumnSelections<BoolDefaultMixTable> conflictColumns,
+    _i1.ColumnSelections<BoolDefaultMixTable>? updateColumns,
+    _i1.WhereExpressionBuilder<BoolDefaultMixTable>? conflictWhere,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsert<BoolDefaultMix>(
       rows,
       conflictColumns: conflictColumns(BoolDefaultMix.t),
+      updateColumns: updateColumns?.call(BoolDefaultMix.t),
+      conflictWhere: conflictWhere?.call(BoolDefaultMix.t),
       transaction: transaction,
     );
   }
@@ -435,11 +439,15 @@ class BoolDefaultMixRepository {
     _i1.DatabaseSession session,
     BoolDefaultMix row, {
     required _i1.ColumnSelections<BoolDefaultMixTable> conflictColumns,
+    _i1.ColumnSelections<BoolDefaultMixTable>? updateColumns,
+    _i1.WhereExpressionBuilder<BoolDefaultMixTable>? conflictWhere,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsertRow<BoolDefaultMix>(
       row,
       conflictColumns: conflictColumns(BoolDefaultMix.t),
+      updateColumns: updateColumns?.call(BoolDefaultMix.t),
+      conflictWhere: conflictWhere?.call(BoolDefaultMix.t),
       transaction: transaction,
     );
   }

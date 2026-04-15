@@ -507,11 +507,16 @@ class OrganizationWithLongTableNameRepository {
     List<OrganizationWithLongTableName> rows, {
     required _i1.ColumnSelections<OrganizationWithLongTableNameTable>
     conflictColumns,
+    _i1.ColumnSelections<OrganizationWithLongTableNameTable>? updateColumns,
+    _i1.WhereExpressionBuilder<OrganizationWithLongTableNameTable>?
+    conflictWhere,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsert<OrganizationWithLongTableName>(
       rows,
       conflictColumns: conflictColumns(OrganizationWithLongTableName.t),
+      updateColumns: updateColumns?.call(OrganizationWithLongTableName.t),
+      conflictWhere: conflictWhere?.call(OrganizationWithLongTableName.t),
       transaction: transaction,
     );
   }
@@ -527,11 +532,16 @@ class OrganizationWithLongTableNameRepository {
     OrganizationWithLongTableName row, {
     required _i1.ColumnSelections<OrganizationWithLongTableNameTable>
     conflictColumns,
+    _i1.ColumnSelections<OrganizationWithLongTableNameTable>? updateColumns,
+    _i1.WhereExpressionBuilder<OrganizationWithLongTableNameTable>?
+    conflictWhere,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsertRow<OrganizationWithLongTableName>(
       row,
       conflictColumns: conflictColumns(OrganizationWithLongTableName.t),
+      updateColumns: updateColumns?.call(OrganizationWithLongTableName.t),
+      conflictWhere: conflictWhere?.call(OrganizationWithLongTableName.t),
       transaction: transaction,
     );
   }

@@ -393,11 +393,15 @@ class EnumDefaultPersistRepository {
     _i1.DatabaseSession session,
     List<EnumDefaultPersist> rows, {
     required _i1.ColumnSelections<EnumDefaultPersistTable> conflictColumns,
+    _i1.ColumnSelections<EnumDefaultPersistTable>? updateColumns,
+    _i1.WhereExpressionBuilder<EnumDefaultPersistTable>? conflictWhere,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsert<EnumDefaultPersist>(
       rows,
       conflictColumns: conflictColumns(EnumDefaultPersist.t),
+      updateColumns: updateColumns?.call(EnumDefaultPersist.t),
+      conflictWhere: conflictWhere?.call(EnumDefaultPersist.t),
       transaction: transaction,
     );
   }
@@ -412,11 +416,15 @@ class EnumDefaultPersistRepository {
     _i1.DatabaseSession session,
     EnumDefaultPersist row, {
     required _i1.ColumnSelections<EnumDefaultPersistTable> conflictColumns,
+    _i1.ColumnSelections<EnumDefaultPersistTable>? updateColumns,
+    _i1.WhereExpressionBuilder<EnumDefaultPersistTable>? conflictWhere,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsertRow<EnumDefaultPersist>(
       row,
       conflictColumns: conflictColumns(EnumDefaultPersist.t),
+      updateColumns: updateColumns?.call(EnumDefaultPersist.t),
+      conflictWhere: conflictWhere?.call(EnumDefaultPersist.t),
       transaction: transaction,
     );
   }

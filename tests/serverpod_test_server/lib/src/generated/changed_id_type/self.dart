@@ -618,11 +618,15 @@ class ChangedIdTypeSelfRepository {
     _i1.DatabaseSession session,
     List<ChangedIdTypeSelf> rows, {
     required _i1.ColumnSelections<ChangedIdTypeSelfTable> conflictColumns,
+    _i1.ColumnSelections<ChangedIdTypeSelfTable>? updateColumns,
+    _i1.WhereExpressionBuilder<ChangedIdTypeSelfTable>? conflictWhere,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsert<ChangedIdTypeSelf>(
       rows,
       conflictColumns: conflictColumns(ChangedIdTypeSelf.t),
+      updateColumns: updateColumns?.call(ChangedIdTypeSelf.t),
+      conflictWhere: conflictWhere?.call(ChangedIdTypeSelf.t),
       transaction: transaction,
     );
   }
@@ -637,11 +641,15 @@ class ChangedIdTypeSelfRepository {
     _i1.DatabaseSession session,
     ChangedIdTypeSelf row, {
     required _i1.ColumnSelections<ChangedIdTypeSelfTable> conflictColumns,
+    _i1.ColumnSelections<ChangedIdTypeSelfTable>? updateColumns,
+    _i1.WhereExpressionBuilder<ChangedIdTypeSelfTable>? conflictWhere,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsertRow<ChangedIdTypeSelf>(
       row,
       conflictColumns: conflictColumns(ChangedIdTypeSelf.t),
+      updateColumns: updateColumns?.call(ChangedIdTypeSelf.t),
+      conflictWhere: conflictWhere?.call(ChangedIdTypeSelf.t),
       transaction: transaction,
     );
   }

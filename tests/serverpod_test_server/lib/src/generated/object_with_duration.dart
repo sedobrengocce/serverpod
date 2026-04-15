@@ -344,11 +344,15 @@ class ObjectWithDurationRepository {
     _i1.DatabaseSession session,
     List<ObjectWithDuration> rows, {
     required _i1.ColumnSelections<ObjectWithDurationTable> conflictColumns,
+    _i1.ColumnSelections<ObjectWithDurationTable>? updateColumns,
+    _i1.WhereExpressionBuilder<ObjectWithDurationTable>? conflictWhere,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsert<ObjectWithDuration>(
       rows,
       conflictColumns: conflictColumns(ObjectWithDuration.t),
+      updateColumns: updateColumns?.call(ObjectWithDuration.t),
+      conflictWhere: conflictWhere?.call(ObjectWithDuration.t),
       transaction: transaction,
     );
   }
@@ -363,11 +367,15 @@ class ObjectWithDurationRepository {
     _i1.DatabaseSession session,
     ObjectWithDuration row, {
     required _i1.ColumnSelections<ObjectWithDurationTable> conflictColumns,
+    _i1.ColumnSelections<ObjectWithDurationTable>? updateColumns,
+    _i1.WhereExpressionBuilder<ObjectWithDurationTable>? conflictWhere,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsertRow<ObjectWithDuration>(
       row,
       conflictColumns: conflictColumns(ObjectWithDuration.t),
+      updateColumns: updateColumns?.call(ObjectWithDuration.t),
+      conflictWhere: conflictWhere?.call(ObjectWithDuration.t),
       transaction: transaction,
     );
   }

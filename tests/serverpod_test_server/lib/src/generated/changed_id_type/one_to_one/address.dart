@@ -423,11 +423,15 @@ class AddressUuidRepository {
     _i1.DatabaseSession session,
     List<AddressUuid> rows, {
     required _i1.ColumnSelections<AddressUuidTable> conflictColumns,
+    _i1.ColumnSelections<AddressUuidTable>? updateColumns,
+    _i1.WhereExpressionBuilder<AddressUuidTable>? conflictWhere,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsert<AddressUuid>(
       rows,
       conflictColumns: conflictColumns(AddressUuid.t),
+      updateColumns: updateColumns?.call(AddressUuid.t),
+      conflictWhere: conflictWhere?.call(AddressUuid.t),
       transaction: transaction,
     );
   }
@@ -442,11 +446,15 @@ class AddressUuidRepository {
     _i1.DatabaseSession session,
     AddressUuid row, {
     required _i1.ColumnSelections<AddressUuidTable> conflictColumns,
+    _i1.ColumnSelections<AddressUuidTable>? updateColumns,
+    _i1.WhereExpressionBuilder<AddressUuidTable>? conflictWhere,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsertRow<AddressUuid>(
       row,
       conflictColumns: conflictColumns(AddressUuid.t),
+      updateColumns: updateColumns?.call(AddressUuid.t),
+      conflictWhere: conflictWhere?.call(AddressUuid.t),
       transaction: transaction,
     );
   }

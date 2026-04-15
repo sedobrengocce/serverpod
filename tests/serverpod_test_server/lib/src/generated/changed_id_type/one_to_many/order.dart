@@ -498,11 +498,15 @@ class OrderUuidRepository {
     _i1.DatabaseSession session,
     List<OrderUuid> rows, {
     required _i1.ColumnSelections<OrderUuidTable> conflictColumns,
+    _i1.ColumnSelections<OrderUuidTable>? updateColumns,
+    _i1.WhereExpressionBuilder<OrderUuidTable>? conflictWhere,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsert<OrderUuid>(
       rows,
       conflictColumns: conflictColumns(OrderUuid.t),
+      updateColumns: updateColumns?.call(OrderUuid.t),
+      conflictWhere: conflictWhere?.call(OrderUuid.t),
       transaction: transaction,
     );
   }
@@ -517,11 +521,15 @@ class OrderUuidRepository {
     _i1.DatabaseSession session,
     OrderUuid row, {
     required _i1.ColumnSelections<OrderUuidTable> conflictColumns,
+    _i1.ColumnSelections<OrderUuidTable>? updateColumns,
+    _i1.WhereExpressionBuilder<OrderUuidTable>? conflictWhere,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsertRow<OrderUuid>(
       row,
       conflictColumns: conflictColumns(OrderUuid.t),
+      updateColumns: updateColumns?.call(OrderUuid.t),
+      conflictWhere: conflictWhere?.call(OrderUuid.t),
       transaction: transaction,
     );
   }

@@ -495,11 +495,15 @@ class ObjectWithVectorRepository {
     _i1.DatabaseSession session,
     List<ObjectWithVector> rows, {
     required _i1.ColumnSelections<ObjectWithVectorTable> conflictColumns,
+    _i1.ColumnSelections<ObjectWithVectorTable>? updateColumns,
+    _i1.WhereExpressionBuilder<ObjectWithVectorTable>? conflictWhere,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsert<ObjectWithVector>(
       rows,
       conflictColumns: conflictColumns(ObjectWithVector.t),
+      updateColumns: updateColumns?.call(ObjectWithVector.t),
+      conflictWhere: conflictWhere?.call(ObjectWithVector.t),
       transaction: transaction,
     );
   }
@@ -514,11 +518,15 @@ class ObjectWithVectorRepository {
     _i1.DatabaseSession session,
     ObjectWithVector row, {
     required _i1.ColumnSelections<ObjectWithVectorTable> conflictColumns,
+    _i1.ColumnSelections<ObjectWithVectorTable>? updateColumns,
+    _i1.WhereExpressionBuilder<ObjectWithVectorTable>? conflictWhere,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsertRow<ObjectWithVector>(
       row,
       conflictColumns: conflictColumns(ObjectWithVector.t),
+      updateColumns: updateColumns?.call(ObjectWithVector.t),
+      conflictWhere: conflictWhere?.call(ObjectWithVector.t),
       transaction: transaction,
     );
   }

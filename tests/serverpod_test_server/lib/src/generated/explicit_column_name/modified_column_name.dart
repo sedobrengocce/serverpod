@@ -368,11 +368,15 @@ class ModifiedColumnNameRepository {
     _i1.DatabaseSession session,
     List<ModifiedColumnName> rows, {
     required _i1.ColumnSelections<ModifiedColumnNameTable> conflictColumns,
+    _i1.ColumnSelections<ModifiedColumnNameTable>? updateColumns,
+    _i1.WhereExpressionBuilder<ModifiedColumnNameTable>? conflictWhere,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsert<ModifiedColumnName>(
       rows,
       conflictColumns: conflictColumns(ModifiedColumnName.t),
+      updateColumns: updateColumns?.call(ModifiedColumnName.t),
+      conflictWhere: conflictWhere?.call(ModifiedColumnName.t),
       transaction: transaction,
     );
   }
@@ -387,11 +391,15 @@ class ModifiedColumnNameRepository {
     _i1.DatabaseSession session,
     ModifiedColumnName row, {
     required _i1.ColumnSelections<ModifiedColumnNameTable> conflictColumns,
+    _i1.ColumnSelections<ModifiedColumnNameTable>? updateColumns,
+    _i1.WhereExpressionBuilder<ModifiedColumnNameTable>? conflictWhere,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsertRow<ModifiedColumnName>(
       row,
       conflictColumns: conflictColumns(ModifiedColumnName.t),
+      updateColumns: updateColumns?.call(ModifiedColumnName.t),
+      conflictWhere: conflictWhere?.call(ModifiedColumnName.t),
       transaction: transaction,
     );
   }

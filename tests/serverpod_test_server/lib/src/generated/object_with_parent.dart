@@ -341,11 +341,15 @@ class ObjectWithParentRepository {
     _i1.DatabaseSession session,
     List<ObjectWithParent> rows, {
     required _i1.ColumnSelections<ObjectWithParentTable> conflictColumns,
+    _i1.ColumnSelections<ObjectWithParentTable>? updateColumns,
+    _i1.WhereExpressionBuilder<ObjectWithParentTable>? conflictWhere,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsert<ObjectWithParent>(
       rows,
       conflictColumns: conflictColumns(ObjectWithParent.t),
+      updateColumns: updateColumns?.call(ObjectWithParent.t),
+      conflictWhere: conflictWhere?.call(ObjectWithParent.t),
       transaction: transaction,
     );
   }
@@ -360,11 +364,15 @@ class ObjectWithParentRepository {
     _i1.DatabaseSession session,
     ObjectWithParent row, {
     required _i1.ColumnSelections<ObjectWithParentTable> conflictColumns,
+    _i1.ColumnSelections<ObjectWithParentTable>? updateColumns,
+    _i1.WhereExpressionBuilder<ObjectWithParentTable>? conflictWhere,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsertRow<ObjectWithParent>(
       row,
       conflictColumns: conflictColumns(ObjectWithParent.t),
+      updateColumns: updateColumns?.call(ObjectWithParent.t),
+      conflictWhere: conflictWhere?.call(ObjectWithParent.t),
       transaction: transaction,
     );
   }

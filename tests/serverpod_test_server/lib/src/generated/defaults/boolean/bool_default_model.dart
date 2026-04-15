@@ -409,11 +409,15 @@ class BoolDefaultModelRepository {
     _i1.DatabaseSession session,
     List<BoolDefaultModel> rows, {
     required _i1.ColumnSelections<BoolDefaultModelTable> conflictColumns,
+    _i1.ColumnSelections<BoolDefaultModelTable>? updateColumns,
+    _i1.WhereExpressionBuilder<BoolDefaultModelTable>? conflictWhere,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsert<BoolDefaultModel>(
       rows,
       conflictColumns: conflictColumns(BoolDefaultModel.t),
+      updateColumns: updateColumns?.call(BoolDefaultModel.t),
+      conflictWhere: conflictWhere?.call(BoolDefaultModel.t),
       transaction: transaction,
     );
   }
@@ -428,11 +432,15 @@ class BoolDefaultModelRepository {
     _i1.DatabaseSession session,
     BoolDefaultModel row, {
     required _i1.ColumnSelections<BoolDefaultModelTable> conflictColumns,
+    _i1.ColumnSelections<BoolDefaultModelTable>? updateColumns,
+    _i1.WhereExpressionBuilder<BoolDefaultModelTable>? conflictWhere,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsertRow<BoolDefaultModel>(
       row,
       conflictColumns: conflictColumns(BoolDefaultModel.t),
+      updateColumns: updateColumns?.call(BoolDefaultModel.t),
+      conflictWhere: conflictWhere?.call(BoolDefaultModel.t),
       transaction: transaction,
     );
   }

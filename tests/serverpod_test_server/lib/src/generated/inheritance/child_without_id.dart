@@ -390,11 +390,15 @@ class ChildClassWithoutIdRepository {
     _i2.DatabaseSession session,
     List<ChildClassWithoutId> rows, {
     required _i2.ColumnSelections<ChildClassWithoutIdTable> conflictColumns,
+    _i2.ColumnSelections<ChildClassWithoutIdTable>? updateColumns,
+    _i2.WhereExpressionBuilder<ChildClassWithoutIdTable>? conflictWhere,
     _i2.Transaction? transaction,
   }) async {
     return session.db.upsert<ChildClassWithoutId>(
       rows,
       conflictColumns: conflictColumns(ChildClassWithoutId.t),
+      updateColumns: updateColumns?.call(ChildClassWithoutId.t),
+      conflictWhere: conflictWhere?.call(ChildClassWithoutId.t),
       transaction: transaction,
     );
   }
@@ -409,11 +413,15 @@ class ChildClassWithoutIdRepository {
     _i2.DatabaseSession session,
     ChildClassWithoutId row, {
     required _i2.ColumnSelections<ChildClassWithoutIdTable> conflictColumns,
+    _i2.ColumnSelections<ChildClassWithoutIdTable>? updateColumns,
+    _i2.WhereExpressionBuilder<ChildClassWithoutIdTable>? conflictWhere,
     _i2.Transaction? transaction,
   }) async {
     return session.db.upsertRow<ChildClassWithoutId>(
       row,
       conflictColumns: conflictColumns(ChildClassWithoutId.t),
+      updateColumns: updateColumns?.call(ChildClassWithoutId.t),
+      conflictWhere: conflictWhere?.call(ChildClassWithoutId.t),
       transaction: transaction,
     );
   }
