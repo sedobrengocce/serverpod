@@ -721,11 +721,15 @@ class AppleAccountRepository {
     _i1.DatabaseSession session,
     List<AppleAccount> rows, {
     required _i1.ColumnSelections<AppleAccountTable> conflictColumns,
+    _i1.ColumnSelections<AppleAccountTable>? updateColumns,
+    _i1.WhereExpressionBuilder<AppleAccountTable>? conflictWhere,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsert<AppleAccount>(
       rows,
       conflictColumns: conflictColumns(AppleAccount.t),
+      updateColumns: updateColumns?.call(AppleAccount.t),
+      conflictWhere: conflictWhere?.call(AppleAccount.t),
       transaction: transaction,
     );
   }
@@ -740,11 +744,15 @@ class AppleAccountRepository {
     _i1.DatabaseSession session,
     AppleAccount row, {
     required _i1.ColumnSelections<AppleAccountTable> conflictColumns,
+    _i1.ColumnSelections<AppleAccountTable>? updateColumns,
+    _i1.WhereExpressionBuilder<AppleAccountTable>? conflictWhere,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsertRow<AppleAccount>(
       row,
       conflictColumns: conflictColumns(AppleAccount.t),
+      updateColumns: updateColumns?.call(AppleAccount.t),
+      conflictWhere: conflictWhere?.call(AppleAccount.t),
       transaction: transaction,
     );
   }

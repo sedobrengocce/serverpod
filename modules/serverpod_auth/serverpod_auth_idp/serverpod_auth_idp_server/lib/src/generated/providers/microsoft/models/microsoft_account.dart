@@ -502,11 +502,15 @@ class MicrosoftAccountRepository {
     _i1.DatabaseSession session,
     List<MicrosoftAccount> rows, {
     required _i1.ColumnSelections<MicrosoftAccountTable> conflictColumns,
+    _i1.ColumnSelections<MicrosoftAccountTable>? updateColumns,
+    _i1.WhereExpressionBuilder<MicrosoftAccountTable>? conflictWhere,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsert<MicrosoftAccount>(
       rows,
       conflictColumns: conflictColumns(MicrosoftAccount.t),
+      updateColumns: updateColumns?.call(MicrosoftAccount.t),
+      conflictWhere: conflictWhere?.call(MicrosoftAccount.t),
       transaction: transaction,
     );
   }
@@ -521,11 +525,15 @@ class MicrosoftAccountRepository {
     _i1.DatabaseSession session,
     MicrosoftAccount row, {
     required _i1.ColumnSelections<MicrosoftAccountTable> conflictColumns,
+    _i1.ColumnSelections<MicrosoftAccountTable>? updateColumns,
+    _i1.WhereExpressionBuilder<MicrosoftAccountTable>? conflictWhere,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsertRow<MicrosoftAccount>(
       row,
       conflictColumns: conflictColumns(MicrosoftAccount.t),
+      updateColumns: updateColumns?.call(MicrosoftAccount.t),
+      conflictWhere: conflictWhere?.call(MicrosoftAccount.t),
       transaction: transaction,
     );
   }

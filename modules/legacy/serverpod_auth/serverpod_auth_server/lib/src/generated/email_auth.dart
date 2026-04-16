@@ -402,11 +402,15 @@ class EmailAuthRepository {
     _i1.DatabaseSession session,
     List<EmailAuth> rows, {
     required _i1.ColumnSelections<EmailAuthTable> conflictColumns,
+    _i1.ColumnSelections<EmailAuthTable>? updateColumns,
+    _i1.WhereExpressionBuilder<EmailAuthTable>? conflictWhere,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsert<EmailAuth>(
       rows,
       conflictColumns: conflictColumns(EmailAuth.t),
+      updateColumns: updateColumns?.call(EmailAuth.t),
+      conflictWhere: conflictWhere?.call(EmailAuth.t),
       transaction: transaction,
     );
   }
@@ -421,11 +425,15 @@ class EmailAuthRepository {
     _i1.DatabaseSession session,
     EmailAuth row, {
     required _i1.ColumnSelections<EmailAuthTable> conflictColumns,
+    _i1.ColumnSelections<EmailAuthTable>? updateColumns,
+    _i1.WhereExpressionBuilder<EmailAuthTable>? conflictWhere,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsertRow<EmailAuth>(
       row,
       conflictColumns: conflictColumns(EmailAuth.t),
+      updateColumns: updateColumns?.call(EmailAuth.t),
+      conflictWhere: conflictWhere?.call(EmailAuth.t),
       transaction: transaction,
     );
   }

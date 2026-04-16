@@ -607,11 +607,16 @@ class EmailAccountPasswordResetRequestRepository {
     List<EmailAccountPasswordResetRequest> rows, {
     required _i1.ColumnSelections<EmailAccountPasswordResetRequestTable>
     conflictColumns,
+    _i1.ColumnSelections<EmailAccountPasswordResetRequestTable>? updateColumns,
+    _i1.WhereExpressionBuilder<EmailAccountPasswordResetRequestTable>?
+    conflictWhere,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsert<EmailAccountPasswordResetRequest>(
       rows,
       conflictColumns: conflictColumns(EmailAccountPasswordResetRequest.t),
+      updateColumns: updateColumns?.call(EmailAccountPasswordResetRequest.t),
+      conflictWhere: conflictWhere?.call(EmailAccountPasswordResetRequest.t),
       transaction: transaction,
     );
   }
@@ -627,11 +632,16 @@ class EmailAccountPasswordResetRequestRepository {
     EmailAccountPasswordResetRequest row, {
     required _i1.ColumnSelections<EmailAccountPasswordResetRequestTable>
     conflictColumns,
+    _i1.ColumnSelections<EmailAccountPasswordResetRequestTable>? updateColumns,
+    _i1.WhereExpressionBuilder<EmailAccountPasswordResetRequestTable>?
+    conflictWhere,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsertRow<EmailAccountPasswordResetRequest>(
       row,
       conflictColumns: conflictColumns(EmailAccountPasswordResetRequest.t),
+      updateColumns: updateColumns?.call(EmailAccountPasswordResetRequest.t),
+      conflictWhere: conflictWhere?.call(EmailAccountPasswordResetRequest.t),
       transaction: transaction,
     );
   }

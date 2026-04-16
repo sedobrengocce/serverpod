@@ -403,11 +403,15 @@ class DatabaseMigrationVersionRepository {
     List<DatabaseMigrationVersion> rows, {
     required _i2.ColumnSelections<DatabaseMigrationVersionTable>
     conflictColumns,
+    _i2.ColumnSelections<DatabaseMigrationVersionTable>? updateColumns,
+    _i2.WhereExpressionBuilder<DatabaseMigrationVersionTable>? conflictWhere,
     _i2.Transaction? transaction,
   }) async {
     return session.db.upsert<DatabaseMigrationVersion>(
       rows,
       conflictColumns: conflictColumns(DatabaseMigrationVersion.t),
+      updateColumns: updateColumns?.call(DatabaseMigrationVersion.t),
+      conflictWhere: conflictWhere?.call(DatabaseMigrationVersion.t),
       transaction: transaction,
     );
   }
@@ -423,11 +427,15 @@ class DatabaseMigrationVersionRepository {
     DatabaseMigrationVersion row, {
     required _i2.ColumnSelections<DatabaseMigrationVersionTable>
     conflictColumns,
+    _i2.ColumnSelections<DatabaseMigrationVersionTable>? updateColumns,
+    _i2.WhereExpressionBuilder<DatabaseMigrationVersionTable>? conflictWhere,
     _i2.Transaction? transaction,
   }) async {
     return session.db.upsertRow<DatabaseMigrationVersion>(
       row,
       conflictColumns: conflictColumns(DatabaseMigrationVersion.t),
+      updateColumns: updateColumns?.call(DatabaseMigrationVersion.t),
+      conflictWhere: conflictWhere?.call(DatabaseMigrationVersion.t),
       transaction: transaction,
     );
   }

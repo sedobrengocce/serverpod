@@ -404,11 +404,15 @@ class EmailFailedSignInRepository {
     _i1.DatabaseSession session,
     List<EmailFailedSignIn> rows, {
     required _i1.ColumnSelections<EmailFailedSignInTable> conflictColumns,
+    _i1.ColumnSelections<EmailFailedSignInTable>? updateColumns,
+    _i1.WhereExpressionBuilder<EmailFailedSignInTable>? conflictWhere,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsert<EmailFailedSignIn>(
       rows,
       conflictColumns: conflictColumns(EmailFailedSignIn.t),
+      updateColumns: updateColumns?.call(EmailFailedSignIn.t),
+      conflictWhere: conflictWhere?.call(EmailFailedSignIn.t),
       transaction: transaction,
     );
   }
@@ -423,11 +427,15 @@ class EmailFailedSignInRepository {
     _i1.DatabaseSession session,
     EmailFailedSignIn row, {
     required _i1.ColumnSelections<EmailFailedSignInTable> conflictColumns,
+    _i1.ColumnSelections<EmailFailedSignInTable>? updateColumns,
+    _i1.WhereExpressionBuilder<EmailFailedSignInTable>? conflictWhere,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsertRow<EmailFailedSignIn>(
       row,
       conflictColumns: conflictColumns(EmailFailedSignIn.t),
+      updateColumns: updateColumns?.call(EmailFailedSignIn.t),
+      conflictWhere: conflictWhere?.call(EmailFailedSignIn.t),
       transaction: transaction,
     );
   }

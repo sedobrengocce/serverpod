@@ -73,6 +73,7 @@ abstract base class DatabaseUpsertRowException implements DatabaseException {
   /// reports one or more rows that violate foreign key constraints.
 }
 
+/// Exception thrown when SQLite foreign key constraints are violated.
 final class SqliteForeignKeyViolationException implements DatabaseException {
   /// Creates a new [SqliteForeignKeyViolationException].
   ///

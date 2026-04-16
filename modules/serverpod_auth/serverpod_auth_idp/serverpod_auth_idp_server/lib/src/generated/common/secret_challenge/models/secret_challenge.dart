@@ -354,11 +354,15 @@ class SecretChallengeRepository {
     _i1.DatabaseSession session,
     List<SecretChallenge> rows, {
     required _i1.ColumnSelections<SecretChallengeTable> conflictColumns,
+    _i1.ColumnSelections<SecretChallengeTable>? updateColumns,
+    _i1.WhereExpressionBuilder<SecretChallengeTable>? conflictWhere,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsert<SecretChallenge>(
       rows,
       conflictColumns: conflictColumns(SecretChallenge.t),
+      updateColumns: updateColumns?.call(SecretChallenge.t),
+      conflictWhere: conflictWhere?.call(SecretChallenge.t),
       transaction: transaction,
     );
   }
@@ -373,11 +377,15 @@ class SecretChallengeRepository {
     _i1.DatabaseSession session,
     SecretChallenge row, {
     required _i1.ColumnSelections<SecretChallengeTable> conflictColumns,
+    _i1.ColumnSelections<SecretChallengeTable>? updateColumns,
+    _i1.WhereExpressionBuilder<SecretChallengeTable>? conflictWhere,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsertRow<SecretChallenge>(
       row,
       conflictColumns: conflictColumns(SecretChallenge.t),
+      updateColumns: updateColumns?.call(SecretChallenge.t),
+      conflictWhere: conflictWhere?.call(SecretChallenge.t),
       transaction: transaction,
     );
   }

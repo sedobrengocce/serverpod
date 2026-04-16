@@ -461,11 +461,15 @@ class UserDataRepository {
     _i1.DatabaseSession session,
     List<UserData> rows, {
     required _i1.ColumnSelections<UserDataTable> conflictColumns,
+    _i1.ColumnSelections<UserDataTable>? updateColumns,
+    _i1.WhereExpressionBuilder<UserDataTable>? conflictWhere,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsert<UserData>(
       rows,
       conflictColumns: conflictColumns(UserData.t),
+      updateColumns: updateColumns?.call(UserData.t),
+      conflictWhere: conflictWhere?.call(UserData.t),
       transaction: transaction,
     );
   }
@@ -480,11 +484,15 @@ class UserDataRepository {
     _i1.DatabaseSession session,
     UserData row, {
     required _i1.ColumnSelections<UserDataTable> conflictColumns,
+    _i1.ColumnSelections<UserDataTable>? updateColumns,
+    _i1.WhereExpressionBuilder<UserDataTable>? conflictWhere,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsertRow<UserData>(
       row,
       conflictColumns: conflictColumns(UserData.t),
+      updateColumns: updateColumns?.call(UserData.t),
+      conflictWhere: conflictWhere?.call(UserData.t),
       transaction: transaction,
     );
   }

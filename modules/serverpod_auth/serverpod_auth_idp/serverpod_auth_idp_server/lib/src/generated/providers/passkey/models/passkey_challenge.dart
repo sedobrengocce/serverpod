@@ -381,11 +381,15 @@ class PasskeyChallengeRepository {
     _i1.DatabaseSession session,
     List<PasskeyChallenge> rows, {
     required _i1.ColumnSelections<PasskeyChallengeTable> conflictColumns,
+    _i1.ColumnSelections<PasskeyChallengeTable>? updateColumns,
+    _i1.WhereExpressionBuilder<PasskeyChallengeTable>? conflictWhere,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsert<PasskeyChallenge>(
       rows,
       conflictColumns: conflictColumns(PasskeyChallenge.t),
+      updateColumns: updateColumns?.call(PasskeyChallenge.t),
+      conflictWhere: conflictWhere?.call(PasskeyChallenge.t),
       transaction: transaction,
     );
   }
@@ -400,11 +404,15 @@ class PasskeyChallengeRepository {
     _i1.DatabaseSession session,
     PasskeyChallenge row, {
     required _i1.ColumnSelections<PasskeyChallengeTable> conflictColumns,
+    _i1.ColumnSelections<PasskeyChallengeTable>? updateColumns,
+    _i1.WhereExpressionBuilder<PasskeyChallengeTable>? conflictWhere,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsertRow<PasskeyChallenge>(
       row,
       conflictColumns: conflictColumns(PasskeyChallenge.t),
+      updateColumns: updateColumns?.call(PasskeyChallenge.t),
+      conflictWhere: conflictWhere?.call(PasskeyChallenge.t),
       transaction: transaction,
     );
   }

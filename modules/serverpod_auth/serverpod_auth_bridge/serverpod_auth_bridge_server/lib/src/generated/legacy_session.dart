@@ -488,11 +488,15 @@ class LegacySessionRepository {
     _i1.DatabaseSession session,
     List<LegacySession> rows, {
     required _i1.ColumnSelections<LegacySessionTable> conflictColumns,
+    _i1.ColumnSelections<LegacySessionTable>? updateColumns,
+    _i1.WhereExpressionBuilder<LegacySessionTable>? conflictWhere,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsert<LegacySession>(
       rows,
       conflictColumns: conflictColumns(LegacySession.t),
+      updateColumns: updateColumns?.call(LegacySession.t),
+      conflictWhere: conflictWhere?.call(LegacySession.t),
       transaction: transaction,
     );
   }
@@ -507,11 +511,15 @@ class LegacySessionRepository {
     _i1.DatabaseSession session,
     LegacySession row, {
     required _i1.ColumnSelections<LegacySessionTable> conflictColumns,
+    _i1.ColumnSelections<LegacySessionTable>? updateColumns,
+    _i1.WhereExpressionBuilder<LegacySessionTable>? conflictWhere,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsertRow<LegacySession>(
       row,
       conflictColumns: conflictColumns(LegacySession.t),
+      updateColumns: updateColumns?.call(LegacySession.t),
+      conflictWhere: conflictWhere?.call(LegacySession.t),
       transaction: transaction,
     );
   }

@@ -446,11 +446,16 @@ class LegacyExternalUserIdentifierRepository {
     List<LegacyExternalUserIdentifier> rows, {
     required _i1.ColumnSelections<LegacyExternalUserIdentifierTable>
     conflictColumns,
+    _i1.ColumnSelections<LegacyExternalUserIdentifierTable>? updateColumns,
+    _i1.WhereExpressionBuilder<LegacyExternalUserIdentifierTable>?
+    conflictWhere,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsert<LegacyExternalUserIdentifier>(
       rows,
       conflictColumns: conflictColumns(LegacyExternalUserIdentifier.t),
+      updateColumns: updateColumns?.call(LegacyExternalUserIdentifier.t),
+      conflictWhere: conflictWhere?.call(LegacyExternalUserIdentifier.t),
       transaction: transaction,
     );
   }
@@ -466,11 +471,16 @@ class LegacyExternalUserIdentifierRepository {
     LegacyExternalUserIdentifier row, {
     required _i1.ColumnSelections<LegacyExternalUserIdentifierTable>
     conflictColumns,
+    _i1.ColumnSelections<LegacyExternalUserIdentifierTable>? updateColumns,
+    _i1.WhereExpressionBuilder<LegacyExternalUserIdentifierTable>?
+    conflictWhere,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsertRow<LegacyExternalUserIdentifier>(
       row,
       conflictColumns: conflictColumns(LegacyExternalUserIdentifier.t),
+      updateColumns: updateColumns?.call(LegacyExternalUserIdentifier.t),
+      conflictWhere: conflictWhere?.call(LegacyExternalUserIdentifier.t),
       transaction: transaction,
     );
   }

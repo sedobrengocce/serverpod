@@ -451,11 +451,15 @@ class RuntimeSettingsRepository {
     _i1.DatabaseSession session,
     List<RuntimeSettings> rows, {
     required _i1.ColumnSelections<RuntimeSettingsTable> conflictColumns,
+    _i1.ColumnSelections<RuntimeSettingsTable>? updateColumns,
+    _i1.WhereExpressionBuilder<RuntimeSettingsTable>? conflictWhere,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsert<RuntimeSettings>(
       rows,
       conflictColumns: conflictColumns(RuntimeSettings.t),
+      updateColumns: updateColumns?.call(RuntimeSettings.t),
+      conflictWhere: conflictWhere?.call(RuntimeSettings.t),
       transaction: transaction,
     );
   }
@@ -470,11 +474,15 @@ class RuntimeSettingsRepository {
     _i1.DatabaseSession session,
     RuntimeSettings row, {
     required _i1.ColumnSelections<RuntimeSettingsTable> conflictColumns,
+    _i1.ColumnSelections<RuntimeSettingsTable>? updateColumns,
+    _i1.WhereExpressionBuilder<RuntimeSettingsTable>? conflictWhere,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsertRow<RuntimeSettings>(
       row,
       conflictColumns: conflictColumns(RuntimeSettings.t),
+      updateColumns: updateColumns?.call(RuntimeSettings.t),
+      conflictWhere: conflictWhere?.call(RuntimeSettings.t),
       transaction: transaction,
     );
   }

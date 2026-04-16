@@ -352,11 +352,15 @@ class ReadWriteTestEntryRepository {
     _i1.DatabaseSession session,
     List<ReadWriteTestEntry> rows, {
     required _i1.ColumnSelections<ReadWriteTestEntryTable> conflictColumns,
+    _i1.ColumnSelections<ReadWriteTestEntryTable>? updateColumns,
+    _i1.WhereExpressionBuilder<ReadWriteTestEntryTable>? conflictWhere,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsert<ReadWriteTestEntry>(
       rows,
       conflictColumns: conflictColumns(ReadWriteTestEntry.t),
+      updateColumns: updateColumns?.call(ReadWriteTestEntry.t),
+      conflictWhere: conflictWhere?.call(ReadWriteTestEntry.t),
       transaction: transaction,
     );
   }
@@ -371,11 +375,15 @@ class ReadWriteTestEntryRepository {
     _i1.DatabaseSession session,
     ReadWriteTestEntry row, {
     required _i1.ColumnSelections<ReadWriteTestEntryTable> conflictColumns,
+    _i1.ColumnSelections<ReadWriteTestEntryTable>? updateColumns,
+    _i1.WhereExpressionBuilder<ReadWriteTestEntryTable>? conflictWhere,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsertRow<ReadWriteTestEntry>(
       row,
       conflictColumns: conflictColumns(ReadWriteTestEntry.t),
+      updateColumns: updateColumns?.call(ReadWriteTestEntry.t),
+      conflictWhere: conflictWhere?.call(ReadWriteTestEntry.t),
       transaction: transaction,
     );
   }

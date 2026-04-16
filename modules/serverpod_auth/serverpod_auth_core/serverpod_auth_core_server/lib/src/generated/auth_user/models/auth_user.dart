@@ -417,11 +417,15 @@ class AuthUserRepository {
     _i1.DatabaseSession session,
     List<AuthUser> rows, {
     required _i1.ColumnSelections<AuthUserTable> conflictColumns,
+    _i1.ColumnSelections<AuthUserTable>? updateColumns,
+    _i1.WhereExpressionBuilder<AuthUserTable>? conflictWhere,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsert<AuthUser>(
       rows,
       conflictColumns: conflictColumns(AuthUser.t),
+      updateColumns: updateColumns?.call(AuthUser.t),
+      conflictWhere: conflictWhere?.call(AuthUser.t),
       transaction: transaction,
     );
   }
@@ -436,11 +440,15 @@ class AuthUserRepository {
     _i1.DatabaseSession session,
     AuthUser row, {
     required _i1.ColumnSelections<AuthUserTable> conflictColumns,
+    _i1.ColumnSelections<AuthUserTable>? updateColumns,
+    _i1.WhereExpressionBuilder<AuthUserTable>? conflictWhere,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsertRow<AuthUser>(
       row,
       conflictColumns: conflictColumns(AuthUser.t),
+      updateColumns: updateColumns?.call(AuthUser.t),
+      conflictWhere: conflictWhere?.call(AuthUser.t),
       transaction: transaction,
     );
   }

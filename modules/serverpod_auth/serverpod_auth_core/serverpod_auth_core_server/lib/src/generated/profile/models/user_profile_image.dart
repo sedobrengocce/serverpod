@@ -523,11 +523,15 @@ class UserProfileImageRepository {
     _i1.DatabaseSession session,
     List<UserProfileImage> rows, {
     required _i1.ColumnSelections<UserProfileImageTable> conflictColumns,
+    _i1.ColumnSelections<UserProfileImageTable>? updateColumns,
+    _i1.WhereExpressionBuilder<UserProfileImageTable>? conflictWhere,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsert<UserProfileImage>(
       rows,
       conflictColumns: conflictColumns(UserProfileImage.t),
+      updateColumns: updateColumns?.call(UserProfileImage.t),
+      conflictWhere: conflictWhere?.call(UserProfileImage.t),
       transaction: transaction,
     );
   }
@@ -542,11 +546,15 @@ class UserProfileImageRepository {
     _i1.DatabaseSession session,
     UserProfileImage row, {
     required _i1.ColumnSelections<UserProfileImageTable> conflictColumns,
+    _i1.ColumnSelections<UserProfileImageTable>? updateColumns,
+    _i1.WhereExpressionBuilder<UserProfileImageTable>? conflictWhere,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsertRow<UserProfileImage>(
       row,
       conflictColumns: conflictColumns(UserProfileImage.t),
+      updateColumns: updateColumns?.call(UserProfileImage.t),
+      conflictWhere: conflictWhere?.call(UserProfileImage.t),
       transaction: transaction,
     );
   }

@@ -653,11 +653,15 @@ class RefreshTokenRepository {
     _i1.DatabaseSession session,
     List<RefreshToken> rows, {
     required _i1.ColumnSelections<RefreshTokenTable> conflictColumns,
+    _i1.ColumnSelections<RefreshTokenTable>? updateColumns,
+    _i1.WhereExpressionBuilder<RefreshTokenTable>? conflictWhere,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsert<RefreshToken>(
       rows,
       conflictColumns: conflictColumns(RefreshToken.t),
+      updateColumns: updateColumns?.call(RefreshToken.t),
+      conflictWhere: conflictWhere?.call(RefreshToken.t),
       transaction: transaction,
     );
   }
@@ -672,11 +676,15 @@ class RefreshTokenRepository {
     _i1.DatabaseSession session,
     RefreshToken row, {
     required _i1.ColumnSelections<RefreshTokenTable> conflictColumns,
+    _i1.ColumnSelections<RefreshTokenTable>? updateColumns,
+    _i1.WhereExpressionBuilder<RefreshTokenTable>? conflictWhere,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsertRow<RefreshToken>(
       row,
       conflictColumns: conflictColumns(RefreshToken.t),
+      updateColumns: updateColumns?.call(RefreshToken.t),
+      conflictWhere: conflictWhere?.call(RefreshToken.t),
       transaction: transaction,
     );
   }

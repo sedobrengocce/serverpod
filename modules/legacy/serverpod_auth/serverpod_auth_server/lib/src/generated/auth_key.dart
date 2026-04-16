@@ -446,11 +446,15 @@ class AuthKeyRepository {
     _i1.DatabaseSession session,
     List<AuthKey> rows, {
     required _i1.ColumnSelections<AuthKeyTable> conflictColumns,
+    _i1.ColumnSelections<AuthKeyTable>? updateColumns,
+    _i1.WhereExpressionBuilder<AuthKeyTable>? conflictWhere,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsert<AuthKey>(
       rows,
       conflictColumns: conflictColumns(AuthKey.t),
+      updateColumns: updateColumns?.call(AuthKey.t),
+      conflictWhere: conflictWhere?.call(AuthKey.t),
       transaction: transaction,
     );
   }
@@ -465,11 +469,15 @@ class AuthKeyRepository {
     _i1.DatabaseSession session,
     AuthKey row, {
     required _i1.ColumnSelections<AuthKeyTable> conflictColumns,
+    _i1.ColumnSelections<AuthKeyTable>? updateColumns,
+    _i1.WhereExpressionBuilder<AuthKeyTable>? conflictWhere,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsertRow<AuthKey>(
       row,
       conflictColumns: conflictColumns(AuthKey.t),
+      updateColumns: updateColumns?.call(AuthKey.t),
+      conflictWhere: conflictWhere?.call(AuthKey.t),
       transaction: transaction,
     );
   }

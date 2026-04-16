@@ -440,11 +440,15 @@ class LegacyEmailPasswordRepository {
     _i1.DatabaseSession session,
     List<LegacyEmailPassword> rows, {
     required _i1.ColumnSelections<LegacyEmailPasswordTable> conflictColumns,
+    _i1.ColumnSelections<LegacyEmailPasswordTable>? updateColumns,
+    _i1.WhereExpressionBuilder<LegacyEmailPasswordTable>? conflictWhere,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsert<LegacyEmailPassword>(
       rows,
       conflictColumns: conflictColumns(LegacyEmailPassword.t),
+      updateColumns: updateColumns?.call(LegacyEmailPassword.t),
+      conflictWhere: conflictWhere?.call(LegacyEmailPassword.t),
       transaction: transaction,
     );
   }
@@ -459,11 +463,15 @@ class LegacyEmailPasswordRepository {
     _i1.DatabaseSession session,
     LegacyEmailPassword row, {
     required _i1.ColumnSelections<LegacyEmailPasswordTable> conflictColumns,
+    _i1.ColumnSelections<LegacyEmailPasswordTable>? updateColumns,
+    _i1.WhereExpressionBuilder<LegacyEmailPasswordTable>? conflictWhere,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsertRow<LegacyEmailPassword>(
       row,
       conflictColumns: conflictColumns(LegacyEmailPassword.t),
+      updateColumns: updateColumns?.call(LegacyEmailPassword.t),
+      conflictWhere: conflictWhere?.call(LegacyEmailPassword.t),
       transaction: transaction,
     );
   }

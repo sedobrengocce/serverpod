@@ -377,11 +377,15 @@ class GoogleRefreshTokenRepository {
     _i1.DatabaseSession session,
     List<GoogleRefreshToken> rows, {
     required _i1.ColumnSelections<GoogleRefreshTokenTable> conflictColumns,
+    _i1.ColumnSelections<GoogleRefreshTokenTable>? updateColumns,
+    _i1.WhereExpressionBuilder<GoogleRefreshTokenTable>? conflictWhere,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsert<GoogleRefreshToken>(
       rows,
       conflictColumns: conflictColumns(GoogleRefreshToken.t),
+      updateColumns: updateColumns?.call(GoogleRefreshToken.t),
+      conflictWhere: conflictWhere?.call(GoogleRefreshToken.t),
       transaction: transaction,
     );
   }
@@ -396,11 +400,15 @@ class GoogleRefreshTokenRepository {
     _i1.DatabaseSession session,
     GoogleRefreshToken row, {
     required _i1.ColumnSelections<GoogleRefreshTokenTable> conflictColumns,
+    _i1.ColumnSelections<GoogleRefreshTokenTable>? updateColumns,
+    _i1.WhereExpressionBuilder<GoogleRefreshTokenTable>? conflictWhere,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsertRow<GoogleRefreshToken>(
       row,
       conflictColumns: conflictColumns(GoogleRefreshToken.t),
+      updateColumns: updateColumns?.call(GoogleRefreshToken.t),
+      conflictWhere: conflictWhere?.call(GoogleRefreshToken.t),
       transaction: transaction,
     );
   }

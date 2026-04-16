@@ -491,11 +491,15 @@ class ServerHealthConnectionInfoRepository {
     List<ServerHealthConnectionInfo> rows, {
     required _i1.ColumnSelections<ServerHealthConnectionInfoTable>
     conflictColumns,
+    _i1.ColumnSelections<ServerHealthConnectionInfoTable>? updateColumns,
+    _i1.WhereExpressionBuilder<ServerHealthConnectionInfoTable>? conflictWhere,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsert<ServerHealthConnectionInfo>(
       rows,
       conflictColumns: conflictColumns(ServerHealthConnectionInfo.t),
+      updateColumns: updateColumns?.call(ServerHealthConnectionInfo.t),
+      conflictWhere: conflictWhere?.call(ServerHealthConnectionInfo.t),
       transaction: transaction,
     );
   }
@@ -511,11 +515,15 @@ class ServerHealthConnectionInfoRepository {
     ServerHealthConnectionInfo row, {
     required _i1.ColumnSelections<ServerHealthConnectionInfoTable>
     conflictColumns,
+    _i1.ColumnSelections<ServerHealthConnectionInfoTable>? updateColumns,
+    _i1.WhereExpressionBuilder<ServerHealthConnectionInfoTable>? conflictWhere,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsertRow<ServerHealthConnectionInfo>(
       row,
       conflictColumns: conflictColumns(ServerHealthConnectionInfo.t),
+      updateColumns: updateColumns?.call(ServerHealthConnectionInfo.t),
+      conflictWhere: conflictWhere?.call(ServerHealthConnectionInfo.t),
       transaction: transaction,
     );
   }

@@ -404,11 +404,15 @@ class GreetingRepository {
     _i1.DatabaseSession session,
     List<Greeting> rows, {
     required _i1.ColumnSelections<GreetingTable> conflictColumns,
+    _i1.ColumnSelections<GreetingTable>? updateColumns,
+    _i1.WhereExpressionBuilder<GreetingTable>? conflictWhere,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsert<Greeting>(
       rows,
       conflictColumns: conflictColumns(Greeting.t),
+      updateColumns: updateColumns?.call(Greeting.t),
+      conflictWhere: conflictWhere?.call(Greeting.t),
       transaction: transaction,
     );
   }
@@ -423,11 +427,15 @@ class GreetingRepository {
     _i1.DatabaseSession session,
     Greeting row, {
     required _i1.ColumnSelections<GreetingTable> conflictColumns,
+    _i1.ColumnSelections<GreetingTable>? updateColumns,
+    _i1.WhereExpressionBuilder<GreetingTable>? conflictWhere,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsertRow<Greeting>(
       row,
       conflictColumns: conflictColumns(Greeting.t),
+      updateColumns: updateColumns?.call(Greeting.t),
+      conflictWhere: conflictWhere?.call(Greeting.t),
       transaction: transaction,
     );
   }

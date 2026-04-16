@@ -376,11 +376,15 @@ class MethodInfoRepository {
     _i1.DatabaseSession session,
     List<MethodInfo> rows, {
     required _i1.ColumnSelections<MethodInfoTable> conflictColumns,
+    _i1.ColumnSelections<MethodInfoTable>? updateColumns,
+    _i1.WhereExpressionBuilder<MethodInfoTable>? conflictWhere,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsert<MethodInfo>(
       rows,
       conflictColumns: conflictColumns(MethodInfo.t),
+      updateColumns: updateColumns?.call(MethodInfo.t),
+      conflictWhere: conflictWhere?.call(MethodInfo.t),
       transaction: transaction,
     );
   }
@@ -395,11 +399,15 @@ class MethodInfoRepository {
     _i1.DatabaseSession session,
     MethodInfo row, {
     required _i1.ColumnSelections<MethodInfoTable> conflictColumns,
+    _i1.ColumnSelections<MethodInfoTable>? updateColumns,
+    _i1.WhereExpressionBuilder<MethodInfoTable>? conflictWhere,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsertRow<MethodInfo>(
       row,
       conflictColumns: conflictColumns(MethodInfo.t),
+      updateColumns: updateColumns?.call(MethodInfo.t),
+      conflictWhere: conflictWhere?.call(MethodInfo.t),
       transaction: transaction,
     );
   }

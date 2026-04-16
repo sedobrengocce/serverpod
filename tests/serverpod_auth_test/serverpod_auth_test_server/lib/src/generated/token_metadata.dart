@@ -505,11 +505,15 @@ class TokenMetadataRepository {
     _i1.DatabaseSession session,
     List<TokenMetadata> rows, {
     required _i1.ColumnSelections<TokenMetadataTable> conflictColumns,
+    _i1.ColumnSelections<TokenMetadataTable>? updateColumns,
+    _i1.WhereExpressionBuilder<TokenMetadataTable>? conflictWhere,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsert<TokenMetadata>(
       rows,
       conflictColumns: conflictColumns(TokenMetadata.t),
+      updateColumns: updateColumns?.call(TokenMetadata.t),
+      conflictWhere: conflictWhere?.call(TokenMetadata.t),
       transaction: transaction,
     );
   }
@@ -524,11 +528,15 @@ class TokenMetadataRepository {
     _i1.DatabaseSession session,
     TokenMetadata row, {
     required _i1.ColumnSelections<TokenMetadataTable> conflictColumns,
+    _i1.ColumnSelections<TokenMetadataTable>? updateColumns,
+    _i1.WhereExpressionBuilder<TokenMetadataTable>? conflictWhere,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsertRow<TokenMetadata>(
       row,
       conflictColumns: conflictColumns(TokenMetadata.t),
+      updateColumns: updateColumns?.call(TokenMetadata.t),
+      conflictWhere: conflictWhere?.call(TokenMetadata.t),
       transaction: transaction,
     );
   }

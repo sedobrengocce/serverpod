@@ -384,11 +384,15 @@ class FutureCallClaimEntryRepository {
     _i1.DatabaseSession session,
     List<FutureCallClaimEntry> rows, {
     required _i1.ColumnSelections<FutureCallClaimEntryTable> conflictColumns,
+    _i1.ColumnSelections<FutureCallClaimEntryTable>? updateColumns,
+    _i1.WhereExpressionBuilder<FutureCallClaimEntryTable>? conflictWhere,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsert<FutureCallClaimEntry>(
       rows,
       conflictColumns: conflictColumns(FutureCallClaimEntry.t),
+      updateColumns: updateColumns?.call(FutureCallClaimEntry.t),
+      conflictWhere: conflictWhere?.call(FutureCallClaimEntry.t),
       transaction: transaction,
     );
   }
@@ -403,11 +407,15 @@ class FutureCallClaimEntryRepository {
     _i1.DatabaseSession session,
     FutureCallClaimEntry row, {
     required _i1.ColumnSelections<FutureCallClaimEntryTable> conflictColumns,
+    _i1.ColumnSelections<FutureCallClaimEntryTable>? updateColumns,
+    _i1.WhereExpressionBuilder<FutureCallClaimEntryTable>? conflictWhere,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsertRow<FutureCallClaimEntry>(
       row,
       conflictColumns: conflictColumns(FutureCallClaimEntry.t),
+      updateColumns: updateColumns?.call(FutureCallClaimEntry.t),
+      conflictWhere: conflictWhere?.call(FutureCallClaimEntry.t),
       transaction: transaction,
     );
   }

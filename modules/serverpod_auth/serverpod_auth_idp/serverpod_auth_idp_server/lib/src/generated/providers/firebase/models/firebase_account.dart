@@ -526,11 +526,15 @@ class FirebaseAccountRepository {
     _i1.DatabaseSession session,
     List<FirebaseAccount> rows, {
     required _i1.ColumnSelections<FirebaseAccountTable> conflictColumns,
+    _i1.ColumnSelections<FirebaseAccountTable>? updateColumns,
+    _i1.WhereExpressionBuilder<FirebaseAccountTable>? conflictWhere,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsert<FirebaseAccount>(
       rows,
       conflictColumns: conflictColumns(FirebaseAccount.t),
+      updateColumns: updateColumns?.call(FirebaseAccount.t),
+      conflictWhere: conflictWhere?.call(FirebaseAccount.t),
       transaction: transaction,
     );
   }
@@ -545,11 +549,15 @@ class FirebaseAccountRepository {
     _i1.DatabaseSession session,
     FirebaseAccount row, {
     required _i1.ColumnSelections<FirebaseAccountTable> conflictColumns,
+    _i1.ColumnSelections<FirebaseAccountTable>? updateColumns,
+    _i1.WhereExpressionBuilder<FirebaseAccountTable>? conflictWhere,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsertRow<FirebaseAccount>(
       row,
       conflictColumns: conflictColumns(FirebaseAccount.t),
+      updateColumns: updateColumns?.call(FirebaseAccount.t),
+      conflictWhere: conflictWhere?.call(FirebaseAccount.t),
       transaction: transaction,
     );
   }

@@ -580,11 +580,15 @@ class FacebookAccountRepository {
     _i1.DatabaseSession session,
     List<FacebookAccount> rows, {
     required _i1.ColumnSelections<FacebookAccountTable> conflictColumns,
+    _i1.ColumnSelections<FacebookAccountTable>? updateColumns,
+    _i1.WhereExpressionBuilder<FacebookAccountTable>? conflictWhere,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsert<FacebookAccount>(
       rows,
       conflictColumns: conflictColumns(FacebookAccount.t),
+      updateColumns: updateColumns?.call(FacebookAccount.t),
+      conflictWhere: conflictWhere?.call(FacebookAccount.t),
       transaction: transaction,
     );
   }
@@ -599,11 +603,15 @@ class FacebookAccountRepository {
     _i1.DatabaseSession session,
     FacebookAccount row, {
     required _i1.ColumnSelections<FacebookAccountTable> conflictColumns,
+    _i1.ColumnSelections<FacebookAccountTable>? updateColumns,
+    _i1.WhereExpressionBuilder<FacebookAccountTable>? conflictWhere,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsertRow<FacebookAccount>(
       row,
       conflictColumns: conflictColumns(FacebookAccount.t),
+      updateColumns: updateColumns?.call(FacebookAccount.t),
+      conflictWhere: conflictWhere?.call(FacebookAccount.t),
       transaction: transaction,
     );
   }

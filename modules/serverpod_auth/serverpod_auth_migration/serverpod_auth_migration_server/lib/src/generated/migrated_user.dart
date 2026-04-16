@@ -480,11 +480,15 @@ class MigratedUserRepository {
     _i1.DatabaseSession session,
     List<MigratedUser> rows, {
     required _i1.ColumnSelections<MigratedUserTable> conflictColumns,
+    _i1.ColumnSelections<MigratedUserTable>? updateColumns,
+    _i1.WhereExpressionBuilder<MigratedUserTable>? conflictWhere,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsert<MigratedUser>(
       rows,
       conflictColumns: conflictColumns(MigratedUser.t),
+      updateColumns: updateColumns?.call(MigratedUser.t),
+      conflictWhere: conflictWhere?.call(MigratedUser.t),
       transaction: transaction,
     );
   }
@@ -499,11 +503,15 @@ class MigratedUserRepository {
     _i1.DatabaseSession session,
     MigratedUser row, {
     required _i1.ColumnSelections<MigratedUserTable> conflictColumns,
+    _i1.ColumnSelections<MigratedUserTable>? updateColumns,
+    _i1.WhereExpressionBuilder<MigratedUserTable>? conflictWhere,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsertRow<MigratedUser>(
       row,
       conflictColumns: conflictColumns(MigratedUser.t),
+      updateColumns: updateColumns?.call(MigratedUser.t),
+      conflictWhere: conflictWhere?.call(MigratedUser.t),
       transaction: transaction,
     );
   }

@@ -406,11 +406,15 @@ class EmailResetRepository {
     _i1.DatabaseSession session,
     List<EmailReset> rows, {
     required _i1.ColumnSelections<EmailResetTable> conflictColumns,
+    _i1.ColumnSelections<EmailResetTable>? updateColumns,
+    _i1.WhereExpressionBuilder<EmailResetTable>? conflictWhere,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsert<EmailReset>(
       rows,
       conflictColumns: conflictColumns(EmailReset.t),
+      updateColumns: updateColumns?.call(EmailReset.t),
+      conflictWhere: conflictWhere?.call(EmailReset.t),
       transaction: transaction,
     );
   }
@@ -425,11 +429,15 @@ class EmailResetRepository {
     _i1.DatabaseSession session,
     EmailReset row, {
     required _i1.ColumnSelections<EmailResetTable> conflictColumns,
+    _i1.ColumnSelections<EmailResetTable>? updateColumns,
+    _i1.WhereExpressionBuilder<EmailResetTable>? conflictWhere,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsertRow<EmailReset>(
       row,
       conflictColumns: conflictColumns(EmailReset.t),
+      updateColumns: updateColumns?.call(EmailReset.t),
+      conflictWhere: conflictWhere?.call(EmailReset.t),
       transaction: transaction,
     );
   }

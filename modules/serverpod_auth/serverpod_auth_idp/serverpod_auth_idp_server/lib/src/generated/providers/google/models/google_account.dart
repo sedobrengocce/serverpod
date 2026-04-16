@@ -497,11 +497,15 @@ class GoogleAccountRepository {
     _i1.DatabaseSession session,
     List<GoogleAccount> rows, {
     required _i1.ColumnSelections<GoogleAccountTable> conflictColumns,
+    _i1.ColumnSelections<GoogleAccountTable>? updateColumns,
+    _i1.WhereExpressionBuilder<GoogleAccountTable>? conflictWhere,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsert<GoogleAccount>(
       rows,
       conflictColumns: conflictColumns(GoogleAccount.t),
+      updateColumns: updateColumns?.call(GoogleAccount.t),
+      conflictWhere: conflictWhere?.call(GoogleAccount.t),
       transaction: transaction,
     );
   }
@@ -516,11 +520,15 @@ class GoogleAccountRepository {
     _i1.DatabaseSession session,
     GoogleAccount row, {
     required _i1.ColumnSelections<GoogleAccountTable> conflictColumns,
+    _i1.ColumnSelections<GoogleAccountTable>? updateColumns,
+    _i1.WhereExpressionBuilder<GoogleAccountTable>? conflictWhere,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsertRow<GoogleAccount>(
       row,
       conflictColumns: conflictColumns(GoogleAccount.t),
+      updateColumns: updateColumns?.call(GoogleAccount.t),
+      conflictWhere: conflictWhere?.call(GoogleAccount.t),
       transaction: transaction,
     );
   }

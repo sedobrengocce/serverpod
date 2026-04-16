@@ -703,11 +703,15 @@ class SessionLogEntryRepository {
     _i1.DatabaseSession session,
     List<SessionLogEntry> rows, {
     required _i1.ColumnSelections<SessionLogEntryTable> conflictColumns,
+    _i1.ColumnSelections<SessionLogEntryTable>? updateColumns,
+    _i1.WhereExpressionBuilder<SessionLogEntryTable>? conflictWhere,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsert<SessionLogEntry>(
       rows,
       conflictColumns: conflictColumns(SessionLogEntry.t),
+      updateColumns: updateColumns?.call(SessionLogEntry.t),
+      conflictWhere: conflictWhere?.call(SessionLogEntry.t),
       transaction: transaction,
     );
   }
@@ -722,11 +726,15 @@ class SessionLogEntryRepository {
     _i1.DatabaseSession session,
     SessionLogEntry row, {
     required _i1.ColumnSelections<SessionLogEntryTable> conflictColumns,
+    _i1.ColumnSelections<SessionLogEntryTable>? updateColumns,
+    _i1.WhereExpressionBuilder<SessionLogEntryTable>? conflictWhere,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsertRow<SessionLogEntry>(
       row,
       conflictColumns: conflictColumns(SessionLogEntry.t),
+      updateColumns: updateColumns?.call(SessionLogEntry.t),
+      conflictWhere: conflictWhere?.call(SessionLogEntry.t),
       transaction: transaction,
     );
   }

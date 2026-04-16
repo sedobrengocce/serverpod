@@ -586,11 +586,15 @@ class LogEntryRepository {
     _i1.DatabaseSession session,
     List<LogEntry> rows, {
     required _i1.ColumnSelections<LogEntryTable> conflictColumns,
+    _i1.ColumnSelections<LogEntryTable>? updateColumns,
+    _i1.WhereExpressionBuilder<LogEntryTable>? conflictWhere,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsert<LogEntry>(
       rows,
       conflictColumns: conflictColumns(LogEntry.t),
+      updateColumns: updateColumns?.call(LogEntry.t),
+      conflictWhere: conflictWhere?.call(LogEntry.t),
       transaction: transaction,
     );
   }
@@ -605,11 +609,15 @@ class LogEntryRepository {
     _i1.DatabaseSession session,
     LogEntry row, {
     required _i1.ColumnSelections<LogEntryTable> conflictColumns,
+    _i1.ColumnSelections<LogEntryTable>? updateColumns,
+    _i1.WhereExpressionBuilder<LogEntryTable>? conflictWhere,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsertRow<LogEntry>(
       row,
       conflictColumns: conflictColumns(LogEntry.t),
+      updateColumns: updateColumns?.call(LogEntry.t),
+      conflictWhere: conflictWhere?.call(LogEntry.t),
       transaction: transaction,
     );
   }

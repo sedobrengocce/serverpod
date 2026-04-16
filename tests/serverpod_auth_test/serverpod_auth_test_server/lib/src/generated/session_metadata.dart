@@ -510,11 +510,15 @@ class SessionMetadataRepository {
     _i1.DatabaseSession session,
     List<SessionMetadata> rows, {
     required _i1.ColumnSelections<SessionMetadataTable> conflictColumns,
+    _i1.ColumnSelections<SessionMetadataTable>? updateColumns,
+    _i1.WhereExpressionBuilder<SessionMetadataTable>? conflictWhere,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsert<SessionMetadata>(
       rows,
       conflictColumns: conflictColumns(SessionMetadata.t),
+      updateColumns: updateColumns?.call(SessionMetadata.t),
+      conflictWhere: conflictWhere?.call(SessionMetadata.t),
       transaction: transaction,
     );
   }
@@ -529,11 +533,15 @@ class SessionMetadataRepository {
     _i1.DatabaseSession session,
     SessionMetadata row, {
     required _i1.ColumnSelections<SessionMetadataTable> conflictColumns,
+    _i1.ColumnSelections<SessionMetadataTable>? updateColumns,
+    _i1.WhereExpressionBuilder<SessionMetadataTable>? conflictWhere,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsertRow<SessionMetadata>(
       row,
       conflictColumns: conflictColumns(SessionMetadata.t),
+      updateColumns: updateColumns?.call(SessionMetadata.t),
+      conflictWhere: conflictWhere?.call(SessionMetadata.t),
       transaction: transaction,
     );
   }

@@ -93,7 +93,7 @@ class UserClass implements TableRow<int?>, ProtocolSerialization {
 
 void main() {
   setUp(() {
-    ValueEncoder.set(PostgresValueEncoder());
+    ValueEncoder.set(const PostgresValueEncoder());
   });
 
   group('Given model with a couple of columns', () {

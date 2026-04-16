@@ -668,11 +668,15 @@ class ServerSideSessionRepository {
     _i1.DatabaseSession session,
     List<ServerSideSession> rows, {
     required _i1.ColumnSelections<ServerSideSessionTable> conflictColumns,
+    _i1.ColumnSelections<ServerSideSessionTable>? updateColumns,
+    _i1.WhereExpressionBuilder<ServerSideSessionTable>? conflictWhere,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsert<ServerSideSession>(
       rows,
       conflictColumns: conflictColumns(ServerSideSession.t),
+      updateColumns: updateColumns?.call(ServerSideSession.t),
+      conflictWhere: conflictWhere?.call(ServerSideSession.t),
       transaction: transaction,
     );
   }
@@ -687,11 +691,15 @@ class ServerSideSessionRepository {
     _i1.DatabaseSession session,
     ServerSideSession row, {
     required _i1.ColumnSelections<ServerSideSessionTable> conflictColumns,
+    _i1.ColumnSelections<ServerSideSessionTable>? updateColumns,
+    _i1.WhereExpressionBuilder<ServerSideSessionTable>? conflictWhere,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsertRow<ServerSideSession>(
       row,
       conflictColumns: conflictColumns(ServerSideSession.t),
+      updateColumns: updateColumns?.call(ServerSideSession.t),
+      conflictWhere: conflictWhere?.call(ServerSideSession.t),
       transaction: transaction,
     );
   }

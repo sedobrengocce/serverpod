@@ -488,11 +488,15 @@ class ServerHealthMetricRepository {
     _i1.DatabaseSession session,
     List<ServerHealthMetric> rows, {
     required _i1.ColumnSelections<ServerHealthMetricTable> conflictColumns,
+    _i1.ColumnSelections<ServerHealthMetricTable>? updateColumns,
+    _i1.WhereExpressionBuilder<ServerHealthMetricTable>? conflictWhere,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsert<ServerHealthMetric>(
       rows,
       conflictColumns: conflictColumns(ServerHealthMetric.t),
+      updateColumns: updateColumns?.call(ServerHealthMetric.t),
+      conflictWhere: conflictWhere?.call(ServerHealthMetric.t),
       transaction: transaction,
     );
   }
@@ -507,11 +511,15 @@ class ServerHealthMetricRepository {
     _i1.DatabaseSession session,
     ServerHealthMetric row, {
     required _i1.ColumnSelections<ServerHealthMetricTable> conflictColumns,
+    _i1.ColumnSelections<ServerHealthMetricTable>? updateColumns,
+    _i1.WhereExpressionBuilder<ServerHealthMetricTable>? conflictWhere,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsertRow<ServerHealthMetric>(
       row,
       conflictColumns: conflictColumns(ServerHealthMetric.t),
+      updateColumns: updateColumns?.call(ServerHealthMetric.t),
+      conflictWhere: conflictWhere?.call(ServerHealthMetric.t),
       transaction: transaction,
     );
   }

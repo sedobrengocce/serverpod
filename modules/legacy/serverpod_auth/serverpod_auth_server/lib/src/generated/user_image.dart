@@ -402,11 +402,15 @@ class UserImageRepository {
     _i1.DatabaseSession session,
     List<UserImage> rows, {
     required _i1.ColumnSelections<UserImageTable> conflictColumns,
+    _i1.ColumnSelections<UserImageTable>? updateColumns,
+    _i1.WhereExpressionBuilder<UserImageTable>? conflictWhere,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsert<UserImage>(
       rows,
       conflictColumns: conflictColumns(UserImage.t),
+      updateColumns: updateColumns?.call(UserImage.t),
+      conflictWhere: conflictWhere?.call(UserImage.t),
       transaction: transaction,
     );
   }
@@ -421,11 +425,15 @@ class UserImageRepository {
     _i1.DatabaseSession session,
     UserImage row, {
     required _i1.ColumnSelections<UserImageTable> conflictColumns,
+    _i1.ColumnSelections<UserImageTable>? updateColumns,
+    _i1.WhereExpressionBuilder<UserImageTable>? conflictWhere,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsertRow<UserImage>(
       row,
       conflictColumns: conflictColumns(UserImage.t),
+      updateColumns: updateColumns?.call(UserImage.t),
+      conflictWhere: conflictWhere?.call(UserImage.t),
       transaction: transaction,
     );
   }

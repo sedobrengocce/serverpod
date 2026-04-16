@@ -434,11 +434,15 @@ class EmailCreateAccountRequestRepository {
     List<EmailCreateAccountRequest> rows, {
     required _i1.ColumnSelections<EmailCreateAccountRequestTable>
     conflictColumns,
+    _i1.ColumnSelections<EmailCreateAccountRequestTable>? updateColumns,
+    _i1.WhereExpressionBuilder<EmailCreateAccountRequestTable>? conflictWhere,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsert<EmailCreateAccountRequest>(
       rows,
       conflictColumns: conflictColumns(EmailCreateAccountRequest.t),
+      updateColumns: updateColumns?.call(EmailCreateAccountRequest.t),
+      conflictWhere: conflictWhere?.call(EmailCreateAccountRequest.t),
       transaction: transaction,
     );
   }
@@ -454,11 +458,15 @@ class EmailCreateAccountRequestRepository {
     EmailCreateAccountRequest row, {
     required _i1.ColumnSelections<EmailCreateAccountRequestTable>
     conflictColumns,
+    _i1.ColumnSelections<EmailCreateAccountRequestTable>? updateColumns,
+    _i1.WhereExpressionBuilder<EmailCreateAccountRequestTable>? conflictWhere,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsertRow<EmailCreateAccountRequest>(
       row,
       conflictColumns: conflictColumns(EmailCreateAccountRequest.t),
+      updateColumns: updateColumns?.call(EmailCreateAccountRequest.t),
+      conflictWhere: conflictWhere?.call(EmailCreateAccountRequest.t),
       transaction: transaction,
     );
   }

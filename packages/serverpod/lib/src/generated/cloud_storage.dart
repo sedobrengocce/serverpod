@@ -491,11 +491,15 @@ class CloudStorageEntryRepository {
     _i1.DatabaseSession session,
     List<CloudStorageEntry> rows, {
     required _i1.ColumnSelections<CloudStorageEntryTable> conflictColumns,
+    _i1.ColumnSelections<CloudStorageEntryTable>? updateColumns,
+    _i1.WhereExpressionBuilder<CloudStorageEntryTable>? conflictWhere,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsert<CloudStorageEntry>(
       rows,
       conflictColumns: conflictColumns(CloudStorageEntry.t),
+      updateColumns: updateColumns?.call(CloudStorageEntry.t),
+      conflictWhere: conflictWhere?.call(CloudStorageEntry.t),
       transaction: transaction,
     );
   }
@@ -510,11 +514,15 @@ class CloudStorageEntryRepository {
     _i1.DatabaseSession session,
     CloudStorageEntry row, {
     required _i1.ColumnSelections<CloudStorageEntryTable> conflictColumns,
+    _i1.ColumnSelections<CloudStorageEntryTable>? updateColumns,
+    _i1.WhereExpressionBuilder<CloudStorageEntryTable>? conflictWhere,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsertRow<CloudStorageEntry>(
       row,
       conflictColumns: conflictColumns(CloudStorageEntry.t),
+      updateColumns: updateColumns?.call(CloudStorageEntry.t),
+      conflictWhere: conflictWhere?.call(CloudStorageEntry.t),
       transaction: transaction,
     );
   }

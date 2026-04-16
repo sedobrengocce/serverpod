@@ -439,11 +439,15 @@ class AnonymousAccountRepository {
     _i1.DatabaseSession session,
     List<AnonymousAccount> rows, {
     required _i1.ColumnSelections<AnonymousAccountTable> conflictColumns,
+    _i1.ColumnSelections<AnonymousAccountTable>? updateColumns,
+    _i1.WhereExpressionBuilder<AnonymousAccountTable>? conflictWhere,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsert<AnonymousAccount>(
       rows,
       conflictColumns: conflictColumns(AnonymousAccount.t),
+      updateColumns: updateColumns?.call(AnonymousAccount.t),
+      conflictWhere: conflictWhere?.call(AnonymousAccount.t),
       transaction: transaction,
     );
   }
@@ -458,11 +462,15 @@ class AnonymousAccountRepository {
     _i1.DatabaseSession session,
     AnonymousAccount row, {
     required _i1.ColumnSelections<AnonymousAccountTable> conflictColumns,
+    _i1.ColumnSelections<AnonymousAccountTable>? updateColumns,
+    _i1.WhereExpressionBuilder<AnonymousAccountTable>? conflictWhere,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsertRow<AnonymousAccount>(
       row,
       conflictColumns: conflictColumns(AnonymousAccount.t),
+      updateColumns: updateColumns?.call(AnonymousAccount.t),
+      conflictWhere: conflictWhere?.call(AnonymousAccount.t),
       transaction: transaction,
     );
   }

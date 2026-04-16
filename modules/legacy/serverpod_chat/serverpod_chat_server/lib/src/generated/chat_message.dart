@@ -547,11 +547,15 @@ class ChatMessageRepository {
     _i1.DatabaseSession session,
     List<ChatMessage> rows, {
     required _i1.ColumnSelections<ChatMessageTable> conflictColumns,
+    _i1.ColumnSelections<ChatMessageTable>? updateColumns,
+    _i1.WhereExpressionBuilder<ChatMessageTable>? conflictWhere,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsert<ChatMessage>(
       rows,
       conflictColumns: conflictColumns(ChatMessage.t),
+      updateColumns: updateColumns?.call(ChatMessage.t),
+      conflictWhere: conflictWhere?.call(ChatMessage.t),
       transaction: transaction,
     );
   }
@@ -566,11 +570,15 @@ class ChatMessageRepository {
     _i1.DatabaseSession session,
     ChatMessage row, {
     required _i1.ColumnSelections<ChatMessageTable> conflictColumns,
+    _i1.ColumnSelections<ChatMessageTable>? updateColumns,
+    _i1.WhereExpressionBuilder<ChatMessageTable>? conflictWhere,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsertRow<ChatMessage>(
       row,
       conflictColumns: conflictColumns(ChatMessage.t),
+      updateColumns: updateColumns?.call(ChatMessage.t),
+      conflictWhere: conflictWhere?.call(ChatMessage.t),
       transaction: transaction,
     );
   }

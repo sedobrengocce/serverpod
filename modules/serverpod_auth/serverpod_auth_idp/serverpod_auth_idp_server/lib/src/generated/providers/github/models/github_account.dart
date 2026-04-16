@@ -501,11 +501,15 @@ class GitHubAccountRepository {
     _i1.DatabaseSession session,
     List<GitHubAccount> rows, {
     required _i1.ColumnSelections<GitHubAccountTable> conflictColumns,
+    _i1.ColumnSelections<GitHubAccountTable>? updateColumns,
+    _i1.WhereExpressionBuilder<GitHubAccountTable>? conflictWhere,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsert<GitHubAccount>(
       rows,
       conflictColumns: conflictColumns(GitHubAccount.t),
+      updateColumns: updateColumns?.call(GitHubAccount.t),
+      conflictWhere: conflictWhere?.call(GitHubAccount.t),
       transaction: transaction,
     );
   }
@@ -520,11 +524,15 @@ class GitHubAccountRepository {
     _i1.DatabaseSession session,
     GitHubAccount row, {
     required _i1.ColumnSelections<GitHubAccountTable> conflictColumns,
+    _i1.ColumnSelections<GitHubAccountTable>? updateColumns,
+    _i1.WhereExpressionBuilder<GitHubAccountTable>? conflictWhere,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsertRow<GitHubAccount>(
       row,
       conflictColumns: conflictColumns(GitHubAccount.t),
+      updateColumns: updateColumns?.call(GitHubAccount.t),
+      conflictWhere: conflictWhere?.call(GitHubAccount.t),
       transaction: transaction,
     );
   }

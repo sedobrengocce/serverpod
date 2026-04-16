@@ -588,11 +588,15 @@ class QueryLogEntryRepository {
     _i1.DatabaseSession session,
     List<QueryLogEntry> rows, {
     required _i1.ColumnSelections<QueryLogEntryTable> conflictColumns,
+    _i1.ColumnSelections<QueryLogEntryTable>? updateColumns,
+    _i1.WhereExpressionBuilder<QueryLogEntryTable>? conflictWhere,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsert<QueryLogEntry>(
       rows,
       conflictColumns: conflictColumns(QueryLogEntry.t),
+      updateColumns: updateColumns?.call(QueryLogEntry.t),
+      conflictWhere: conflictWhere?.call(QueryLogEntry.t),
       transaction: transaction,
     );
   }
@@ -607,11 +611,15 @@ class QueryLogEntryRepository {
     _i1.DatabaseSession session,
     QueryLogEntry row, {
     required _i1.ColumnSelections<QueryLogEntryTable> conflictColumns,
+    _i1.ColumnSelections<QueryLogEntryTable>? updateColumns,
+    _i1.WhereExpressionBuilder<QueryLogEntryTable>? conflictWhere,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsertRow<QueryLogEntry>(
       row,
       conflictColumns: conflictColumns(QueryLogEntry.t),
+      updateColumns: updateColumns?.call(QueryLogEntry.t),
+      conflictWhere: conflictWhere?.call(QueryLogEntry.t),
       transaction: transaction,
     );
   }

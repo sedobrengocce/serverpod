@@ -375,11 +375,15 @@ class ChannelRepository {
     _i1.DatabaseSession session,
     List<Channel> rows, {
     required _i1.ColumnSelections<ChannelTable> conflictColumns,
+    _i1.ColumnSelections<ChannelTable>? updateColumns,
+    _i1.WhereExpressionBuilder<ChannelTable>? conflictWhere,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsert<Channel>(
       rows,
       conflictColumns: conflictColumns(Channel.t),
+      updateColumns: updateColumns?.call(Channel.t),
+      conflictWhere: conflictWhere?.call(Channel.t),
       transaction: transaction,
     );
   }
@@ -394,11 +398,15 @@ class ChannelRepository {
     _i1.DatabaseSession session,
     Channel row, {
     required _i1.ColumnSelections<ChannelTable> conflictColumns,
+    _i1.ColumnSelections<ChannelTable>? updateColumns,
+    _i1.WhereExpressionBuilder<ChannelTable>? conflictWhere,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsertRow<Channel>(
       row,
       conflictColumns: conflictColumns(Channel.t),
+      updateColumns: updateColumns?.call(Channel.t),
+      conflictWhere: conflictWhere?.call(Channel.t),
       transaction: transaction,
     );
   }

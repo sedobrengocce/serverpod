@@ -463,11 +463,15 @@ class ChallengeTrackerRepository {
     _i1.DatabaseSession session,
     List<ChallengeTracker> rows, {
     required _i1.ColumnSelections<ChallengeTrackerTable> conflictColumns,
+    _i1.ColumnSelections<ChallengeTrackerTable>? updateColumns,
+    _i1.WhereExpressionBuilder<ChallengeTrackerTable>? conflictWhere,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsert<ChallengeTracker>(
       rows,
       conflictColumns: conflictColumns(ChallengeTracker.t),
+      updateColumns: updateColumns?.call(ChallengeTracker.t),
+      conflictWhere: conflictWhere?.call(ChallengeTracker.t),
       transaction: transaction,
     );
   }
@@ -482,11 +486,15 @@ class ChallengeTrackerRepository {
     _i1.DatabaseSession session,
     ChallengeTracker row, {
     required _i1.ColumnSelections<ChallengeTrackerTable> conflictColumns,
+    _i1.ColumnSelections<ChallengeTrackerTable>? updateColumns,
+    _i1.WhereExpressionBuilder<ChallengeTrackerTable>? conflictWhere,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsertRow<ChallengeTracker>(
       row,
       conflictColumns: conflictColumns(ChallengeTracker.t),
+      updateColumns: updateColumns?.call(ChallengeTracker.t),
+      conflictWhere: conflictWhere?.call(ChallengeTracker.t),
       transaction: transaction,
     );
   }

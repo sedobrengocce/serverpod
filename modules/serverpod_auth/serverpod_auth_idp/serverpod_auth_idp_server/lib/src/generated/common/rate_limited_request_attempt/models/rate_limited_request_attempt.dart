@@ -508,11 +508,15 @@ class RateLimitedRequestAttemptRepository {
     List<RateLimitedRequestAttempt> rows, {
     required _i1.ColumnSelections<RateLimitedRequestAttemptTable>
     conflictColumns,
+    _i1.ColumnSelections<RateLimitedRequestAttemptTable>? updateColumns,
+    _i1.WhereExpressionBuilder<RateLimitedRequestAttemptTable>? conflictWhere,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsert<RateLimitedRequestAttempt>(
       rows,
       conflictColumns: conflictColumns(RateLimitedRequestAttempt.t),
+      updateColumns: updateColumns?.call(RateLimitedRequestAttempt.t),
+      conflictWhere: conflictWhere?.call(RateLimitedRequestAttempt.t),
       transaction: transaction,
     );
   }
@@ -528,11 +532,15 @@ class RateLimitedRequestAttemptRepository {
     RateLimitedRequestAttempt row, {
     required _i1.ColumnSelections<RateLimitedRequestAttemptTable>
     conflictColumns,
+    _i1.ColumnSelections<RateLimitedRequestAttemptTable>? updateColumns,
+    _i1.WhereExpressionBuilder<RateLimitedRequestAttemptTable>? conflictWhere,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsertRow<RateLimitedRequestAttempt>(
       row,
       conflictColumns: conflictColumns(RateLimitedRequestAttempt.t),
+      updateColumns: updateColumns?.call(RateLimitedRequestAttempt.t),
+      conflictWhere: conflictWhere?.call(RateLimitedRequestAttempt.t),
       transaction: transaction,
     );
   }

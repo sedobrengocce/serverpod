@@ -435,11 +435,16 @@ class CloudStorageDirectUploadEntryRepository {
     List<CloudStorageDirectUploadEntry> rows, {
     required _i1.ColumnSelections<CloudStorageDirectUploadEntryTable>
     conflictColumns,
+    _i1.ColumnSelections<CloudStorageDirectUploadEntryTable>? updateColumns,
+    _i1.WhereExpressionBuilder<CloudStorageDirectUploadEntryTable>?
+    conflictWhere,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsert<CloudStorageDirectUploadEntry>(
       rows,
       conflictColumns: conflictColumns(CloudStorageDirectUploadEntry.t),
+      updateColumns: updateColumns?.call(CloudStorageDirectUploadEntry.t),
+      conflictWhere: conflictWhere?.call(CloudStorageDirectUploadEntry.t),
       transaction: transaction,
     );
   }
@@ -455,11 +460,16 @@ class CloudStorageDirectUploadEntryRepository {
     CloudStorageDirectUploadEntry row, {
     required _i1.ColumnSelections<CloudStorageDirectUploadEntryTable>
     conflictColumns,
+    _i1.ColumnSelections<CloudStorageDirectUploadEntryTable>? updateColumns,
+    _i1.WhereExpressionBuilder<CloudStorageDirectUploadEntryTable>?
+    conflictWhere,
     _i1.Transaction? transaction,
   }) async {
     return session.db.upsertRow<CloudStorageDirectUploadEntry>(
       row,
       conflictColumns: conflictColumns(CloudStorageDirectUploadEntry.t),
+      updateColumns: updateColumns?.call(CloudStorageDirectUploadEntry.t),
+      conflictWhere: conflictWhere?.call(CloudStorageDirectUploadEntry.t),
       transaction: transaction,
     );
   }
