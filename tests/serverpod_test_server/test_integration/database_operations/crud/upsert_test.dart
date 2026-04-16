@@ -208,11 +208,13 @@ void main() async {
               data,
               conflictColumns: (t) => [t.email],
             ),
-            throwsA(isA<DatabaseQueryException>().having(
-              (e) => e.code,
-              'code',
-              PgErrorCode.checkViolation,
-            )),
+            throwsA(
+              isA<DatabaseQueryException>().having(
+                (e) => e.code,
+                'code',
+                PgErrorCode.checkViolation,
+              ),
+            ),
           );
 
           var allRows = await UniqueDataWithNonPersist.db.find(session);

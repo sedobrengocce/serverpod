@@ -300,6 +300,80 @@ class SqliteDatabaseConnection extends DatabaseConnection<SqlitePoolManager> {
   }
 
   @override
+  Future<List<T>> upsert<T extends TableRow>(
+    DatabaseSession session,
+    List<T> rows, {
+    required List<Column> conflictColumns,
+    List<Column>? updateColumns,
+    Expression? conflictWhere,
+    Transaction? transaction,
+  }) async {
+    if (rows.isEmpty) return [];
+    if (rows.length > 1) {
+      return DatabaseUtil.runInTransactionOrSavepoint(
+        session.db,
+        transaction,
+        (tx) async => [
+          for (var row in rows)
+            ...await upsert<T>(
+              session,
+              [row],
+              conflictColumns: conflictColumns,
+              updateColumns: updateColumns,
+              conflictWhere: conflictWhere,
+              transaction: tx,
+            ),
+        ],
+      );
+    }
+
+    var table = rows.first.table;
+    var query = UpsertQueryBuilder(
+      table: table,
+      rows: rows,
+      conflictColumns: conflictColumns,
+      updateColumns: updateColumns,
+      conflictWhere: conflictWhere,
+    ).build();
+
+    var results = await _mappedResultsQuery(
+      session,
+      query,
+      transaction: transaction,
+      table: table,
+    );
+    var merged = _mergeResultsWithNonPersistedFields(rows)(results);
+    return merged.map(poolManager.serializationManager.deserialize<T>).toList();
+  }
+
+  @override
+  Future<T> upsertRow<T extends TableRow>(
+    DatabaseSession session,
+    T row, {
+    required List<Column> conflictColumns,
+    List<Column>? updateColumns,
+    Expression? conflictWhere,
+    Transaction? transaction,
+  }) async {
+    var result = await upsert<T>(
+      session,
+      [row],
+      conflictColumns: conflictColumns,
+      updateColumns: updateColumns,
+      conflictWhere: conflictWhere,
+      transaction: transaction,
+    );
+
+    if (result.length != 1) {
+      throw _SqliteDatabaseUpsertRowException(
+        'Failed to upsert row, affected number of rows is ${result.length} != 1',
+      );
+    }
+
+    return result.first;
+  }
+
+  @override
   Future<List<T>> update<T extends TableRow>(
     DatabaseSession session,
     List<T> rows, {

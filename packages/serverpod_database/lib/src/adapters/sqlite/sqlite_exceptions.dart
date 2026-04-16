@@ -74,3 +74,11 @@ final class _SqliteDatabaseDeleteRowException
 
   _SqliteDatabaseDeleteRowException(this.message);
 }
+
+final class _SqliteDatabaseUpsertRowException
+    extends DatabaseUpsertRowException {
+  @override
+  final String message;
+
+  _SqliteDatabaseUpsertRowException(this.message);
+}
